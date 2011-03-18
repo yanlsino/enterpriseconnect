@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<!-- Application context loader -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:webApplicationContext.xml
+			classpath:webApplicationContext-security.xml
+		</param-value>
+	</context-param>
+
+	<!-- Reads request input using UTF-8 encoding -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- filter all request into spring security -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Rewrite Module handle all requests -->
+	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>org.osforce.platform.web.urlrewrite.UrlRewriteFilter</filter-class>
+		<init-param>
+			<param-name>logLevel</param-name>
+			<param-value>WARN</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- 
+	<filter>
+		<filter-name>SimplePageCachingFilter</filter-name>
+		<filter-class>net.sf.ehcache.constructs.web.filter.SimplePageCachingFilter</filter-class>
+		<init-param>
+			<param-name>suppressStackTraces</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cacheName</param-name>
+			<param-value>SimplePageCachingFilter</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+    	<filter-name>SimplePageCachingFilter</filter-name>
+		<url-pattern>/**/layout.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	 -->
+	<filter>
+		<filter-name>SimplePageFragmentCachingFilter</filter-name>
+		<filter-class>org.osforce.platform.web.cache.SimplePageFragmentCachingFilter</filter-class>
+	    <init-param>
+	      <param-name>suppressStackTraces</param-name>
+	      <param-value>false</param-value>
+	    </init-param>
+		<init-param>
+			<param-name>cacheName</param-name>
+			<param-value>SimplePageFragmentCachingFilter</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+    	<filter-name>SimplePageFragmentCachingFilter</filter-name>
+    	<url-pattern>/fragment/*</url-pattern>
+    	<dispatcher>INCLUDE</dispatcher>
+  	</filter-mapping>
+	
+	<!-- 
+	<filter>
+		<filter-name>SimpleCachingHeadersPageCachingFilter</filter-name>
+		<filter-class>net.sf.ehcache.constructs.web.filter.SimpleCachingHeadersPageCachingFilter</filter-class>
+		<init-param>
+			<param-name>suppressStackTraces</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cacheName</param-name>
+			<param-value>SimpleCachingHeadersTimeoutPageCachingFilter</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+    	<filter-name>SimpleCachingHeadersPageCachingFilter</filter-name>
+    	<url-pattern>/fragment/*</url-pattern>
+    	<dispatcher>INCLUDE</dispatcher>
+  	</filter-mapping>
+  	 -->
+  	 
+	<servlet>
+		<servlet-name>PackServlet</servlet-name>
+		<servlet-class>net.sf.packtag.servlet.PackServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PackServlet</servlet-name>
+		<url-pattern>*.pack</url-pattern>
+	</servlet-mapping>
+
+	<!-- Handles all requests into the application -->
+	<servlet>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<servlet-class>org.osforce.platform.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/dispatcherServletContext.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- Introspector cleanup listener -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<!-- Spring context loader listener -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+</web-app>

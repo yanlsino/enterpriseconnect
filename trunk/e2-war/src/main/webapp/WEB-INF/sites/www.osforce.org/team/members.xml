@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+	<page name="team/members" parent="commons/header">
+		<position name="mainColumn">
+			<fragment refer="memberFragment" view="List">
+				<title>好友列表</title>
+				<preferences>
+					<pageSize>18</pageSize>
+				</preferences>
+				<rules>
+					<rule name="securityRule" code="team-member-view"/>
+				</rules>
+			</fragment>
+		</position>
+		<position name="rightColumn" width="280px">
+			<fragment refer="linkFragment" view="List">
+				<title>我关注的</title>
+				<preferences>
+					<limit>10</limit>
+					<entity>Profile</entity>
+					<mode>link-from</mode>
+				</preferences>
+			</fragment>
+			<fragment refer="linkFragment" view="List">
+				<title>关注我的</title>
+				<preferences>
+					<limit>10</limit>
+					<entity>Profile</entity>
+					<mode>link-to</mode>
+				</preferences>
+			</fragment>
+		</position>
+	</page>
+</pages>

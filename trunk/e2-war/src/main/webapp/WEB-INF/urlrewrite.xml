@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN"
+        "http://tuckey.org/res/dtds/urlrewrite3.2.dtd">
+<urlrewrite>
+	<!-- urlrewrite module configuration -->
+	<!-- skip rewrite begin -->
+	<rule>
+		<from>^/(process|check)/(.*)$</from>
+		<to last="true">/$2</to>
+	</rule>
+	<rule>
+		<from>^/(components|themes)/(.*)$</from>
+		<to last="true">/$1/$2</to>
+	</rule>
+	<!-- skip rewrite end -->
+	
+	<!-- redirect to home -->
+	<rule>
+		<note>rewrite /</note>
+		<from>^/$</from>
+		<to last="true">/page?viewName=/dashboardTname=home</to>
+	</rule>
+	<!-- attachment begin -->
+	<rule>
+		<from>^/([\w\d-_]+)/(profile)/attachment$</from>
+		<to last="true">/page?viewName=/commons/attachment_form&amp;uniqueId=$1</to>	
+	</rule>
+	<rule>
+		<from>^/(image|doc|photo|logo)/download/([\d]+)$</from>
+		<to last="true">/commons/download?attachmentId=$2</to>
+	</rule>
+	<rule>
+		<from>^/(image|doc|photo|logo)/download/([\d]+)/([\dx]+)$</from>
+		<to last="true">/commons/download?attachmentId=$2&amp;dimension=$3</to>
+	</rule>
+	<!-- attachment end -->
+	
+	<!-- apps begin -->
+	<rule>
+		<from>^/app/([\w]+)/form$</from>
+		<to>/page?viewName=/apps/$1_form&amp;popup=true</to>
+	</rule>
+	<!-- apps end -->
+	
+	<!-- profile module begin -->
+	<rule>
+		<from>^/([\w\d-_]+)/profile$</from>
+		<to last="true">/page?viewName=/profile/profile&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/(profile|map)/form$</from>
+		<to last="true">/page?viewName=/profile/$2_form&amp;uniqueId=$1</to>
+	</rule>
+	<!-- profile module end -->
+	
+	<!-- calendar module begin -->
+	<rule>
+		<from>^/([\w\d-_]+)/calendar$</from>
+		<to last="true">/page?viewName=/calendar/events&amp;uniqueId=$1</to>
+	</rule>	
+	<rule>
+		<from>^/([\w\d-_]+)/calendar/event/form$</from>
+		<to last="true">/page?viewName=/calendar/event_form&amp;uniqueId=$1</to>
+	</rule>
+	<!-- calendar module end -->
+	
+	<!-- blog model begin -->
+	<rule>
+		<from>^/([\w\d-_]+)/blog$</from>
+		<to last="true">/page?viewName=/blog/posts&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/blog/category/([\d]+)$</from>
+		<to last="true">/page?viewName=/blog/posts&amp;uniqueId=$1&amp;categoryId=$2</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/blog/post/([\d]+)$</from>
+		<to last="true">/page?viewName=/blog/post&amp;uniqueId=$1&amp;postId=$2&amp;linkedId=$2</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/blog/(post|category)/form$</from>
+		<to last="true">/page?viewName=/blog/$2_form&amp;uniqueId=$1</to>
+	</rule>
+	<!-- blog model end -->
+	
+	<!-- document module begin -->
+	<rule>
+		<from>^/([\w\d-_]+)/document$</from>
+		<to last="true">/page?viewName=/document/folders&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/document/(file|folder)/form$</from>
+		<to last="true">/page?viewName=/document/$2_form&amp;uniqueId=$1</to>
+	</rule>
+	<!-- document module end -->
+	
+	<!-- discussion module begin -->
+	<rule>
+		<from>^/([\w\d-_]+)/discussion$</from>
+		<to last="true">/page?viewName=/discussion/forums&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/discussion/forum/([\d]+)$</from>
+		<to last="true">/page?viewName=/discussion/forum&amp;uniqueId=$1&amp;forumId=$2</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/discussion/topic/([\d]+)$</from>
+		<to last="true">/page?viewName=/discussion/topic&amp;uniqueId=$1&amp;topicId=$2</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/discussion/(forum|topic|reply)/form$</from>
+		<to last="true">/page?viewName=/discussion/$2_form&amp;uniqueId=$1</to>
+	</rule>
+	<!-- discussion module end -->
+	
+	<!-- team module begin -->
+	<rule>
+		<from>^/([\w\d-_]+)/team$</from>
+		<to last="true">/page?viewName=/team/members&amp;uniqueId=$1</to>
+	</rule>
+	<!-- team module end -->
+	
+	<!-- message module begin -->
+	<rule>
+		<from>^/([\w\d-_]+)/message$</from>
+		<to last="true">/page?viewName=/message/messages&amp;uniqueId=$1&amp;box=inbox</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/message/(inbox|sentbox)$</from>
+		<to last="true">/page?viewName=/message/messages&amp;uniqueId=$1&amp;box=$2</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/message/(inbox|sentbox)/([\d]+)$</from>
+		<to last="true">/page?viewName=/message/message_$2&amp;uniqueId=$1&amp;messageId=$3&amp;box=$2</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/message/(inbox|sentbox)/form$</from>
+		<to last="true">/page?viewName=/message/message_form&amp;uniqueId=$1&amp;box=$2</to>
+	</rule>
+	<!-- message module end -->
+	
+	<!-- system module begin -->
+	<rule>
+		<from>^/(login|register|system)$</from>
+		<to last="true">/page?viewName=/system/$1</to>
+	</rule>
+	<rule>
+		<from>^/system/(sites|themes|categories|users|roles|resources|permissions|templates|mail_settings)$</from>
+		<to last="true">/page?viewName=system/$1</to>
+	</rule>
+	<rule>
+		<from>^/system/(sites|themes|categories|users|roles|resources|permissions|templates|mail_settings)/(site|theme|category|user|role|resource|permission|template|mail_settings)/form$</from>
+		<to last="true">/page?viewName=system/$2_form</to>
+	</rule>
+	<!-- system module end -->
+	
+	<!-- portal begin -->
+	<rule>
+		<from>^/([\w\d-_]+)/form$</from>
+		<to last="true">/page?viewName=/system/project_formTcategoryCode=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/(concerned|all)$</from>
+		<to last="true">/page?viewName=/dashboardTname=$1&amp;type=$2</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)$</from>
+		<to last="true">/page?viewName=/dashboardTname=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/([\w\d-_]+)$</from>
+		<to last="true">/page?viewName=/dashboardTname=$1&amp;subCategoryCode=$2</to>
+	</rule>	
+	<!-- portal end -->
+</urlrewrite>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page name="system/login" parent="commons/header">
+	<position name="mainColumn">
+		<fragment refer="systemFragment" view="LoginForm">
+			<title>登录信息</title>
+		</fragment>
+	</position>
+	<position name="rightColumn" width="300px">
+		<fragment refer="aboutFragment" view="About">
+			<title>关于登录</title>
+			<content><![CDATA[
+			如果你还没有注册本站，请先注册！
+			]]></content>
+		</fragment>
+	</position>
+</page>

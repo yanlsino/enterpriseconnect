@@ -1,0 +1,107 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.osforce</groupId>
+	<artifactId>e2-parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Enterprise2.0 Platform</name>
+	<description>Open Source Force Enterprise2.0 Platform</description>
+
+	<modules>
+		<module>e2-web</module>
+		<module>e2-service</module>
+		<module>e2-dao</module>
+		<module>e2-task</module>
+		<module>e2-war</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<platform.version>1.0.0-SNAPSHOT</platform.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- OSForce E2 Begin -->
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>e2-web</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>e2-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>e2-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>e2-task</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- OSForce E2 End -->
+			<!-- OSForce Platform Begin -->
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>platform-web</artifactId>
+				<version>${platform.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>platform-task</artifactId>
+				<version>${platform.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>platform-dao</artifactId>
+				<version>${platform.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>platform-commons</artifactId>
+				<version>${platform.version}</version>
+			</dependency>
+			<!-- OSForce Platform End -->
+			<!-- JAVA EE -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>jsp-api</artifactId>
+				<version>2.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- Java EE -->
+			<!-- Pretty Time Begin -->
+			<dependency>
+				<groupId>com.ocpsoft</groupId>
+				<artifactId>ocpsoft-pretty-time</artifactId>
+				<version>1.0.6</version>
+			</dependency>
+			<!-- Pretty Time End -->
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,50 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="e2PersistenceUnit" transaction-type="RESOURCE_LOCAL">
+		<!-- commons -->
+		<class>org.osforce.e2.entity.commons.Activity</class>
+		<class>org.osforce.e2.entity.commons.Attachment</class>
+		<class>org.osforce.e2.entity.commons.Comment</class>
+		<class>org.osforce.e2.entity.commons.Link</class>
+		<class>org.osforce.e2.entity.commons.Rating</class>
+		<class>org.osforce.e2.entity.commons.Statistic</class>
+		<class>org.osforce.e2.entity.commons.Template</class>
+		<class>org.osforce.e2.entity.commons.Keyword</class>
+		<class>org.osforce.e2.entity.commons.Tag</class>
+		<!-- profile -->
+		<class>org.osforce.e2.entity.profile.Profile</class>
+		<!-- blog -->
+		<class>org.osforce.e2.entity.blog.BlogCategory</class>
+		<class>org.osforce.e2.entity.blog.BlogPost</class>
+		<!-- calendar -->
+		<class>org.osforce.e2.entity.calendar.Event</class>
+		<!-- document -->
+		<class>org.osforce.e2.entity.document.FileItem</class>
+		<class>org.osforce.e2.entity.document.Folder</class>
+		<!-- discussion -->
+		<class>org.osforce.e2.entity.discussion.Forum</class>
+		<class>org.osforce.e2.entity.discussion.Reply</class>
+		<class>org.osforce.e2.entity.discussion.Topic</class>
+		<class>org.osforce.e2.entity.discussion.TopicCategory</class>
+		<!-- message -->
+		<class>org.osforce.e2.entity.message.Message</class>
+		<!-- system -->
+		<class>org.osforce.e2.entity.system.User</class>
+		<class>org.osforce.e2.entity.system.Role</class>
+		<class>org.osforce.e2.entity.system.Resource</class>
+		<class>org.osforce.e2.entity.system.Permission</class>
+		<class>org.osforce.e2.entity.system.Site</class>
+		<class>org.osforce.e2.entity.system.Theme</class>
+		<class>org.osforce.e2.entity.system.MailSettings</class>
+		<class>org.osforce.e2.entity.system.Project</class>
+		<class>org.osforce.e2.entity.system.ProjectCategory</class>
+		<class>org.osforce.e2.entity.system.ProjectFeature</class>
+		<!-- team -->
+		<class>org.osforce.e2.entity.team.TeamMember</class>
+		<!-- map -->
+		<class>org.osforce.e2.entity.map.Map</class>
+		<class>org.osforce.e2.entity.map.Marker</class>
+	</persistence-unit>
+</persistence>

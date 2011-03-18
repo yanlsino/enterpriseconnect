@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page name="system/resources" parent="commons/header">
+	<position name="leftColumn" width="200px" layout="fill">
+		<fragment refer="systemFragment" view="Actions" cache="300">
+			<title>系统管理主菜单</title>
+		</fragment>
+	</position>
+	<position name="mainColumn">
+		<fragment refer="permissionFragment" view="List">
+			<title>权限列表</title>
+			<preferences>
+				<pageSize>50</pageSize>
+			</preferences>
+		</fragment>
+	</position>
+</page>

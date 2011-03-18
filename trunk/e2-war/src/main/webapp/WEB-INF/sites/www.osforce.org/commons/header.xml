@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page name="header">
+	<position name="userMenu">
+		<fragment refer="menuFragment" view="UserMenu"/>
+	</position>
+	<position name="siteSearch">
+		<fragment refer="searchFragment" view="SiteForm"/>
+	</position>
+	<position name="mainMenu">
+		<fragment refer="menuFragment" view="MainMenu">
+			<preferences>
+				<showMe>true</showMe>
+				<showHome>true</showHome>
+			</preferences>
+		</fragment>
+	</position>
+	<position name="subMenu">
+		<fragment refer="projectFragment" view="projectMenu"/>
+	</position>
+</page>	

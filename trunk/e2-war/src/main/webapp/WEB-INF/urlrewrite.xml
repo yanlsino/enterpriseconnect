@@ -139,6 +139,21 @@
 	</rule>
 	<!-- message module end -->
 	
+	<!-- admin module begin -->
+	<rule>
+		<from>^/([\w\d-_]+)/admin$</from>
+		<to last="true">/page?viewName=/admin/admin&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/admin/project/form$</from>
+		<to last="true">/page?viewName=/admin/project_form&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/admin/features/form$</from>
+		<to last="true">/page?viewName=/admin/features_form&amp;uniqueId=$1</to>
+	</rule>
+	<!-- admin module end -->
+	
 	<!-- system module begin -->
 	<rule>
 		<from>^/(login|register|system)$</from>

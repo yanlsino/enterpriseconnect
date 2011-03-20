@@ -2,8 +2,10 @@ package org.osforce.e2.service.system.impl;
 
 import org.osforce.e2.dao.system.ProjectDao;
 import org.osforce.e2.dao.system.ProjectFeatureDao;
+import org.osforce.e2.dao.system.RoleDao;
 import org.osforce.e2.entity.system.Project;
 import org.osforce.e2.entity.system.ProjectFeature;
+import org.osforce.e2.entity.system.Role;
 import org.osforce.e2.service.system.ProjectFeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +22,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProjectFeatureServiceImpl implements ProjectFeatureService {
 
+	private RoleDao roleDao;
 	private ProjectDao projectDao;
 	private ProjectFeatureDao projectFeatureDao;
 	
 	public ProjectFeatureServiceImpl() {
+	}
+	
+	@Autowired
+	public void setRoleDao(RoleDao roleDao) {
+		this.roleDao = roleDao;
 	}
 	
 	@Autowired
@@ -45,6 +53,10 @@ public class ProjectFeatureServiceImpl implements ProjectFeatureService {
 	}
 
 	public void updateProjectFeature(ProjectFeature feature) {
+		if(feature.getRoleId()!=null) {
+			Role role = roleDao.get(feature.getRoleId());
+			feature.setRole(role);
+		}
 		if(feature.getProjectId()!=null) {
 			Project project = projectDao.get(feature.getProjectId());
 			feature.setProject(project);

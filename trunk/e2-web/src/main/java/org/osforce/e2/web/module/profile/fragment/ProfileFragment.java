@@ -124,13 +124,10 @@ public class ProfileFragment {
 	}
 	
 	public String doListView(@Pref String categoryCode, 
-			@Param String subCategoryCode, @Param String type, 
+			@Param Long subCategoryId1, @Param String type, 
 			Page<Profile> page, User user, Site site, FragmentContext context) {
 		ProjectCategory category = projectCategoryService
 				.getProjectCategory(site, categoryCode);
-		if(StringUtils.isNotBlank(subCategoryCode)) {
-			category = projectCategoryService.getProjectCategory(site, subCategoryCode);
-		}
 		if(StringUtils.equals("concerned", type)) {
 			page = profileService.getConcernedProfilePage(page, category, user);
 		} else if(StringUtils.equals("all", type)) {

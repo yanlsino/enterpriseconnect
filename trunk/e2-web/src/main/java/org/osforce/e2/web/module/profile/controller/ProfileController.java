@@ -8,9 +8,11 @@ import org.osforce.commons.custom.CustomFormUtil;
 import org.osforce.e2.entity.commons.Attachment;
 import org.osforce.e2.entity.commons.Template;
 import org.osforce.e2.entity.profile.Profile;
+import org.osforce.e2.entity.system.Project;
 import org.osforce.e2.service.commons.AttachmentService;
 import org.osforce.e2.service.commons.TemplateService;
 import org.osforce.e2.service.profile.ProfileService;
+import org.osforce.e2.service.system.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,7 @@ import org.springframework.web.context.request.WebRequest;
 public class ProfileController {
 
 	private ProfileService profileService;
+	private ProjectService projectService;
 	private TemplateService templateService;
 	private AttachmentService attachmentService;
 	
@@ -39,6 +42,11 @@ public class ProfileController {
 	@Autowired
 	public void setProfileService(ProfileService profileService) {
 		this.profileService = profileService;
+	}
+
+	@Autowired
+	public void setProjectService(ProjectService projectService) {
+		this.projectService = projectService;
 	}
 	
 	@Autowired
@@ -54,9 +62,10 @@ public class ProfileController {
 	@RequestMapping(value="/profile/profile", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Long> update(
 			Profile profile, WebRequest request) {
+		Project project = projectService.getProject(profile.getProjectId());
 		Map<String, String[]> context = request.getParameterMap();
 		Template attributesTemplate = templateService.getTemplate(
-				profile.getProject().getCategoryId(), profile.getAttributesTemplateCode());
+				project.getCategoryId(), profile.getAttributesTemplateCode());
 		CustomForm customForm = CustomFormUtil.populate(
 				attributesTemplate.getContent(), context);
 		String attributes = CustomFormUtil.renderJSONObject(customForm);

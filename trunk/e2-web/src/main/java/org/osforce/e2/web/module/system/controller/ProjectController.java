@@ -4,10 +4,8 @@ import java.util.List;
 
 import org.osforce.e2.entity.system.Project;
 import org.osforce.e2.entity.system.ProjectFeature;
-import org.osforce.e2.entity.system.Role;
 import org.osforce.e2.service.system.ProjectFeatureService;
 import org.osforce.e2.service.system.ProjectService;
-import org.osforce.e2.service.system.RoleService;
 import org.osforce.e2.web.AttributeKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +26,6 @@ import org.springframework.web.context.request.WebRequest;
 @RequestMapping("/system")
 public class ProjectController {
 
-	private RoleService roleService;
 	private ProjectService projectService;
 	private ProjectFeatureService projectFeatureService;
 	

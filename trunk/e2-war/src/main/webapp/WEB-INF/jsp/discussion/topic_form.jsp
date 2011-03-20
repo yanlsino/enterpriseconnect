@@ -8,6 +8,11 @@
 		<h3>${fragmentConfig.title}</h3>
 	</div>	
 	<div class="fragment-body">
+	<c:choose>
+		<c:when test="${empty forums}">
+			当前无话题版块，因此无法发表话题.
+		</c:when>
+		<c:otherwise>
 		<form:form id="topicForm" action="${base}/process/discussion/topic" commandName="topic">
 			<fieldset>
 				<div>
@@ -36,6 +41,8 @@
 				</div>
 			</fieldset>
 		</form:form>
+		</c:otherwise>
+	</c:choose>
 	</div>
 </div>
 

@@ -39,7 +39,6 @@
 		</position>
 		<position name="mainColumn">
 			<fragment refer="profileFragment" view="Profile"/>
-			<fragment refer="mapFragment" view="Map"/>
 			<fragment refer="activityFragment" view="Form">
 				<title>微薄</title>
 				<preferences>

@@ -61,6 +61,21 @@ public class ProjectServiceImpl implements ProjectService {
 			ProjectCategory category = projectCategoryDao.get(project.getCategoryId());
 			project.setCategory(category);
 		}
+		if(project.getSubCategoryId1()!=null) {
+			ProjectCategory subCategory1 = projectCategoryDao
+					.get(project.getSubCategoryId1());
+			project.setSubCategory1(subCategory1);
+		}
+		if(project.getSubCategoryId2()!=null) {
+			ProjectCategory subCategory2 = projectCategoryDao
+					.get(project.getSubCategoryId2());
+			project.setSubCategory2(subCategory2);
+		}
+		if(project.getSubCategoryId3()!=null) {
+			ProjectCategory subCategory3 = projectCategoryDao
+					.get(project.getSubCategoryId3());
+			project.setSubCategory3(subCategory3);
+		}
 		if(project.getEnteredId()!=null) {
 			User enteredBy = userDao.get(project.getEnteredId()) ;
 			project.setEnteredBy(enteredBy);

@@ -21,8 +21,6 @@
 				<form:textarea path="description" cssClass="vblog"/>
 			</div>
 			<div class="last">
-				<input class="button" type="submit" value='<fmt:message key="vblog.activity_form.submit"/>'/>
-				<img src="${base}/themes/${theme.name}/icons/loading16.gif" style="display: none;"/>
 				<div class="sync-targets float-right">
 					<!--
 					<img id="sinaImg" src="${base}/themes/${theme.name}/icons/sina_16x16.png">
@@ -34,6 +32,7 @@
 					-->
 					最多<span class="charsCounter">140</span>个字
 				</div>
+				<input class="button" type="submit" value='<fmt:message key="vblog.activity_form.submit"/>'/>
 			</div>
 			<form:hidden path="type"/>
 			<form:hidden path="projectId"/>

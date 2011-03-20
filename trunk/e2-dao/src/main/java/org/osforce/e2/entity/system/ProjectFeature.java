@@ -83,6 +83,9 @@ public class ProjectFeature extends IdEntity {
 	
 	@Transient
 	public Long getProjectId() {
+		if(projectId==null && project!=null) {
+			projectId = project.getId();
+		}
 		return projectId;
 	}
 	

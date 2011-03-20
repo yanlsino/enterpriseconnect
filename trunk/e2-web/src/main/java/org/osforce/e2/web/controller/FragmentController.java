@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.osforce.commons.lang.StringUtil;
+import org.osforce.e2.entity.system.Project;
 import org.osforce.e2.entity.system.Site;
 import org.osforce.e2.web.AttributeKeys;
 import org.osforce.platform.web.framework.config.ConfigFactory;
@@ -55,6 +56,14 @@ public class FragmentController {
 		if(project!=null && StringUtils.equals(viewName, "/profile/profile")) {
 			viewName = project.getCategory().getCode() + "/" +viewName;
 		}*/
+		Project project = (Project) request.getAttribute(AttributeKeys.PROJECT_KEY, WebRequest.SCOPE_REQUEST);
+		if(project!=null && !viewName.contains("categoryCode")) {
+			if(viewName.contains("T")) {
+				viewName += "_categoryCode=" + project.getCategory().getCode(); 
+			} else {
+				viewName += "TcategoryCode=" + project.getCategory().getCode();
+			}
+		}
 		PageConfig pageConfig = configFactory.getPageConfig(site.getDomain(), viewName);
 		request.setAttribute("pageConfig", pageConfig, WebRequest.SCOPE_REQUEST);
 		String layout = StringUtil.buildPath("themes", site.getTheme().getName(), "layout");

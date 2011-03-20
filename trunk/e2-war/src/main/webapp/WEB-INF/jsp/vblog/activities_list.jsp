@@ -87,9 +87,11 @@
 			</li>
 			</c:forEach>
 		</ul>
+		<c:if test="${page.totalPages gt 1}">
 		<div style="text-align: center">
 			<a href="#" class="more">更多</a>
 		</div>
+		</c:if>
 		</c:otherwise>
 	</c:choose>
 	</div>

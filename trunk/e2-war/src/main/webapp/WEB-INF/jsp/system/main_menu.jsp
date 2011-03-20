@@ -37,7 +37,7 @@
 			<ul class="menu">
 				<c:forEach var="subCategory" items="${category.children}">
 				<li>
-					<a href="${base}/${category.code}/${subCategory.code}">${subCategory.label}</a>
+					<a href="${base}/${category.code}?subCategoryId1=${subCategory.id}">${subCategory.label}</a>
 				</li>				
 				</c:forEach>
 			</ul>

@@ -1,159 +1,128 @@
-body {
-	margin:0;
-	padding:0;
-	border:0;			/* This removes the border around the viewport in old versions of IE */
-	width:100%;
-	background:#fff;
-	min-width:600px;		/* Minimum width of layout - remove line if not required */
-					/* The min-width property does not work in old versions of Internet Explorer */
-	font-size:90%;
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}/*h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}*/q:before,q:after{content:'';}abbr,acronym {border:0;font-variant:normal;}sup {vertical-align:text-top;}sub {vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}body {font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}table {font-size:inherit;font:100%;}pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
+body{text-align:center;}#ft{clear:both;}#doc,#doc2,#doc3,#doc4,.yui-t1,.yui-t2,.yui-t3,.yui-t4,.yui-t5,.yui-t6,.yui-t7{margin:auto;text-align:left;width:57.69em;*width:56.25em;min-width:750px;}#doc2{width:73.076em;*width:71.25em;}#doc3{margin:auto 10px;width:auto;}#doc4{width:74.923em;*width:73.05em;}.yui-b{position:relative;}.yui-b{_position:static;}#yui-main .yui-b{position:static;}#yui-main{width:100%;}.yui-t1 #yui-main,.yui-t2 #yui-main,.yui-t3 #yui-main{float:right;margin-left:-25em;}.yui-t4 #yui-main,.yui-t5 #yui-main,.yui-t6 #yui-main{float:left;margin-right:-25em;}.yui-t1 .yui-b{float:left;width:12.30769em;*width:12.00em;}.yui-t1 #yui-main .yui-b{margin-left:13.30769em;*margin-left:13.05em;}.yui-t2 .yui-b{float:left;width:13.8461em;*width:13.50em;}.yui-t2 #yui-main .yui-b{margin-left:14.8461em;*margin-left:14.55em;}.yui-t3 .yui-b{float:left;width:23.0769em;*width:22.50em;}.yui-t3 #yui-main .yui-b{margin-left:24.0769em;*margin-left:23.62em;}.yui-t4 .yui-b{float:right;width:13.8456em;*width:13.50em;}.yui-t4 #yui-main .yui-b{margin-right:14.8456em;*margin-right:14.55em;}.yui-t5 .yui-b{float:right;width:18.4615em;*width:18.00em;}.yui-t5 #yui-main .yui-b{margin-right:19.4615em;*margin-right:19.125em;}.yui-t6 .yui-b{float:right;width:23.0769em;*width:22.50em;}.yui-t6 #yui-main .yui-b{margin-right:24.0769em;*margin-right:23.62em;}.yui-t7 #yui-main .yui-b{display:block;margin:0 0 1em 0;}#yui-main .yui-b{float:none;width:auto;}.yui-gb .yui-u,.yui-g .yui-gb .yui-u,.yui-gb .yui-g,.yui-gb .yui-gb,.yui-gb .yui-gc,.yui-gb .yui-gd,.yui-gb .yui-ge,.yui-gb .yui-gf,.yui-gc .yui-u,.yui-gc .yui-g,.yui-gd .yui-u{float:left;}.yui-g .yui-u,.yui-g .yui-g,.yui-g .yui-gb,.yui-g .yui-gc,.yui-g .yui-gd,.yui-g .yui-ge,.yui-g .yui-gf,.yui-gc .yui-u,.yui-gd .yui-g,.yui-g .yui-gc .yui-u,.yui-ge .yui-u,.yui-ge .yui-g,.yui-gf .yui-g,.yui-gf .yui-u{float:right;}.yui-g div.first,.yui-gb div.first,.yui-gc div.first,.yui-gd div.first,.yui-ge div.first,.yui-gf div.first,.yui-g .yui-gc div.first,.yui-g .yui-ge div.first,.yui-gc div.first div.first{float:left;}.yui-g .yui-u,.yui-g .yui-g,.yui-g .yui-gb,.yui-g .yui-gc,.yui-g .yui-gd,.yui-g .yui-ge,.yui-g .yui-gf{width:49.1%;}.yui-gb .yui-u,.yui-g .yui-gb .yui-u,.yui-gb .yui-g,.yui-gb .yui-gb,.yui-gb .yui-gc,.yui-gb .yui-gd,.yui-gb .yui-ge,.yui-gb .yui-gf,.yui-gc .yui-u,.yui-gc .yui-g,.yui-gd .yui-u{width:32%;margin-left:1.99%;}.yui-gb .yui-u{*margin-left:1.9%;*width:31.9%;}.yui-gc div.first,.yui-gd .yui-u{width:66%;}.yui-gd div.first{width:32%;}.yui-ge div.first,.yui-gf .yui-u{width:74.2%;}.yui-ge .yui-u,.yui-gf div.first{width:24%;}.yui-g .yui-gb div.first,.yui-gb div.first,.yui-gc div.first,.yui-gd div.first{margin-left:0;}.yui-g .yui-g .yui-u,.yui-gb .yui-g .yui-u,.yui-gc .yui-g .yui-u,.yui-gd .yui-g .yui-u,.yui-ge .yui-g .yui-u,.yui-gf .yui-g .yui-u{width:49%;*width:48.1%;*margin-left:0;}.yui-g .yui-gb div.first,.yui-gb .yui-gb div.first{*margin-right:0;*width:32%;_width:31.7%;}.yui-g .yui-gc div.first,.yui-gd .yui-g{width:66%;}.yui-gb .yui-g div.first{*margin-right:4%;_margin-right:1.3%;}.yui-gb .yui-gc div.first,.yui-gb .yui-gd div.first{*margin-right:0;}.yui-gb .yui-gb .yui-u,.yui-gb .yui-gc .yui-u{*margin-left:1.8%;_margin-left:4%;}.yui-g .yui-gb .yui-u{_margin-left:1.0%;}.yui-gb .yui-gd .yui-u{*width:66%;_width:61.2%;}.yui-gb .yui-gd div.first{*width:31%;_width:29.5%;}.yui-g .yui-gc .yui-u,.yui-gb .yui-gc .yui-u{width:32%;_float:right;margin-right:0;_margin-left:0;}.yui-gb .yui-gc div.first{width:66%;*float:left;*margin-left:0;}.yui-gb .yui-ge .yui-u,.yui-gb .yui-gf .yui-u{margin:0;}.yui-gb .yui-gb .yui-u{_margin-left:.7%;}.yui-gb .yui-g div.first,.yui-gb .yui-gb div.first{*margin-left:0;}.yui-gc .yui-g .yui-u,.yui-gd .yui-g .yui-u{*width:48.1%;*margin-left:0;}s .yui-gb .yui-gd div.first{width:32%;}.yui-g .yui-gd div.first{_width:29.9%;}.yui-ge .yui-g{width:24%;}.yui-gf .yui-g{width:74.2%;}.yui-gb .yui-ge div.yui-u,.yui-gb .yui-gf div.yui-u{float:right;}.yui-gb .yui-ge div.first,.yui-gb .yui-gf div.first{float:left;}.yui-gb .yui-ge .yui-u,.yui-gb .yui-gf div.first{*width:24%;_width:20%;}.yui-gb .yui-ge div.first,.yui-gb .yui-gf .yui-u{*width:73.5%;_width:65.5%;}.yui-ge div.first .yui-gd .yui-u{width:65%;}.yui-ge div.first .yui-gd div.first{width:32%;}
+
+
+#layout {width: 100%;padding: 0;margin: 10px 0 0 0;}
+#layout td {}
+#layout td.left {padding: 0 5px 0 0;border: none;vertical-align: top;}
+#layout td.main {width:auto;padding: 0 0 5px 0;border: none;vertical-align: top;}
+#layout td.right {padding: 0 0 5px 5px;border: none;vertical-align: top;}
+
+#layout-popup {width: 100%;padding: 0;margin: 0;}
+
+/* Header */
+#hd {
 }
-a {
-	color:#369;
+/* Menu Start */
+#user-menu {
+	float: right;	
 }
-a:hover {
-	color:#fff;
-	background:#369;
-	text-decoration:none;
-}
-h1, h2, h3 {
-	margin:.8em 0 .2em 0;
-	padding:0;
-}
-p {
-	margin:.4em 0 .8em 0;
-	padding:0;
-}
-img {
-	margin:10px 0 5px;
-}
-#ads img {
-	display:block;
-	padding-top:10px;
+#user-menu ul li{
+	display: inline;	
 }
 
-/* Header styles */
-#header {
-	clear:both;
-	float:left;
-	width:100%;
+
+/* Menu End */
+#title-bar {
+	margin-top: 5px;
+	padding: 0 20px;	
 }
-#header {
-	border-bottom:1px solid #000;
+#title-bar {
+	
 }
-#header p,
-#header h1,
-#header h2 {
-	padding:.4em 15px 0 15px;
-	margin:0;
+/* Tab Navigation Start*/
+#sub-menu ul { /* general settings */
+	text-align: left; /* set to left, right or center */
+	margin: 10px 0 0 0; /* set margins as desired */
+	font: bold 12px; /* set font as desired */
+	border-bottom: 1px solid #DDD; /* set border COLOR as desired */
+	list-style-type: none;
+	padding: 0 10px 3px 10px; /* THIRD number must change with respect to padding-top (X) below */
 }
-#header ul {
-	clear:left;
-	float:left;
-	width:100%;
-	list-style:none;
-	margin:10px 0 0 0;
-	padding:0;
+#sub-menu ul li { /* do not change */
+	margin: 0 1px;
+	display: inline;
 }
-#header ul li {
-	display:inline;
-	list-style:none;
-	margin:0;
-	padding:0;
-}
-#header ul li a {
-	display:block;
-	float:left;
-	margin:0 0 0 1px;
-	padding:3px 10px;
-	text-align:center;
-	background:#eee;
-	color:#000;
+#sub-menu li.actived a{ /* settings for selected tab link */
+	border-bottom: 1px solid #fff; /* set border color to page background color */
+	background-color: #fff; /* set selected tab background color as desired */
+	position: relative;
+	color: #333;
 	text-decoration:none;
-	position:relative;
-	left:15px;
-	line-height:1.3em;
+	top: 1px;
+	padding-top: 4px; /* must change with respect to padding (X) above and below */
 }
-#header ul li a:hover {
-	background:#369;
-	color:#fff;
+
+#sub-menu ul li a { /* settings for all tab links */
+	padding: 3px 10px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+	border: 1px solid #DDD; /* set border COLOR as desired; usually matches border color specified in #tabnav */
+	background-color: #F6F6F6; /* set unselected tab background color as desired */
+	margin-right: 0px; /* set additional spacing between tabs as desired */
+	border-bottom: none;
 }
-#header ul li a.active,
-#header ul li a.active:hover {
-	color:#fff;
-	background:#000;
-	font-weight:bold;
+ 
+#sub-menu ul a:hover { /* settings for hover effect */
+background: #fff; /* set desired hover color */
 }
-#header ul li a span {
+/* Tab Navigation End*/
+
+#logo {
+	margin-top: 5px;
+}
+
+/* Head End */
+
+
+html {
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+	font-size: 72%;
+	color: #333;
+}
+img.thumbnail {
+	background: white;
+	border: 1px solid #DDD;	
+	padding: 2px;
+}
+
+label {
 	display:block;
+	font-weight:bold;
+	margin:5px 0;
 }
-/* 'widths' sub menu */
-#layoutdims {
-	clear:both;
-	background:#eee;
-	border-top:4px solid #000;
-	margin:0;
-	padding:6px 15px !important;
-	text-align:right;
+label.error {
+	color: #F96;
 }
-/* column container */
-.colmask {
-	position:relative;	/* This fixes the IE7 overflow hidden bug */
-	clear:both;
-	float:left;
-	width:100%;			/* width of whole page */
-	overflow:hidden;		/* This chops off any overhanging divs */
+input {
+	padding: 2px 3px;
 }
-/* common column settings */
-.colright,
-.colmid,
-.colleft {
-	float:left;
-	width:100%;			/* width of page */
-	position:relative;
+input.button {
 }
-.col1,
-.col2,
-.col3 {
-	float:left;
-	position:relative;
-	padding:0 0 1em 0;	/* no left and right padding on columns, we just make them narrower instead 
-					only padding top and bottom is included here, make it whatever value you need */
-	overflow:hidden;
+textarea {
+	width:350px;
+	padding:3px;
+	border:1px solid #DDD;
+	height:100px;
+	display:block;
+	color:#777;
 }
-/* 3 Column settings */
-.threecol {
-	background:#eee;		/* right column background colour */
+
+a {
+	color: #1A4686;
+	text-decoration: none;
 }
-.threecol .colmid {
-	right:25%;			/* width of the right column */
-	background:#fff;		/* center column background colour */
+a:hover {
+	text-decoration: underline;
 }
-.threecol .colleft {
-	right:50%;			/* width of the middle column */
-	background:#f4f4f4;	/* left column background colour */
+
+.clear {
+	clear: both;	
 }
-.threecol .col1 {
-	width:46%;			/* width of center column content (column width minus padding on either side) */
-	left:102%;			/* 100% plus left padding of center column */
+ul {
+	margin: 5px;
 }
-.threecol .col2 {
-	width:21%;			/* Width of left column content (column width minus padding on either side) */
-	left:31%;			/* width of (right column) plus (center column left and right padding) plus (left column left padding) */
+.float-right {
+	float: right;	
 }
-.threecol .col3 {
-	width:21%;			/* Width of right column content (column width minus padding on either side) */
-	left:85%;			/* Please make note of the brackets here:
-					(100% - left column width) plus (center column left and right padding) plus (left column left and right padding) plus (right column left padding) */
-}
-/* Footer styles */
-#footer {
-	clear:both;
-	float:left;
-	width:100%;
-	border-top:1px solid #000;
-}
-#footer p {
-	padding:10px;
-	margin:0;
-}
+.float-left {
+	float: left;
+} 

@@ -57,8 +57,9 @@ public class PermissionFragment {
 		this.projectCategoryService = projectCategoryService;
 	}
 	
-	public String doListView(Page<Permission> page, FragmentContext context) {
-		page = permissionService.getPermissionPage(page);
+	public String doListView(@Param Long siteId,
+			Page<Permission> page, FragmentContext context) {
+		page = permissionService.getPermissionPage(page, siteId);
 		context.putRequestData(AttributeKeys.PAGE_KEY_READABLE, page);
 		return "system/permissions_list";
 	}
@@ -73,12 +74,12 @@ public class PermissionFragment {
 			categoryId = categories.get(0).getId();
 		}
 		permission.setCategoryId(categoryId);
-		List<Role> roles = roleService.getRoleList(categoryId);
-		if(!roles.isEmpty()) {
-			permission.setRole(roles.get(roles.size()-1));
-		}
 		if(permissionId!=null) {
 			permission = permissionService.getPermission(permissionId);
+		}
+		List<Role> roles = roleService.getRoleList(permission.getCategoryId());
+		if(!roles.isEmpty()) {
+			permission.setRole(roles.get(roles.size()-1));
 		}
 		context.putRequestData(AttributeKeys.PERMISSION_KEY_READABLE, permission);
 		context.putRequestData(AttributeKeys.ROLE_LIST_KEY_READABLE, roles);

@@ -143,8 +143,8 @@
 		</p>
 
 		<script type="text/javascript">
-		$(document).ready(function(){
-		$('#registerForm').validate({
+$(document).ready(function(){
+	$('#registerForm').validate({
 		   submitHandler: function(form) {
 			// check email or uniqueId
 			var url = '${base}/check/system/user/exist?username='+$('#username-coldRegistrationForm').val();
@@ -154,7 +154,10 @@
 				async:false,
 				success:function(exist){
 					if(exist) {
-						$.prompt('该用户已经存在！');
+						$.blockUI({ 
+				            message: '该用户已经存在！',
+				            timeout: 1500
+				        });
 						flag = false;
 					}
 				}
@@ -163,8 +166,11 @@
 				$(form).ajaxSubmit({
 					clearForm:true,
 					success:function(user){
-						$.prompt('注册邮件已经发送到您的邮箱，请登录您的邮箱查看！');
-						window.location.href = '${base}';
+						$.blockUI({ 
+				            message: '注册邮件已经发送到您的邮箱，请登录您的邮箱查看！',
+				            timeout: 1500,
+				            onUnblock: function(){window.location.href = '${base}';}
+				        });
 					}
 				});
 			}

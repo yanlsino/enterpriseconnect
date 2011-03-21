@@ -26,6 +26,7 @@ public class ProjectFeature extends IdEntity {
 
 	private String label;
 	private String code;
+	private Integer level;
 	private Boolean show = false;
 	// helper
 	private Long roleId;
@@ -59,6 +60,14 @@ public class ProjectFeature extends IdEntity {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+	
+	public Integer getLevel() {
+		return level;
+	}
+	
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
 
 	public Boolean getShow() {

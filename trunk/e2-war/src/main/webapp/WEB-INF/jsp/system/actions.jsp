@@ -34,6 +34,10 @@
 					<a href="${base}/system/templates?siteId=${param.siteId}">模板管理</a>
 					(<a href="${base}/system/templates/template/form?siteId=${param.siteId}">添加</a>)
 				</li>
+				<li class="last">
+					<a href="${base}/system/links?siteId=${param.siteId}">友情链接管理</a>
+					(<a href="${base}/system/links/link/form?siteId=${param.siteId}">添加</a>)
+				</li>
 			</ul>	
 			<div>安全管理</div>
 			<ul>
@@ -48,7 +52,7 @@
 					(<a href="${base}/process/system/resources/synchronize?siteId=${param.siteId}">同步</a>)
 				</li>
 				<li class="last">
-					<a href="${base}/system/permissions?siteId=${param.siteId}&categoryId=${param.categoryId}">权限管理</a>
+					<a href="${base}/system/permissions?siteId=${param.siteId}">权限管理</a>
 					(<a href="${base}/system/permissions/permission/form?siteId=${param.siteId}">添加</a>)
 				</li>
 			</ul>

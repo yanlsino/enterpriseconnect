@@ -28,6 +28,6 @@ public interface PermissionService {
 	
 	List<Permission> getPermissionList(Long siteId);
 
-	Page<Permission> getPermissionPage(Page<Permission> page);
+	Page<Permission> getPermissionPage(Page<Permission> page, Long siteId);
 
 }

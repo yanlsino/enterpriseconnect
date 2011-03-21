@@ -21,7 +21,7 @@
 			<tbody>
 			<c:forEach var="permission" items="${page.result}" varStatus="status">
 				<tr class="<c:if test='${status.last}'>last</c:if> <c:if test='${status.count%2==0}'>alt</c:if>">
-					<td class="first"><a href="${base}/system/permissions/permission/form?permissionId=${permission.id}&siteId=${param.siteId}&categoryId=${param.categoryId}">${permission.id}</a></td>
+					<td class="first"><a href="${base}/system/permissions/permission/form?permissionId=${permission.id}&siteId=${param.siteId}&categoryId=${permission.category.id}">${permission.id}</a></td>
 					<td>${permission.resource.name}</td>
 					<td>${permission.resource.code}</td>
 					<td>${permission.role.name}(${permission.role.code})</td>

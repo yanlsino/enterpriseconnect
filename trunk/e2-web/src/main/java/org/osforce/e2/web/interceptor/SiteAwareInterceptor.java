@@ -1,5 +1,8 @@
 package org.osforce.e2.web.interceptor;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -48,8 +51,7 @@ public class SiteAwareInterceptor extends HandlerInterceptorAdapter {
 		}
 		if(site==null) {
 			// site always is null, build a default site use default theme
-			site = buildDefaultSite();
-			request.getSession().setAttribute(key, site);
+			site = buildDefaultSite(request);
 		}
 		// Site will always bind to current request 
 		request.setAttribute(AttributeKeys.SITE_KEY, site);
@@ -59,10 +61,27 @@ public class SiteAwareInterceptor extends HandlerInterceptorAdapter {
 		return super.preHandle(request, response, handler);
 	}
 	
-	protected Site buildDefaultSite() {
-		Site site = new Site("Open Source Force", null, "Open, Share", "www.osforce.org", true);
-		Theme theme = new Theme("osforce", true);
+	protected Site buildDefaultSite(HttpServletRequest request) throws UnknownHostException {
+		String domain = request.getServerName();
+		for(InetAddress addr : InetAddress.getAllByName("localhost")) {
+			if(StringUtils.equals(addr.getHostAddress(), request.getServerName())) {
+				domain = "localhost";
+			}
+		}
+		Site site = new Site(
+				"Enterprise Connect", 
+				null, 
+				"Open Source, Socail Business Software, SBS, Social Networking Service, SNS ", 
+				domain, 
+				true);
+		Theme theme = new Theme("default", true);
 		site.setTheme(theme);
 		return site;
+	}
+	
+	public static void main(String[] args) throws UnknownHostException {
+		for(InetAddress addr : InetAddress.getAllByName("localhost")) {
+			System.out.println(addr.getHostAddress());
+		}
 	}
 }

@@ -3,7 +3,6 @@ package org.osforce.e2.service.commons;
 import java.util.List;
 
 import org.osforce.e2.entity.commons.Template;
-import org.osforce.e2.entity.system.Site;
 import org.osforce.platform.dao.support.Page;
 
 /**
@@ -25,7 +24,7 @@ public interface TemplateService {
 	
 	void deleteTemplate(Long templateId);
 
-	Page<Template> getTemplatePage(Page<Template> page, Site site);
+	Page<Template> getTemplatePage(Page<Template> page, Long siteId);
 
 	List<Template> getTemplateList(Long siteId);
 

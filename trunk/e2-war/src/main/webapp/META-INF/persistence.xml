@@ -36,6 +36,7 @@
 		<class>org.osforce.e2.entity.system.Resource</class>
 		<class>org.osforce.e2.entity.system.Permission</class>
 		<class>org.osforce.e2.entity.system.Site</class>
+		<class>org.osforce.e2.entity.system.SiteLink</class>
 		<class>org.osforce.e2.entity.system.Theme</class>
 		<class>org.osforce.e2.entity.system.MailSettings</class>
 		<class>org.osforce.e2.entity.system.Project</class>

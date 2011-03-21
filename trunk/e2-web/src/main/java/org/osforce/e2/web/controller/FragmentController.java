@@ -65,12 +65,15 @@ public class FragmentController {
 			}
 		}
 		PageConfig pageConfig = configFactory.getPageConfig(site.getDomain(), viewName);
-		request.setAttribute("pageConfig", pageConfig, WebRequest.SCOPE_REQUEST);
-		String layout = StringUtil.buildPath("themes", site.getTheme().getName(), "layout");
-		if(StringUtils.isNotBlank(popup)) {
-			layout = StringUtil.buildPath("themes", site.getTheme().getName(), "layout-popup");
+		if(pageConfig!=null) {
+			request.setAttribute("pageConfig", pageConfig, WebRequest.SCOPE_REQUEST);
+			String layout = StringUtil.buildPath("themes", site.getTheme().getName(), "layout");
+			if(StringUtils.isNotBlank(popup)) {
+				layout = StringUtil.buildPath("themes", site.getTheme().getName(), "layout-popup");
+			}
+			return layout;
 		}
-		return layout;
+		return "commons/error404";
 	}
 
 	@RequestMapping(value = "/fragment/{fragmentId}", method = RequestMethod.GET)

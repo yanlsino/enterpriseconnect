@@ -6,7 +6,6 @@ import org.osforce.e2.dao.commons.TemplateDao;
 import org.osforce.e2.dao.system.ProjectCategoryDao;
 import org.osforce.e2.entity.commons.Template;
 import org.osforce.e2.entity.system.ProjectCategory;
-import org.osforce.e2.entity.system.Site;
 import org.osforce.e2.service.commons.TemplateService;
 import org.osforce.platform.dao.support.Page;
 import org.osforce.platform.dao.support.QueryAppender;
@@ -65,9 +64,10 @@ public class TemplateServiceImpl implements TemplateService {
 		templateDao.delete(templateId);
 	}
 
-	public Page<Template> getTemplatePage(Page<Template> page, Site site) {
-		QueryAppender appender = new QueryAppender();
-		appender.equal("template.category.site.id", site.getId());
+	public Page<Template> getTemplatePage(Page<Template> page, Long siteId) {
+		QueryAppender appender = new QueryAppender()
+				.equal("template.category.site.id", siteId)
+				.asc("template.code");
 		return templateDao.findPage(page, appender);
 	}
 	
@@ -80,7 +80,8 @@ public class TemplateServiceImpl implements TemplateService {
 	
 	public List<Template> getTemplateList(Long siteId) {
 		QueryAppender appender = new QueryAppender()
-				.equal("template.category.site.id", siteId);
+				.equal("template.category.site.id", siteId)
+				.asc("template.code");
 		return templateDao.find(appender);
 	}
 }

@@ -113,8 +113,9 @@ public class PermissionServiceImpl implements PermissionService {
 		permissionDao.delete(permissionId);
 	}
 
-	public Page<Permission> getPermissionPage(Page<Permission> page) {
-		QueryAppender appender = new QueryAppender();
+	public Page<Permission> getPermissionPage(Page<Permission> page, Long siteId) {
+		QueryAppender appender = new QueryAppender()
+				.equal("permission.category.site.id", siteId);
 		return permissionDao.findPage(page, appender);
 	}
 	

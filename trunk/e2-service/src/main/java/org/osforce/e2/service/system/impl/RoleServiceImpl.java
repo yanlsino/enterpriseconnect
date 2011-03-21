@@ -80,9 +80,9 @@ public class RoleServiceImpl implements RoleService {
 		roleDao.delete(roleId);
 	}
 	
-	public Page<Role> getRolePage(Page<Role> page, Site site ) {
+	public Page<Role> getRolePage(Page<Role> page, Long siteId) {
 		QueryAppender appender = new QueryAppender();
-		appender.equal("role.category.site.id", site.getId()).asc("role.level");
+		appender.equal("role.category.site.id", siteId).asc("role.level");
 		return roleDao.findPage(page, appender);
 	}
 	

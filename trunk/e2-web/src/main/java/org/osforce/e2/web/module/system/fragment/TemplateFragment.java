@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.osforce.e2.entity.commons.Template;
 import org.osforce.e2.entity.system.ProjectCategory;
-import org.osforce.e2.entity.system.Site;
 import org.osforce.e2.service.commons.TemplateService;
 import org.osforce.e2.service.system.ProjectCategoryService;
 import org.osforce.e2.web.AttributeKeys;
@@ -29,7 +28,7 @@ public class TemplateFragment {
 	
 	public TemplateFragment() {
 	}
-	
+
 	@Autowired
 	public void setTemplateService(TemplateService templateService) {
 		this.templateService = templateService;
@@ -41,9 +40,9 @@ public class TemplateFragment {
 		this.projectCategoryService = projectCategoryService;
 	}
 	
-	public String doListView(Site site, Page<Template> page, 
-			FragmentContext context) {
-		page = templateService.getTemplatePage(page, site);
+	public String doListView(@Param Long siteId, 
+			Page<Template> page, FragmentContext context) {
+		page = templateService.getTemplatePage(page, siteId);
 		context.putRequestData(AttributeKeys.PAGE_KEY_READABLE, page);
 		return "system/templates_list";
 	}

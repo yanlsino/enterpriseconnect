@@ -160,11 +160,11 @@
 		<to last="true">/page?viewName=/system/$1</to>
 	</rule>
 	<rule>
-		<from>^/system/(sites|themes|categories|users|roles|resources|permissions|templates|mail_settings)$</from>
+		<from>^/system/(sites|themes|categories|links|users|roles|resources|permissions|templates|mail_settings)$</from>
 		<to last="true">/page?viewName=system/$1</to>
 	</rule>
 	<rule>
-		<from>^/system/(sites|themes|categories|users|roles|resources|permissions|templates|mail_settings)/(site|theme|category|user|role|resource|permission|template|mail_settings)/form$</from>
+		<from>^/system/(sites|themes|categories|links|users|roles|resources|permissions|templates|mail_settings)/(site|theme|category|link|user|role|resource|permission|template|mail_settings)/form$</from>
 		<to last="true">/page?viewName=system/$2_form</to>
 	</rule>
 	<!-- system module end -->

@@ -23,6 +23,7 @@ import org.osforce.e2.entity.system.ProjectFeature;
 import org.osforce.e2.entity.system.Resource;
 import org.osforce.e2.entity.system.Role;
 import org.osforce.e2.entity.system.Site;
+import org.osforce.e2.entity.system.SiteLink;
 import org.osforce.e2.entity.system.Theme;
 import org.osforce.e2.entity.system.User;
 import org.osforce.e2.entity.team.TeamMember;
@@ -83,6 +84,10 @@ public  abstract  class AttributeKeys {
 	public static final String ROLE_KEY = "_" + Role.class.getName();
 	public static final String ROLE_KEY_READABLE = "role";
 	public static final String ROLE_LIST_KEY_READABLE = "roles";
+	
+	public static final String SITE_LINK_KEY = "_" + SiteLink.class.getName();
+	public static final String SITE_LINK_KEY_READABLE = "siteLink";
+	public static final String SITE_LINK_LIST_KEY_READABLE = "siteLinks";
 	
 	public static final String PERMISSION_KEY = "_" + Permission.class.getName();
 	public static final String PERMISSION_KEY_READABLE = "permission";

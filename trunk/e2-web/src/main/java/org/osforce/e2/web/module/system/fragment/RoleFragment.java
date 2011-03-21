@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.osforce.e2.entity.system.ProjectCategory;
 import org.osforce.e2.entity.system.Role;
-import org.osforce.e2.entity.system.Site;
 import org.osforce.e2.service.system.ProjectCategoryService;
 import org.osforce.e2.service.system.RoleService;
 import org.osforce.e2.web.AttributeKeys;
@@ -41,9 +40,9 @@ public class RoleFragment {
 		this.projectCategoryService = projectCategoryService;
 	}
 	
-	public String doListView(Page<Role> page, Site site,
-			FragmentContext context) {
-		page = roleService.getRolePage(page, site);
+	public String doListView(@Param Long siteId,
+			Page<Role> page, FragmentContext context) {
+		page = roleService.getRolePage(page, siteId);
 		context.putRequestData(AttributeKeys.PAGE_KEY_READABLE, page);
 		return "system/roles_list";
 	}

@@ -27,7 +27,7 @@ public interface RoleService {
 	
 	void delete(Long roleId);
 
-	Page<Role> getRolePage(Page<Role> page, Site site);
+	Page<Role> getRolePage(Page<Role> page, Long siteId);
 
 	List<Role> getRoleList(Long categoryId);
 

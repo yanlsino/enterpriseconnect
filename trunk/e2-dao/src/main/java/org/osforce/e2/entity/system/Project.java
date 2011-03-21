@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -267,6 +268,7 @@ public class Project extends IdEntity {
 	}
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="project")
+	@OrderBy("level")
 	public List<ProjectFeature> getFeatures() {
 		return features;
 	}

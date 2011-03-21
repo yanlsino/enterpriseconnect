@@ -16,6 +16,7 @@
 				<label>${feature.label}</label>
 				<form:input path="label" cssClass="{validate:{required:true, messages:{required:'显示名不能为空！'}}}"/>
 				<form:input path="code" readonly="true"/>
+				<form:input path="level" size="2"/>
 				<form:checkbox path="show"/>
 				<form:select path="roleId" items="${roles}" itemLabel="name" itemValue="id"/>
 				<form:hidden path="id"/>

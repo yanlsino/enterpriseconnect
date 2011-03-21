@@ -10,16 +10,16 @@
 		<form:form id="permissionForm" action="${base}/process/system/permission" commandName="permission">
 			<fieldset>
 				<div>
+					<label for="categoryId">分类名称:</label>
+					<form:select path="categoryId" items="${categories}" itemLabel="label" itemValue="id"/>
+				</div>
+				<div>
 					<label for="resourceId">资源名称:</label>
 					<form:select path="resourceId" items="${resources}" itemLabel="name" itemValue="id"/>
 				</div>
 				<div>
 					<label for="roleId">角色名称:</label>
 					<form:select path="roleId" items="${roles}" itemLabel="name" itemValue="id"/>
-				</div>
-				<div>
-					<label for="categoryId">分类名称:</label>
-					<form:select path="categoryId" items="${categories}" itemLabel="label" itemValue="id"/>
 				</div>
 				<div>
 					<label for="enabled">启用:</label>

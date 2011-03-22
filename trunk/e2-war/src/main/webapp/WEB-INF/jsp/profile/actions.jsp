@@ -9,7 +9,6 @@
 	</div>	
 	<div class="fragment-body">
 		<ul class="project-actions">
-		<e2:security code="team-member-add" userRequired="true">
 		<c:if test="${empty member}">
 			<li><a class="addMemberAction" href="${base}/process/team/join?projectId=${project.id}">
 			<c:choose>
@@ -18,7 +17,6 @@
 			</c:choose>
 			</a></li>
 		</c:if>
-		</e2:security>
 		<e2:entity name="Profile" user="${user}" project="${project}" exist="false">
 		<li><a class="concernAction" href="${base}/process/commons/link?fromId=${user.project.id}&toId=${project.profile.id}&entity=Profile">
 			<fmt:message key="profile.profiles_list.addConcern"/>

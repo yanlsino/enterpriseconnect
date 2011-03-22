@@ -3,10 +3,14 @@ package org.osforce.e2.web.module.team.controller;
 import java.util.Collections;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.osforce.e2.entity.system.Project;
+import org.osforce.e2.entity.system.Role;
 import org.osforce.e2.entity.system.User;
 import org.osforce.e2.entity.team.TeamMember;
 import org.osforce.e2.service.system.ProjectService;
+import org.osforce.e2.service.system.RoleService;
+import org.osforce.e2.service.system.UserService;
 import org.osforce.e2.service.team.MemberService;
 import org.osforce.e2.web.AttributeKeys;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +32,22 @@ import org.springframework.web.context.request.WebRequest;
 @RequestMapping("/team")
 public class MemberController {
 
+	private RoleService roleService;
+	private UserService userService;
 	private ProjectService projectService;
 	private MemberService memberService;
 	
 	public MemberController() {
+	}
+	
+	@Autowired
+	public void setRoleService(RoleService roleService) {
+		this.roleService = roleService;
+	}
+	
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 	
 	@Autowired
@@ -64,6 +80,7 @@ public class MemberController {
 					AttributeKeys.TEAM_MEMBER_KEY, WebRequest.SCOPE_SESSION);
 			member.setUser(user);
 			member.setProject(project);
+			member.setStatus(TeamMember.STATUS_WAIT_APPROVE);
 			memberService.createMember(member);
 			request.removeAttribute(AttributeKeys.TEAM_MEMBER_KEY, 
 					WebRequest.SCOPE_SESSION);
@@ -72,10 +89,28 @@ public class MemberController {
 		return null;
 	}
 	
-	@RequestMapping("/approve")
+	@RequestMapping(value={"/approve", "/accept"})
 	public @ResponseBody Map<String, Long> approve(
 			@RequestParam Long memberId) {
 		memberService.approveMember(memberId);
 		return Collections.singletonMap("id", memberId);
+	}
+	
+	@RequestMapping(value="/members/invite")
+	public @ResponseBody String invite(@RequestParam String emails,
+			WebRequest request) {
+		Project project = (Project) request.getAttribute(AttributeKeys.PROJECT_KEY, 
+				WebRequest.SCOPE_REQUEST);
+		String[] emailsArray = StringUtils.split(emails, "\n");
+		for(String email : emailsArray) {
+			User user = userService.getUser(StringUtils.trim(email));
+			if(user!=null) {
+				Role defaultRole = roleService.getRole(project.getCategoryId(), 50);
+				TeamMember member = new TeamMember(project, user, defaultRole);
+				member.setStatus(TeamMember.STATUS_NEED_ACCEPT);
+				memberService.createMember(member);
+			}
+		}
+		return "success";
 	}
 }

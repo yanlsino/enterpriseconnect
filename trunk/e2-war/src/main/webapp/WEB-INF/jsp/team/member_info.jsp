@@ -29,11 +29,43 @@
 					</div>
 					<div>
 						<a id="approveMemberAction" href="${base}/process/team/approve?memberId=${member.id}">
-						<fmt:message key="team.member_info.approval"/>
+						<fmt:message key="team.member_info.approve"/>
 						</a>
 						|
 						<a href="#">
-						<fmt:message key="team.member_info.disapproval"/>
+						<fmt:message key="team.member_info.disapprove"/>
+						</a>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</li>
+		</c:forEach>
+		<c:forEach var="member" items="${needAccept}" varStatus="status">
+			<li>
+				<a href="${base}/${member.user.project.uniqueId}/profile">
+				<c:choose>
+					<c:when test="${not empty member.project.profile.logo}">
+					<img class="thumbnail" src="${base}/logo/download/${member.project.profile.logo.id}/35x35"/>
+					</c:when>
+					<c:otherwise>
+					<img class="thumbnail"src="${base}/themes/${theme.name}/stock/${member.project.category.code}.png" with="35" height="35"/>
+					</c:otherwise>
+				</c:choose>	
+				</a>
+				<div class="desc">
+					<div>
+						<a target="_blank" href="${base}/${member.project.uniqueId}/profile">
+							${member.project.title}
+						</a>
+						${member.project.profile.shortDescription}
+					</div>
+					<div>
+						<a id="approveMemberAction" href="${base}/process/team/approve?memberId=${member.id}">
+						<fmt:message key="team.member_info.accept"/>
+						</a>
+						|
+						<a href="#">
+						<fmt:message key="team.member_info.refuse"/>
 						</a>
 					</div>
 					<div class="clear"></div>

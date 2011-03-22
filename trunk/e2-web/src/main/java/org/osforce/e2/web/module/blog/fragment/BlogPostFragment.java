@@ -2,6 +2,7 @@ package org.osforce.e2.web.module.blog.fragment;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.osforce.e2.entity.blog.BlogCategory;
 import org.osforce.e2.entity.blog.BlogPost;
 import org.osforce.e2.entity.commons.Statistic;
@@ -11,9 +12,11 @@ import org.osforce.e2.service.blog.BlogCategoryService;
 import org.osforce.e2.service.blog.BlogPostService;
 import org.osforce.e2.service.commons.CommentService;
 import org.osforce.e2.service.commons.StatisticService;
+import org.osforce.e2.service.system.ProjectService;
 import org.osforce.e2.web.AttributeKeys;
 import org.osforce.platform.dao.support.Page;
 import org.osforce.platform.web.framework.annotation.Param;
+import org.osforce.platform.web.framework.annotation.Pref;
 import org.osforce.platform.web.framework.core.FragmentContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,12 +31,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class BlogPostFragment {
 	
+	private ProjectService projectService;
 	private StatisticService statisticService;
 	private BlogPostService blogPostService;
 	private CommentService commentService;
 	private BlogCategoryService blogCategoryService;
 	
 	public BlogPostFragment() {
+	}
+	
+	@Autowired
+	public void setProjectService(ProjectService projectService) {
+		this.projectService = projectService;
 	}
 	
 	@Autowired
@@ -70,9 +79,21 @@ public class BlogPostFragment {
 		return "blog/posts_top";
 	}
 	
-	public String doRecentView(Page<BlogPost> page, Project project,
-			FragmentContext context) {
-		page = blogPostService.getBlogPostPage(page, project);
+	public String doRecentView(@Pref String uniqueId, @Pref String categoryLabel,
+			Page<BlogPost> page, Project project, FragmentContext context) {
+		if(StringUtils.isNotBlank(uniqueId)) {
+			Project tmp = projectService.getProject(uniqueId);
+			if(tmp!=null) {
+				project = tmp;
+			}
+		}
+		BlogCategory blogCategory = null;
+		if(StringUtils.isNotBlank(categoryLabel)) {
+			 blogCategory = blogCategoryService
+					.getBlogCategory(project.getId(), categoryLabel);
+		}
+		page = blogPostService.getBlogPostPage(page, project, 
+				blogCategory!=null?blogCategory.getId():null);
 		if(page.getResult().isEmpty()) {
 			return "commons/blank";
 		}

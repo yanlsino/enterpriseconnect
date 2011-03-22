@@ -28,6 +28,10 @@ public class TeamMember extends IdEntity {
 	
 	public static final String NAME = TeamMember.class.getSimpleName();
 	
+	public static String STATUS_WAIT_APPROVE = "wait-approve";
+	public static String STATUS_NEED_ACCEPT =  "need-accept";
+	
+	private String status;
 	private Boolean enabled = false;
 	// helper
 	private Long userId;
@@ -51,6 +55,14 @@ public class TeamMember extends IdEntity {
 		this.role = defaultRole;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	public Boolean getEnabled() {
 		return enabled;
 	}

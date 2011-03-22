@@ -40,7 +40,6 @@ public class BlogPost extends IdEntity {
 	
 	private String type = TYPE_ORIGINAL; 
 	private String title;
-	private String shortContent;
 	private String content;
 	private String keywords;
 	private Boolean top = false;
@@ -49,6 +48,7 @@ public class BlogPost extends IdEntity {
 	private Boolean enabled;	// 标记是否为草稿 
 	
 	// helper
+	private String shortContent;
 	private Long categoryId;
 	private Long projectId;
 	private Long enteredId;
@@ -83,19 +83,6 @@ public class BlogPost extends IdEntity {
 		this.title = title;
 	}
 	
-	
-	@Column(length=500)
-	public String getShortContent() {
-		if(StringUtils.isBlank(shortContent) && StringUtils.isNotBlank(content)) {
-			this.shortContent = HtmlUtil.subStringHTML(content, 500, "...");
-		}
-		return shortContent;
-	}
-	
-	public void setShortContent(String shortContent) {
-		this.shortContent = shortContent;
-	}
-
 	@Lob@Column(nullable=false)
 	@Type(type="org.hibernate.type.StringClobType")
 	public String getContent() {
@@ -146,6 +133,14 @@ public class BlogPost extends IdEntity {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	@Transient
+	public String getShortContent() {
+		if(StringUtils.isNotBlank(content)) {
+			this.shortContent = HtmlUtil.subStringHTML(content, 500, "...");
+		}
+		return shortContent;
 	}
 
 	@Transient

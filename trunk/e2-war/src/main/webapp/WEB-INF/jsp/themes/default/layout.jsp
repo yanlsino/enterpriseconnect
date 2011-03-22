@@ -45,6 +45,9 @@
 	<pack:style src="/components/jquery-zTree/zTreeStyle.css"/>
 	<pack:script src="/components/jquery-zTree/jquery-zTree-2.5.js"/>
 	
+	<pack:style src="/components/jquery-autocomplete/style.css"/>
+	<pack:script src="/components/jquery-autocomplete/jquery.autocomplete.js"/>
+	
 	<!-- tooltip 
 	<link rel="stylesheet" type="text/css" href="${base}/components/jquery-tooltip/jquery.tooltip.css" />
 	<script type="text/javascript" src="${base}/components/jquery-tooltip/lib/jquery.bgiframe.js"></script>

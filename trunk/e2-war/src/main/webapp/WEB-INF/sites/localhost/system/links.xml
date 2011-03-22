@@ -7,7 +7,7 @@
 	</position>
 	<position name="mainColumn">
 		<fragment refer="siteLinkFragment" view="List">
-			<title>友情链接列表</title>
+			<title>链接列表</title>
 		</fragment>
 	</position>
 </page>

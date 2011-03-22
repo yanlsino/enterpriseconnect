@@ -177,5 +177,5 @@ public class Message extends IdEntity {
 	public void setReadBy(User readBy) {
 		this.readBy = readBy;
 	}
-
+	
 }

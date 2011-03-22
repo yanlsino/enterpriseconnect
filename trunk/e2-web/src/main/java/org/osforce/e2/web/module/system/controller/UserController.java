@@ -1,12 +1,19 @@
 package org.osforce.e2.web.module.system.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 import org.osforce.e2.entity.system.User;
 import org.osforce.e2.service.system.UserService;
 import org.osforce.e2.web.AttributeKeys;
+import org.osforce.platform.dao.support.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
@@ -51,4 +58,21 @@ public class UserController {
 		}
 		return "redirect:/";
  	}
+	
+	@RequestMapping(value="/users/auto", method=RequestMethod.GET)
+	public @ResponseBody Map<String, Object> autoComplete(
+			@RequestParam String query) {
+		Page<User> page = new Page<User>(10);
+		page = userService.getUserPage(page, query);
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("query", query);
+		model.put("data", "");
+		List<String> suggestions = new ArrayList<String>();
+		for(User user : page.getResult()) {
+			suggestions.add(user.getUsername());
+		}
+		model.put("suggestions", suggestions);
+		return model;
+	}
+	
 }

@@ -2,6 +2,7 @@ package org.osforce.e2.service.team.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.osforce.e2.dao.system.ProjectDao;
 import org.osforce.e2.dao.system.RoleDao;
@@ -121,13 +122,32 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.find(appender);
 	}
 	
+	public List<TeamMember> getMemberList(Project project, User user,
+			String status, Boolean reverse) {
+		QueryAppender appender = new QueryAppender();
+		if(reverse) {
+			appender.equal("teamMember.project.id", project.getId())
+					.notEqual("teamMember.user.id", user.getId())
+					.equal("teamMember.enabled", false)
+					.equal("status", status);
+		} else {
+			appender.notEqual("teamMember.project.id", project.getId())
+					.equal("teamMember.user.id", user.getId())
+					.equal("teamMember.enabled", false)
+					.equal("status", status);
+		}
+		return memberDao.find(appender);
+	}
+	
 	public void approveMember(Long memberId) {
 		TeamMember member = memberDao.get(memberId);
+		member.setStatus(null);
 		member.setEnabled(true);
 		memberDao.update(member);
 		if(NumberUtils.compare(member.getProject().getId(), 
 				member.getProject().getEnteredBy().getProject().getId())==0) {
 			TeamMember otherSide = new TeamMember();
+			otherSide.setStatus(null);
 			otherSide.setEnabled(true);
 			otherSide.setProject(member.getUser().getProject());
 			otherSide.setUser(member.getProject().getEnteredBy());

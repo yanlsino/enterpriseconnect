@@ -42,6 +42,13 @@ public class BlogCategoryServiceImpl implements BlogCategoryService {
 	public BlogCategory getBlogCategory(Long categoryId) {
 		return blogCategoryDao.get(categoryId);
 	}
+	
+	public BlogCategory getBlogCategory(Long projectId, String categoryLabel) {
+		QueryAppender appender = new QueryAppender()
+				.equal("blogCategory.project.id", projectId)
+				.equal("blogCategory.label", categoryLabel);
+		return blogCategoryDao.findUnique(appender);
+	}
 
 	public void createBlogCategory(BlogCategory category) {
 		updateBlogCategory(category);

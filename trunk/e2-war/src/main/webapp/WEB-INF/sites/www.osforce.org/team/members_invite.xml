@@ -25,14 +25,8 @@
 			</fragment>
 		</position>
 		<position name="mainColumn">
-			<fragment refer="memberFragment" view="List">
-				<title>好友列表</title>
-				<preferences>
-					<pageSize>18</pageSize>
-				</preferences>
-				<rules>
-					<rule name="securityRule" code="team-member-view" />
-				</rules>
+			<fragment refer="memberFragment" view="Invite">
+				<title>好友邀请</title>
 			</fragment>
 		</position>
 	</page>
@@ -53,14 +47,8 @@
 			</fragment>
 		</position>
 		<position name="mainColumn">
-			<fragment refer="memberFragment" view="List">
-				<title>好友列表</title>
-				<preferences>
-					<pageSize>18</pageSize>
-				</preferences>
-				<rules>
-					<rule name="securityRule" code="team-member-view" />
-				</rules>
+			<fragment refer="memberFragment" view="Invite">
+				<title>成员邀请</title>
 			</fragment>
 		</position>
 	</page>
@@ -81,14 +69,8 @@
 			</fragment>
 		</position>
 		<position name="mainColumn">
-			<fragment refer="memberFragment" view="List">
-				<title>好友列表</title>
-				<preferences>
-					<pageSize>18</pageSize>
-				</preferences>
-				<rules>
-					<rule name="securityRule" code="team-member-view" />
-				</rules>
+			<fragment refer="memberFragment" view="Invite">
+				<title>参与者邀请</title>
 			</fragment>
 		</position>
 	</page>

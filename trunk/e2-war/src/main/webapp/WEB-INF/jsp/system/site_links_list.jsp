@@ -8,10 +8,10 @@
 	<div class="fragment-body">
 	<c:choose>
 		<c:when test="${not empty siteLinksMap}">
-		<ul>
+		<ul class="site-links">
 		<c:forEach var="categoryCode" items="${categoryCodes}">
 			<c:forEach var="siteLink" items="${siteLinksMap[categoryCode]}">
-			<li><a href="${siteLink.href}">${siteLink.text}</a></li>
+			<li><a href="${siteLink.href}" target="_blank">${siteLink.text}</a></li>
 			</c:forEach>
 		</c:forEach>
 		</ul>

@@ -31,6 +31,7 @@ public class BlogCategory extends IdEntity {
 	private static final long serialVersionUID = -1856521070359459275L;
 	
 	private String label;
+	private String code;
 	private Integer level = 0;
 	private Boolean enabled = true;
 	// helper 
@@ -50,7 +51,15 @@ public class BlogCategory extends IdEntity {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-
+	
+	public String getCode() {
+		return code;
+	}
+	
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 	public Integer getLevel() {
 		return level;
 	}

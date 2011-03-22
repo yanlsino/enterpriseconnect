@@ -28,9 +28,11 @@ public interface MemberService {
 
 	Page<TeamMember> getMemberPage(Page<TeamMember> page, Project project);
 
-	List<TeamMember> getNeedApproveMemberList(Project project, User user);
+	/*List<TeamMember> getNeedApproveMemberList(Project project, User user);
 
-	List<TeamMember> getWaitApproveMemberList(Project project, User user);
+	List<TeamMember> getWaitApproveMemberList(Project project, User user);*/
+	
+	List<TeamMember> getMemberList(Project project, User user, String status, Boolean reverse);
 
 	void approveMember(Long memberId);
 	

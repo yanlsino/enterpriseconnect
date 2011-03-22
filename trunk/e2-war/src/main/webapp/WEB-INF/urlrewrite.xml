@@ -118,6 +118,10 @@
 		<from>^/([\w\d-_]+)/team$</from>
 		<to last="true">/page?viewName=/team/members&amp;uniqueId=$1</to>
 	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/team/members/invite$</from>
+		<to last="true">/page?viewName=/team/members_invite&amp;uniqueId=$1</to>
+	</rule>
 	<!-- team module end -->
 	
 	<!-- message module begin -->

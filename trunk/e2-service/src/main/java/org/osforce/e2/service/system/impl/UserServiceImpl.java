@@ -90,6 +90,12 @@ public class UserServiceImpl implements UserService {
 		return userDao.findPage(page, appender);
 	}
 	
+	public Page<User> getUserPage(Page<User> page, String startWith) {
+		QueryAppender appender = new QueryAppender()
+				.like("user.username", startWith+"%");
+		return userDao.findPage(page, appender);
+	}
+	
 	public void register(User user, Project project) {
 		// create user
 		Date now = new Date();

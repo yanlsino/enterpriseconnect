@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.osforce.e2.entity.system.Site;
 import org.osforce.e2.entity.system.SiteLink;
 import org.osforce.e2.service.system.SiteLinkService;
 import org.osforce.e2.web.AttributeKeys;
@@ -34,8 +35,9 @@ public class SiteLinkFragment {
 		this.siteLinkService = siteLinkService;
 	}
 	
-	public String doListView(@Param Long siteId, 
+	public String doListView(@Param Long siteId, Site site,
 			@Pref String[] categoryCodes,  FragmentContext context) {
+		if(siteId==null) { siteId = site.getId(); }
 		List<SiteLink> siteLinks = siteLinkService.getSiteLinkList(siteId);
 		Map<String, List<SiteLink>> siteLinksMap = new HashMap<String, List<SiteLink>>();
 		for(SiteLink siteLink : siteLinks) {

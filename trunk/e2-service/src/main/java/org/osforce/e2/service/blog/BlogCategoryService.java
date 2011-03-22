@@ -16,6 +16,8 @@ public interface BlogCategoryService {
 
 	BlogCategory getBlogCategory(Long categoryId);
 	
+	BlogCategory getBlogCategory(Long projectId, String categoryLabel);
+	
 	void createBlogCategory(BlogCategory category);
 	
 	void updateBlogCategory(BlogCategory category);

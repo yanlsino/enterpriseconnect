@@ -26,6 +26,8 @@ public interface UserService {
 	Page<User> getUserPage(Page<User> page);
 
 	Page<User> getUserPage(Page<User> page, Long siteId);
+	
+	Page<User> getUserPage(Page<User> page, String startWith);
 
 	void register(User user, Project project);
 

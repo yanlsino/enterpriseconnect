@@ -47,6 +47,7 @@ $(document).ready(function(){
 				overlayCSS: { backgroundColor: '#EEE' }
 			});
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(folder){
 					setTimeout('window.location.href="?folderId='+folder.id+'"', 500);
 				}

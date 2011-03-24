@@ -47,6 +47,7 @@ $(document).ready(function(){
 	$('#roleForm').validate({
 		submitHandler: function(form) {
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(role){
 					window.location.href="?roleId="+role.id+"&siteId=${param.siteId}";
 				}

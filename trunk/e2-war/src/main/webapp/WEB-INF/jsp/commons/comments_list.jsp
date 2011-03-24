@@ -66,6 +66,7 @@
 		var content = $(this).find('#content').val();
 		if($.trim(content)!='') {
 			$(this).ajaxSubmit({
+				dataType:'json',
 				success:function(comment){
 					window.location.reload();
 				}

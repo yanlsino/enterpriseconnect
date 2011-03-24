@@ -1,6 +1,8 @@
 package org.osforce.e2.dao.profile.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.osforce.e2.dao.profile.ProfileDao;
 import org.osforce.e2.entity.profile.Profile;
@@ -28,10 +30,16 @@ public class ProfileDaoImpl extends AbstractDao<Profile>
 	static final String FIND_CONCERED_PAGE_JPQL = "FROM Profile p WHERE p.project.category.id = ?1 AND p.id IN (?2)";
 	public Page<Profile> findConcernedPage(Page<Profile> page,
 			ProjectCategory category, User user) {
-		List<Long> pIds = find("SELECT l.toId FROM Link l WHERE l.from.id = ?1 AND l.entity = ?2", 
+		Set<Long> pIds = new HashSet<Long>();
+		// link
+		List<Long> _pIds = find("SELECT l.toId FROM Link l WHERE l.from.id = ?1 AND l.entity = ?2", 
 				Long.class, user.getProjectId(), Profile.NAME);
-		pIds.add(user.getProjectId());
-		List<Long> _pIds = find("SELECT p.id FROM Project p WHERE p.enteredBy.id = ?1", Long.class, user.getId());
+		pIds.addAll(_pIds);
+		// enteredBy
+		_pIds = find("SELECT p.id FROM Project p WHERE p.enteredBy.id = ?1", Long.class, user.getId());
+		pIds.addAll(_pIds);
+		// teamMember
+		_pIds = find("SELECT tm.project.id FROM TeamMember tm WHERE tm.user.id = ?1", Long.class, user.getId());
 		pIds.addAll(_pIds);
 		return findPage(page, FIND_CONCERED_PAGE_JPQL, category.getId(), pIds);
 	}

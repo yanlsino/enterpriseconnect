@@ -61,6 +61,7 @@ $(document).ready(function(){
 				overlayCSS: { backgroundColor: '#F6F6F6' }
 			});
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(event){
 					setTimeout('window.location.href="?eventId='+event.id+'"', 500);
 				}

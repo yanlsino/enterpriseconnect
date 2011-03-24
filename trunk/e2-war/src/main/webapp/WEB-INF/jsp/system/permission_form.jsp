@@ -43,6 +43,7 @@ $(document).ready(function(){
 	$('#permissionForm').validate({
 		submitHandler: function(form) {
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(permission){
 					window.location.href="?permissionId="+permission.id+"&siteId=${param.siteId}";
 				}

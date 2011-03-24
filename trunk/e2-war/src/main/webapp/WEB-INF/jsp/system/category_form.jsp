@@ -47,6 +47,7 @@ $(document).ready(function(){
 	$('#projectCategoryForm').validate({
 		submitHandler: function(form) {
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(category){
 					window.location.href="?categoryId="+category.id+"&siteId="+category.siteId;
 				}

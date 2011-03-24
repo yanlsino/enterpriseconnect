@@ -50,6 +50,7 @@ $(document).ready(function(){
 	$('#messageForm').validate({
 		submitHandler: function(form) {
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(message){
 					window.location.href='?messageId='+message.id;
 				}

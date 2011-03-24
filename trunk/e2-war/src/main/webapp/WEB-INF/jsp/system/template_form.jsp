@@ -52,6 +52,7 @@ $(document).ready(function(){
 	$('#templateForm').validate({
 		submitHandler: function(form) {
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(template){
 					window.location.href="?templateId="+template.id+"&siteId=${param.siteId}";
 				}

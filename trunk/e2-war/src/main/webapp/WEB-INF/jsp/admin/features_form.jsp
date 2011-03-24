@@ -34,6 +34,7 @@
 $(document).ready(function(){
 	$('.featuresForm').submit(function(){
 		$(this).ajaxSubmit({
+			dataType: 'json',
 			success: function(feature){
 			}
 		});

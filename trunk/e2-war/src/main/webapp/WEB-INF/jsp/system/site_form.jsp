@@ -74,6 +74,7 @@ $(document).ready(function(){
 	$('#siteForm').validate({
 		submitHandler: function(form) {
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(site){
 					window.location.href="?siteId="+site.id;
 				}

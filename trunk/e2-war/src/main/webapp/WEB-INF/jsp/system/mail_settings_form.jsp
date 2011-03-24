@@ -45,6 +45,7 @@ $(document).ready(function(){
 	$('#mailSettingsForm').validate({
 		submitHandler: function(form) {
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(mailSettings){
 					window.location.href="?mailSettingsId="+mailSettings.id;
 				}

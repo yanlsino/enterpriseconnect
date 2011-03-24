@@ -29,6 +29,7 @@ $(document).ready(function(){
 	$('#attachmentForm').validate({
 		submitHandler: function(form) {
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(attachmentId){
 					window.location.reload();
 				}

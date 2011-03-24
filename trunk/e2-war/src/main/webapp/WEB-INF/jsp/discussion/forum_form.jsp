@@ -46,6 +46,7 @@ $(document).ready(function(){
 				overlayCSS: { backgroundColor: '#EEE' }
 			});
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(forum){
 					setTimeout('window.location.href="?forumId='+forum.id+'"', 1000);
 				}

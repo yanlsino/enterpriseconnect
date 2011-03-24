@@ -28,6 +28,7 @@ $(document).ready(function(){
 	$('#themeForm').validate({
 		submitHandler: function(form) {
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(theme){
 					window.location.href="?themeId="+theme.id;
 				}

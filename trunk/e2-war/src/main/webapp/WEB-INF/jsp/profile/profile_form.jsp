@@ -72,6 +72,7 @@ $(document).ready(function(){
 				overlayCSS: { backgroundColor: '#EEE' }
 			});
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(profile){
 					setTimeout('window.location.href="?profileId='+profile.id+'"', 500);
 				}

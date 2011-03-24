@@ -60,6 +60,7 @@ $(document).ready(function(){
 				overlayCSS: { backgroundColor: '#EEE' }
 			});
 			$(form).ajaxSubmit({
+				dataType:'json',
 				clearForm:true,
 				success:function(reply){
 					setTimeout('window.location.reload()', 500);

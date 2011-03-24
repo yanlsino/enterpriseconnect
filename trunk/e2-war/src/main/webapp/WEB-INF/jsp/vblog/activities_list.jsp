@@ -139,6 +139,7 @@ $(document).ready(function(){
 		self = this;
 		if($.trim(content)!='') {
 			$(this).ajaxSubmit({
+				dataType:'json',
 				clearForm:true,
 				success:function(comment){
 					showComments(comment.linkedId);

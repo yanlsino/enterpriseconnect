@@ -40,6 +40,7 @@ $(document).ready(function(){
 	$('#resourceForm').validate({
 		submitHandler: function(form) {
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(resource){
 					window.location.href="?resourceId="+resource.id;
 				}

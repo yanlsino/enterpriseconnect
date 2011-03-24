@@ -41,6 +41,7 @@ $(document).ready(function(){
 				overlayCSS: { backgroundColor: '#EEE' }
 			}); 
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(category){
 					setTimeout('window.location.href="?categoryId='+category.id+'"', 500);
 				}

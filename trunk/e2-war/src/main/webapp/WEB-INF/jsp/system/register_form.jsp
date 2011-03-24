@@ -164,6 +164,7 @@ $(document).ready(function(){
 			});
 			if(flag) {
 				$(form).ajaxSubmit({
+					dataType:'json',
 					clearForm:true,
 					success:function(user){
 						$.blockUI({ 

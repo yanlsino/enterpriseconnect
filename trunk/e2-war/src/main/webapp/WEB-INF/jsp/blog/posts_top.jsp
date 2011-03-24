@@ -11,11 +11,11 @@
 			<c:forEach var="statistic" items="${page.result}" varStatus="status">
 				<li <c:if test="${status.last}">class="last"</c:if>>
 				<span class="title">
-					<a href="${base}/${statistic.linkedEntity.enteredBy.project.uniqueId}/blog/post/${statistic.linkedEntity.id}">${statistic.linkedEntity.title}</a>
+					<a href="${base}/${statistic.linkedEntity.project.uniqueId}/blog/post/${statistic.linkedEntity.id}">${statistic.linkedEntity.title}</a>
 				</span>
 				<span class="author">
 					<span><fmt:message key="blog.posts_recent.author"/><span> 
-					<a href="${base}/${statistic.linkedEntity.enteredBy.project.uniqueId}/profile">${statistic.linkedEntity.enteredBy.nickname}</a>
+					<a href="${base}/${statistic.linkedEntity.project.uniqueId}/profile">${statistic.linkedEntity.enteredBy.nickname}</a>
 					<span><fmt:message key="blog.posts_recent.postAt"/><span><fmt:formatDate value="${statistic.linkedEntity.entered}" pattern="yyyy-MM-dd HH:mm"/>
 				</span>
 			</li>

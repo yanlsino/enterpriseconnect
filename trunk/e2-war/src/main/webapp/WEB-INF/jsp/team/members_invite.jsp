@@ -34,6 +34,7 @@ $(document).ready(function(){
 				overlayCSS: { backgroundColor: '#EEE' }
 			});
 			$(form).ajaxSubmit({
+				dataType:'json',
 				clearForm:true,
 				success:function(data){
 					if(data=='success') {

@@ -35,6 +35,7 @@ $(document).ready(function(){
 	$('#siteLinkForm').validate({
 		submitHandler: function(form) {
 			$(form).ajaxSubmit({
+				dataType:'json',
 				success:function(siteLink){
 					window.location.href="?siteId=${param.siteId}&linkId="+siteLink.id;
 				}

@@ -54,6 +54,7 @@ $(document).ready(function(){
 				overlayCSS: { backgroundColor: '#EEE' }
 			});
 			$(this).ajaxSubmit({
+				dataType:'json',
 				clearForm: true,
 				success:function(comment){
 					setTimeout('window.location.reload()', 500);

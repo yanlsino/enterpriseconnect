@@ -15,6 +15,19 @@
 		<module>e2-task</module>
 		<module>e2-war</module>
 	</modules>
+	
+	<repositories>
+		<repository>
+			<id>osforce</id>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<url>http://www.opensourceforce.org/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

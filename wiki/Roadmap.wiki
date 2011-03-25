@@ -1,10 +1,10 @@
 #summary One-sentence summary of this page.
 #labels Featured
 
-1、Q&A module    [已完成]
+1、Q&A module    
 
 
-2、Photo Module  
+2、Photo Module   [已完成]
 
 
 3、Issues Module

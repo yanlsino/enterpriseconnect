@@ -14,6 +14,8 @@ import org.osforce.e2.entity.discussion.Forum;
 import org.osforce.e2.entity.discussion.Reply;
 import org.osforce.e2.entity.discussion.Topic;
 import org.osforce.e2.entity.document.Folder;
+import org.osforce.e2.entity.gallery.Album;
+import org.osforce.e2.entity.gallery.Photo;
 import org.osforce.e2.entity.profile.Profile;
 import org.osforce.e2.entity.system.MailSettings;
 import org.osforce.e2.entity.system.Permission;
@@ -104,6 +106,14 @@ public  abstract  class AttributeKeys {
 	
 	public static final String BLOG_POST_KEY  =  "_" + BlogPost.class.getName();
 	public static final String BLOG_POST_KEY_READABLE = "post";
+	
+	public static final String ALBUM_KEY = "_" + Album.class.getName();
+	public static final String ALBUM_KEY_READABLE = "album";
+	public static final String ALBUM_LIST_KEY_READABLE = "albums";
+	
+	public static final String PHOTO_KEY = "_" + Photo.class.getName();
+	public static final String PHOTO_KEY_READABLE = "photo";
+	public static final String PHOTO_LIST_KEY_READABLE = "photos";
 	
 	public static final String BLOG_CATEGORY_KEY = "_" + BlogCategory.class.getName();
 	public static final String BLOG_CATEGORY_KEY_READABLE = "category";

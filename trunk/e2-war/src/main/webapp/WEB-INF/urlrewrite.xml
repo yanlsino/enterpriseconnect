@@ -64,7 +64,7 @@
 	</rule>
 	<!-- calendar module end -->
 	
-	<!-- blog model begin -->
+	<!-- blog module begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/blog$</from>
 		<to last="true">/page?viewName=/blog/posts&amp;uniqueId=$1</to>
@@ -81,7 +81,26 @@
 		<from>^/([\w\d-_]+)/blog/(post|category)/form$</from>
 		<to last="true">/page?viewName=/blog/$2_form&amp;uniqueId=$1</to>
 	</rule>
-	<!-- blog model end -->
+	<!-- blog module end -->
+	
+	<!-- gallery module begin -->
+	<rule>
+		<from>^/([\w\d-_]+)/gallery$</from>
+		<to last="true">/page?viewName=/gallery/albums&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/gallery/(albums|photos)$</from>
+		<to last="true">/page?viewName=/gallery/$2&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/gallery/album/form$</from>
+		<to last="true">/page?viewName=/gallery/album_form&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/gallery/photo/upload$</from>
+		<to last="true">/page?viewName=/gallery/photo_upload&amp;uniqueId=$1</to>
+	</rule>
+	<!-- gallery module end -->
 	
 	<!-- document module begin -->
 	<rule>

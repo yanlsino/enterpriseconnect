@@ -111,7 +111,7 @@ public class ProjectFeature extends IdEntity {
 		this.roleCode = roleCode;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="project_id")
 	public Project getProject() {
 		return project;
@@ -121,7 +121,7 @@ public class ProjectFeature extends IdEntity {
 		this.project = project;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="role_id")
 	public Role getRole() {
 		return role;

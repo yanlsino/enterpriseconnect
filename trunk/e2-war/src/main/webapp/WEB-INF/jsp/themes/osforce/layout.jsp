@@ -17,30 +17,37 @@
 	<meta name="Keywords" content="${site.keywords }"/>
 	<meta name="Description" content="${site.description}"/>
 	
-	<pack:script src="/components/jquery/jquery.min.js"/>
-	
-	<pack:script src="/components/jquery-form/jquery.form.js"/>
-	<pack:script src="/components/jquery-validate/jquery.validate.js"/>
-	<pack:script src="/components/jquery-validate/jquery.metadata.js"/>
+	<pack:script>
+		<src>/components/jquery/jquery.min.js</src>
+		<src>/components/jquery-form/jquery.form.js</src>
+		<src>/components/jquery-validate/jquery.validate.js</src>
+		<src>/components/jquery-validate/jquery.metadata.js</src>
+		<src>/components/jquery-blockUI/jquery.blockUI.js</src>
+		<src>/components/jquery-cycle/jquery.cycle.all.js</src>
+	</pack:script>
 	
 	<pack:style src="/components/nyroModal/nyroModal.css"/>
 	<pack:script src="/components/nyroModal/jquery.nyroModal.js"/>
 	
 	<pack:script src="/components/kindeditor/kindeditor.js"/>
 	
-	<pack:style src="/components/fullcalendar/redmond/theme.css"/>
-	<pack:style src="/components/fullcalendar/fullcalendar.css"/>
-	<pack:script src="/components/fullcalendar/fullcalendar.min.js"/>
-	<pack:script src="/components/fullcalendar/jquery-ui.custom.min.js"/>
-	
-	<pack:script src="/components/jquery-blockUI/jquery.blockUI.js"/>
+	<pack:style>
+		<src>/components/fullcalendar/redmond/theme.css</src>
+		<src>/components/fullcalendar/fullcalendar.css</src>
+	</pack:style>
+	<pack:script>
+		<src>/components/fullcalendar/fullcalendar.min.js</src>
+		<src>/components/fullcalendar/jquery-ui.custom.min.js</src>
+	</pack:script>
 	
 	<pack:style src="/components/jquery-tageditor/jquery.tag.editor.css"/>
 	<pack:script src="/components/jquery-tageditor/jquery.tag.editor.js"/>
 	
 	<pack:style src="/components/plupload/examples/css/plupload.queue.css"/>
-	<pack:script src="/components/plupload/js/plupload.full.min.js"/>
-	<pack:script src="/components/plupload/js/jquery.plupload.queue.min.js"/>
+	<pack:script>
+		<src>/components/plupload/js/plupload.full.min.js</src>
+		<src>/components/plupload/js/jquery.plupload.queue.min.js</src>
+	</pack:script>
 	
 	<pack:style src="/components/jquery-zTree/zTreeStyle.css"/>
 	<pack:script src="/components/jquery-zTree/jquery-zTree-2.5.js"/>

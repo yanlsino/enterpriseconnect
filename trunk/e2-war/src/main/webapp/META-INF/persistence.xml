@@ -44,6 +44,9 @@
 		<class>org.osforce.e2.entity.system.ProjectFeature</class>
 		<!-- team -->
 		<class>org.osforce.e2.entity.team.TeamMember</class>
+		<!-- gallery -->
+		<class>org.osforce.e2.entity.gallery.Album</class>
+		<class>org.osforce.e2.entity.gallery.Photo</class>
 		<!-- map -->
 		<class>org.osforce.e2.entity.map.Map</class>
 		<class>org.osforce.e2.entity.map.Marker</class>

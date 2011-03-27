@@ -40,6 +40,11 @@ public class Attachment extends IdEntity {
 	public String getFileName() {
 		return fileName;
 	}
+	
+	@Transient
+	public String getName() {
+		return StringUtils.substringBefore(fileName, ".");
+	}
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
@@ -72,7 +77,7 @@ public class Attachment extends IdEntity {
 	
 	@Transient
 	public String getSuffix() {
-		return StringUtils.substringAfterLast(fileName, ".");
+		return "."+StringUtils.substringAfterLast(fileName, ".");
 	}
 	
 	@Transient

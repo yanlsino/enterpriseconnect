@@ -30,6 +30,10 @@
 		<to last="true">/commons/download?attachmentId=$2</to>
 	</rule>
 	<rule>
+		<from>^/(image|doc|photo|logo)/download/([\d]+)\..*$</from>
+		<to last="true">/commons/download?attachmentId=$2</to>
+	</rule>
+	<rule>
 		<from>^/(image|doc|photo|logo)/download/([\d]+)/([\dx]+)$</from>
 		<to last="true">/commons/download?attachmentId=$2&amp;dimension=$3</to>
 	</rule>

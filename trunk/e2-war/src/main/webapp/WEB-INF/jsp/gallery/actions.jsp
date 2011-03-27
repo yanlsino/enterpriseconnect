@@ -9,8 +9,12 @@
 	</div>	
 	<div class="fragment-body">
 		<ul class="actions">
+		<e2:security code="gallery-album-add">
 			<li><a href="${base}/${project.uniqueId}/gallery/album/form">添加相册</a></li>
+		</e2:security>
+		<e2:security code="gallery-photo-add">
 			<li class="last"><a href="${base}/${project.uniqueId}/gallery/photo/upload">上传相片</a></li>
+		</e2:security>
 		</ul>
 	</div>
 </div>

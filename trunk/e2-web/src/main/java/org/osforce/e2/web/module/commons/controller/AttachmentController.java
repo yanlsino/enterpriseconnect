@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.osforce.e2.entity.commons.Attachment;
 import org.osforce.e2.service.commons.AttachmentService;
 import org.osforce.e2.web.module.commons.util.AttachmentUtil;
@@ -77,7 +76,7 @@ public class AttachmentController {
 		// read attachment content from local file
 		AttachmentUtil.read(attachment);
 		// prepare download
-		if(StringUtils.isBlank(dimension)) {
+		if(!attachment.getContentType().matches("image/.*")) {
 			response.setContentType(attachment.getContentType());
 			response.setContentLength(attachment.getSize().intValue());
 			response.setHeader("Content-Disposition","attachment; filename=\"" + attachment.getFileName() +"\"");

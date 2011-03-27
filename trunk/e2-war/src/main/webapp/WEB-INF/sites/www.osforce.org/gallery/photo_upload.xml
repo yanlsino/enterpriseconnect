@@ -2,11 +2,18 @@
 <pages>
 	<page name="/document/folders" parent="commons/header">
 		<position name="leftColumn" width="200px">
-			<fragment refer="galleryFragment" view="Actions"/>
+			<fragment refer="galleryFragment" view="Actions">
+				<rules>
+					<rule name="securityRule" code="gallery-album-add|gallery-photo-add"/>
+				</rules>
+			</fragment>
 		</position>
 		<position name="mainColumn">
 			<fragment refer="photoFragment" view="Upload">
 				<title>相片上传</title>
+				<rules>
+					<rule name="securityRule" code="gallery-photo-add"/>
+				</rules>
 			</fragment>
 		</position>
 	</page>

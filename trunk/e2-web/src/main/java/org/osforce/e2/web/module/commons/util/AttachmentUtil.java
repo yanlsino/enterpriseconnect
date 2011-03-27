@@ -41,14 +41,14 @@ public final class AttachmentUtil {
 	private static File getThumnailFile(Attachment attachment) {
 		String path = StringUtil.buildPath(basePath, DateUtil.format(attachment.getEntered(), "yyyy"),
 				DateUtil.format(attachment.getEntered(), "MMdd"));
-		String name = DateUtil.format(attachment.getEntered(), "yyyyMMddHHmmss") + "_" +attachment.getDimension();
+		String name = attachment.getName() + "_" + attachment.getId() + "." +attachment.getDimension();
 		return new File(path, name);
 	}
 	
 	private static File getTargetFile(Attachment attachment) {
 		String path = StringUtil.buildPath(basePath, DateUtil.format(attachment.getEntered(), "yyyy"),
 				DateUtil.format(attachment.getEntered(), "MMdd"));
-		String name =  DateUtil.format(attachment.getEntered(), "yyyyMMddHHmmss") + "." + attachment.getSuffix();
+		String name =  attachment.getName() + "_" + attachment.getId() + attachment.getSuffix();
 		return new File(path, name);
 	}
 	

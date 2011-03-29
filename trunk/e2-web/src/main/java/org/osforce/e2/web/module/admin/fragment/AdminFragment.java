@@ -82,6 +82,7 @@ public class AdminFragment {
 					feature.setId(tmp.getId());
 					feature.setLabel(tmp.getLabel());
 					feature.setShow(tmp.getShow());
+					feature.setLevel(tmp.getLevel());
 					feature.setRoleId(tmp.getRoleId());
 				}
 			}

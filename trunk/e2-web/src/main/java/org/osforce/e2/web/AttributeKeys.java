@@ -2,6 +2,7 @@ package org.osforce.e2.web;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.lucene.messages.Message;
+import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 import org.osforce.e2.dao.search.SearchBean;
 import org.osforce.e2.entity.blog.BlogCategory;
 import org.osforce.e2.entity.blog.BlogPost;
@@ -16,6 +17,7 @@ import org.osforce.e2.entity.discussion.Topic;
 import org.osforce.e2.entity.document.Folder;
 import org.osforce.e2.entity.gallery.Album;
 import org.osforce.e2.entity.gallery.Photo;
+import org.osforce.e2.entity.knowledge.Answer;
 import org.osforce.e2.entity.profile.Profile;
 import org.osforce.e2.entity.system.MailSettings;
 import org.osforce.e2.entity.system.Permission;
@@ -93,6 +95,7 @@ public  abstract  class AttributeKeys {
 	
 	public static final String PERMISSION_KEY = "_" + Permission.class.getName();
 	public static final String PERMISSION_KEY_READABLE = "permission";
+	public static final String PERMISSION_LIST_KEY_READABLE = "permissions";
 	
 	public static final String RESOURCE_KEY = "_" + Resource.class.getName();
 	public static final String RESOURCE_KEY_READABLE = "resource";
@@ -114,6 +117,14 @@ public  abstract  class AttributeKeys {
 	public static final String PHOTO_KEY = "_" + Photo.class.getName();
 	public static final String PHOTO_KEY_READABLE = "photo";
 	public static final String PHOTO_LIST_KEY_READABLE = "photos";
+	
+	public static final String QUESTION_KEY = "_" + Question.class.getName();
+	public static final String QUESTION_KEY_READABLE = "question";
+	public static final String QUESTION_LIST_KEY_READABLE = "questions";
+	
+	public static final String ANSWER_KEY = "_" + Answer.class.getName();
+	public static final String ANSWER_KEY_READABLE = "answer";
+	public static final String ANSWER_LIST_KEY_READABLE = "answers";
 	
 	public static final String BLOG_CATEGORY_KEY = "_" + BlogCategory.class.getName();
 	public static final String BLOG_CATEGORY_KEY_READABLE = "category";

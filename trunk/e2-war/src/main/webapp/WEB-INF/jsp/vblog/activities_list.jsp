@@ -42,7 +42,7 @@
 						</div>
 						<div class="clear"></div>
 					</div>
-					<e2:security code="vblog-comment-view">
+					<e2:security code="vblog-comment-view" project="${activity.project}">
 					<div id="commentContainer${activity.id}">
 					<%-- replace use ajax load 
 					<c:forEach var="comment" items="${activity.comments}" varStatus="status">
@@ -65,7 +65,7 @@
 					--%>
 					</div>
 					</e2:security>
-					<e2:security code="vblog-comment-add" userRequired="true">
+					<e2:security code="vblog-comment-add" project="${activity.project}" userRequired="true">
 					<form id="activityCommentForm${activity.id}" class="activityCommentForm" style="display: none;" action="${base}/process/commons/comment" method="post">
 						<div>
 							<textarea name="content"></textarea>

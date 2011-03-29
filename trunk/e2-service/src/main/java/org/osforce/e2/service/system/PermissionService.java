@@ -3,7 +3,6 @@ package org.osforce.e2.service.system;
 import java.util.List;
 
 import org.osforce.e2.entity.system.Permission;
-import org.osforce.platform.dao.support.Page;
 
 /**
  * 
@@ -20,14 +19,14 @@ public interface PermissionService {
 	
 	Permission getPermission(Long resourceId, Long categoryId);
 	
+	Permission getPermission(String resourceCode, Long categoryId);
+	
 	void createPermission(Permission permission);
 	
 	void updatePermission(Permission permission);
 	
 	void deletePermission(Long permissionId);
 	
-	List<Permission> getPermissionList(Long siteId);
-
-	Page<Permission> getPermissionPage(Page<Permission> page, Long siteId);
+	List<Permission> getPermissionList(Long siteId, Long categoryId);
 
 }

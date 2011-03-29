@@ -55,6 +55,8 @@
 	<pack:style src="/components/jquery-autocomplete/style.css"/>
 	<pack:script src="/components/jquery-autocomplete/jquery.autocomplete.js"/>
 	
+	<pack:script src="/components/datepicker/WdatePicker.js"/>
+	
 	<!-- tooltip 
 	<link rel="stylesheet" type="text/css" href="${base}/components/jquery-tooltip/jquery.tooltip.css" />
 	<script type="text/javascript" src="${base}/components/jquery-tooltip/lib/jquery.bgiframe.js"></script>

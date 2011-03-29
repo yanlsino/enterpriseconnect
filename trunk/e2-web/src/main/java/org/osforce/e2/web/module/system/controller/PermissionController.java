@@ -35,7 +35,16 @@ public class PermissionController {
 	@RequestMapping(value="/permission", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Long> update(Permission permission) {
 		if(permission.getId()==null) {
-			permissionService.createPermission(permission);
+			Permission p = permissionService.getPermission(permission.getResourceId(), 
+					permission.getCategoryId());
+			if(p==null) {
+				permissionService.createPermission(permission);
+			} else {
+				p.setCategoryId(permission.getCategoryId());
+				p.setResourceId(permission.getResourceId());
+				p.setRoleId(permission.getRoleId());
+				permissionService.updatePermission(p);
+			}
 		} else {
 			permissionService.updatePermission(permission);
 		}

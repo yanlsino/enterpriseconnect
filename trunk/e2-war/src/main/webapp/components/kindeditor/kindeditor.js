@@ -5,14 +5,14 @@
 * @author Roddy <luolonghao@gmail.com>
 * @site http://www.kindsoft.net/
 * @licence LGPL(http://www.opensource.org/licenses/lgpl-license.php)
-* @version 3.5.1 (2010-07-18)
+* @version 3.5.2 (2010-12-02)
 *******************************************************************************/
 
 (function (undefined) {
 
 var KE = {};
 
-KE.version = '3.5.1 (2010-07-18)';
+KE.version = '3.5.2 (2010-12-02)';
 
 KE.scriptPath = (function() {
 	var elements = document.getElementsByTagName('script');
@@ -47,8 +47,8 @@ KE.setting = {
 	newlineTag : 'p',
 	dialogAlignType : 'page',
 	cssPath : '',
-	skinsPath : KE.scriptPath === '' ? '' : KE.scriptPath + 'skins/',
-	pluginsPath : KE.scriptPath === '' ? '' : KE.scriptPath + 'plugins/',
+	skinsPath : KE.scriptPath + 'skins/',
+	pluginsPath : KE.scriptPath + 'plugins/',
 	minWidth : 200,
 	minHeight : 100,
 	minChangeSize : 5,
@@ -309,11 +309,14 @@ KE.selection = function(doc) {
 							var nodeRange = range.duplicate();
 							KE.util.moveToElementText(nodeRange, node);
 							testRange.setEndPoint('StartToEnd', nodeRange);
-							if (isEnd) startPos += nodeRange.text.length;
+							if (isEnd) startPos += nodeRange.text.replace(/\r\n|\n|\r/g, '').length;
 							else startPos = 0;
 						} else if (node.nodeType == 3) {
-							testRange.moveStart('character', node.nodeValue.length);
-							startPos += node.nodeValue.length;
+							//fix bug: typeof node.nodeValue can return "unknown" in IE.
+							if (typeof node.nodeValue === 'string') {
+								testRange.moveStart('character', node.nodeValue.length);
+								startPos += node.nodeValue.length;
+							}
 						}
 						if (!isEnd) startNode = node;
 					}
@@ -1379,7 +1382,7 @@ KE.util = {
 		if (typeof el.style.opacity == "undefined") {
 			el.style.filter = (opacity == 100) ? "" : "alpha(opacity=" + opacity + ")";
 		} else {
-			el.style.opacity = (opacity == 100) ? "" : "0." + opacity.toString();
+			el.style.opacity = (opacity == 100) ? "" : (opacity / 100);
 		}
 	},
 	getIframeDoc : function(iframe) {
@@ -1397,6 +1400,11 @@ KE.util = {
 		);
 	},
 	parseJson : function (text) {
+		//extract JSON string
+		var match;
+		if ((match = /\{[\s\S]*\}|\[[\s\S]*\]/.exec(text))) {
+			text = match[0];
+		}
 		var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
 		cx.lastIndex = 0;
 		if (cx.test(text)) {
@@ -1550,11 +1558,15 @@ KE.util = {
 		if (!g.container) return;
 		if (isCheck && (parseInt(width) <= g.minWidth || parseInt(height) <= g.minHeight)) return;
 		if (isResizeWidth) g.container.style.width = width;
+		if (KE.browser.IE) {
+			//improve IE performance (issue #126)
+			var temp = g.toolbarTable && g.toolbarTable.offsetHeight;
+		}
 		g.container.style.height = height;
 		var diff = parseInt(height) - g.toolbarHeight - g.statusbarHeight;
 		if (diff >= 0) {
 			g.iframe.style.height = diff + 'px';
-			g.newTextarea.style.height = (((KE.browser.IE && KE.browser.VERSION < 8) || document.compatMode != 'CSS1Compat') ? diff - 2 : diff) + 'px';
+			g.newTextarea.style.height = (((KE.browser.IE && KE.browser.VERSION < 8 || document.compatMode != 'CSS1Compat') && diff >= 2) ? diff - 2 : diff) + 'px';
 		}
 	},
 	hideLoadingPage : function(id) {

@@ -50,5 +50,8 @@
 		<!-- map -->
 		<class>org.osforce.e2.entity.map.Map</class>
 		<class>org.osforce.e2.entity.map.Marker</class>
+		<!-- knowledge -->
+		<class>org.osforce.e2.entity.knowledge.Question</class>
+		<class>org.osforce.e2.entity.knowledge.Answer</class>
 	</persistence-unit>
 </persistence>

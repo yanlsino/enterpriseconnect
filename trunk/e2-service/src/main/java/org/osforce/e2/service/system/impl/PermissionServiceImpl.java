@@ -13,7 +13,6 @@ import org.osforce.e2.entity.system.ProjectCategory;
 import org.osforce.e2.entity.system.Resource;
 import org.osforce.e2.entity.system.Role;
 import org.osforce.e2.service.system.PermissionService;
-import org.osforce.platform.dao.support.Page;
 import org.osforce.platform.dao.support.QueryAppender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +79,13 @@ public class PermissionServiceImpl implements PermissionService {
 				.equal("permission.category.id", categoryId);
 		return permissionDao.findUnique(appender);
 	}
+	
+	public Permission getPermission(String resourceCode, Long categoryId) {
+		QueryAppender appender = new QueryAppender()
+				.equal("permission.resource.code", resourceCode)
+				.equal("permission.category.id", categoryId);
+		return permissionDao.findUnique(appender);
+	}
 
 	public void createPermission(Permission permission) {
 		updatePermission(permission);
@@ -113,15 +119,14 @@ public class PermissionServiceImpl implements PermissionService {
 		permissionDao.delete(permissionId);
 	}
 
-	public Page<Permission> getPermissionPage(Page<Permission> page, Long siteId) {
-		QueryAppender appender = new QueryAppender()
-				.equal("permission.category.site.id", siteId);
-		return permissionDao.findPage(page, appender);
-	}
-	
-	public List<Permission> getPermissionList(Long siteId) {
-		QueryAppender appender = new QueryAppender()
-				.equal("permission.category.site.id", siteId);
+	public List<Permission> getPermissionList(Long siteId, Long categoryId) {
+		QueryAppender appender = new QueryAppender();
+		if(siteId!=null) {
+			appender.equal("permission.category.site.id", siteId);
+		}
+		if(categoryId!=null) {
+			appender.equal("permission.category.id", categoryId);
+		}
 		return permissionDao.find(appender);
 	}
 }

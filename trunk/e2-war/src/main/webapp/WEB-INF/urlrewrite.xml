@@ -57,6 +57,25 @@
 	</rule>
 	<!-- profile module end -->
 	
+	<!-- knowledge module begin -->
+	<rule>
+		<from>^/([\w\d-_]+)/knowledge$</from>
+		<to last="true">/page?viewName=/knowledge/questions&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/knowledge/(questions|answers)$</from>
+		<to last="true">/page?viewName=/knowledge/$2&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/knowledge/(question|answer)/form$</from>
+		<to last="true">/page?viewName=/knowledge/$2_form&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
+		<from>^/([\w\d-_]+)/knowledge/(question|answer)/([\d]+)$</from>
+		<to last="true">/page?viewName=/knowledge/$2&amp;uniqueId=$1&amp;$2Id=$3</to>
+	</rule>
+	<!-- knowledge module end -->
+	
 	<!-- calendar module begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/calendar$</from>

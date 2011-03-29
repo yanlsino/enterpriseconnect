@@ -44,4 +44,20 @@
 	<resource name="微薄评论添加" code="vblog-comment-add" enabled="true"/>
 	<resource name="微薄评论编辑" code="vblog-comment-edit" enabled="true"/>
 	<resource name="微薄评论查看" code="vblog-comment-view" enabled="true"/>
+	
+	<resource name="相册添加" code="gallery-album-add" enabled="true"/>
+	<resource name="相册编辑" code="gallery-album-edit" enabled="true"/>
+	<resource name="相册查看" code="gallery-album-view" enabled="true"/>
+	
+	<resource name="相片上传" code="gallery-photo-add" enabled="true"/>
+	<resource name="相片编辑" code="gallery-photo-edit" enabled="true"/>
+	<resource name="相片查看" code="gallery-photo-view" enabled="true"/>
+	
+	<resource name="问题添加" code="knowledge-question-add" enabled="true"/>
+	<resource name="问题编辑" code="knowledge-question-edit" enabled="true"/>
+	<resource name="问题查看" code="knowledge-question-view" enabled="true"/>
+	
+	<resource name="答案添加" code="knowledge-answer-add" enabled="true"/>
+	<resource name="答案编辑" code="knowledge-answer-edit" enabled="true"/>
+	<resource name="答案查看" code="knowledge-answer-view" enabled="true"/>
 </resources>

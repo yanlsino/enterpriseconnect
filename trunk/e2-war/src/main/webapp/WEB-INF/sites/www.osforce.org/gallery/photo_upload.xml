@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
-	<page name="/document/folders" parent="commons/header">
+	<page name="gallery/photo_upload" parent="commons/header">
 		<position name="leftColumn" width="200px">
 			<fragment refer="galleryFragment" view="Actions">
 				<rules>

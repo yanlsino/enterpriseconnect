@@ -26,8 +26,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ActivityFragment {
 
-	private static final String ENTITY = Activity.class.getSimpleName();
-	
 	private UserService userService;
 	private ActivityService activityService;
 	private CommentService commentService;
@@ -51,7 +49,7 @@ public class ActivityFragment {
 	}
 
 	public String doListView(@Pref String[] activityTypes, Page<Activity> page,  
-			User user, Project project, Site site, FragmentContext context) {
+			Project project, Site site, FragmentContext context) {
 		page = activityService.getActivityPage(page, project, Arrays.asList(activityTypes));
 		for(Activity activity : page.getResult()) {
 			Long count = commentService.countComment(activity.getId(), Activity.NAME);

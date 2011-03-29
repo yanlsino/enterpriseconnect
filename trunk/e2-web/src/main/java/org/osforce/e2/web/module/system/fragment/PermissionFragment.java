@@ -12,7 +12,6 @@ import org.osforce.e2.service.system.ProjectCategoryService;
 import org.osforce.e2.service.system.ResourceService;
 import org.osforce.e2.service.system.RoleService;
 import org.osforce.e2.web.AttributeKeys;
-import org.osforce.platform.dao.support.Page;
 import org.osforce.platform.web.framework.annotation.Param;
 import org.osforce.platform.web.framework.core.FragmentContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,10 +56,16 @@ public class PermissionFragment {
 		this.projectCategoryService = projectCategoryService;
 	}
 	
-	public String doListView(@Param Long siteId,
-			Page<Permission> page, FragmentContext context) {
-		page = permissionService.getPermissionPage(page, siteId);
-		context.putRequestData(AttributeKeys.PAGE_KEY_READABLE, page);
+	public String doListView(@Param Long siteId, 
+			@Param Long categoryId, FragmentContext context) {
+		List<ProjectCategory> categories = projectCategoryService.getProjectCategoryList(siteId);
+		context.putRequestData(AttributeKeys.PROJECT_CATEGORY_LIST_KEY_READABLE, categories);
+		if(categoryId==null && categories.size()>0) {
+			categoryId = categories.get(0).getId();
+		}
+		//
+		List<Permission> permissions = permissionService.getPermissionList(siteId, categoryId);
+		context.putRequestData(AttributeKeys.PERMISSION_LIST_KEY_READABLE, permissions);
 		return "system/permissions_list";
 	}
 	

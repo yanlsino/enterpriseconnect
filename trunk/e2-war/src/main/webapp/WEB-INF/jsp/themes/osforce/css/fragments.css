@@ -508,6 +508,18 @@ textarea.comment {
 	margin-left: 40px;
 	min-height: 40px;
 }
+.questions-list li {
+	padding-left: 18px;
+	padding-bottom: 2px;
+	margin-bottom: 3px;
+	line-height: 16px;
+	background: url("../icons/help_16x16.png") no-repeat;
+	border-bottom: 1px dashed #DDD;	
+}
+.questions-list li.last {
+	border-bottom: none;
+}
+
 #postForm textarea {
 	width: 99%;	
 	height: 400px;

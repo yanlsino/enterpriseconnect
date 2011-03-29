@@ -14,12 +14,18 @@
 					<th>名称</th>
 					<th>编码</th>
 					<th>默认角色</th>
-					<th>分类</th>
+					<th>
+						<select>
+						<c:forEach var="category" items="${categories}">
+							<option value="${category.id}" <c:if test="${category.id eq param.categoryId}">selected="selected"</c:if>>${category.label}</option>
+						</c:forEach>
+						</select>
+					</th>
 					<th class="last">状态</th>
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="permission" items="${page.result}" varStatus="status">
+			<c:forEach var="permission" items="${permissions}" varStatus="status">
 				<tr class="<c:if test='${status.last}'>last</c:if> <c:if test='${status.count%2==0}'>alt</c:if>">
 					<td class="first"><a href="${base}/system/permissions/permission/form?permissionId=${permission.id}&siteId=${param.siteId}&categoryId=${permission.category.id}">${permission.id}</a></td>
 					<td>${permission.resource.name}</td>
@@ -41,3 +47,11 @@
 		</c:if>
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('select').change(function(){
+		window.location.href = '?siteId=${param.siteId}&categoryId='+$(this).val();
+	});
+});
+</script>

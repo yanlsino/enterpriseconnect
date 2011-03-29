@@ -53,7 +53,7 @@
 				</li>
 				<li class="last">
 					<a href="${base}/system/permissions?siteId=${param.siteId}">权限管理</a>
-					(<a href="${base}/system/permissions/permission/form?siteId=${param.siteId}">添加</a>)
+					(<a href="${base}/system/permissions/permission/form?siteId=${param.siteId}&multiple=true">添加</a>)
 				</li>
 			</ul>
 			</c:if>

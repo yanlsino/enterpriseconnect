@@ -10,9 +10,18 @@
 	<div class="fragment-body">
 		<div class="photos-list">
 		<c:forEach var="photo" items="${page.result}">
-			<img class="thumbnail" src="${base}/photo/download/${photo.realFile.id}/150x150"/>
+			<a class="nyroModal" rel="album" href="${base}/photo/download/${photo.realFile.id}${photo.realFile.suffix}">
+				<img class="thumbnail" src="${base}/photo/download/${photo.realFile.id}/150x150"/>
+			</a>
 		</c:forEach>
 		</div>
 		<div class="clear"></div>
 	</div>
 </div>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.nyroModal').nyroModal();
+});
+</script>

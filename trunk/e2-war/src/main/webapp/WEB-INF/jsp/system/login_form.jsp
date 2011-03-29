@@ -48,7 +48,7 @@
         <li class="button">
         	<input type="submit" class="btn-primary" tabindex="3" value='<fmt:message key="system.login_form.submit"/>'/>&nbsp;&nbsp;
 			<input type="reset" class="btn-primary" value="<fmt:message key="system.login_form.reset"/>"/>
-          <span> 或  <a href="${base}/register" class="nav-link">加入开源力量</a></span>
+          <span> 或  <a href="${base}/register" class="nav-link">加入${site.title}</a></span>
         </li>
       </ul>
 </form>
@@ -79,7 +79,16 @@ $(document).ready(function(){
 				}
 			});
 			if(flag) {
-				form.submit();
+				$(form).ajaxSubmit({
+					dataType:'json',
+					success:function(user){
+						if('${param.popup}' == 'true') {
+							setTimeout('window.location.reload()', 0);
+						} else {
+							setTimeout('window.location.href="${base}/'+user.uniqueId+'/profile"', 0);
+						}
+					}
+				});
 			}
 		},
 		meta: "validate"

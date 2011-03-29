@@ -11,7 +11,6 @@ import javax.persistence.Transient;
 
 import org.osforce.e2.entity.system.Project;
 import org.osforce.platform.entity.support.IdEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 

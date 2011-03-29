@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+	<page name="knowledge/questions" parent="commons/header">
+		<position name="leftColumn" width="200px">
+			<fragment refer="knowledgeFragment" view="Actions">
+				<rules>
+					<rule name="securityRule" code="knowledge-question-add|knowledge-answer-add"/>
+				</rules>
+			</fragment>
+		</position>
+		<position name="mainColumn">
+			<fragment refer="questionFragment" view="List">
+				<title>问题列表</title>
+				<preferences>
+					<limit>50</limit>
+				</preferences>
+			</fragment>
+		</position>
+	</page>
+</pages>

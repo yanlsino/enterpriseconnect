@@ -519,7 +519,34 @@ textarea.comment {
 .questions-list li.last {
 	border-bottom: none;
 }
-
+.questions-recent li {
+	padding-left: 18px;
+	padding-bottom: 2px;
+	margin-bottom: 3px;
+	line-height: 16px;
+	background: url("../icons/help_16x16.png") no-repeat;
+}
+.question .title {
+	padding: 5px;
+	border-bottom: 1px solid #DDD;
+	background-color: #F6F6F6;
+}
+.question .content {
+	padding: 10px 5px;
+}
+.question .foot {
+	padding: 5px;
+}
+.answer .content {
+	padding: 10px 5px;
+	border-top: 1px solid #DDD;
+	background-color: #F6F6F6;
+}
+.answer .foot {
+	margin-bottom: 10px;
+	padding: 5px;
+}
+	
 #postForm textarea {
 	width: 99%;	
 	height: 400px;

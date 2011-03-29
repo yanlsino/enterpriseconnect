@@ -42,7 +42,6 @@
 						</div>
 						<div class="clear"></div>
 					</div>
-					<e2:security code="vblog-comment-view" project="${activity.project}">
 					<div id="commentContainer${activity.id}">
 					<%-- replace use ajax load 
 					<c:forEach var="comment" items="${activity.comments}" varStatus="status">
@@ -64,25 +63,27 @@
 					</c:forEach>
 					--%>
 					</div>
-					</e2:security>
-					<e2:security code="vblog-comment-add" project="${activity.project}" userRequired="true">
 					<form id="activityCommentForm${activity.id}" class="activityCommentForm" style="display: none;" action="${base}/process/commons/comment" method="post">
-						<div>
-							<textarea name="content"></textarea>
-						</div>
-						<div class="last">
-							<!-- 
-							<span class="float-right"><fmt:message key="vblog.activities_list.maxCharacters"/></span>
-							-->
-							<input class="button" type="submit" value='<fmt:message key="vblog.activities_list.submit"/>'>
-							<input class="button cancel" type="button" value="<fmt:message key="vblog.activities_list.cancel"/>">
-							<input type="hidden" name="linkedId" value="${activity.id}"/>
-							<input type="hidden" name="enteredId" value="${user.id}"/>
-							<input type="hidden" name="modifiedId" value="${user.id}"/>
-							<input type="hidden" name="entity" value="Activity">
-						</div>
+					<c:choose>
+						<c:when test="${empty user}">添加评论，请先<a href="#" class="loginAction">登录</a></c:when>
+						<c:otherwise>
+							<div>
+								<textarea name="content"></textarea>
+							</div>
+							<div class="last">
+								<!-- 
+								<span class="float-right"><fmt:message key="vblog.activities_list.maxCharacters"/></span>
+								-->
+								<input class="button" type="submit" value='<fmt:message key="vblog.activities_list.submit"/>'>
+								<input class="button cancel" type="button" value="<fmt:message key="vblog.activities_list.cancel"/>">
+								<input type="hidden" name="linkedId" value="${activity.id}"/>
+								<input type="hidden" name="enteredId" value="${user.id}"/>
+								<input type="hidden" name="modifiedId" value="${user.id}"/>
+								<input type="hidden" name="entity" value="Activity">
+							</div>
+						</c:otherwise>
+					</c:choose>
 					</form>
-					</e2:security>					
 				</div>
 			</li>
 			</c:forEach>

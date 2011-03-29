@@ -82,6 +82,12 @@
 					<entity>Profile</entity>
 				</preferences>
 			</fragment>
+			<fragment refer="questionFragment" view="Recent">
+				<title>最新问题</title>
+				<preferences>
+					<limit>5</limit>
+				</preferences>
+			</fragment>
 			<fragment refer="blogPostFragment" view="Recent">
 				<title>最新博文</title>
 				<preferences>

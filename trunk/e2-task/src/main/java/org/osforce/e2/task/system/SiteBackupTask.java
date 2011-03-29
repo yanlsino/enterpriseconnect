@@ -133,7 +133,7 @@ public class SiteBackupTask extends AbstractTask implements ResourceLoaderAware 
 	}
 	
 	protected void backupPermission(Site site, Element dataEle) {
-		List<Permission> permissions = permissionService.getPermissionList(site.getId());
+		List<Permission> permissions = permissionService.getPermissionList(site.getId(), null);
 		Element permissionsEle = xmlDoc.createElement("permissions");
 		for(Permission permission : permissions) {
 			Element permissionEle = xmlDoc.createElement("permission");

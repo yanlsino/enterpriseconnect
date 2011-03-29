@@ -2,6 +2,7 @@ package org.osforce.e2.web.module.system.controller;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -49,8 +50,9 @@ public class SystemController {
 		this.entityManager = entityManager;
 	}
 	
+	// TODO move to @Code UserController 
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String login(WebRequest request) {
+	public @ResponseBody Map<String, Object> login(WebRequest request) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		User persisted = userService.getUser(userDetails.getUsername());
@@ -58,9 +60,13 @@ public class SystemController {
 		userService.updateUser(persisted);
 		request.setAttribute(AttributeKeys.USER_KEY, persisted, WebRequest.SCOPE_SESSION);
 		request.setAttribute(AttributeKeys.USER_KEY_READABLE, persisted, WebRequest.SCOPE_SESSION);
-		return "redirect:/" + persisted.getProject().getUniqueId() + "/profile";
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("id", persisted.getId());
+		model.put("uniqueId", persisted.getProject().getUniqueId());
+		return model;
 	}
 	
+	// TODO move to @Code UserController
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(WebRequest request) {
 		request.removeAttribute(AttributeKeys.USER_KEY, WebRequest.SCOPE_SESSION);
@@ -68,6 +74,7 @@ public class SystemController {
 		return "redirect:/";
 	}
 	
+	// TODO move to @Code UserController
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Long> register(User user, WebRequest request) {
 		if(StringUtils.equals(user.getPassword(), user.getRePassword()) || 

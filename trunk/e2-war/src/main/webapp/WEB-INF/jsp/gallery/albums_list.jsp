@@ -22,7 +22,7 @@
 			<c:choose>
 				<c:when test="${not empty album.photos}">
 					<c:forEach var="photo" items="${album.photos}">
-					<a class="nyroModal" rel="gal${album.id}" href="${base}/photo/download/${photo.id}${photo.realFile.suffix}" title="${photo.name}">
+					<a href="${base}/${project.uniqueId}/gallery/photos?albumId=${album.id}" title="${photo.name}">
 						<img src="${base}/photo/download/${photo.realFile.id}/150x150"/>
 					</a>	
 					</c:forEach>
@@ -45,6 +45,5 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('.slideshow').cycle();
-    $('.nyroModal').nyroModal();
 });
 </script>

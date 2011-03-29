@@ -41,8 +41,10 @@
 		</c:forEach>
 		</ul>
 		</c:if>
-		<c:if test="${not empty user}">
 		<form:form class="commentForm" action="${base}/process/commons/comment" commandName="comment">
+		<c:choose>
+			<c:when test="${empty user}">添加评论，请先<a href="#" class="loginAction">登录</a></c:when>
+			<c:otherwise>
 			<div>
 				<label><fmt:message key="commons.comments_list.comment"/></label>
 				<form:textarea path="content" cssClass="required"/>
@@ -55,8 +57,9 @@
 				<form:hidden path="entity"/>
 				<input type="hidden" name="uniqueId" value="${project.uniqueId}"/>
 			</div>
+			</c:otherwise>
+		</c:choose>
 		</form:form>
-		</c:if>
 	</div>
 </div>
 

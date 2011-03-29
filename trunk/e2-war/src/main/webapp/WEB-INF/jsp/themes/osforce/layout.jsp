@@ -96,6 +96,13 @@
 		if($.trim($('#layout td.right').html())=='') {
 			$('#layout td.right').remove();
 		}
+		$('.loginAction').click(function(){
+			$.fn.nyroModalManual({
+				bgColor: '#DDD',
+				url:'${base}/app/login/form?popup=true'
+			});
+			return false;
+		});
 	});
 	</script>
 

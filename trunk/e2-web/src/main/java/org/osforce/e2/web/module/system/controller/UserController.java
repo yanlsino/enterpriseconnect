@@ -40,9 +40,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/user/exist")
-	public @ResponseBody Boolean exist(@RequestParam String username) {
+	public @ResponseBody Map<String, Object> exist(@RequestParam String username) {
 		User user = userService.getUser(username);
-		return user!=null;
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("code", 200);
+		model.put("exist", user!=null);
+		return model;
 	}
 	
 	@RequestMapping(value="/user/active")

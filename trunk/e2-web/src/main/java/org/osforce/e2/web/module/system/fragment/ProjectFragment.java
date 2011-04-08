@@ -57,6 +57,14 @@ public class ProjectFragment {
 		this.projectCategoryService = projectCategoryService;
 	}
 	
+	public String doProjectView(Project project, FragmentContext context) {
+		if(project==null) {
+			return "commons/blank";
+		}
+		context.putRequestData(AttributeKeys.PROJECT_KEY_READABLE, project);
+		return "system/project";
+	}
+	
 	public String doFormView(@Pref String templateCode, @Pref String categoryCode, 
 			User user, Site site, FragmentContext context) {
 		ProjectCategory category = projectCategoryService

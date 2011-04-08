@@ -61,6 +61,7 @@ public class SiteAwareInterceptor extends HandlerInterceptorAdapter {
 		return super.preHandle(request, response, handler);
 	}
 	
+	// TODO 
 	protected Site buildDefaultSite(HttpServletRequest request) throws UnknownHostException {
 		String domain = request.getServerName();
 		for(InetAddress addr : InetAddress.getAllByName("localhost")) {
@@ -79,9 +80,4 @@ public class SiteAwareInterceptor extends HandlerInterceptorAdapter {
 		return site;
 	}
 	
-	public static void main(String[] args) throws UnknownHostException {
-		for(InetAddress addr : InetAddress.getAllByName("localhost")) {
-			System.out.println(addr.getHostAddress());
-		}
-	}
 }

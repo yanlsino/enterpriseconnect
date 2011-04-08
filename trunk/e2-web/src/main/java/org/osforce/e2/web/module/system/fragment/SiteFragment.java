@@ -50,7 +50,15 @@ public class SiteFragment {
 	public String doListView(Page<Site> page, FragmentContext context) {
 		page = siteService.getSitePage(page);
 		context.putRequestData(AttributeKeys.PAGE_KEY_READABLE, page);
+		if(page.getResult().isEmpty()) {
+			return "commons/blank";
+		}
 		return "system/sites_list";
+	}
+	
+	public String doCopyrightView(Site site, FragmentContext context) {
+		context.putRequestData(AttributeKeys.SITE_KEY_READABLE, site);
+		return "system/site_copyright";
 	}
 	
 	public String doFormView(@Param Long siteId, FragmentContext context) {

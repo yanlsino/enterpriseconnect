@@ -42,7 +42,7 @@ public class AdminController {
 		this.projectFeatureService = projectFeatureService;
 	}
 	
-	@RequestMapping(value="/features", method=RequestMethod.POST)
+	@RequestMapping(value="/feature", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> update(ProjectFeature feature) {
 		if(feature.getId()==null) {
 			projectFeatureService.createProjectFeature(feature);

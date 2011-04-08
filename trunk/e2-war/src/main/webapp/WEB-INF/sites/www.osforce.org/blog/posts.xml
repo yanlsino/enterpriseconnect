@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
 	<page name="blog/posts" parent="commons/header">
-		<position name="mainColumn" layout="fill">
+		<position name="mainColumn">
 			<fragment refer="blogPostFragment" view="List">
 				<rules>
 					<rule name="securityRule" code="blog-post-view"/>

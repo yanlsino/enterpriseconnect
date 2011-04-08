@@ -33,6 +33,7 @@ public class Site extends IdEntity {
 	private Integer port;
 	private Boolean ssl = false;
 	private Boolean enabled = false;
+	private String copyright;
 	// helper
 	private Long themeId;
 	private Long mailSettingsId;
@@ -118,6 +119,14 @@ public class Site extends IdEntity {
 	
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	public String getCopyright() {
+		return copyright;
+	}
+	
+	public void setCopyright(String copyright) {
+		this.copyright = copyright;
 	}
 	
 	@Transient

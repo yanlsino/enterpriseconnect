@@ -1,8 +1,12 @@
 package org.osforce.e2.web.module.calendar.fragment;
 
+import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.osforce.commons.date.DateUtil;
 import org.osforce.e2.entity.calendar.Event;
 import org.osforce.e2.entity.system.Project;
@@ -45,8 +49,28 @@ public class EventFragment {
 		return "calendar/events_recent";
 	}
 	
-	public String doListView() {
-		//List<Event> events = eventService.getEventBySiteAndDate();
+	public String doListView(@Param String date, 
+			Project project, FragmentContext context) throws ParseException {
+		Date d = new Date();
+		Date start = new Date();
+		Date end = new Date();
+		if(StringUtils.contains(date, "~")) {
+			String startStr = StringUtils.substringBefore(date, "~");
+			String endStr = StringUtils.substringAfter(date, "~");
+			start = DateUtils.parseDate(startStr, new String[]{"yyyy/M/d"});
+			end = DateUtils.parseDate(endStr, new String[]{"yyyy/M/d"});
+		} else if(StringUtils.isNotBlank(date)) {
+			d = DateUtils.parseDate(date, new String[]{"yyyy/M/d"});
+			start = DateUtils.ceiling(DateUtils.addDays(d, -1), Calendar.DAY_OF_MONTH);
+			end = DateUtils.ceiling(d, Calendar.DAY_OF_MONTH);
+		}
+		//
+		List<Event> events = eventService.getEventList(project, start, DateUtils.addDays(end, 1));
+		context.putRequestData(AttributeKeys.EVENT_LIST_KEY_READABLE, events);
+		//
+		context.putRequestData("date", d);
+		context.putRequestData("start", start);
+		context.putRequestData("end", end);
 		return "calendar/events_list";
 	}
 	

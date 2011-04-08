@@ -41,11 +41,17 @@ public class PhotoFragment {
 		this.albumService = albumService;
 	}
 	
-	public String doListView(@Param Long albumId, 
+	public String doListView(@Param Long albumId, @Param Long photoId,
 			Page<Photo> page, FragmentContext context) {
 		if(albumId!=null) {
 			page = photoService.getPhotoPage(page, albumId);
 			context.putRequestData(AttributeKeys.PAGE_KEY_READABLE, page);
+			//
+			Photo photo = page.getResult().isEmpty() ? null:page.getResult().get(0);
+			if(photoId!=null) {
+				photo = photoService.getPhoto(photoId);
+			}
+			context.putRequestData(AttributeKeys.PHOTO_KEY_READABLE, photo);
 		}
 		return "gallery/photos_list";
 	}

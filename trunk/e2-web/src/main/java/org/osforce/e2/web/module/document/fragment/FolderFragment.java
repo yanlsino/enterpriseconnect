@@ -3,6 +3,9 @@ package org.osforce.e2.web.module.document.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.osforce.e2.entity.document.Folder;
 import org.osforce.e2.entity.system.Project;
 import org.osforce.e2.entity.system.User;
@@ -33,7 +36,10 @@ public class FolderFragment {
 		this.folderService = folderService;
 	}
 	
-	public  String doTreeView(FragmentContext context) {
+	public  String doTreeView(Project project, FragmentContext context) {
+		List<Folder> parentFolders =  folderService.getRootForlders(project.getId());
+		JSONArray folderTree = buildTree(parentFolders);
+		context.putRequestData(AttributeKeys.FOLDER_TREE_KEY_READABLE, folderTree.toString());
 		return "document/folders_tree";
 	}
 	
@@ -57,9 +63,45 @@ public class FolderFragment {
 		} else {
 			parentFolders = folderService.getRootForlders(project.getId());
 		}
+		//
+		JSONArray folderTree = buildTree(parentFolders);
+		context.putRequestData(AttributeKeys.FOLDER_TREE_KEY_READABLE, folderTree.toString());
+		//
 		context.putRequestData(AttributeKeys.FOLDER_LIST_KEY_READABLE, parentFolders);
 		context.putRequestData(AttributeKeys.FOLDER_KEY_READABLE, folder);
 		return "document/folder_form";
+	}
+	
+	private JSONArray buildTree(List<Folder> folders) {
+		JSONArray jsonArray = new JSONArray();
+		for(Folder folder : folders) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", folder.getId());
+			jsonObject.put("label", folder.getName());
+			jsonObject.put("type", "text");
+			jsonObject.put("expanded", true);
+			if(!folder.getChildren().isEmpty()) {
+				walkTree(jsonObject, folder.getChildren());
+			}
+			jsonArray.add(jsonObject);
+		}
+		return jsonArray;
+	}
+	
+	private void walkTree(JSONObject jsonObject, List<Folder> folders) {
+		JSONArray jsonArray = new JSONArray();
+		for(Folder folder : folders) {
+			JSONObject subJsonObject = new JSONObject();
+			subJsonObject.put("id", folder.getId());
+			subJsonObject.put("label", folder.getName());
+			subJsonObject.put("type", "text");
+			subJsonObject.put("expanded", true);
+			if(!folder.getChildren().isEmpty()) {
+				walkTree(subJsonObject, folder.getChildren());
+			}
+			jsonArray.add(subJsonObject);
+		}
+		jsonObject.put("children", jsonArray);
 	}
 	
 }

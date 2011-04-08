@@ -14,10 +14,6 @@
 					[label=消息,code=message,show=true,role=admin]
 				</features>
 			</preferences>
-			<aboutTitle>关于注册</aboutTitle>
-			<aboutContent><![CDATA[
-			请认真填写你的注册信息!
-			]]></aboutContent>
 		</fragment>
 	</position>
 </page>

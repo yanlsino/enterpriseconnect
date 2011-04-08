@@ -1,19 +1,20 @@
 package org.osforce.e2.web.module.commons.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.osforce.e2.entity.commons.Comment;
 import org.osforce.e2.service.commons.CommentService;
-import org.osforce.e2.web.AttributeKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ocpsoft.pretty.time.PrettyTime;
 
 /**
  * 
@@ -51,11 +52,22 @@ public class CommentController {
 	}
 	
 	@RequestMapping(value="/comments", method=RequestMethod.GET)
-	public String list(@RequestParam Long linkedId, 
-			@RequestParam String entity, Model model) {
-		List<Comment> commentList = commentService.getCommentList(linkedId, entity);
-		model.addAttribute(AttributeKeys.COMMENT_LIST_KEY_READABLE, commentList);
-		return "commons/comments_list_ajax";
+	public @ResponseBody List<Map<String, Object>> list(
+			@RequestParam Long linkedId, @RequestParam String entity) {
+		List<Comment> comments = commentService.getCommentList(linkedId, entity);
+		List<Map<String, Object>> commentList = new ArrayList<Map<String, Object>>();
+		for(Comment comment : comments) {
+			Map<String, Object> model = new HashMap<String, Object>();
+			model.put("id", comment.getId());
+			model.put("linkedId", comment.getLinkedId());
+			model.put("content", comment.getContent());
+			model.put("entered_pretty", new PrettyTime().format(comment.getEntered()));
+			model.put("enteredBy_project_profile_logo_id", comment.getEnteredBy().getProject().getProfile().getLogoId());
+			model.put("enteredBy_project_category_code", comment.getEnteredBy().getProject().getCategory().getCode());
+			model.put("enteredBy_project_uniqueId", comment.getEnteredBy().getProject().getUniqueId());
+			commentList.add(model);
+		}
+		return commentList;
 	}
 	
 }

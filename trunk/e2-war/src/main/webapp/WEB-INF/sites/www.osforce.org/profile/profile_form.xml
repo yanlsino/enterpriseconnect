@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
 	<page name="profile/profile_form" parent="commons/header">
-		<position name="mainColumn" layout="fill">
-			<fragment refer="profileFragment" view="Form">
-				<title>简介信息</title>
-			</fragment>
+		<position name="mainColumn">
+			<fragment refer="profileFragment" view="Form"/>
 		</position>
-		<position name="rightColumn" width="280px" layout="fill">
+		<position name="rightColumn" width="280px">
 			<fragment refer="tagFragment" view="Form">
 				<title>Tags</title>
 				<preferences>

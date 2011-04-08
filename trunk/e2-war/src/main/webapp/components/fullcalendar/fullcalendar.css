@@ -25,6 +25,7 @@
 	}
 	
 .fc table {
+	margin: 0;
 	border-collapse: collapse;
 	border-spacing: 0;
 	}
@@ -70,6 +71,7 @@ table.fc-header {
 	
 .fc-header-title {
 	margin-top: 0;
+	text-align: center;
 	white-space: nowrap;
 	}
 	
@@ -369,6 +371,7 @@ table.fc-header {
 ------------------------------------------------------------------------*/
 
 .fc-grid table {
+	margin: 0;
 	width: 100%;
 	}
 	

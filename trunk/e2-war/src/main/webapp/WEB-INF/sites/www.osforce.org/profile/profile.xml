@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
-	<page name="profile/profile" parent="commons/header">
+	<page name="profile/profile" parent="commons/header" categoryCode="people">
 		<position name="leftColumn" width="200px">
 			<fragment refer="tagFragment" view="Cloud">
 				<title>Tag Cloud</title>
 				<preferences>
 					<limit>20</limit>
-				</preferences>
-			</fragment>
-			<fragment refer="blogPostFragment" view="Top">
-				<title>热门博文</title>
-				<preferences>
-					<limit>5</limit>
-				</preferences>
-			</fragment>
-			<fragment refer="topicFragment" view="Top">
-				<title>热门讨论</title>
-				<preferences>
-					<limit>5</limit>
 				</preferences>
 			</fragment>
 			<fragment refer="linkFragment" view="List">
@@ -88,14 +76,14 @@
 					<limit>5</limit>
 				</preferences>
 			</fragment>
-			<fragment refer="blogPostFragment" view="Recent">
-				<title>最新博文</title>
+			<fragment refer="blogPostFragment" view="Top">
+				<title>热门博文</title>
 				<preferences>
 					<limit>5</limit>
 				</preferences>
 			</fragment>
-			<fragment refer="topicFragment" view="Recent">
-				<title>最新讨论</title>
+			<fragment refer="topicFragment" view="Top">
+				<title>热门讨论</title>
 				<preferences>
 					<limit>5</limit>
 				</preferences>

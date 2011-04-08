@@ -15,6 +15,10 @@
 		</fragment>
 	</position>
 	<position name="subMenu">
+		<fragment refer="projectFragment" view="Project"/>
 		<fragment refer="projectFragment" view="projectMenu"/>
+	</position>
+	<position name="foot">
+		<fragment refer="siteFragment" view="Copyright"/>
 	</position>
 </page>	

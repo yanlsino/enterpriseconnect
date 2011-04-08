@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.osforce.e2.entity.document.FileItem;
 import org.osforce.e2.entity.document.Folder;
 import org.osforce.e2.entity.system.Project;
@@ -85,7 +88,44 @@ public class FileItemFragment {
 		if(fileId!=null) {
 			fileItem = fileItemService.getFileItem(fileId);
 		}
+		//
+		List<Folder> parentFolders = folderService.getRootForlders(project.getId());
+		JSONArray folderTree = buildTree(parentFolders);
+		context.putRequestData(AttributeKeys.FOLDER_TREE_KEY_READABLE, folderTree.toString());
 		context.putRequestData(AttributeKeys.FILE_ITEM_KEY_READABLE, fileItem);
 		return "document/file_form";
+	}
+	
+	// TODO merge @see FolderFragment
+	private JSONArray buildTree(List<Folder> folders) {
+		JSONArray jsonArray = new JSONArray();
+		for(Folder folder : folders) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("id", folder.getId());
+			jsonObject.put("label", folder.getName());
+			jsonObject.put("type", "text");
+			jsonObject.put("expanded", true);
+			if(!folder.getChildren().isEmpty()) {
+				walkTree(jsonObject, folder.getChildren());
+			}
+			jsonArray.add(jsonObject);
+		}
+		return jsonArray;
+	}
+	
+	private void walkTree(JSONObject jsonObject, List<Folder> folders) {
+		JSONArray jsonArray = new JSONArray();
+		for(Folder folder : folders) {
+			JSONObject subJsonObject = new JSONObject();
+			subJsonObject.put("id", folder.getId());
+			subJsonObject.put("label", folder.getName());
+			subJsonObject.put("type", "text");
+			subJsonObject.put("expanded", true);
+			if(!folder.getChildren().isEmpty()) {
+				walkTree(subJsonObject, folder.getChildren());
+			}
+			jsonArray.add(subJsonObject);
+		}
+		jsonObject.put("children", jsonArray);
 	}
 }

@@ -23,10 +23,9 @@
 		</position>
 		<position name="mainColumn" layout="fill">
 			<fragment refer="blogPostFragment" view="Post">
-				<title>博文浏览</title>
 				<rules>
-				<rule name="securityRule" code="blog-post-view"/>
-			</rules>
+					<rule name="securityRule" code="blog-post-view"/>
+				</rules>
 			</fragment>
 			<fragment refer="commentFragment" view="List">
 				<title>博文评论</title>

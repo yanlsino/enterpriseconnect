@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
-	<page name="admin/features_form" parent="commons/header">
+	<page name="admin/features_form" parent="commons/header" categoryCode="people">
 		<position name="leftColumn" width="200px">
 			<fragment refer="adminFragment" view="Actions"/>
 		</position>
@@ -9,6 +9,32 @@
 				<title>模块设置</title>
 				<preferences>
 					<templateCode>people-features</templateCode>
+				</preferences>
+			</fragment>
+		</position>
+	</page>
+	<page name="admin/features_form" parent="commons/header" categoryCode="groups">
+		<position name="leftColumn" width="200px">
+			<fragment refer="adminFragment" view="Actions"/>
+		</position>
+		<position name="mainColumn">
+			<fragment refer="adminFragment" view="FeaturesForm">
+				<title>模块设置</title>
+				<preferences>
+					<templateCode>groups-features</templateCode>
+				</preferences>
+			</fragment>
+		</position>
+	</page>
+	<page name="admin/features_form" parent="commons/header" categoryCode="events">
+		<position name="leftColumn" width="200px">
+			<fragment refer="adminFragment" view="Actions"/>
+		</position>
+		<position name="mainColumn">
+			<fragment refer="adminFragment" view="FeaturesForm">
+				<title>模块设置</title>
+				<preferences>
+					<templateCode>events-features</templateCode>
 				</preferences>
 			</fragment>
 		</position>

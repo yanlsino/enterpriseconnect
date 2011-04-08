@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.StringUtils;
 import org.osforce.platform.entity.support.IdEntity;
 
 /**
@@ -19,6 +20,8 @@ public class Theme extends IdEntity {
 	private static final long serialVersionUID = -1683522732887797333L;
 
 	private String name;
+	private String layout;
+	private String layoutPopup;
 	private Boolean enabled = false;
 	
 	public Theme() {
@@ -36,6 +39,28 @@ public class Theme extends IdEntity {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getLayout() {
+		if(StringUtils.endsWith(layout, ".jsp")) {
+			layout = StringUtils.substringBefore(layout, ".jsp");
+		}
+		return layout;
+	}
+	
+	public void setLayout(String layout) {
+		this.layout = layout;
+	}
+	
+	public String getLayoutPopup() {
+		if(StringUtils.endsWith(layoutPopup, ".jsp")) {
+			layoutPopup = StringUtils.substringBefore(layoutPopup, ".jsp");
+		}
+		return layoutPopup;
+	}
+	
+	public void setLayoutPopup(String layoutPopup) {
+		this.layoutPopup = layoutPopup;
 	}
 	
 	public Boolean getEnabled() {

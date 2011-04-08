@@ -1,7 +1,9 @@
 package org.osforce.e2.web.module.system.fragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.osforce.e2.entity.system.Permission;
 import org.osforce.e2.entity.system.Project;
 import org.osforce.e2.entity.system.ProjectCategory;
@@ -79,16 +81,31 @@ public class PermissionFragment {
 			categoryId = categories.get(0).getId();
 		}
 		permission.setCategoryId(categoryId);
-		if(permissionId!=null) {
-			permission = permissionService.getPermission(permissionId);
-		}
 		List<Role> roles = roleService.getRoleList(permission.getCategoryId());
 		if(!roles.isEmpty()) {
 			permission.setRole(roles.get(roles.size()-1));
 		}
+		if(permissionId!=null) {
+			permission = permissionService.getPermission(permissionId);
+		}
+		// filter resources
+		List<Permission> permissions = permissionService.getPermissionList(siteId, categoryId);
+		List<Resource> resourceFilter = new ArrayList<Resource>(); 
+		for(Resource resource : resources) {
+			Boolean flag = true;
+			for(Permission p : permissions) {
+				if(NumberUtils.compare(resource.getId(), p.getResourceId())==0) {
+					flag = false;
+				}
+			}
+			if(flag) {
+				resourceFilter.add(resource);
+			}
+		}
 		context.putRequestData(AttributeKeys.PERMISSION_KEY_READABLE, permission);
 		context.putRequestData(AttributeKeys.ROLE_LIST_KEY_READABLE, roles);
-		context.putRequestData(AttributeKeys.RESOURCE_LIST_KEY_READABLE, resources);
+		context.putRequestData(AttributeKeys.RESOURCE_LIST_KEY_READABLE, resourceFilter);
+		context.putRequestData(AttributeKeys.PERMISSION_LIST_KEY_READABLE, permissions);
 		context.putRequestData(AttributeKeys.PROJECT_CATEGORY_LIST_KEY_READABLE, categories);
 		return "system/permission_form";
 	}

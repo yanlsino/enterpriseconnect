@@ -106,6 +106,7 @@ public  abstract  class AttributeKeys {
 	
 	public static final String EVENT_KEY = "_" + Event.class.getName();
 	public static final String EVENT_KEY_READABLE = "event";
+	public static final String EVENT_LIST_KEY_READABLE = "events";
 	
 	public static final String BLOG_POST_KEY  =  "_" + BlogPost.class.getName();
 	public static final String BLOG_POST_KEY_READABLE = "post";
@@ -162,6 +163,7 @@ public  abstract  class AttributeKeys {
 	
 	public static final String FOLDER_KEY = "_" + Folder.class.getName();
 	public static final String FOLDER_KEY_READABLE = "folder";
+	public static final String FOLDER_TREE_KEY_READABLE = "folderTree";
 	public static final String FOLDER_LIST_KEY_READABLE = "folders";
 	
 	public static final String FILE_ITEM_KEY = "_" + FileItem.class.getName();

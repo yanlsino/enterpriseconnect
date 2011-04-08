@@ -106,6 +106,9 @@ public class ProfileFragment {
 		ProjectCategory category = projectCategoryService
 				.getProjectCategory(site, categoryCode);
 		page = statisticService.getTopStatisticPage(page, category, Profile.NAME);
+		if(page.getResult().isEmpty()) {
+			return "commons/blank";
+		}
 		for(Statistic statistic : page.getResult()) {
 			Object linkedEntity = profileService.getProfile(statistic.getLinkedId());
 			statistic.setLinkedEntity(linkedEntity);
@@ -119,6 +122,9 @@ public class ProfileFragment {
 		ProjectCategory category = projectCategoryService
 		.getProjectCategory(site, categoryCode);
 		page = profileService.getProfilePage(page, category);
+		if(page.getResult().isEmpty()) {
+			return "commons/blank";
+		}
 		context.putRequestData(AttributeKeys.PAGE_KEY_READABLE, page);
 		return "profile/profiles_recent";
 	}

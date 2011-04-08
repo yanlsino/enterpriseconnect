@@ -127,6 +127,7 @@ public class PermissionServiceImpl implements PermissionService {
 		if(categoryId!=null) {
 			appender.equal("permission.category.id", categoryId);
 		}
+		appender.asc("permission.resource.code");
 		return permissionDao.find(appender);
 	}
 }

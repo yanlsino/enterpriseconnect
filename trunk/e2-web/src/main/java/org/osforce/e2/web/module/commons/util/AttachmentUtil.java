@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.osforce.commons.date.DateUtil;
 import org.osforce.commons.image.ImageUtil;
 import org.osforce.commons.lang.StringUtil;
@@ -19,7 +20,7 @@ import org.osforce.e2.entity.commons.Attachment;
  */
 public final class AttachmentUtil {
 	
-	private static final String basePath = FileUtils.getUserDirectoryPath() + "/.e2/attachments";
+	private static final String basePath = SystemUtils.getUserHome() + "/.e2/attachments";
 	
 	public static void read(Attachment attachment) throws IOException {
 		File targetFile = getTargetFile(attachment);

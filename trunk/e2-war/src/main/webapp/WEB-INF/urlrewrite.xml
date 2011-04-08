@@ -116,12 +116,8 @@
 		<to last="true">/page?viewName=/gallery/$2&amp;uniqueId=$1</to>
 	</rule>
 	<rule>
-		<from>^/([\w\d-_]+)/gallery/album/form$</from>
-		<to last="true">/page?viewName=/gallery/album_form&amp;uniqueId=$1</to>
-	</rule>
-	<rule>
-		<from>^/([\w\d-_]+)/gallery/photo/upload$</from>
-		<to last="true">/page?viewName=/gallery/photo_upload&amp;uniqueId=$1</to>
+		<from>^/([\w\d-_]+)/gallery/(album|photo)/form$</from>
+		<to last="true">/page?viewName=/gallery/$2_form&amp;uniqueId=$1</to>
 	</rule>
 	<!-- gallery module end -->
 	

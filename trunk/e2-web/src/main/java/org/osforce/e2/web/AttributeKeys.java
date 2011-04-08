@@ -140,6 +140,7 @@ public  abstract  class AttributeKeys {
 	
 	public static final String ATTACHMENT_KEY = "_" + Attachment.class.getName();
 	public static final String ATTACHMENT_KEY_READABLE = "attachment";
+	public static final String ATTACHMENT_LIST_KEY_READABLE = "attachments";
 	
 	public static final String LINK_KEY = "_" + Link.class.getName();
 	public static final String LINK_KEY_READABLE = "link";

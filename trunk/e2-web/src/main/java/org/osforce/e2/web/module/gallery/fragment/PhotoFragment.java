@@ -56,10 +56,16 @@ public class PhotoFragment {
 		return "gallery/photos_list";
 	}
 	
-	public String doUploadView(@Param Long photoId, @Param Long albumId, 
+	public String doFormView(@Param Long photoId, @Param Long albumId, 
 			Project project, User user, FragmentContext context) {
+		Photo photo = new Photo();
+		photo.setAlbumId(albumId);
+		photo.setEnteredId(user.getId());
+		photo.setModifiedId(user.getId());
+		context.putRequestData(AttributeKeys.PHOTO_KEY_READABLE, photo);
+		//
 		List<Album> albums = albumService.getAlbumList(project);
 		context.putRequestData(AttributeKeys.ALBUM_LIST_KEY_READABLE, albums);
-		return "gallery/photo_upload";
+		return "gallery/photo_form";
 	}
 }

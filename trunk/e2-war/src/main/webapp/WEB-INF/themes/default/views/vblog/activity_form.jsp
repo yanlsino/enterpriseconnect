@@ -28,8 +28,15 @@
 				<form:textarea path="description" id="description${id}"/>
 			</div>
 			<div>
-				<span class="top right">最多<strong class="charsCounter">140</strong>个字</span>
-				<button id="${id}submitButton" type="submit" class="button">
+				<ul class="toolbar left">
+					<li><a href="#" class="insertFace">表情</a></li>
+					<li><a href="#" class="insertLink">链接</a></li>
+					<li><a href="#" class="insertImage">图片</a></li>
+					<!-- 
+					<li><a href="#" class="insertVideo">视频</a></li>
+					 -->
+				</ul>
+				<button id="${id}submitButton" type="submit" class="button right">
 					<span id="status1${id}">
 						<fmt:message key="vblog.activity_form.submit"/>
 					</span>
@@ -43,8 +50,106 @@
 			<form:hidden path="enteredId"/>
 		</form:form>
 		<br class="clear"/>
+		
+		<div id="overlay${id}" class="overlay">
+			<div id="face-select${id}" style="display:none">
+				<ul>
+				<c:forTokens var="face" items="angel,angry,cool,crying,devilish,embarrassed,glasses,kiss,laugh,monkey,plain,raspberry,sad,sick,smile,smile-big,smirk,surprise,tired,uncertain,wink,worried" delims=",">
+					<li><a id="${face}" href="#"><img src="${base}/static/images/faces/face-${face}.png"/></a></li>
+				</c:forTokens>
+				</ul>
+			</div>
+			<div id="url-input${id}" style="display:none">
+				<input class="text" value="http://"/>
+				<button>插入</button>
+			</div>
+		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+YUI().use('overlay', function(Y){
+	var overlay = new Y.Overlay({
+        srcNode:"#overlay${id}",
+        visible:false,
+        width:"108px",
+        align: {
+    		node: '.toolbar',
+    		points: [Y.WidgetPositionAlign.TL, Y.WidgetPositionAlign.TR]
+    	}
+    });
+	overlay.render();
+	//
+	Y.all('#overlay${id} a').on('click', function(e){
+		var face = e.currentTarget.get('id');
+		insertObject('[face:'+face+']');
+		hide();
+		e.halt();
+	});
+	Y.one('#url-input${id} button').on('click', function(e){
+		var type = Y.one('#url-input${id}').get('title');
+		var url = Y.one('#url-input${id} input').get('value');
+		insertObject('['+type+':'+url+']');
+		hide();
+		e.halt();
+	})
+	//
+	var insertFace = Y.one('#activity-form${id} .insertFace');
+	var insertLink = Y.one('#activity-form${id} .insertLink');
+	var insertImage = Y.one('#activity-form${id} .insertImage');
+	var insertVideo = Y.one('#activity-form${id} .insertVideo');
+	if(insertFace!=null) {
+		insertFace.on('click', function(e){
+			overlay.set('width', '108px');
+			show('#face-select${id}');
+			e.halt();
+		});
+	}
+	if(insertLink!=null) {
+		insertLink.on('click', function(e){
+			overlay.set('width', '380px');
+			Y.one('#url-input${id}').set('title', 'link');
+			show('#url-input${id}');
+			e.halt();
+		});
+	}
+	if(insertImage!=null) {
+		insertImage.on('click', function(e){
+			overlay.set('width', '380px');
+			Y.one('#url-input${id}').set('title', 'img');
+			show('#url-input${id}');
+			e.halt();
+		});
+	}
+	if(insertVideo!=null) {
+		insertVideo.on('click', function(e){
+			overlay.set('width', '380px');
+			Y.one('#url-input${id}').set('title', 'video');
+			show('#url-input${id}');
+			e.halt();
+		});
+	}
+	
+	function insertObject(object) {
+		var editArea = Y.one('#description${id}');
+		var content = editArea.get('value');
+		editArea.set('value', content+object);
+	}
+	
+	function hide() {
+		Y.one('#face-select${id}').hide();
+		Y.one('#url-input${id}').hide();
+		overlay.hide();
+	}
+	
+	function show(id) {
+		Y.one('#face-select${id}').hide();
+		Y.one('#url-input${id}').hide();
+		Y.one(id).show();
+		overlay.show();
+	}
+});
+</script>
 
 <script type="text/javascript">
 YUI().use('io-form', 'json', function(Y){

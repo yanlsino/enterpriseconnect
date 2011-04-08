@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.osforce.e2.entity.commons.Attachment;
 import org.osforce.e2.service.commons.AttachmentService;
+import org.osforce.e2.web.AttributeKeys;
 import org.osforce.e2.web.module.commons.util.AttachmentUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,16 +38,19 @@ public class AttachmentController {
 	}
 	
 	@RequestMapping(value="/attachment", method=RequestMethod.POST)
-	public String upload(@RequestParam MultipartFile file, Attachment attachment, 
-			@RequestParam String forward) throws IOException {
-		attachment.setContentType(file.getContentType());
-		attachment.setFileName(file.getOriginalFilename());
-		attachment.setSize(file.getSize());
-		attachment.setBytes(file.getBytes());
-		attachmentService.createAttachment(attachment);
+	public String upload(@RequestParam MultipartFile file, 
+			@RequestParam String forward, WebRequest request) throws IOException {
+		Attachment attach = new Attachment();
+		attach.setContentType(file.getContentType());
+		attach.setFileName(file.getOriginalFilename());
+		attach.setSize(file.getSize());
+		attach.setBytes(file.getBytes());
+		attachmentService.createAttachment(attach);
 		// write attachment content to local file
-		AttachmentUtil.write(attachment);
-		return "forward:"+forward+"?attachmentId="+attachment.getId();
+		AttachmentUtil.write(attach);
+		request.setAttribute(AttributeKeys.ATTACHMENT_KEY, 
+				attach, WebRequest.SCOPE_REQUEST);
+		return "forward:"+forward;
 	}
 	
 	@RequestMapping(value="/kindeditor", method=RequestMethod.POST)

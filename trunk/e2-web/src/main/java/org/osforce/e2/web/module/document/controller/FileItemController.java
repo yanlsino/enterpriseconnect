@@ -1,15 +1,19 @@
 package org.osforce.e2.web.module.document.controller;
 
+import java.util.Collections;
+import java.util.Map;
+
 import org.osforce.e2.entity.commons.Attachment;
 import org.osforce.e2.entity.document.FileItem;
-import org.osforce.e2.service.commons.AttachmentService;
 import org.osforce.e2.service.document.FileItemService;
+import org.osforce.e2.web.AttributeKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 
 /**
  * 
@@ -23,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class FileItemController {
 
 	private FileItemService fileItemService;
-	private AttachmentService attachmentService;
 	
 	public FileItemController() {
 	}
@@ -33,24 +36,14 @@ public class FileItemController {
 		this.fileItemService = fileItemService;
 	}
 	
-	@Autowired
-	public void setAttachmentService(AttachmentService attachmentService) {
-		this.attachmentService = attachmentService;
-	}
-	
 	@RequestMapping(value="/file", method=RequestMethod.POST)
-	public @ResponseBody String update(@RequestParam Long attachmentId,
-			@RequestParam Long folderId, @RequestParam Long enteredId, 
-			@RequestParam Long modifiedId) {
-		Attachment realFile = attachmentService.getAttachment(attachmentId);
-		FileItem fileItem = new FileItem();
-		fileItem.setFolderId(folderId);
-		fileItem.setEnteredId(enteredId);
-		fileItem.setModifiedId(modifiedId);
-		fileItem.setRealFile(realFile);
+	public @ResponseBody Map<String, Long> update(FileItem fileItem, WebRequest request) {
+		Attachment attach = (Attachment) request.getAttribute(
+				AttributeKeys.ATTACHMENT_KEY, WebRequest.SCOPE_REQUEST);
+		fileItem.setRealFile(attach);
 		fileItem.setEnabled(true);
 		fileItemService.createFileItem(fileItem);
-		return "success";
+		return Collections.singletonMap("id", fileItem.getId());
 	}
 
 	@RequestMapping(value="/file", method=RequestMethod.GET)

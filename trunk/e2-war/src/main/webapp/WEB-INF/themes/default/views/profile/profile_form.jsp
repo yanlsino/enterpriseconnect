@@ -13,28 +13,40 @@
 	</div>	
 	</c:if>
 	<div class="body">
-		<form:form id="profile-form${id}" name="profile-form${id}" cssClass="profile-form"
+		<form id="logo-form${id}" class="logo-form" 
+			action="${base}/process/commons/attachment" method="post">
+			<fieldset>
+				<legend>Logo</legend>
+				<div>
+				<c:choose>
+					<c:when test="${not empty profile.logo}">
+					<img class="thumbnail" src="${base}/logo/download/${profile.logo.id}/75x75"/>
+					</c:when>
+					<c:otherwise>
+					<img class="thumbnail" src="${base}/themes/${theme.name}/stock/${profile.project.category.code}.png"/>
+					</c:otherwise>
+				</c:choose>
+				</div>
+				<div>
+					<input type="file" id="select-file${id}" name="file">
+					<input type="hidden" name="forward" value="/profile/logo"/>
+					<input type="hidden" name="profileId" value="${profile.id}"/>
+				</div>
+			</fieldset>
+		</form>
+	
+		<form:form id="profile-form${id}" cssClass="profile-form"
 			action="${base}/process/profile/profile" commandName="profile">
 			<fieldset>
 				<legend>基本信息</legend>
-				<a id="thumbnailEdit" href="#">
-				<c:choose>
-					<c:when test="${not empty profile.logo}">
-					<img class="top right thumbnail" src="${base}/logo/download/${profile.logo.id}/75x75"/>
-					</c:when>
-					<c:otherwise>
-					<img class="top right thumbnail" src="${base}/themes/${theme.name}/stock/${profile.project.category.code}.png"/>
-					</c:otherwise>
-				</c:choose>
-				</a>
-				<div class="formmgr-row">
+				<div>
 					<label for="title"><fmt:message key="profile.profile_form.title"/></label>
-					<p class="formmgr-message-text"></p> 
+					<br/>
 					<form:input path="title"/>
 				</div>
-				<div class="formmgr-row">
+				<div>
 					<label for="shortDescription"><fmt:message key="profile.profile_form.shortDescription"/></label>
-					<p class="formmgr-message-text"></p> 
+					<br/>
 					<form:textarea path="shortDescription" cssClass="shortDescription "/>
 				</div>
 				<div>
@@ -47,6 +59,7 @@
 				<c:forEach var="customAttribute" items="${customAttributes}">
 				<div>
 					<label for="${customAttribute.name}"><fmt:message key="profile.profile_form.${customAttribute.name}"/></label>
+					<br/>
 					<input name="${customAttribute.name}" value="${customAttribute.value}">
 				</div>
 				</c:forEach>
@@ -70,6 +83,26 @@
 		</form:form>
 	</div>
 </div>
+
+<script type="text/javascript">
+YUI().use('io-upload-iframe', 'json', function(Y){
+	Y.one('#select-file${id}').on('change', function(e){
+		var logoForm = Y.one('#logo-form${id}');
+		Y.on('io:complete', function(id, o){
+			var profile = Y.JSON.parse(o.responseText);	
+			window.location.href='?profileId'+profile.id;
+		});
+		Y.io(logoForm.get('action'), {
+			method: 'POST',
+			form: {
+				id: logoForm,
+				upload: true
+			}
+		});
+		e.halt();
+	});
+});
+</script>
 
 <script type="text/javascript">
 YUI().use('io-form', 'json', 'yui2-editor', function(Y){
@@ -118,24 +151,24 @@ YUI().use('io-form', 'json', 'yui2-editor', function(Y){
 	// 
 	var profileForm = Y.one('#profile-form${id}');
 	profileForm.on('submit', function(e){
-			//
-			Y.one('#status1${id}').hide();
-			Y.one('#status2${id}').show();
-			//
-			Y.on('io:complete', function(id, o){
-				try {
-					var profile = Y.JSON.parse(o.responseText);
-					setTimeout('window.location.href ="?profileId='+ profile.id +'"', 500);
-				} catch(e) {
-					// alert message
-				}
-			});
-			Y.io(profileForm.get('action'), {
-				method: 'POST',
-				form: {
-					id: profileForm
-				}
-			});
+		//
+		Y.one('#status1${id}').hide();
+		Y.one('#status2${id}').show();
+		//
+		Y.on('io:complete', function(id, o){
+			try {
+				var profile = Y.JSON.parse(o.responseText);
+				setTimeout('window.location.href ="?profileId='+ profile.id +'"', 500);
+			} catch(e) {
+				// alert message
+			}
+		});
+		Y.io(profileForm.get('action'), {
+			method: 'POST',
+			form: {
+				id: profileForm
+			}
+		});
 		e.halt();
 	});
 });

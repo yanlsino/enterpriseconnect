@@ -9,11 +9,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Type;
 import org.osforce.e2.entity.system.Project;
 import org.osforce.e2.entity.system.User;
 import org.osforce.platform.entity.support.IdEntity;
@@ -63,7 +65,8 @@ public class Question extends IdEntity {
 		this.title = title;
 	}
 
-	@Column(nullable=false)
+	@Lob@Column(nullable=false)
+	@Type(type="org.hibernate.type.StringClobType")
 	public String getContent() {
 		return content;
 	}

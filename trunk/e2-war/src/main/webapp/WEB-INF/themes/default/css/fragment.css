@@ -52,6 +52,9 @@
 .right-column .activity-form {
 	margin-left: 70px;
 }
+.activity-form .toolbar li {
+	display: inline;	
+}
 .span-11 .activity-form-logo {
 	width: 60px;
 	height: 60px;
@@ -80,6 +83,10 @@
 }
 .activities-list .activity-body {
 	padding-left: 65px;
+}
+.activities-list .activity-body img {
+	max-height: 200px;
+	max-width: 200px;	
 }
 .activities-list p {
 	margin: 0;

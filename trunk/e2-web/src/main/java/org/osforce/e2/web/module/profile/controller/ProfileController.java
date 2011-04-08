@@ -13,6 +13,7 @@ import org.osforce.e2.service.commons.AttachmentService;
 import org.osforce.e2.service.commons.TemplateService;
 import org.osforce.e2.service.profile.ProfileService;
 import org.osforce.e2.service.system.ProjectService;
+import org.osforce.e2.web.AttributeKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,13 +76,16 @@ public class ProfileController {
 	}
 	
 	@RequestMapping(value="/profile/logo")
-	public @ResponseBody String update(
-			@RequestParam Long profileId, @RequestParam Long attachmentId) {
+	public @ResponseBody Map<String, Long> update(
+			@RequestParam Long profileId, WebRequest request) {
+		Attachment logo = (Attachment) request.getAttribute(
+				AttributeKeys.ATTACHMENT_KEY, WebRequest.SCOPE_REQUEST);
 		Profile profile = profileService.getProfile(profileId);
-		Attachment logo = attachmentService.getAttachment(attachmentId);
-		// TODO delete old logo before set
+		if(profile.getLogo()!=null) {
+			attachmentService.deleteAttachment(profile.getLogoId());
+		}
 		profile.setLogo(logo);
 		profileService.updateProfile(profile);
-		return attachmentId.toString();
+		return Collections.singletonMap("id", profile.getId());
 	}
 }

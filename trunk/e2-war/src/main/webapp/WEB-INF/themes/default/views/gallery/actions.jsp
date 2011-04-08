@@ -15,7 +15,7 @@
 			<li><a href="${base}/${project.uniqueId}/gallery/album/form">添加相册</a></li>
 		</e2:security>
 		<e2:security code="gallery-photo-add">
-			<li class="last"><a href="${base}/${project.uniqueId}/gallery/photo/upload">上传相片</a></li>
+			<li class="last"><a href="${base}/${project.uniqueId}/gallery/photo/form<c:if test="${not empty param.albumId}">?albumId=${param.albumId}</c:if>">上传相片</a></li>
 		</e2:security>
 		</ul>
 	</div>

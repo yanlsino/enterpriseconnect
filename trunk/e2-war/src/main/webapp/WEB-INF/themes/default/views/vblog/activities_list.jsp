@@ -1,6 +1,3 @@
-
-
-
 <%@page pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -38,7 +35,7 @@
 					<div>
 						<c:choose>
 							<c:when test="${activity.type eq 'site-chat' or activity.type eq 'user-input'}">
-								<e2:wikiRender text="${activity.description}"/>
+								<e2:vBlogRender text="${activity.description}" facesBase="${base}/static/images/faces"/>
 							</c:when>
 							<c:otherwise>${activity.description}</c:otherwise>
 						</c:choose>

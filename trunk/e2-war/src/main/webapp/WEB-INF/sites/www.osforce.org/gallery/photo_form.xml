@@ -9,7 +9,7 @@
 			</fragment>
 		</position>
 		<position name="mainColumn">
-			<fragment refer="photoFragment" view="Upload">
+			<fragment refer="photoFragment" view="Form">
 				<title>相片上传</title>
 				<rules>
 					<rule name="securityRule" code="gallery-photo-add"/>

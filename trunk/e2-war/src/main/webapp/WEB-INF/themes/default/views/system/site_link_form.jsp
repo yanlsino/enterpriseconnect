@@ -3,14 +3,18 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<div id="${fragmentConfig.id}" class="fragment">
-	<c:if test="${not empty fragmentConfig.title}">
+<c:set var="id" value="${fragmentConfig.id}"/>
+<c:set var="title" value="${fragmentConfig.title}"/>
+
+<div id="${id}" class="fragment">
+	<c:if test="${not empty title}">
 	<div class="head">
-		<h3>${fragmentConfig.title}</h3>
+		<h3>${title}</h3>
 	</div>	
 	</c:if>
 	<div class="body">
-		<form:form id="siteLinkForm" action="${base}/process/system/site_link" commandName="siteLink">
+		<form:form id="site-link-form" cssClass="site-link-form" 
+			action="${base}/process/system/site_link" commandName="siteLink">
 			<div>
 				<label>显示名:</label>
 				<form:input path="text" cssClass="{validate:{required:true, messages:{required:'显示名不能我为空！'}}}"/>
@@ -31,6 +35,29 @@
 		</form:form>
 	</div>
 </div>
+
+<script type="text/javascript">
+YUI().use('io-form', 'json', function(Y){
+	var linkForm = Y.one('#site-link-form${id}');
+	linkForm.on('submit', function(e){
+		Y.on('io:complete', function(id, o){
+			try {
+				var siteLink = Y.JSON.parse(o.responseText);
+				window.location.href='?siteId=${param.siteId}&linkId='+siteLink.id;
+			} catch(e) {
+				// TODO alert message username or password invalid
+			}
+		});
+		Y.io(linkForm.get('action'), {
+			method: 'POST',
+			form: {
+				id: linkForm
+			}
+		});
+		e.halt();
+	});
+});
+</script>
 
 <script type="text/javascript">
 $(document).ready(function(){

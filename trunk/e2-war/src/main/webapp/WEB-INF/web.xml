@@ -43,7 +43,7 @@
 	<!-- Rewrite Module handle all requests -->
 	<filter>
 		<filter-name>UrlRewriteFilter</filter-name>
-		<filter-class>org.osforce.platform.web.urlrewrite.UrlRewriteFilter</filter-class>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
 		<init-param>
 			<param-name>logLevel</param-name>
 			<param-value>WARN</param-value>

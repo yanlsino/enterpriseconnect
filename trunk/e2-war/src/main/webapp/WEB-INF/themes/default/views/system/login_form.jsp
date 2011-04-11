@@ -42,7 +42,7 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('gallery-formmgr', 'io-form', 'json', function(Y){
+YUI().use('io-form', 'json', function(Y){
 	var loginForm = Y.one('#login-form${id}');
 	loginForm.on('submit', function(e){
 		if(validateForm()) {

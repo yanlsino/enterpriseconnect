@@ -2,23 +2,27 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<div id="${fragmentConfig.id}" class="fragment">
-	<c:if test="${not empty fragmentConfig.title}">
+<c:set var="id" value="${fragmentConfig.id}"/>
+<c:set var="title" value="${fragmentConfig.title}"/>
+
+<div id="${id}" class="fragment">
+	<c:if test="${not empty title}">
 	<div class="head">
-		<h3>${fragmentConfig.title}</h3>
+		<h3>${title}</h3>
 	</div>	
 	</c:if>
 	<div class="body">
-		<form:form id="projectCategoryForm" action="${base}/process/system/category" 
-			commandName="category">
-			<fieldset>
+		<form:form id="project-category-form${id}" cssClass="project-category-form" 
+			action="${base}/process/system/category" commandName="category">
 				<div>
 					<label for="label">显示名:</label>
-					<form:input path="label" cssClass="{validate:{required:true, messages:{required:'显示名不能为空！'}}}"/>
+					<br/>
+					<form:input path="label" cssClass="text"/>
 				</div>
 				<div>
 					<label for="code">编码:</label>
-					<form:input path="code" cssClass="{validate:{required:true, messages:{required:'编码不能为空！'}}}"/>
+					<br/>
+					<form:input path="code" cssClass="text"/>
 				</div>
 				<div>
 					<label for="level">排序值:</label>
@@ -39,24 +43,29 @@
 					<form:hidden path="id"/>
 					<form:hidden path="siteId"/>
 				</div>
-			</fieldset>
 		</form:form>
 	</div>
 </div>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$('#projectCategoryForm').validate({
-		submitHandler: function(form) {
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(category){
-					window.location.href="?categoryId="+category.id+"&siteId="+category.siteId;
-				}
-			});	
-			return false;
-		},
-		meta: "validate"
+YUI().use('io-form', 'json', function(Y){
+	var categoryForm = Y.one('#project-category-form${id}');
+	categoryForm.on('submit', function(e){
+		Y.on('io:complete', function(id, o){
+			try {
+				var category = Y.JSON.parse(o.responseText);
+				window.location.href='?categoryId='+category.id+'&siteId='+category.siteId;
+			} catch(e) {
+				// TODO alert message username or password invalid
+			}
+		});
+		Y.io(categoryForm.get('action'), {
+			method: 'POST',
+			form: {
+				id: categoryForm
+			}
+		});
+		e.halt();
 	});
 });
 </script>

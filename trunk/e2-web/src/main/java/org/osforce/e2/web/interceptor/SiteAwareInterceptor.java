@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.osforce.commons.castor.CastorUtil;
 import org.osforce.e2.entity.system.Site;
 import org.osforce.e2.entity.system.Theme;
 import org.osforce.e2.service.system.SiteService;
@@ -40,15 +39,8 @@ public class SiteAwareInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		// site id bond by ExtraUrlRewriterConfLoader 
-		String siteIdStr = (String) request.getAttribute("siteId");
-		String key = AttributeKeys.SITE_KEY + "_" +siteIdStr;
-		Site site = (Site) request.getSession().getAttribute(key);
-		// FIXME 
-		if(site==null && StringUtils.isNotBlank(siteIdStr)) {
-			Long siteId = CastorUtil.castTo(siteIdStr, Long.class);
-			site = siteService.getSite(siteId);
-		}
+		String domain = request.getServerName();
+		Site site = siteService.getSite(domain);
 		if(site==null) {
 			// site always is null, build a default site use default theme
 			site = buildDefaultSite(request);
@@ -61,7 +53,7 @@ public class SiteAwareInterceptor extends HandlerInterceptorAdapter {
 		return super.preHandle(request, response, handler);
 	}
 	
-	// TODO 
+	// TODO
 	protected Site buildDefaultSite(HttpServletRequest request) throws UnknownHostException {
 		String domain = request.getServerName();
 		for(InetAddress addr : InetAddress.getAllByName("localhost")) {

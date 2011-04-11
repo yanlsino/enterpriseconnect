@@ -49,6 +49,12 @@ public class SiteServiceImpl implements SiteService {
 	public Site getSite(Long siteId) {
 		return siteDao.get(siteId);
 	}
+	
+	public Site getSite(String domain) {
+		QueryAppender appender = new QueryAppender()
+				.equal("site.domain", domain);
+		return siteDao.findUnique(appender);
+	}
 
 	public void createSite(Site site) {
 		updateSite(site);

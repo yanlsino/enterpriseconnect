@@ -3,23 +3,18 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<div id="${fragmentConfig.id}" class="fragment">
-	<c:if test="${not empty fragmentConfig.title}">
+<c:set var="id" value="${fragmentConfig.id}"/>
+<c:set var="title" value="${fragmentConfig.title}"/>
+
+<div id="${id}" class="fragment">
+	<c:if test="${not empty title}">
 	<div class="head">
-		<h3>${fragmentConfig.title}</h3>
+		<h3>${title}</h3>
 	</div>	
 	</c:if>
 	<div class="body">
-		<form:form id="siteForm" action="${base}/process/system/site" commandName="site">
-			<fieldset>
-				<!-- 
-				<legend>
-					<c:choose>
-						<c:when test="${empty site.id}">添加网站信息</c:when>
-						<c:otherwise>修改网站信息</c:otherwise>			
-					</c:choose>
-				</legend>
-				 -->
+		<form:form id="site-form${id}" cssClass="site-form" 
+			action="${base}/process/system/site" commandName="site">
 				<div>
 					<label for="domain">网站域名:</label>
 					<form:input path="domain"/>
@@ -70,24 +65,29 @@
 					<input type="submit" value=" 提交 "/>
 					<form:hidden path="id"/>
 				</div>
-			</fieldset>
 		</form:form>
 	</div>
 </div>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$('#siteForm').validate({
-		submitHandler: function(form) {
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(site){
-					window.location.href="?siteId="+site.id;
-				}
-			});
-			return false;
-		},
-		meta: "validate"
+YUI().use('io-form', 'json', function(Y){
+	var siteForm = Y.one('#site-form${id}');
+	siteForm.on('submit', function(e){
+		Y.on('io:complete', function(id, o){
+			try {
+				var site = Y.JSON.parse(o.responseText);
+				window.location.href='?siteId='+site.id;
+			} catch(e) {
+				// TODO alert message username or password invalid
+			}
+		});
+		Y.io(siteForm.get('action'), {
+			method: 'POST',
+			form: {
+				id: siteForm
+			}
+		});
+		e.halt();
 	});
 });
 </script>

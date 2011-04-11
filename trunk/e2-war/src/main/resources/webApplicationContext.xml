@@ -94,8 +94,9 @@
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 	
-	<!-- bean for load urlrewriter configuration -->
+	<!-- bean for load urlrewriter configuration 
 	<bean class="org.osforce.e2.web.custom.urlrewrite.ExtraUrlRewriterConfLoader"/>
+	-->
 	
 	<!-- Cache -->
 	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">

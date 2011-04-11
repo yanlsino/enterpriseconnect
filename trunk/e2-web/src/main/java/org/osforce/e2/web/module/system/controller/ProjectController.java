@@ -1,6 +1,8 @@
 package org.osforce.e2.web.module.system.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.osforce.e2.entity.system.Project;
 import org.osforce.e2.entity.system.ProjectFeature;
@@ -44,7 +46,8 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/project", method=RequestMethod.POST)
-	public String update(Project project, WebRequest request) {
+	public @ResponseBody Map<String, Object> update(
+			Project project, WebRequest request) {
 		if(project.getId()==null) {
 			projectService.createProject(project);
 		} else {
@@ -58,7 +61,11 @@ public class ProjectController {
 			feature.setProject(project);
 			projectFeatureService.createProjectFeature(feature);
 		}
-		return "redirect:/" + project.getUniqueId() + "/profile";
+		//
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("id", project.getId());
+		model.put("uniqueId", project.getUniqueId());
+		return  model;
 	}
 	
 	@RequestMapping(value="project/exist", method=RequestMethod.GET)

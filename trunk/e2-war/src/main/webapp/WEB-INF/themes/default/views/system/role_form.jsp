@@ -2,15 +2,18 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<div id="${fragmentConfig.id}" class="fragment">
-	<c:if test="${not empty fragmentConfig.title}">
+<c:set var="id" value="${fragmentConfig.id}"/>
+<c:set var="title" value="${fragmentConfig.title}"/>
+
+<div id="${id}" class="fragment">
+	<c:if test="${not empty title}">
 	<div class="head">
-		<h3>${fragmentConfig.title}</h3>
+		<h3>${title}</h3>
 	</div>	
 	</c:if>
 	<div class="body">
-		<form:form id="roleForm" action="${base}/process/system/role" commandName="role">
-			<fieldset>
+		<form:form id="role-form${id}" cssClass="role-form" 
+			action="${base}/process/system/role" commandName="role">
 				<div>
 					<label for="name">角色名:</label>
 					<form:input path="name"/>
@@ -39,10 +42,32 @@
 					<input type="submit" value=" 提交 "/>
 					<form:hidden path="id"/>
 				</div>
-			</fieldset>
 		</form:form>
 	</div>
 </div>
+
+<script type="text/javascript">
+YUI().use('io-form', 'json', function(Y){
+	var roleForm = Y.one('#role-form${id}');
+	roleForm.on('submit', function(e){
+		Y.on('io:complete', function(id, o){
+			try {
+				var role = Y.JSON.parse(o.responseText);
+				window.location.href='?roleId='+role.id+'&siteId=${param.siteId}';
+			} catch(e) {
+				// TODO alert message username or password invalid
+			}
+		});
+		Y.io(roleForm.get('action'), {
+			method: 'POST',
+			form: {
+				id: roleForm
+			}
+		});
+		e.halt();
+	});
+});
+</script>
 
 <script type="text/javascript">
 $(document).ready(function(){

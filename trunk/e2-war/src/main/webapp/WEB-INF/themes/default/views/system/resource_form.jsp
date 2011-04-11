@@ -2,14 +2,18 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<div id="${fragmentConfig.id}" class="fragment">
-	<c:if test="${not empty fragmentConfig.title}">
+<c:set var="id" value="${fragmentConfig.id}"/>
+<c:set var="title" value="${fragmentConfig.title}"/>
+
+<div id="${id}" class="fragment">
+	<c:if test="${not empty title}">
 	<div class="head">
-		<h3>${fragmentConfig.title}</h3>
+		<h3>${title}</h3>
 	</div>	
 	</c:if>
 	<div class="body">
-		<form:form id="resourceForm" action="${base}/process/system/resource" commandName="resource">
+		<form:form id="resource-form${id}" cssClass="resource-form" 
+			action="${base}/process/system/resource" commandName="resource">
 			<fieldset>
 				<div>
 					<label for="name">名称:</label>
@@ -38,18 +42,24 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$('#resourceForm').validate({
-		submitHandler: function(form) {
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(resource){
-					window.location.href="?resourceId="+resource.id;
-				}
-			});	
-			return false;
-		},
-		meta: "validate"
+YUI().use('io-form', 'json', function(Y){
+	var resourceForm = Y.one('#resource-form${id}');
+	resourceForm.on('submit', function(e){
+		Y.on('io:complete', function(id, o){
+			try {
+				var resource = Y.JSON.parse(o.responseText);
+				window.location.href="?resourceId="+resource.id;
+			} catch(e) {
+				// TODO alert message username or password invalid
+			}
+		});
+		Y.io(resourceForm.get('action'), {
+			method: 'POST',
+			form: {
+				id: resourceForm
+			}
+		});
+		e.halt();
 	});
 });
 </script>

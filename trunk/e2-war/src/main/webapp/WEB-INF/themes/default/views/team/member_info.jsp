@@ -9,9 +9,10 @@
 	</div>	
 	</c:if>
 	<div class="body">
-		<ul class="members-list">
+		<ul class="members-info">
 		<c:forEach var="member" items="${needApprove}" varStatus="status">
 			<li>
+				<span class="span-2">
 				<a href="${base}/${member.user.project.uniqueId}/profile">
 				<c:choose>
 					<c:when test="${not empty member.user.project.profile.logo}">
@@ -22,7 +23,8 @@
 					</c:otherwise>
 				</c:choose>	
 				</a>
-				<div class="desc">
+				</span>
+				<span class="span-4">
 					<div>
 						<a target="_blank" href="${base}/${member.user.project.uniqueId}/profile">
 							${member.user.project.title}
@@ -38,8 +40,8 @@
 						<fmt:message key="team.member_info.disapprove"/>
 						</a>
 					</div>
-					<div class="clear"></div>
-				</div>
+				</span>
+				<div class="clear"></div>
 			</li>
 		</c:forEach>
 		<c:forEach var="member" items="${needAccept}" varStatus="status">

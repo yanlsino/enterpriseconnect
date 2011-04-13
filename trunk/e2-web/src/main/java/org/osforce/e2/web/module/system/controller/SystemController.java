@@ -1,6 +1,5 @@
 package org.osforce.e2.web.module.system.controller;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -76,14 +75,18 @@ public class SystemController {
 	
 	// TODO move to @Code UserController
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Long> register(User user, WebRequest request) {
+	public @ResponseBody Map<String, Object> register(User user, WebRequest request) {
 		if(StringUtils.equals(user.getPassword(), user.getRePassword()) || 
 				user.getId()!=null) {
 			Project project = (Project) request.getAttribute(
 					AttributeKeys.PROJECT_KEY,  WebRequest.SCOPE_SESSION);
 			userService.register(user, project);
 		}
-		return Collections.singletonMap("id", user.getId());
+		//
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("id", user.getId());
+		model.put("uniqueId", user.getProject().getUniqueId());
+		return model;
 	}
 
 	@RequestMapping(value="index-sync")

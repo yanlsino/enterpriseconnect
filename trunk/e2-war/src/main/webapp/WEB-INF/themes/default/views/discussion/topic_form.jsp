@@ -85,30 +85,3 @@ YUI().use('io-form', 'json', function(Y){
 	});
 });
 </script>
-
-<%--
-<script type="text/javascript">
-$(document).ready(function(){
-	KE.show({
-		id : 'content',
-	});
-	
-	$('#topic-form').validate({
-		submitHandler: function(form) {
-			$('#${fragmentConfig.id}').block({ 
-				message: '<div class="notice">正在处理...</div>',
-				overlayCSS: { backgroundColor: '#EEE' }
-			});
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(topic) {
-					setTimeout('window.location.href="?topicId='+topic.id+'"', 1000);
-				}
-			});
-			return false;
-		},
-		meta: "validate"
-	});
-});
-</script>
---%>

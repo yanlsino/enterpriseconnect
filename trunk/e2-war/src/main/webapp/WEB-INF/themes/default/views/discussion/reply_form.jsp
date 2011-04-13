@@ -34,17 +34,17 @@
 		</div>
 		<form:form id="reply-form${id}" action="${base}/process/discussion/reply" 
 			commandName="reply" cssClass="reply-form">
-				<p>
+				<div>
 					<label for="subject" class="title"><fmt:message key="discussion.reply_form.subject"/>${topic.subject}</label>
 					<br/>
 					<form:input path="subject" cssClass="title {validate:{required:true, messages:{required:'回复主题不能为空！'}}}" value="RE:${reply.topic.subject}"/>
-				</p>
-				<p>
+				</div>
+				<div>
 					<label><fmt:message key="discussion.reply_form.content"/></label>
 					<br/>
 					<form:textarea path="content" cssClass="{validate:{required:true, messages:{required:'回复内容不能为空！'}}}"/>
-				</p>
-				<p>
+				</div>
+				<div>
 					<button type="submit" class="button">
 						<span id="status1${id}">
 							<fmt:message key="discussion.reply_form.submit"/>
@@ -58,7 +58,7 @@
 					<form:hidden path="enteredId"/>
 					<form:hidden path="modifiedId"/>
 					<form:hidden path="quoteId"/>
-				</p>
+				</div>
 		</form:form>
 	</div>
 </div>
@@ -88,27 +88,3 @@ YUI().use('io-form', 'json', function(Y){
 	});
 });
 </script>
-
-<%-- 
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#reply-form').validate({
-		submitHandler: function(form) {
-			$('#${fragmentConfig.id}').block({ 
-				message: '<div class="notice">正在处理...</div>',
-				overlayCSS: { backgroundColor: '#EEE' }
-			});
-			$(form).ajaxSubmit({
-				dataType:'json',
-				clearForm:true,
-				success:function(reply){
-					setTimeout('window.location.reload()', 500);
-				}
-			});
-			return false;
-		},
-		meta: "validate"
-	});
-});
-</script>
---%>

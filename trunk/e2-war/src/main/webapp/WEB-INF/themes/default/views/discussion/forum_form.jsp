@@ -15,22 +15,22 @@
 	<div class="body">
 		<form:form id="forum-form${id}" action="${base}/process/discussion/forum" 
 			commandName="forum" class="forum-form">
-				<p>
+				<div>
 					<label for="name" class="title"><fmt:message key="discussion.forum_form.name"/></label>
 					<br/>
 					<form:input path="name" cssClass="text {validate:{required:true, messages:{required:'版块名不能为空！'}}}"/>
-				</p>
-				<p>
+				</div>
+				<div>
 					<label for="discription" class="title"><fmt:message key="discussion.forum_form.description"/></label>
 					<br/>
 					<form:textarea path="description"/>
-				</p>
-				<p>
+				</div>
+				<div>
 					<label for="level" class="title"><fmt:message key="discussion.forum_form.level"/></label>
 					<br/>
 					<form:input path="level" size="2"/>
-				</p>
-				<p>
+				</div>
+				<div>
 					<button type="submit" class="button">
 						<span id="status1${id}">
 							<fmt:message key="discussion.forum_form.submit"/>
@@ -46,7 +46,7 @@
 					<c:if test="${not empty forum.entered}">
 					<input type="hidden" name="entered" value='<fmt:formatDate value="${forum.entered}" pattern="yyyy-MM-dd HH:mm:ss"/>'/> 
 					</c:if>
-				</p>
+				</div>
 		</form:form>
 	</div>
 </div>
@@ -76,26 +76,3 @@ YUI().use('io-form', 'json', function(Y){
 	});
 });
 </script>
-
-<%--
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#forum-form').validate({
-		submitHandler: function(form) {
-			$('#${fragmentConfig.id}').block({ 
-				message: '<div class="notice">正在处理...</div>',
-				overlayCSS: { backgroundColor: '#EEE' }
-			});
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(forum){
-					setTimeout('window.location.href="?forumId='+forum.id+'"', 1000);
-				}
-			});
-			return false;
-		},
-		meta: "validate"
-	});
-});
-</script>
---%>

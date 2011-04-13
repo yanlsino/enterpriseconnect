@@ -3,38 +3,50 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<div id="${fragmentConfig.id}" class="fragment">
-	<c:if test="${not empty fragmentConfig.title}">
+<c:set var="id" value="${fragmentConfig.id}"/>
+<c:set var="title" value="${fragmentConfig.title}"/>
+
+<div id="${id}" class="fragment">
+	<c:if test="${not empty title}">
 	<div class="head">
-		<h3>${fragmentConfig.title}</h3>
+		<h3>${title}</h3>
 	</div>	
 	</c:if>
 	<div class="body">
-	<form:form id="messageForm" action="${base}/process/message/message" commandName="message">
+	<form:form id="message-form${id}" cssClass="message-form" 
+		action="${base}/process/message/message" commandName="message">
 		<fieldset>
 			<div>
 				<label for="recipient"><fmt:message key="message.message_form.recipient"/></label>
-				<form:input path="to.title" readonly="true"/>
+				<br/>
+				<form:input path="to.title" readonly="true" cssClass="text"/>
 			</div>
 			<div>
 				<label for="subject"><fmt:message key="message.message_form.subject"/></label>
-				<c:set var="subjectRequired"><fmt:message key='message.message_form.subjectRequired'/></c:set>
+				<br/>
 				<c:choose>
 					<c:when test="${message.reply}">
-					<form:input path="subject" value="RE:${message.subject}" cssClass="{validate:{required:true, messages:{required:'${subjectRequired}'}}}"/>
+					<form:input path="subject" value="RE:${message.subject}" cssClass="text"/>
 					</c:when>
 					<c:otherwise>
-					<form:input path="subject" cssClass="{validate:{required:true, messages:{required:'${subjectRequired}'}}}"/>
+					<form:input path="subject" cssClass="text"/>
 					</c:otherwise>
 				</c:choose>
 			</div>
 			<div>
 				<label for="content"><fmt:message key="message.message_form.content"/></label>
-				<c:set var="contentRequired"><fmt:message key='message.message_form.contentRequired'/></c:set>
-				<form:textarea path="content" cssClass="{validate:{required:true, messages:{required:'${contentRequired}'}}}"/>
+				<br/>
+				<form:textarea path="content" cssClass="text"/>
 			</div>
 			<div>
-				<button class="button" type="submit"><fmt:message key="message.message_form.submit"/></button>
+				<button class="button" type="submit">
+					<span id="status1${id}">
+						<fmt:message key="message.message_form.submit"/>
+					</span>
+					<span id="status2${id}" style="display: none">
+						<img src="${base}/static/images/loading.gif"/>正在处理...
+					</span>
+				</button>
 				<form:hidden path="id"/>
 				<form:hidden path="fromId"/>
 				<form:hidden path="toId"/>
@@ -47,19 +59,3 @@
 	</form:form>
 	</div>
 </div>
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#messageForm').validate({
-		submitHandler: function(form) {
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(message){
-					window.location.href='?messageId='+message.id;
-				}
-			});
-			return false;
-		},
-		meta: "validate"
-	});
-});
-</script>

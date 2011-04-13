@@ -28,25 +28,3 @@ YUI().use('yui2-treeview', function(Y) {
 	tree.render();
 });
 </script>
-
-<%-- 
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#${fragmentConfig.id} #folders-tree').zTree({
-		async: true,
-		asyncUrl: "${base}/process/document/folders",  //获取节点数据的URL地址
-		asyncParam: ["id"],  //获取节点数据时，必须的数据名称，例如：id、name
-		asyncParamOther: ["projectId", "${project.id}"],
-		callback: {
-			beforeExpand: function(){return true;},
-			beforeCollapse: function(){return true;},
-			click: function(event, treeId, treeNode) {
-				if (treeNode) {
-					window.location.href='${base}/${project.uniqueId}/document?folderId='+treeNode.id;
-				}
-			}		
-		}
-	});
-});
-</script>
---%>

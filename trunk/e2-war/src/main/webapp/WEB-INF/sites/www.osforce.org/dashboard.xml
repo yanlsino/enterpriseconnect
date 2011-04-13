@@ -47,7 +47,7 @@
 		</position>
 	</page>
 	<page name="people" parent="commons/header">
-		<position name="leftColumn" width="200px" layout="fill">
+		<position name="leftColumn" width="200px" >
 			<fragment refer="actionFragment" view="Actions">
 				<preferences>
 					<categoryCode>people</categoryCode>
@@ -59,7 +59,7 @@
 				</rules>
 			</fragment>
 		</position>
-		<position name="mainColumn" layout="fill">
+		<position name="mainColumn" >
 			<fragment refer="profileFragment" view="List" cache="300">
 				<title>成员列表</title>
 				<preferences>
@@ -68,7 +68,7 @@
 				</preferences>
 			</fragment>
 		</position>
-		<position name="rightColumn" width="280px" layout="fill">
+		<position name="rightColumn" width="280px" >
 			<fragment refer="profileFragment" view="Recent" cache="300">
 				<title>最新成员</title>
 				<preferences>
@@ -84,7 +84,7 @@
 		</position>
 	</page>
 	<page name="groups" parent="commons/header">
-		<position name="leftColumn" width="200px" layout="fill">
+		<position name="leftColumn" width="200px" >
 			<fragment refer="actionFragment" view="Actions">
 				<preferences>
 					<categoryCode>groups</categoryCode>
@@ -97,7 +97,7 @@
 				</rules>
 			</fragment>
 		</position>
-		<position name="mainColumn" layout="fill">
+		<position name="mainColumn" >
 			<fragment refer="profileFragment" view="List" cache="300">
 				<title>圈子列表</title>
 				<preferences>
@@ -105,7 +105,7 @@
 				</preferences>
 			</fragment>
 		</position>
-		<position name="rightColumn" width="280px" layout="fill">
+		<position name="rightColumn" width="280px" >
 			<fragment refer="profileFragment" view="Recent" cache="300">
 				<title>最新圈子</title>
 				<preferences>
@@ -121,7 +121,7 @@
 		</position>
 	</page>
 	<page name="events" parent="commons/header">
-		<position name="leftColumn" width="200px" layout="fill">
+		<position name="leftColumn" width="200px" >
 			<fragment refer="actionFragment" view="Actions">
 				<preferences>
 					<categoryCode>events</categoryCode>
@@ -134,7 +134,7 @@
 				</rules>
 			</fragment>
 		</position>
-		<position name="mainColumn" layout="fill">
+		<position name="mainColumn" >
 			<fragment refer="profileFragment" view="List" cache="300">
 				<title>活动列表</title>
 				<preferences>
@@ -142,7 +142,7 @@
 				</preferences>
 			</fragment>
 		</position>
-		<position name="rightColumn" width="280px" layout="fill">
+		<position name="rightColumn" width="280px" >
 			<fragment refer="profileFragment" view="Recent" cache="300">
 				<title>最新活动</title>
 				<preferences>
@@ -166,7 +166,7 @@
 				<title>搜索</title>
 			</fragment>
 		</position>
-		<position name="mainColumn" layout="fill">
+		<position name="mainColumn" >
 			<fragment refer="searchFragment" view="Result">
 				<title>搜索结果</title>
 			</fragment>

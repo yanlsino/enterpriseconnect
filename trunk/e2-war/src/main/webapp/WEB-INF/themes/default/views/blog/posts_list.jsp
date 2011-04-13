@@ -22,7 +22,7 @@
 					<a href="${base}/${project.uniqueId}/blog/post/${post.id}">${post.title}</a>
 				</h1>
 				<div>${post.shortContent}</div>
-				<div class="post-footer align-right">
+				<div class="post-actions">
 				<e2:security code="blog-post-view">
 					<a href="${base}/${project.uniqueId}/blog/post/${post.id}" class="readmore"><fmt:message key="blog.posts_list.readMore"><fmt:param value="${post.views}"/></fmt:message></a>
 				</e2:security>

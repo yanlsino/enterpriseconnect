@@ -4,21 +4,32 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<div id="${fragmentConfig.id}" class="fragment">
-	<c:if test="${not empty fragmentConfig.title}">
+<c:set var="id" value="${fragmentConfig.id}"/>
+<c:set var="title" value="${fragmentConfig.title}"/>
+
+<div id="${id}" class="fragment">
+	<c:if test="${not empty title}">
 	<div class="head">
-		<h3>${fragmentConfig.title}</h3>
+		<h3>${title}</h3>
 	</div>	
 	</c:if>
 	<div class="body">
-		<form:form id="albumForm" action="${base}/process/gallery/album" commandName="album">
+		<form:form id="album-form${id}" cssClass="album-form" 
+			action="${base}/process/gallery/album" commandName="album">
 			<div>
 				<label for="name" class="title">相册名</label>
 				<br/>
-				<form:input path="name" cssClass="text {validate:{required:true, messages:{required:'相册名不能为空！'}}}"/>
+				<form:input path="name" cssClass="text"/>
 			</div>
 			<div>
-				<button type="submit" class="button">提交</button>
+				<button type="submit" class="button">
+					<span id="status1${id}">
+						提交
+					</span>
+					<span id="status2${id}" style="display: none">
+						<img src="${base}/static/images/loading.gif"/>正在处理...
+					</span>
+				</button>
 				<form:hidden path="enteredId"/>
 				<form:hidden path="modifiedId"/>
 				<form:hidden path="projectId"/>
@@ -29,22 +40,27 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$('#albumForm').validate({
-		submitHandler: function(form) {
-			$('#${fragmentConfig.id}').block({ 
-				message: '正在处理...',
-				overlayCSS: { backgroundColor: '#EEE' }
-			});
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(album){
-					setTimeout('window.location.href="?albumId='+album.id+'"', 500);
-				}
-			});
-			return false;
-		},
-		meta: "validate"
+YUI().use('io-form', 'json', function(Y){
+	var albumForm = Y.one('#album-form${id}');
+	albumForm.on('submit', function(e){
+		Y.one('#status1${id}').hide();
+		Y.one('#status2${id}').show();
+		//
+		Y.on('io:complete', function(id, o){
+			try {
+				var album = Y.JSON.parse(o.responseText);
+				setTimeout('window.location.href="?albumId='+album.id+'"', 500);
+			} catch(e) {
+				// TODO alert message username or password invalid
+			}
+		});
+		Y.io(albumForm.get('action'), {
+			method: 'POST',
+			form: {
+				id: albumForm
+			}
+		});
+		e.halt();
 	});
 });
 </script>

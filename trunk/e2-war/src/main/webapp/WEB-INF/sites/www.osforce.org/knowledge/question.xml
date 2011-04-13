@@ -4,7 +4,8 @@
 		<position name="leftColumn" width="200px">
 			<fragment refer="knowledgeFragment" view="Actions">
 				<rules>
-					<rule name="securityRule" code="knowledge-question-add|knowledge-answer-add"/>
+					<rule name="securityRule" 
+					code="knowledge-question-add|knowledge-answer-add" userRequired="true"/>
 				</rules>
 			</fragment>
 		</position>

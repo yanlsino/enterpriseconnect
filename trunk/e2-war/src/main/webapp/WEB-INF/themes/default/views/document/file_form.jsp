@@ -16,7 +16,7 @@
 	<div class="body">
 		<c:choose>
 			<c:when test="${empty fileItem.folder}">
-			<e2:security code="document-folder-add" userRequired="true">
+			<e2:security code="document-folder-add" project="${project}" userRequired="true">
 			<div class="notice">
 				当前无上传目录，请先添加...
 				<a href="${base}/${project.uniqueId}/document/folder/form">添加目录</a>
@@ -24,8 +24,7 @@
 			</e2:security>
 			</c:when>
 			<c:otherwise>
-			<form:form id="file-form${id}" cssClass="file-form" 
-				action="${base}/process/commons/attachment" commandName="fileItem">
+			<form:form id="file-form${id}" cssClass="file-form" commandName="fileItem">
 				<div>
 					<label>上传目录</label>
 					<br/>
@@ -64,7 +63,7 @@ YUI().use('io-upload-iframe', 'json', function(Y){
 			bindEvent();
 			e.currentTarget.set('value', '');
 		});
-		Y.io(fileForm.get('action'), {
+		Y.io('${base}/process/commons/attachment', {
 			method: 'POST',
 			form: {
 				id: fileForm,

@@ -12,7 +12,7 @@
 		<ul class="posts-recent">
 			<c:forEach var="post" items="${page.result}" varStatus="status">
 				<li <c:if test="${status.last}">class="last"</c:if>>
-				<span class="views-counter"><fmt:message key="blog.posts_recent.postViews"><fmt:param value="${post.views}"/></fmt:message></span>
+				<span class="right"><fmt:message key="blog.posts_recent.postViews"><fmt:param value="${post.views}"/></fmt:message></span>
 				<span class="title">
 					<a href="${base}/${post.project.uniqueId}/blog/post/${post.id}">${post.title}</a>
 				</span>

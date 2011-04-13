@@ -11,10 +11,10 @@
 	</c:if>
 	<div class="body">
 		<ul class="actions">
-		<e2:security code="gallery-album-add">
+		<e2:security code="gallery-album-add" project="${project}" userRequired="true">
 			<li><a href="${base}/${project.uniqueId}/gallery/album/form">添加相册</a></li>
 		</e2:security>
-		<e2:security code="gallery-photo-add">
+		<e2:security code="gallery-photo-add" project="${project}" userRequired="true">
 			<li class="last"><a href="${base}/${project.uniqueId}/gallery/photo/form<c:if test="${not empty param.albumId}">?albumId=${param.albumId}</c:if>">上传相片</a></li>
 		</e2:security>
 		</ul>

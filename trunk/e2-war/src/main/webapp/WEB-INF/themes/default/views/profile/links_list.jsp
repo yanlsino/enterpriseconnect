@@ -10,7 +10,7 @@
 	</div>	
 	</c:if>
 	<div class="body">
-	<ul class="thumbnails-list">
+	<ul class="concerns-list">
 	<c:forEach var="link" items="${page.result}" varStatus="status">
 	<c:if test="${mode eq 'link-from'}">
 		<c:set var="project" value="${link.linkedEntity.project}"/>

@@ -1,6 +1,5 @@
 package org.osforce.e2.web.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,17 +38,14 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 @Controller
 public class FragmentController {
 
-	private static final String DEFAULT_LAYOUT = "default/layout";
-	private static final String DEFAULT_LAYOUT_POPUP = "default/layout-popup";
 	private static final String DEFAULT_VIEWS = "default/views/";
 	private static final String VIEWS = "views";
 	private static final String VIEW_PREFIX = "/WEB-INF/themes";
-	private static final String VIEW_SUFFIX_PATTERN = ".*";
 	
 	private ConfigFactory configFactory;
 	private FragmentInvoker fragmentInvoker;
 	
-	private Map<String, Boolean> viewCache = new HashMap<String, Boolean>();
+	private Map<String, String> viewCache = new HashMap<String, String>();
 	
 	public FragmentController() {
 	}
@@ -68,10 +64,6 @@ public class FragmentController {
 	public String renderPage(@RequestParam String viewName, 
 			@RequestParam(required=false) String popup, WebRequest request) {
 		Site site = (Site) request.getAttribute(AttributeKeys.SITE_KEY, WebRequest.SCOPE_REQUEST);
-		/*Project project = (Project) request.getAttribute(AttributeKeys.PROJECT_KEY, WebRequest.SCOPE_REQUEST);
-		if(project!=null && StringUtils.equals(viewName, "/profile/profile")) {
-			viewName = project.getCategory().getCode() + "/" +viewName;
-		}*/
 		Project project = (Project) request.getAttribute(AttributeKeys.PROJECT_KEY, WebRequest.SCOPE_REQUEST);
 		if(project!=null && !viewName.contains("categoryCode")) {
 			if(viewName.contains("T")) {
@@ -84,20 +76,18 @@ public class FragmentController {
 		PageConfig pageConfig = configFactory.getPageConfig(site.getDomain(), viewName);
 		if(pageConfig!=null) {
 			request.setAttribute("pageConfig", pageConfig, WebRequest.SCOPE_REQUEST);
-			String layout = StringUtils.isBlank(site.getTheme().getLayout())
-					?DEFAULT_LAYOUT: StringUtil.buildPath(site.getTheme().getName(), site.getTheme().getLayout()) ;
+			String layout = StringUtil.buildPath(site.getTheme().getName(), "layout");
 			if(StringUtils.isNotBlank(popup)) {
-				layout = StringUtils.isBlank(site.getTheme().getLayoutPopup())
-						?DEFAULT_LAYOUT_POPUP: StringUtil.buildPath(site.getTheme().getName(), site.getTheme().getLayoutPopup()) ;
+				layout = StringUtil.buildPath(site.getTheme().getName(), "layout-popup");
 			}
-			return layout;
+			return layout; 
 		}
 		return "commons/error404";
 	}
 
 	@RequestMapping(value = "/fragment/{fragmentId}", method = RequestMethod.GET)
 	public String renderFragment(@PathVariable String fragmentId,
-			HttpServletRequest request, HttpServletResponse response) throws IOException {
+			HttpServletRequest request, HttpServletResponse response) {
 		Site site = (Site) request.getAttribute(AttributeKeys.SITE_KEY);
 		FragmentConfig fragmentConfig = (FragmentConfig) request.getAttribute(FragmentConfig.NAME);
 		if(fragmentConfig==null) {
@@ -107,31 +97,23 @@ public class FragmentController {
 				 request, response, fragmentConfig);
 		 request.setAttribute("fragmentConfig", fragmentConfig);
 		String viewName =  fragmentInvoker.invoke(fragmentContext);
-		if(StringUtils.isBlank(viewName)) {
-			return viewName;
-		}
-		// TODO  need refactor
-		Boolean flag = viewCache.get(viewName);
-		if(flag==null) {
-			WebApplicationContext webAppContext = RequestContextUtils.getWebApplicationContext(request);
-			String location = StringUtil.buildPath(VIEW_PREFIX, site.getTheme().getName(), VIEWS, viewName);
-			String locationPattern = location + VIEW_SUFFIX_PATTERN;
-			Resource[] resources = webAppContext.getResources(locationPattern);
-			if(resources!=null) {
-				for(Resource resource : resources) {
-					if(resource.exists()) {
-						flag = true;
-					}
-				}
+		WebApplicationContext webAppContext = RequestContextUtils.getWebApplicationContext(request);
+		return getView(webAppContext, site, viewName);
+	}
+	
+	protected String getView(WebApplicationContext webAppContext, Site site, String viewName) {
+		String view = viewCache.get(viewName); 
+		if(view==null) {
+			String viewPath = StringUtil.buildPath(VIEW_PREFIX, site.getTheme().getName(), VIEWS, viewName, ".jsp");
+			Resource resource = webAppContext.getResource(viewPath);
+			if(resource.exists()) {
+				view = StringUtil.buildPath(site.getTheme().getName(), VIEWS, viewName);
+			} else {
+				 view = StringUtil.buildPath(DEFAULT_VIEWS, viewName);
 			}
-			viewCache.put(viewName, flag==null?false:flag);
+			viewCache.put(viewName, view);
 		}
-		if(flag==null || !flag) {
-			viewName = DEFAULT_VIEWS + viewName;
-		} else {
-			viewName = StringUtil.buildPath(site.getTheme().getName(), VIEWS, viewName);
-		}
-		return viewName;
+		return view;
 	}
 	
 }

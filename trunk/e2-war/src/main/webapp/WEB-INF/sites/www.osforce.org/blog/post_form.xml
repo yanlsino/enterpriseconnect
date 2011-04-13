@@ -13,29 +13,11 @@
 					<rule name="securityRule" code="blog-category-view"/>
 				</rules>
 			</fragment>
-			<fragment refer="tagFragment" view="Form">
-				<title>Tags</title>
-				<preferences>
-					<paramName>postId</paramName>
-					<entity>BlogPost</entity>
-				</preferences>
-			</fragment>
 		</position>
 		<position name="mainColumn" layout="fill">
 			<fragment refer="blogPostFragment" view="Form">
 				<title>撰写博文</title>
 			</fragment>
 		</position>
-		<!-- 
-		<position name="rightColumn" width="280px" layout="fill">
-			<fragment refer="aboutFragment" view="About" cache="300">
-				<title>About Link</title>
-				<content><![CDATA[
-				<a href="#">click me</a>
-				<p>This is the right column</p>
-				]]></content>
-			</fragment>
-		</position>
-		 -->
 	</page>
 </pages>

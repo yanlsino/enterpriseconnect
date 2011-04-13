@@ -30,7 +30,7 @@
 							${profile.shortDescription}
 						</c:otherwise>
 					</c:choose>
-					<e2:security code="profile-profile-edit">
+					<e2:security code="profile-profile-edit" project="${profile.project}">
 						(<a href="${base}/${project.uniqueId}/profile/form?profileId=${profile.id}"><fmt:message key="profile.profile.edit"/></a>)
 					</e2:security>
 					</dd>

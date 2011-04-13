@@ -4,10 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<div id="${fragmentConfig.id}" class="fragment">
-	<c:if test="${not empty fragmentConfig.title}">
+<c:set var="id" value="${fragmentConfig.id}"/>
+<c:set var="title" value="${fragmentConfig.title}"/>
+
+<div id="${id}" class="fragment">
+	<c:if test="${not empty title}">
 	<div class="head">
-		<h3>${fragmentConfig.title}</h3>
+		<h3>${title}</h3>
 	</div>	
 	</c:if>
 	<div class="body">
@@ -15,7 +18,7 @@
 		<ul class="comments-list">
 		<c:forEach var="comment" items="${comments}" varStatus="status">
 			<li>
-				<div class="author">
+				<span class="span-2">
 					<a href="${base}/profile/${comment.enteredBy.project.uniqueId}" title="${comment.enteredBy.project.title}">
 					<c:choose>
 						<c:when test="${not empty comment.enteredBy.project.profile.logo}">
@@ -26,8 +29,8 @@
 						</c:otherwise>
 					</c:choose>
 					</a>
-				</div>
-				<div class="content">
+				</span>
+				<span class="span6">
 					<div>
 						<span><a href="${base}/profile/${comment.enteredBy.project.uniqueId}" title="${comment.enteredBy.project.title}">
 						${comment.enteredBy.project.title}
@@ -38,21 +41,31 @@
 						</span>
 					</div>
 					${comment.content}
-				</div>
+				</span>
+				<br class="clear"/>
 			</li>
 		</c:forEach>
 		</ul>
 		</c:if>
-		<form:form class="commentForm" action="${base}/process/commons/comment" commandName="comment">
+		<form:form id="comment-form${id}" class="comment-form" 
+			action="${base}/process/commons/comment" commandName="comment">
 		<c:choose>
 			<c:when test="${empty user}">添加评论，请先<a href="#" class="loginAction">登录</a></c:when>
 			<c:otherwise>
 			<div>
 				<label><fmt:message key="commons.comments_list.comment"/></label>
-				<form:textarea path="content" cssClass="required"/>
+				<br/>
+				<form:textarea path="content" cssClass="text"/>
 			</div>
 			<div>
-				<input class="button" type="submit" value='<fmt:message key="commons.comments_list.submit"/>'/>
+				<button type="submit" class="button">
+					<span id="status1${id}">
+						<fmt:message key="commons.comments_list.submit"/>
+					</span>
+					<span id="status2${id}" style="display: none">
+						<img src="${base}/static/images/loading.gif"/>正在处理...
+					</span>
+				</button>
 				<form:hidden path="enteredId"/>
 				<form:hidden path="modifiedId"/>
 				<form:hidden path="linkedId"/>
@@ -66,6 +79,30 @@
 </div>
 
 <script type="text/javascript">
+YUI().use('io-form', 'json', function(Y){
+	var commentForm = Y.one('#comment-form${id}');
+	commentForm.on('submit', function(e){
+		Y.one('#status1${id}').hide();
+		Y.one('#status2${id}').show();
+		//
+		Y.on('io:complete', function(id, o){
+			try {
+				var comment = Y.JSON.parse(o.responseText);
+				setTimeout('window.location.reload()', 500);
+			} catch(e) {
+				// TODO alert message username or password invalid
+			}
+		});
+		Y.io(commentForm.get('action'), {
+			method: 'POST',
+			form: {
+				id: commentForm
+			}
+		});
+		e.halt();
+	});
+});
+
 (function(){
 	$('.commentForm').submit(function(){
 		var content = $(this).find('#content').val();

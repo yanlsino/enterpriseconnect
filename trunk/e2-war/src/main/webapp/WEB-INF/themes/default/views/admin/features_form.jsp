@@ -92,28 +92,3 @@ YUI().use('io-form', 'json', function(Y){
 	});
 });
 </script>
-
-<%-- 
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#${fragmentConfig.id} form').submit(function(){
-		$(this).ajaxSubmit({
-			dataType: 'json',
-			success: function(feature){
-			}
-		});
-		return false;
-	});
-	$('.button').click(function(){
-		$('#${fragmentConfig.id}').block({ 
-			message: '正在处理...',
-			overlayCSS: { backgroundColor: '#EEE' }
-		});
-		$('#${fragmentConfig.id} form').each(function(){
-			$(this).submit();
-		});
-		setTimeout('window.location.reload()', 500);
-	});
-});
-</script>
---%>

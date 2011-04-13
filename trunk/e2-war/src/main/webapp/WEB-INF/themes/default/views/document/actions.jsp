@@ -11,12 +11,12 @@
 	</c:if>
 	<div class="body">
 		<ul class="actions">
-		<e2:security code="document-file-add" userRequired="true">
+		<e2:security code="document-file-add" project="${project}" userRequired="true">
 			<li>
 				<a href="${base}/${project.uniqueId}/document/file/form?folderId=${param.folderId}">上传文档</a>
 			</li>
 		</e2:security>
-		<e2:security code="document-folder-add" userRequired="true">
+		<e2:security code="document-folder-add" project="${project}" userRequired="true">
 			<li class="last">
 				<a href="${base}/${project.uniqueId}/document/folder/form">添加目录</a>
 			</li>

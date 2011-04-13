@@ -92,12 +92,15 @@
 	margin: 0;
 	padding: 0;
 }
-.comments-list .comment-content {
+.activities-list .comments-list .comment-content {
 	margin-left: 55px; 	
 }
 /* blog post fragment */
-#post-form textarea {
+.post-form textarea {
 	width: 90%;
+}
+.posts-list li {
+	margin-bottom: 3em;
 }
 /* question fragment */
 .questions-list li,
@@ -183,12 +186,27 @@ table.calendar tbody tr td a {
 	display: block;	
 }
 /* answer fragment */
-#answer-form textarea {
+.answer-form textarea {
 	width: 450px;
 	height: 150px;
 }
+/* album fragment */
+.albums-list .slideshow {
+	margin-bottom: 1.5em;	
+}
+.albums-list .slideshow { 
+	height: 182px; 
+	width: 182px; 
+	margin-right: 1.5em; 
+	float: left 
+}
+.slideshow img { 
+	padding: 15px; 
+	border: 1px solid #ccc; 
+	background-color: #eee; 
+}
 /* forum fragment */
-#forum-form #description {
+.forum-form #description {
 	width: 300px;
 	height: 100px;	
 }
@@ -196,7 +214,7 @@ table.calendar tbody tr td a {
 	margin-bottom: 1.5em;	
 }
 /* topic fragment */
-#topic-form #content {
+.topic-form #content {
 	width: 550px;
 	height: 250px;	
 }
@@ -218,10 +236,10 @@ table.calendar tbody tr td a {
 	margin-left: 120px;
 	border-bottom: 1px solid #DDD;	
 }
-#reply-form {
+.reply-form {
 	margin-left: 120px;
 }
-#reply-form textarea {
+.reply-form textarea {
 	width: 450px;
 	height: 150px;	
 }
@@ -236,9 +254,6 @@ table.calendar tbody tr td a {
 	border: 1px dashed #DDD;
 	width: 32%;
 }
-.right .members-list li {
-	width: 97.5%;
-}
 .members-list li:hover {
 	background-color: #DDF0F8;
 	border: 1px solid #DDD;	
@@ -247,12 +262,22 @@ table.calendar tbody tr td a {
 	float: left;
 	margin: 5px;	
 }
-.members-list .desc {
-	margin-top: 5px;	
+.members-info {
+	
+}
+.members-info li:hover {
+	background-color: #DDF0F8;
+}
+/* comment fragment */
+.comments-list li {
+	margin-bottom: 1em;	
+}
+.comment-form textarea {
+	height: 100px; 
 }
 /* link fragment */
-.thumbnails-list li {
-	display: inline;
+.concerns-list li {
+	float: left;
 	margin-right: 5px; 
 }
 /* project fragment */

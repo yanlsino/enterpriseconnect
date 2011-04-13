@@ -11,7 +11,7 @@
 	</c:if>
 	<div class="body">
 		<ul class="actions">
-			<e2:security code="knowledge-question-add">
+			<e2:security code="knowledge-question-add" project="${project}" userRequired="true">
 			<li class="last"><a href="${base}/${project.uniqueId}/knowledge/question/form">我有问题</a></li>
 			</e2:security>
 		</ul>

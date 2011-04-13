@@ -12,7 +12,7 @@
 		<ul class="topics-list">
 		<c:forEach var="topic" items="${page.result}" varStatus="status">
 			<li <c:if test="${status.last}">class="last"</c:if>>
-				<span class="views-counter"><fmt:message key="discussion.topics_recent.topicViews"><fmt:param value="${topic.views}"/></fmt:message></span>
+				<span class="right"><fmt:message key="discussion.topics_recent.topicViews"><fmt:param value="${topic.views}"/></fmt:message></span>
 				<span class="title">
 					<a href="${base}/${topic.forum.project.uniqueId}/discussion/topic/${topic.id}">
 						${topic.subject}

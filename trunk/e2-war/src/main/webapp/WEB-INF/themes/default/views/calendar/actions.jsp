@@ -11,9 +11,11 @@
 	</c:if>
 	<div class="body">
 		<ul class="actions">
+		<e2:security code="calendar-event-add" project="${project}" userRequired="true">
 			<li class="last">
 				<a href="${base}/${project.uniqueId}/calendar/event/form">添加日程</a>
 			</li>
+		</e2:security>
 		</ul>
 	</div>
 </div>

@@ -20,13 +20,6 @@
 					userRequired="true" projectRequired="true"/>
 				</rules>
 			</fragment>
-			<fragment refer="tagFragment" view="Form">
-				<title>Tags</title>
-				<preferences>
-					<paramName>topicId</paramName>
-					<entity>Topic</entity>
-				</preferences>
-			</fragment>
 			<fragment refer="topicFragment" view="Top">
 				<title>热门话题</title>
 				<rules>

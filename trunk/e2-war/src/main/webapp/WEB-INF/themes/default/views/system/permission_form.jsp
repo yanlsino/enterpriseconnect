@@ -11,35 +11,48 @@ select[multiple] {
 -->
 </style>
 
-<div id="${fragmentConfig.id}" class="fragment">
-	<c:if test="${not empty fragmentConfig.title}">
+<c:set var="id" value="${fragmentConfig.id}"/>
+<c:set var="title" value="${fragmentConfig.title}"/>
+
+<div id="${id}" class="fragment">
+	<c:if test="${not empty title}">
 	<div class="head">
-		<h3>${fragmentConfig.title}</h3>
+		<h3>${title}</h3>
 	</div>	
 	</c:if>
 	<div class="body">
-		<form:form id="permissionForm" action="${base}/process/system/permission" commandName="permission">
-			<fieldset>
+		<form:form id="permission-form${id}" cssClass="permission-form" 
+			action="${base}/process/system/permission" commandName="permission">
 				<div>
 					<label for="categoryId">分类名称:</label>
-					<form:select path="categoryId" items="${categories}" itemLabel="label" itemValue="id"/>
+					<br/>
+					<form:select path="categoryId" id="select-category${id}" items="${categories}" itemLabel="label" itemValue="id"/>
 				</div>
 				<div>
 					<label for="roleId">角色名称:</label>
-					<form:select path="roleId" items="${roles}" itemLabel="name" itemValue="id"/>
+					<br/>
+					<form:select path="roleId" id="select-role${id}" items="${roles}" itemLabel="name" itemValue="id"/>
 				</div>
 				<c:choose>
 					<c:when test="${param.multiple}">
 					<div>
 						<label for="resourceId">资源名称:</label>
-						<select id="select1" multiple="multiple">
+						<br/>
+						<select id="select1${id}" multiple="multiple">
 						<c:forEach var="resource" items="${resources}">
 							<option value="${resource.id}">${resource.name}</option>
 						</c:forEach>
 						</select>
-						<button id="addAction">Add&gt;&gt;</button>
-						<button id="removeAction">Remove&lt;&lt;</button>
-						<select id="select2" multiple="multiple"></select>
+						<a id="addAction${id}" href="#">&gt;&gt;Add</a>
+						|
+						<a id="removeAction${id}" href="#">Remove&lt;&lt;</a>
+						<select id="select2${id}" multiple="multiple">
+						<c:forEach var="p" items="${permissions}">
+							<c:if test="${p.role.id eq permission.role.id}">
+							<option value="${p.resource.id}">${p.resource.name}</option>
+							</c:if>
+						</c:forEach>
+						</select>
 					</div> 					
 					</c:when>
 					<c:otherwise>
@@ -50,70 +63,81 @@ select[multiple] {
 					</c:otherwise>
 				</c:choose>
 				<div>
-					<input type="submit" value=" 提交 "/>
-					<input type="reset" value=" 重置 "/>
+					<button type="submit">提交</button>
+					<button type="reset">重置</button>
 					<form:hidden path="id"/>
 				</div>
-			</fieldset>
 		</form:form>
 	</div>
 </div>
+
 <c:choose>
 	<c:when test="${param.multiple}">
 	<script type="text/javascript">
-	$(document).ready(function(){
-		$('select#categoryId').change(function(){
-			window.location.href='?siteId=${param.siteId}&multiple=${param.multiple}&categoryId='+$(this).val();
+	YUI().use('io-form', 'json', function(Y){
+		Y.one('#select-category${id}').on('change', function(e){
+			window.location.href='?siteId=${param.siteId}&multiple=${param.multiple}&categoryId='+e.currentTarget.get('value');
 		});
-		$('#permissionForm').validate({
-			submitHandler: function(form) {
-				var categoryId = $('#categoryId').val();
-				var roleId = $('#roleId').val();
-				$('#select2 option:selected').each(function(i){
-					var params = {
-						categoryId : categoryId,
-						roleId	   : roleId,
-						resourceId : $(this).val()
-					};
-					$.ajax({
-						async: false,
-	     			    type: 'POST',
-						url: '${base}/process/system/permission',
-						data: params,
-						dataType: 'json',
-						success: function(jsonObj){}
-					});
+		Y.one('#select-role${id}').on('change', function(e){
+			window.location.href='?siteId=${param.siteId}&multiple=${param.multiple}&categoryId=${param.categoryId}&roleId='+e.currentTarget.get('value');
+		});
+		//
+		var select1 = Y.one('#select1${id}');
+		var select2 = Y.one('#select2${id}');
+		Y.one('#addAction${id}').on('click', function(e){
+			select1.all('option').each(function(){
+				if(this.get('selected')) {
+					select2.insert(this);
+				}
+			});
+			e.halt();
+		});
+		Y.one('#removeAction${id}').on('click', function(e){
+			select2.all('option').each(function(){
+				if(this.get('selected')) {
+					select1.insert(this);
+				}
+			})
+			e.halt();
+		});
+		//
+		var permissionForm = Y.one('#permission-form${id}');
+		permissionForm.on('submit', function(e){
+			select2.all('option').each(function(){
+				var resourceId = this.get('value');
+				Y.io(permissionForm.get('action'), {
+					method: 'POST',
+					data: 'resourceId='+resourceId,
+					form: {
+						id: permissionForm
+					}
 				});
-				return false;
-			},
-			meta: "validate"
-		});
-		$('#addAction').click(function(){
-			return !$('#select1 option:selected').remove().appendTo('#select2');
-		});
-		$('#removeAction').click(function(){
-			return !$('#select2 option:selected').remove().appendTo('#select1');
+			});
+			e.halt();
 		});
 	});
 	</script>
 	</c:when>
 	<c:otherwise>
 	<script type="text/javascript">
-	$(document).ready(function(){
-		$('select#categoryId').change(function(){
-			window.location.href='?siteId=${param.siteId}&categoryId='+$(this).val();
-		});
-		$('#permissionForm').validate({
-			submitHandler: function(form) {
-				$(form).ajaxSubmit({
-					dataType:'json',
-					success:function(permission){
-						window.location.href="?permissionId="+permission.id+"&siteId=${param.siteId}";
-					}
-				});
-				return false;
-			},
-			meta: "validate"
+	YUI().use('io-form', 'json', function(Y){
+		var permissionForm = Y.one('#permission-form${id}');
+		permissionForm.on('submit', function(e){
+			Y.on('io:complete', function(id, o){
+				try {
+					var permission = Y.JSON.parse(o.responseText);
+					window.location.href='?permissionId='+permission.id+'&siteId=${param.siteId}&categoryId=${param.categoryId}';
+				} catch(e) {
+					// TODO alert message username or password invalid
+				}
+			});
+			Y.io(permissionForm.get('action'), {
+				method: 'POST',
+				form: {
+					id: permissionForm
+				}
+			});
+			e.halt();
 		});
 	});
 	</script>

@@ -197,26 +197,3 @@ YUI().use('node', 'yui2-calendar', 'overlay', function(Y) {
 	});
 });
 </script>
-
-<%--
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#eventForm').validate({
-		submitHandler: function(form) {
-			$('#${fragmentConfig.id}').block({ 
-				message: '<div class="notice">正在处理...<div>',
-				overlayCSS: { backgroundColor: '#F6F6F6' }
-			});
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(event){
-					setTimeout('window.location.href="?eventId='+event.id+'"', 500);
-				}
-			});
-			return false;	
-		},
-		meta: "validate"
-	});
-});
-</script>
---%>

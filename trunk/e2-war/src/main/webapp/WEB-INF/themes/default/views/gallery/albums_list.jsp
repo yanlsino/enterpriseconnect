@@ -3,11 +3,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<style type="text/css">
-.slideshow { height: 182px; width: 182px; margin: 0 5px; float: left }
-.slideshow img { padding: 15px; border: 1px solid #ccc; background-color: #eee; }
-</style>
-
 <div id="${fragmentConfig.id}" class="fragment">
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
@@ -30,7 +25,7 @@
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<a href='<e2:security code="gallery-photo-add">${base}/${project.uniqueId}/gallery/photo/upload?albumId=${album.id}</e2:security>' title="${album.name}">
+					<a href='<e2:security code="gallery-photo-add" project="${project}">${base}/${project.uniqueId}/gallery/photo/upload?albumId=${album.id}</e2:security>' title="${album.name}">
 						<img src="${base}/static/images/nophoto.jpg" width="150" height="150"/>
 					</a>
 				</c:otherwise>

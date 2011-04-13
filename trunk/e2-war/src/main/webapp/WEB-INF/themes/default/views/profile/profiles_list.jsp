@@ -57,26 +57,3 @@
 	</c:choose>
 	</div>
 </div>
-
-
-<%-- 
-<script type="text/javascript">
-$(document).ready(function(){
-	$('.concernAction').click(function(){
-		var url = $(this).attr('href');
-		$.get(url, function(link){
-			window.location.reload();
-		});
-		return false;
-	});
-	$('.leaveMessageAction').click(function(){
-		var url = $(this).attr('href');
-		$.fn.nyroModalManual({
-			bgColor: '#DDD',
-			url:url
-		});
-		return false;
-	});
-});
-</script>
---%>

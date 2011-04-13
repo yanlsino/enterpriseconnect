@@ -14,7 +14,7 @@
 	</div>	
 	</c:if>
 	<div class="body">
-		<form id="photo-form${id}" action="${base}/process/commons/attachment" method="post" enctype="multipart/form-data">
+		<form id="photo-form${id}">
 			<div>
 				<label>目标相册</label>
 				<br/>
@@ -27,9 +27,7 @@
 			<div>
 				<input type="file" name="file" id="select-file${id}"/>
 			</div>
-			<div id="file-queue${id}" class="file-queue">
-				
-			</div>
+			<div id="file-queue${id}" class="file-queue"></div>
 			<div>
 				<input type="hidden" name="forward" value="/gallery/photo"/>
 				<input type="hidden" name="enteredId" value="${user.id}"/>
@@ -44,16 +42,17 @@ YUI().use('io-upload-iframe', 'json', function(Y){
 	var fileQueue = Y.one('#file-queue${id}');
 	Y.one('#select-file${id}').on('change', function(e){
 		var path = e.currentTarget.get('value');
+		alert(path);
 		//
 		var photoForm = Y.one('#photo-form${id}');
 		Y.on('io:complete', function(id, o){
-			var photo = Y.JSON.parse(o.responseText);	
-			var html = '<div><span>'+ path +'<span><a class="removeAction"></a></div>';
+			var photo = Y.JSON.parse(o.responseText);
+			var html = '<div><span>'+ path +'<span><a class="removeAction">x</a></div>';
 			Y.one('#file-queue${id}').insert(html);
 			bindEvent();
 			e.currentTarget.set('value', '');
 		});
-		Y.io(photoForm.get('action'), {
+		Y.io('${base}/process/commons/attachment', {
 			method: 'POST',
 			form: {
 				id: photoForm,

@@ -16,26 +16,24 @@
 	<div class="body">
 		<form:form id="blog-post-form${id}" action="${base}/process/blog/post" 
 			commandName="post" cssClass="blog-post-form">
-			<p>
+			<div>
 				<label for="title" class="title"><fmt:message key="blog.post_form.title"/></label>
 				<br/>
-				<c:set var="titleRequired"><fmt:message key='blog.post_form.titleRequired'/></c:set>
-				<form:input path="title" cssClass="title {validate:{required:true, messages:{required:'${titleRequired}'}}}"/>
+				<form:input path="title" cssClass="title"/>
 				<span><fmt:message key="blog.post_form.classify"><fmt:param value="${fn:length(categories)}"/></fmt:message></span>
 				<form:select path="categoryId" itemLabel="label" itemValue="id" items="${categories}" />
-			</p>
-			<p>
+			</div>
+			<div>
 				<label for="content" class="title"><fmt:message key="blog.post_form.content"/></label>
 				<br/>
-				<c:set var="contentRequired"><fmt:message key='blog.post_form.contentRequired'/></c:set>
-				<form:textarea path="content" cssClass="{validate:{required:true, messages:{required:'${contentRequired}'}}}"/>
-			</p>
-			<p>
+				<form:textarea path="content" id="editor${id}" cssClass="text"/>
+			</div>
+			<div>
 				<label for="keywords"><fmt:message key="blog.post_form.keywords"/></label>
 				<br/>
 				<form:input path="keywords" cssClass="text"/>
-			</p>
-			<p>
+			</div>
+			<div>
 				<button type="submit" class="button">
 					<span id="status1${id}">
 						<fmt:message key="blog.post_form.submit"/>
@@ -51,10 +49,55 @@
 				<c:if test="${not empty post.entered}">
 				<input type="hidden" name="entered" value='<fmt:formatDate value="${post.entered}" pattern="yyyy-MM-dd HH:mm:ss"/>'/>
 				</c:if>
-			</p>
+			</div>
 		</form:form>
 	</div>
 </div>
+
+<script type="text/javascript">
+YUI().use('yui2-editor', function(Y){
+	var YAHOO = Y.YUI2;
+	//
+	var editor = new YAHOO.widget.Editor('editor${id}', 
+	{
+	    animate: true,
+	    dompath: true,
+	    focusAtStart: true,
+	    autoHeight: true,
+	    collapse: false,
+	    toolbar: {
+	      collapse: false,
+	      draggable: false,
+	      buttonType: 'advanced',
+	      buttons: [
+	          { group: 'textstyle',
+	              buttons: [
+	                  { type: 'push', label: 'Bold CTRL + SHIFT + B', value: 'bold' },
+	                  { type: 'push', label: 'Italic CTRL + SHIFT + I', value: 'italic' },
+	                  { type: 'push', label: 'Underline CTRL + SHIFT + U', value: 'underline' },
+	              ]
+	          },             
+	          { type: 'separator' },
+	          { group: 'indentlist',
+	              buttons: [
+	                  { type: 'push', label: 'Indent', value: 'indent', disabled: true },
+	                  { type: 'push', label: 'Outdent', value: 'outdent', disabled: true },
+	                  { type: 'push', label: 'Create an Unordered List', value: 'insertunorderedlist' },
+	                  { type: 'push', label: 'Create an Ordered List', value: 'insertorderedlist' }
+	              ]
+	          }        
+	      ]
+	    }
+	});
+	//
+	editor.on('toolbarLoaded', function() {
+	    this.on('afterNodeChange', function(o) {
+	    	editor.saveHTML();
+	    });
+	}, editor, true);
+	editor.render();
+});
+</script>
 
 <script type="text/javascript">
 YUI().use('io-form', 'json', function(Y){
@@ -81,31 +124,3 @@ YUI().use('io-form', 'json', function(Y){
 	});
 });
 </script>
-
-<%--
-<script type="text/javascript">
-$(document).ready(function(){
-	KE.show({
-		id : 'content',
-		imageUploadJson: '${base}/process/commons/kindeditor'
-	});
-	
-	$('#post-form').validate({
-		submitHandler: function(form) {
-			$('#${id}').block({ 
-				message: '正在处理...',
-				overlayCSS: { backgroundColor: '#EEE' }
-			});
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(post){
-					setTimeout('window.location.href="?postId='+post.id+'"', 500);
-				}
-			});
-			return false;
-		},
-		meta: "validate"
-	});
-});
-</script>
- --%>

@@ -68,26 +68,3 @@ YUI().use('io-form', 'json', function(Y){
 	});
 });
 </script>
-
-<%-- 
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#blog-category-form').validate({
-		submitHandler: function(form) {
-			$('#${fragmentConfig.id}').block({ 
-				message: '正在处理...',
-				overlayCSS: { backgroundColor: '#EEE' }
-			}); 
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(category){
-					setTimeout('window.location.href="?categoryId='+category.id+'"', 500);
-				}
-			});
-			return false;
-		},
-		meta: "validate"
-	});
-});
-</script>
---%>

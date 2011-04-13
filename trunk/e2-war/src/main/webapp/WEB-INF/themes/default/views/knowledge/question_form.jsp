@@ -24,7 +24,7 @@
 			<div class="formmgr-row">
 				<label for="content" class="title">内容 <span class="required">*</span></label>
 				<br/>
-				<form:textarea path="content" cssClass="text"/>
+				<form:textarea path="content" id="editor${id}" cssClass="text"/>
 			</div>
 			<div>
 				<button type="submit" class="button">
@@ -44,6 +44,50 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+YUI().use('yui2-editor', function(Y){
+	var YAHOO = Y.YUI2;
+	//
+	var editor = new YAHOO.widget.Editor('editor${id}', 
+	{
+	    animate: true,
+	    dompath: true,
+	    focusAtStart: true,
+	    autoHeight: true,
+	    collapse: false,
+	    toolbar: {
+	      collapse: false,
+	      draggable: false,
+	      buttonType: 'advanced',
+	      buttons: [
+	          { group: 'textstyle',
+	              buttons: [
+	                  { type: 'push', label: 'Bold CTRL + SHIFT + B', value: 'bold' },
+	                  { type: 'push', label: 'Italic CTRL + SHIFT + I', value: 'italic' },
+	                  { type: 'push', label: 'Underline CTRL + SHIFT + U', value: 'underline' },
+	              ]
+	          },             
+	          { type: 'separator' },
+	          { group: 'indentlist',
+	              buttons: [
+	                  { type: 'push', label: 'Indent', value: 'indent', disabled: true },
+	                  { type: 'push', label: 'Outdent', value: 'outdent', disabled: true },
+	                  { type: 'push', label: 'Create an Unordered List', value: 'insertunorderedlist' },
+	                  { type: 'push', label: 'Create an Ordered List', value: 'insertorderedlist' }
+	              ]
+	          }        
+	      ]
+	    }
+	});
+	//
+	editor.on('toolbarLoaded', function() {
+	    this.on('afterNodeChange', function(o) {
+	    	editor.saveHTML();
+	    });
+	}, editor, true);
+	editor.render();
+});
+</script>
 
 <script type="text/javascript">
 YUI().use('io-form', 'json', function(Y){
@@ -76,35 +120,3 @@ YUI().use('io-form', 'json', function(Y){
 	});
 });
 </script>
-<%-- 
-<script type="text/javascript">
-$(document).ready(function(){
-	KE.show({
-		id : 'content',
-		resizeMode : 1,
-		allowPreviewEmoticons : false,
-		allowUpload : false,
-		items : [
-		'fontname', 'fontsize', '|', 'textcolor', 'bgcolor', 'bold', 'italic', 'underline',
-		'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-		'insertunorderedlist']
-	});
-	$('#question-form').validate({
-		submitHandler: function(form) {
-			$('#${id}').block({ 
-				message: '正在处理...',
-				overlayCSS: { backgroundColor: '#EEE' }
-			});
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(question){
-					setTimeout('window.location.href="?questionId='+question.id+'"', 500);
-				}
-			});
-			return false;
-		},
-		meta: "validate"
-	});
-});
-</script>
---%>

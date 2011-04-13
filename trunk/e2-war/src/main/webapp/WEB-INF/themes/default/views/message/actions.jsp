@@ -11,7 +11,7 @@
 	</c:if>
 	<div class="body">
 		<ul class="actions">
-		<e2:security code="message-message-view">
+		<e2:security code="message-message-view" project="${project}">
 			<li><a href="${base}/${project.uniqueId}/message/inbox">
 				<fmt:message key="message.actions.inbox"/>
 			</a></li>

@@ -24,41 +24,14 @@
 			<fmt:message key="profile.profiles_list.addConcern"/>
 		</a></li>
 		</e2:entity>
-		<e2:security code="message-message-add" userRequired="true">
+		<c:if test="${not empty user}">
 			<li class="last"><a class="leaveMessageAction" href="${base}/app/message/form?popup=true&fromId=${user.project.id}&toId=${project.id}">
 			<c:choose>
 				<c:when test="${project.category.code eq 'people'}"><fmt:message key="profile.actions.giveMeMessage"/></c:when>
 				<c:otherwise><fmt:message key="profile.actions.giveUsMessage"/></c:otherwise>
 			</c:choose>
 			</a></li>
-		</e2:security>
+		</c:if>
 		</ul>
 	</div>
 </div>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	$('.addMemberAction').click(function(){
-		var url = $(this).attr('href');
-		$.get(url, function(member){
-			window.location.reload();
-		});
-		return false;
-	});
-	$('.concernAction').click(function(){
-		var url = $(this).attr('href');
-		$.get(url, function(link){
-			window.location.reload();
-		});
-		return false;
-	});
-	$('.leaveMessageAction').click(function(){
-		var url = $(this).attr('href');
-		$.fn.nyroModalManual({
-			bgColor: '#DDD',
-			url:url
-		});
-		return false;
-	});
-});
-</script>

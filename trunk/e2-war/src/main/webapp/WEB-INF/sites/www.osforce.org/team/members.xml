@@ -35,6 +35,11 @@
 				</rules>
 			</fragment>
 		</position>
+		<position name="rightColumn">
+			<fragment refer="memberFragment" view="Info" cache="300">
+				<title>好友请求</title>
+			</fragment>
+		</position>
 	</page>
 	<page name="team/members" parent="commons/header" categoryCode="groups">
 		<position name="leftColumn" width="200px">
@@ -63,6 +68,11 @@
 				</rules>
 			</fragment>
 		</position>
+		<position name="rightColumn">
+			<fragment refer="memberFragment" view="Info" cache="300">
+				<title>好友请求</title>
+			</fragment>
+		</position>
 	</page>
 	<page name="team/members" parent="commons/header" categoryCode="events">
 		<position name="leftColumn" width="200px">
@@ -89,6 +99,11 @@
 				<rules>
 					<rule name="securityRule" code="team-member-view" />
 				</rules>
+			</fragment>
+		</position>
+		<position name="rightColumn">
+			<fragment refer="memberFragment" view="Info" cache="300">
+				<title>好友请求</title>
 			</fragment>
 		</position>
 	</page>

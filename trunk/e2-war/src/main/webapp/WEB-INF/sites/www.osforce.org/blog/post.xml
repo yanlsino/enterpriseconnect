@@ -13,13 +13,6 @@
 					<rule name="securityRule" code="blog-category-view"/>
 				</rules>
 			</fragment>
-			<fragment refer="tagFragment" view="Form">
-				<title>Tags</title>
-				<preferences>
-					<paramName>postId</paramName>
-					<entity>BlogPost</entity>
-				</preferences>
-			</fragment>
 		</position>
 		<position name="mainColumn" layout="fill">
 			<fragment refer="blogPostFragment" view="Post">

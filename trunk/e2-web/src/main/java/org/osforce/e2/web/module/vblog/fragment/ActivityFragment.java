@@ -60,7 +60,7 @@ public class ActivityFragment {
 	}
 	
 	public String doFormView(@Pref String activityType, User user, 
-			Project project, FragmentContext context) {
+			@Pref("false") String showToolbar, Project project, FragmentContext context) {
 		if(user!=null) {
 			user = userService.getUser(user.getId());
 			Activity activity = new Activity();
@@ -68,6 +68,8 @@ public class ActivityFragment {
 			activity.setEnteredBy(user);
 			activity.setProject(project);
 			context.putRequestData(AttributeKeys.ACTIVITY_KEY_READABLE, activity);
+			// 
+			context.putRequestData("showToolbar", showToolbar);
 			return "vblog/activity_form";
 		}
 		return "commons/blank";

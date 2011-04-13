@@ -11,12 +11,12 @@
 	</c:if>
 	<div class="body">
 		<ul class="actions">
-		<e2:security code="discussion-forum-add">
+		<e2:security code="discussion-forum-add" project="${project}" userRequired="true">
 			<li><a href="${base}/${project.uniqueId}/discussion/forum/form">
 				<fmt:message key="discussion.actions.newForum"/>		
 			</a></li>
 		</e2:security>
-		<e2:security code="discussion-topic-add">
+		<e2:security code="discussion-topic-add" project="${project}" userRequired="true">
 			<li class="last"> <a href="${base}/${project.uniqueId}/discussion/topic/form">
 				<fmt:message key="discussion.actions.newTopic"/>
 			</a></li>

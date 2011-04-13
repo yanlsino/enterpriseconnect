@@ -87,6 +87,9 @@ public class ProjectFragment {
 	
 	public String doProjectMenuView(@Param String viewName, User user,
 			TeamMember member, Project project, FragmentContext context) {
+		if(project==null) {
+			return "commons/blank";
+		}
 		List<ProjectFeature> features = project.getFeatures();
 		List<ProjectFeature> tmp = new ArrayList<ProjectFeature>();
 		for(ProjectFeature feature : features) {

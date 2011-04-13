@@ -4,14 +4,5 @@
 		<position name="mainColumn">
 			<fragment refer="profileFragment" view="Form"/>
 		</position>
-		<position name="rightColumn" width="280px">
-			<fragment refer="tagFragment" view="Form">
-				<title>Tags</title>
-				<preferences>
-					<paramName>profileId</paramName>
-					<entity>Profile</entity>
-				</preferences>
-			</fragment>
-		</position>
 	</page>
 </pages>

@@ -11,12 +11,12 @@
 	</c:if>
 	<div class="body">
 		<ul class="actions">
-		<e2:security code="blog-post-add">
+		<e2:security code="blog-post-add" project="${project}" userRequired="true">
 			<li><a href="${base}/${project.uniqueId}/blog/post/form">
 				<fmt:message key="blog.actions.newPost"/>
 			</a></li>
 		</e2:security>
-		<e2:security code="blog-category-add">
+		<e2:security code="blog-category-add" project="${project}" userRequired="true">
 			<li class="last"><a href="${base}/${project.uniqueId}/blog/category/form">
 				<fmt:message key="blog.actions.newCategory"/>
 			</a></li>

@@ -28,14 +28,16 @@
 				<form:textarea path="description" id="description${id}"/>
 			</div>
 			<div>
+				<c:if test="${showToolbar}">
 				<ul class="toolbar left">
 					<li><a href="#" class="insertFace">表情</a></li>
 					<li><a href="#" class="insertLink">链接</a></li>
 					<li><a href="#" class="insertImage">图片</a></li>
 					<!-- 
 					<li><a href="#" class="insertVideo">视频</a></li>
-					 -->
+					-->
 				</ul>
+				</c:if>
 				<button id="${id}submitButton" type="submit" class="button right">
 					<span id="status1${id}">
 						<fmt:message key="vblog.activity_form.submit"/>

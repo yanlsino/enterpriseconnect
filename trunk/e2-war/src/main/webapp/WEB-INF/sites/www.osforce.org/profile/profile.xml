@@ -2,12 +2,6 @@
 <pages>
 	<page name="profile/profile" parent="commons/header">
 		<position name="leftColumn" width="200px">
-			<fragment refer="tagFragment" view="Cloud">
-				<title>Tag Cloud</title>
-				<preferences>
-					<limit>20</limit>
-				</preferences>
-			</fragment>
 			<fragment refer="linkFragment" view="List">
 				<title>我关注的</title>
 				<preferences>
@@ -31,6 +25,7 @@
 				<title>微薄</title>
 				<preferences>
 					<activityType>user-input</activityType>
+					<showToolbar>true</showToolbar>
 				</preferences>
 				<rules>
 					<rule name="securityRule" code="vblog-activity-add" 
@@ -62,13 +57,6 @@
 			</fragment>
 			<fragment refer="memberFragment" view="Info" cache="300">
 				<title>好友请求</title>
-			</fragment>
-			<fragment refer="tagFragment" view="Form">
-				<title>Tags</title>
-				<preferences>
-					<paramName>profileId</paramName>
-					<entity>Profile</entity>
-				</preferences>
 			</fragment>
 			<fragment refer="questionFragment" view="Recent">
 				<title>最新问题</title>
@@ -92,12 +80,6 @@
 	</page>
 	<page name="profile/profile" parent="commons/header" categoryCode="people">
 		<position name="leftColumn" width="200px">
-			<fragment refer="tagFragment" view="Cloud">
-				<title>Tag Cloud</title>
-				<preferences>
-					<limit>20</limit>
-				</preferences>
-			</fragment>
 			<fragment refer="linkFragment" view="List">
 				<title>我关注的</title>
 				<preferences>
@@ -121,6 +103,7 @@
 				<title>微薄</title>
 				<preferences>
 					<activityType>user-input</activityType>
+					<showToolbar>true</showToolbar>
 				</preferences>
 				<rules>
 					<rule name="securityRule" code="vblog-activity-add" 
@@ -152,13 +135,6 @@
 			</fragment>
 			<fragment refer="memberFragment" view="Info" cache="300">
 				<title>好友请求</title>
-			</fragment>
-			<fragment refer="tagFragment" view="Form">
-				<title>Tags</title>
-				<preferences>
-					<paramName>profileId</paramName>
-					<entity>Profile</entity>
-				</preferences>
 			</fragment>
 			<fragment refer="questionFragment" view="Recent">
 				<title>最新问题</title>
@@ -182,12 +158,6 @@
 	</page>
 	<page name="profile/profile" parent="commons/header" categoryCode="events">
 		<position name="leftColumn" width="200px">
-			<fragment refer="tagFragment" view="Cloud">
-				<title>Tag Cloud</title>
-				<preferences>
-					<limit>20</limit>
-				</preferences>
-			</fragment>
 			<fragment refer="blogPostFragment" view="Top">
 				<title>热门博文</title>
 				<preferences>
@@ -223,6 +193,7 @@
 				<title>微薄</title>
 				<preferences>
 					<activityType>user-input</activityType>
+					<showToolbar>true</showToolbar>
 				</preferences>
 				<rules>
 					<rule name="securityRule" code="vblog-activity-add" 
@@ -254,13 +225,6 @@
 			</fragment>
 			<fragment refer="memberFragment" view="Info" cache="300">
 				<title>好友请求</title>
-			</fragment>
-			<fragment refer="tagFragment" view="Form">
-				<title>Tags</title>
-				<preferences>
-					<paramName>profileId</paramName>
-					<entity>Profile</entity>
-				</preferences>
 			</fragment>
 			<fragment refer="blogPostFragment" view="Recent">
 				<title>最新博文</title>

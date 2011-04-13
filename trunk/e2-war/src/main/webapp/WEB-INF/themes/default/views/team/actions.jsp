@@ -10,7 +10,7 @@
 	</c:if>
 	<div class="body">
 		<ul class="actions">
-		<e2:security code="team-member-add" userRequired="true">
+		<e2:security code="team-member-add" project="${project}" userRequired="true">
 			<li class="last">
 				<a href="${base}/${project.uniqueId}/team/members/invite">邀请</a>
 			</li>

@@ -1,1 +1,0 @@
-日程提醒 ${event.title}

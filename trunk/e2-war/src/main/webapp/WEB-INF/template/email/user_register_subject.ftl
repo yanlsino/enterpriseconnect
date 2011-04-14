@@ -1,1 +1,0 @@
-${user.nickname} 欢迎注册开源力量

@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>platform-parent</artifactId>
+		<groupId>org.osforce</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<groupId>org.osforce</groupId>
+	<artifactId>connect-parent</artifactId>
+	<packaging>pom</packaging>
+	<name>Connect's Parent</name>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>connect-task</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>connect-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>connect-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ocpsoft</groupId>
+				<artifactId>ocpsoft-pretty-time</artifactId>
+				<version>1.0.5</version>
+			</dependency>
+			<dependency>
+				<groupId>org.wikimodel</groupId>
+				<artifactId>org.wikimodel.wem</artifactId>
+				<version>2.0.7</version>
+			</dependency>
+			<dependency>
+				<groupId>postgresql</groupId>
+				<artifactId>postgresql</artifactId>
+				<version>8.4-702.jdbc3</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.15</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

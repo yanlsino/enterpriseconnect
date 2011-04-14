@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+	<page name="admin/admin" parent="commons/header">
+		<position name="leftColumn" width="200px">
+			<fragment refer="adminFragment" view="Actions"/>
+		</position>
+		<position name="mainColumn">
+			<fragment refer="adminFragment" view="Welcome">
+				<title>管理</title>
+			</fragment>
+		</position>
+	</page>
+</pages>

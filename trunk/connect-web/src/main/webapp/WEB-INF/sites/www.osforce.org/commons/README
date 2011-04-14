@@ -1,0 +1,9 @@
+NOTE: the page definition files in this folder only used to be extends.
+
+example:
+
+<page name="/test/demo" extends="partal-fragment">
+	<position name="leftColumn">
+		<fragment refer="aboutFragment" view="About"/>
+	</position>
+</page>

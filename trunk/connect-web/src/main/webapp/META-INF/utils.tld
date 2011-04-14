@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>Enterprise 2.0 System JSP Tag Library</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>u</short-name>
+	<uri>http://www.opensourceforce.org/utils/tags</uri>
+	
+	<tag>
+		<name>pagination</name>
+		<tag-class>org.osforce.connect.web.tag.PaginationTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>page</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>link</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>security</name>
+		<tag-class>org.osforce.connect.web.security.tag.SecurityTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>code</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>project</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>userRequired</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>projectRequired</name>
+			<required>false</required>
+		</attribute>
+	</tag>
+	<tag>
+		<name>entity</name>
+		<tag-class>org.osforce.connect.web.tag.EntityTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>user</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>project</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>exist</name>
+			<required>false</required>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>prettyTime</name>
+		<tag-class>org.osforce.connect.web.tag.PrettyTimeTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>date</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>wikiRender</name>
+		<tag-class>org.osforce.connect.web.tag.WikiRenderTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>text</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>vBlogRender</name>
+		<tag-class>org.osforce.connect.web.tag.VBlogRenderTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>text</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>facesBase</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

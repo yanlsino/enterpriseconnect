@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+	<page name="/message/messages" parent="commons/header">
+		<position name="leftColumn" width="200px" layout="fill">
+			<fragment refer="messageFragment" view="Actions" cache="300">
+				<rules>
+					<rule name="securityRule" code="message-message-view"/>
+				</rules>
+			</fragment>
+		</position>
+		<position name="mainColumn" layout="fill">
+			<fragment refer="messageFragment" view="List">
+				<title>留言列表</title>
+				<preferences>
+					<pageSize>15</pageSize>
+				</preferences>
+				<rules>
+					<rule name="securityRule" code="message-message-view"/>
+				</rules>
+			</fragment>
+		</position>
+	</page>
+</pages>

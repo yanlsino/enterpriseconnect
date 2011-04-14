@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+	<page name="home" parent="commons/header">
+		<position name="mainColumn">
+			<fragment refer="topicFragment" view="Recent" cache="300">
+				<title>最新讨论</title>
+				<preferences>
+					<limit>10</limit>
+				</preferences>
+			</fragment>
+			<fragment refer="blogPostFragment" view="Recent" cache="300">
+				<title>最新博文</title>
+				<preferences>
+					<limit>10</limit>
+				</preferences>
+			</fragment>
+			<fragment refer="activityFragment" view="List" cache="60">
+				<title>最新动态</title>
+				<preferences>
+					<limit>10</limit>
+					<activityTypes>Profile,BlogPost,Topic,Reply</activityTypes>
+				</preferences>
+			</fragment>
+		</position>
+		<position name="rightColumn" width="300px" layout="fill">
+			<fragment refer="aboutFragment" view="About" cache="300">
+				<title>公告牌</title>
+				<content><![CDATA[
+				<ul>
+					<li>官方QQ群开放了：616995</li>
+					<li>本站@<a href="http://t.sina.com.cn/opensourceforce">新浪微博</a>，欢迎Follow</li>
+				</ul>
+				]]></content>
+			</fragment>
+			<fragment refer="activityFragment" view="Form">
+				<title>话题</title>
+				<preferences>
+					<activityType>site-chat</activityType>
+				</preferences>
+			</fragment>
+			<fragment refer="activityFragment" view="List">
+				<title>最新话题</title>
+				<preferences>
+					<activityTypes>site-chat</activityTypes>
+				</preferences>
+			</fragment>
+		</position>
+	</page>
+	<page name="people" parent="commons/header">
+		<position name="leftColumn" width="200px" >
+			<fragment refer="actionFragment" view="Actions">
+				<preferences>
+					<categoryCode>people</categoryCode>
+					<projectConcerned>关注的成员</projectConcerned>
+					<projectAll>所有成员</projectAll>
+				</preferences>
+				<rules>
+					<rule name="securityRule" userRequired="true"/>
+				</rules>
+			</fragment>
+		</position>
+		<position name="mainColumn" >
+			<fragment refer="profileFragment" view="List" cache="300">
+				<title>成员列表</title>
+				<preferences>
+					<categoryCode>people</categoryCode>
+					<pageSize>20</pageSize>
+				</preferences>
+			</fragment>
+		</position>
+		<position name="rightColumn" width="280px" >
+			<fragment refer="profileFragment" view="Recent" cache="300">
+				<title>最新成员</title>
+				<preferences>
+					<categoryCode>people</categoryCode>
+				</preferences>
+			</fragment>
+			<fragment refer="profileFragment" view="Top" cache="300">
+				<title>热门成员</title>
+				<preferences>
+					<categoryCode>people</categoryCode>
+				</preferences>
+			</fragment>
+		</position>
+	</page>
+	<page name="groups" parent="commons/header">
+		<position name="leftColumn" width="200px" >
+			<fragment refer="actionFragment" view="Actions">
+				<preferences>
+					<categoryCode>groups</categoryCode>
+					<projectAdd>添加圈子</projectAdd>
+					<projectConcerned>关注的圈子</projectConcerned>
+					<projectAll>所有圈子</projectAll>
+				</preferences>
+				<rules>
+					<rule name="securityRule" userRequired="true"/>
+				</rules>
+			</fragment>
+		</position>
+		<position name="mainColumn" >
+			<fragment refer="profileFragment" view="List" cache="300">
+				<title>圈子列表</title>
+				<preferences>
+					<categoryCode>groups</categoryCode>
+				</preferences>
+			</fragment>
+		</position>
+		<position name="rightColumn" width="280px" >
+			<fragment refer="profileFragment" view="Recent" cache="300">
+				<title>最新圈子</title>
+				<preferences>
+					<categoryCode>groups</categoryCode>
+				</preferences>
+			</fragment>
+			<fragment refer="profileFragment" view="Top" cache="300">
+				<title>热门圈子</title>
+				<preferences>
+					<categoryCode>groups</categoryCode>
+				</preferences>
+			</fragment>
+		</position>
+	</page>
+	<page name="events" parent="commons/header">
+		<position name="leftColumn" width="200px" >
+			<fragment refer="actionFragment" view="Actions">
+				<preferences>
+					<categoryCode>events</categoryCode>
+					<projectAdd>添加活动</projectAdd>
+					<projectConcerned>关注的活动</projectConcerned>
+					<projectAll>所有活动</projectAll>
+				</preferences>
+				<rules>
+					<rule name="securityRule" userRequired="true"/>
+				</rules>
+			</fragment>
+		</position>
+		<position name="mainColumn" >
+			<fragment refer="profileFragment" view="List" cache="300">
+				<title>活动列表</title>
+				<preferences>
+					<categoryCode>events</categoryCode>
+				</preferences>
+			</fragment>
+		</position>
+		<position name="rightColumn" width="280px" >
+			<fragment refer="profileFragment" view="Recent" cache="300">
+				<title>最新活动</title>
+				<preferences>
+					<categoryCode>events</categoryCode>
+				</preferences>
+			</fragment>
+			<fragment refer="profileFragment" view="Top" cache="300">
+				<title>热门活动</title>
+				<preferences>
+					<categoryCode>events</categoryCode>
+				</preferences>
+			</fragment>
+		</position>
+	</page>
+	<page name="search" parent="commons/header">
+		<position name="subMenu">
+			<fragment refer="searchFragment" view="Bar"/>
+		</position>
+		<position name="leftColumn" width="200px">
+			<fragment refer="searchFragment" view="Form">
+				<title>搜索</title>
+			</fragment>
+		</position>
+		<position name="mainColumn" >
+			<fragment refer="searchFragment" view="Result">
+				<title>搜索结果</title>
+			</fragment>
+		</position>
+	</page>
+</pages>

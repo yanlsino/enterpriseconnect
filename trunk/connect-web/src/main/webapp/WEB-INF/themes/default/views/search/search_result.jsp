@@ -12,21 +12,28 @@
 	<div class="body">
 		<ul class="profiles-list">
 		<c:forEach var="profile" items="${page.result}" varStatus="status">
-			<li <c:if test="${status.last}">class="last"</c:if>>
+			<li class="profile <c:if test="${status.last}">last</c:if>">
 				<a href="${base}/${profile.project.uniqueId}/profile">
-					<img class="thumbnail" src="${base}/themes/${theme.name}/stock/${profile.project.category.code}.png" with="40" height="40"/>
+				<c:choose>
+					<c:when test="${not empty profile.logo}">
+					<img class="top left thumbnail" src="${base}/logo/download/${profile.logo.id}/40x40"/>
+					</c:when>
+					<c:otherwise>
+					<img class="top left thumbnail" src="${base}/themes/${theme.name}/stock/${profile.project.category.code}.png" with="40" height="40"/>
+					</c:otherwise>
+				</c:choose>
 				</a>
 				<div class="profile-body">
 					<div class="profile-content">
-						<ul class="float-right">
+						<ul class="top right">
 							<u:entity name="Profile" user="${user}" project="${profile.project}" exist="false">
 							<li><a class="concernAction" href="${base}/process/commons/link?fromId=${user.project.id}&toId=${profile.id}&entity=Profile">
-								<fmt:message key="search.search_result.addConcern"/>
+								<fmt:message key="profile.profiles_list.addConcern"/>
 							</a></li>
 							</u:entity>
 							<u:security code="message-message-add" userRequired="true">
-							<li><a id="${profile.project.uniqueId}" class="leaveMessageAction" href="${base}/app/message/form?popup=true&fromId=${user.project.id}&toId=${profile.project.id}">
-								<fmt:message key="search.search_result.sendMessage"/>
+							<li><a id="${profile.project.uniqueId}" class="leaveMessageAction" href="${base}/app/message/form?popup=true&fromId=${user.project.id}&toId=${profile.project.id}"">
+								<fmt:message key="profile.profiles_list.sendMessage"/>
 							</a></li>
 							</u:security>
 						</ul>

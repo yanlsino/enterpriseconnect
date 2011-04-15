@@ -2,7 +2,6 @@ package org.osforce.connect.service.system;
 
 import org.osforce.connect.entity.system.Project;
 import org.osforce.connect.entity.system.ProjectCategory;
-import org.osforce.connect.entity.system.User;
 import org.osforce.platform.dao.support.Page;
 
 /**

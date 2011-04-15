@@ -2,11 +2,8 @@ package org.osforce.connect.web.module.profile.fragment;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
-import org.osforce.commons.custom.CustomForm;
-import org.osforce.commons.custom.CustomFormUtil;
 import org.osforce.connect.entity.commons.Link;
 import org.osforce.connect.entity.commons.Statistic;
-import org.osforce.connect.entity.commons.Template;
 import org.osforce.connect.entity.profile.Profile;
 import org.osforce.connect.entity.system.Project;
 import org.osforce.connect.entity.system.ProjectCategory;
@@ -16,7 +13,6 @@ import org.osforce.connect.entity.system.User;
 import org.osforce.connect.entity.team.TeamMember;
 import org.osforce.connect.service.commons.LinkService;
 import org.osforce.connect.service.commons.StatisticService;
-import org.osforce.connect.service.commons.TemplateService;
 import org.osforce.connect.service.profile.ProfileService;
 import org.osforce.connect.service.system.ProjectCategoryService;
 import org.osforce.connect.service.system.RoleService;
@@ -42,7 +38,6 @@ public class ProfileFragment {
 	private RoleService roleService;
 	private ProfileService profileService;
 	private StatisticService statisticService;
-	private TemplateService templateService;
 	private ProjectCategoryService projectCategoryService;
 	
 	public ProfileFragment() {
@@ -66,11 +61,6 @@ public class ProfileFragment {
 	@Autowired
 	public void setStatisticService(StatisticService statisticService) {
 		this.statisticService = statisticService;
-	}
-	
-	@Autowired
-	public void setTemplateService(TemplateService templateService) {
-		this.templateService = templateService;
 	}
 	
 	@Autowired
@@ -158,27 +148,12 @@ public class ProfileFragment {
 			profile.setModifiedBy(project.getModifiedBy());
 			profileService.createProfile(profile);
 		}
-		if(StringUtils.isNotBlank(profile.getAttributes())) {
-			String templateCode = project.getCategory().getCode() + "-attributes";
-			Template template = templateService.getTemplate(project.getCategoryId(), templateCode);
-			CustomForm customForm = CustomFormUtil.parse(
-					template.getContent(), profile.getAttributes());
-			context.putRequestData(AttributeKeys.CUSTOM_ATTRIBUTES_KEY_READABLE, 
-					customForm.getAllHasValues());
-		}
 		context.putRequestData(AttributeKeys.PROFILE_KEY_READABLE, profile);
 		return "/profile/profile";
 	}
 	
-	public String doFormView(@Param Long profileId, 
-			User user, Site site, Project project, FragmentContext context) {
+	public String doFormView(@Param Long profileId, FragmentContext context) {
 		Profile profile = profileService.getProfile(profileId);
-		String templateCode = project.getCategory().getCode() + "-attributes";
-		profile.setAttributesTemplateCode(templateCode);
-		Template template = templateService.getTemplate(project.getCategoryId(), templateCode);
-		CustomForm customForm = CustomFormUtil.parse(
-				template.getContent(), profile.getAttributes());
-		context.putRequestData(AttributeKeys.CUSTOM_ATTRIBUTES_KEY_READABLE, customForm.getAll());
 		context.putRequestData(AttributeKeys.PROFILE_KEY_READABLE, profile);
 		return "/profile/profile_form";
 	}

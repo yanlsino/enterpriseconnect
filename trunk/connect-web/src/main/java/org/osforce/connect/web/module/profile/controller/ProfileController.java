@@ -3,16 +3,10 @@ package org.osforce.connect.web.module.profile.controller;
 import java.util.Collections;
 import java.util.Map;
 
-import org.osforce.commons.custom.CustomForm;
-import org.osforce.commons.custom.CustomFormUtil;
 import org.osforce.connect.entity.commons.Attachment;
-import org.osforce.connect.entity.commons.Template;
 import org.osforce.connect.entity.profile.Profile;
-import org.osforce.connect.entity.system.Project;
 import org.osforce.connect.service.commons.AttachmentService;
-import org.osforce.connect.service.commons.TemplateService;
 import org.osforce.connect.service.profile.ProfileService;
-import org.osforce.connect.service.system.ProjectService;
 import org.osforce.connect.web.AttributeKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,8 +27,6 @@ import org.springframework.web.context.request.WebRequest;
 public class ProfileController {
 
 	private ProfileService profileService;
-	private ProjectService projectService;
-	private TemplateService templateService;
 	private AttachmentService attachmentService;
 	
 	public ProfileController() {
@@ -46,31 +38,14 @@ public class ProfileController {
 	}
 
 	@Autowired
-	public void setProjectService(ProjectService projectService) {
-		this.projectService = projectService;
-	}
-	
-	@Autowired
-	public void setTemplateService(TemplateService templateService) {
-		this.templateService = templateService;
-	}
-	
-	@Autowired
 	public void setAttachmentService(AttachmentService attachmentService) {
 		this.attachmentService = attachmentService;
 	}
 	
 	@RequestMapping(value="/profile/profile", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Long> update(
-			Profile profile, WebRequest request) {
-		Project project = projectService.getProject(profile.getProjectId());
-		Map<String, String[]> context = request.getParameterMap();
-		Template attributesTemplate = templateService.getTemplate(
-				project.getCategoryId(), profile.getAttributesTemplateCode());
-		CustomForm customForm = CustomFormUtil.populate(
-				attributesTemplate.getContent(), context);
-		String attributes = CustomFormUtil.renderJSONObject(customForm);
-		profile.setAttributes(attributes);
+	public @ResponseBody Map<String, Long> update(@RequestParam String[] labels, 
+			@RequestParam String[] values, Profile profile, WebRequest request) {
+		profile.setAttributes(labels, values);
 		profileService.updateProfile(profile);
 		return Collections.singletonMap("id", profile.getId());
 	}
@@ -88,4 +63,5 @@ public class ProfileController {
 		profileService.updateProfile(profile);
 		return Collections.singletonMap("id", profile.getId());
 	}
+	
 }

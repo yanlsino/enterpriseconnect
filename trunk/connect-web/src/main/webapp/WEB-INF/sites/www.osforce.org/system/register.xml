@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page name="system/register" parent="commons/header">
 	<position name="mainColumn">
-		<fragment refer="systemFragment" view="RegisterForm">
+		<fragment refer="userFragment" view="RegisterForm">
 			<title>加入开源力量，请认真填写如下注册信息 ... </title>
 			<preferences>
 				<features>

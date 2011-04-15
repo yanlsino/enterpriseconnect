@@ -4,7 +4,10 @@
 
 <form:form id="site-search-form" action="${base}/search" 
 	commandName="searchBean" method="GET" cssClass="inline">
-	<form:select path="categoryId" items="${categories}" itemLabel="label" itemValue="id"/>
+	<form:select path="categoryId" >
+		<option value="">全站</option>
+		<form:options items="${categories}" itemLabel="label" itemValue="id"/>
+	</form:select>
  	<form:input path="keywords"/>
-	<input type="submit" name="search" value="搜索"/>
+	<input type="submit" value="搜索"/>
 </form:form> 

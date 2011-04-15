@@ -16,10 +16,13 @@
 	</modules>
 	<repositories>
 		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
 			<id>osforce</id>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
 			<name>Open Source Force</name>
 			<url>http://www.opensourceforce.org/nexus/content/groups/public/</url>
 		</repository>

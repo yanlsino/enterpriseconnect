@@ -11,15 +11,16 @@
 	</c:if>
 	<div class="body">
 		<form:form id="searchForm" action="${base}/search" commandName="searchBean" method="GET">
-			<fieldset>
-				<div>
-					<form:input path="keywords" cssClass="keywords"/>
-				</div>
-				<div>
-					<form:select path="categoryId" items="${categories}" itemLabel="label" itemValue="id"/>
-					<input class="button" type="submit" value='<fmt:message key="search.search_form.submit"/>'>
-				</div>
-			</fieldset>
+			<div>
+				<form:input path="keywords" cssClass="keywords"/>
+			</div>
+			<div>
+				<form:select path="categoryId" >
+					<option value="">全站</option>
+					<form:options items="${categories}" itemLabel="label" itemValue="id"/>
+				</form:select>
+				<input class="button" type="submit" value='<fmt:message key="search.search_form.submit"/>'>
+			</div>
 		</form:form>
 	</div>
 </div>

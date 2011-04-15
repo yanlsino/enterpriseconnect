@@ -2,7 +2,6 @@ package org.osforce.connect.service.team.impl;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.osforce.connect.dao.system.ProjectDao;
 import org.osforce.connect.dao.system.RoleDao;

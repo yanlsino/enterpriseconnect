@@ -1,6 +1,10 @@
 package org.osforce.connect.entity.profile;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
@@ -12,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
@@ -34,7 +39,7 @@ public class Profile extends IdEntity {
 	private String title;
 	private String shortDescription;
 	private String description;
-	private String attributes;      // 使用自定义表单模板 设置项目的属性
+	private String attributes;
 	private Date entered;
 	private Date modified;
 	// helper
@@ -42,7 +47,6 @@ public class Profile extends IdEntity {
 	private Long modifiedId;
 	private Long projectId;
 	private Long logoId;
-	private String attributesTemplateCode;
 	// refer
 	private User enteredBy;
 	private User modifiedBy;
@@ -86,8 +90,37 @@ public class Profile extends IdEntity {
 		return attributes;
 	}
 	
+	@Transient
+	public Map<String, String> getAttributesMap() {
+		Map<String, String> map = new TreeMap<String, String>();
+		if(StringUtils.isNotBlank(attributes)) {
+			String[] items = StringUtils.split(attributes, "|");
+			for(String item : items) {
+				String key = StringUtils.substringBefore(item, "=");
+				String value = StringUtils.substringAfter(item, "=");
+				map.put(key, value);
+			}
+		}
+		return map;
+	}
+	
 	public void setAttributes(String attributes) {
 		this.attributes = attributes;
+	}
+	
+	@Transient
+	public void setAttributes(String[] labels, String[] values) {
+		List<String> attributeList = new ArrayList<String>();
+		if(labels!=null && values!=null) {
+			for(int i=0; i<labels.length; i++) {
+				if(StringUtils.isNotBlank(labels[i]) &&
+						StringUtils.isNotBlank(values[i])){
+					String kv = labels[i] + "=" + values[i];
+					attributeList.add(kv);
+				}
+			}
+		}
+		attributes = StringUtils.join(attributeList, "|");
 	}
 	
 	public Date getEntered() {
@@ -152,15 +185,6 @@ public class Profile extends IdEntity {
 	
 	public void setLogoId(Long logoId) {
 		this.logoId = logoId;
-	}
-	
-	@Transient
-	public String getAttributesTemplateCode() {
-		return attributesTemplateCode;
-	}
-	
-	public void setAttributesTemplateCode(String attributesTemplateCode) {
-		this.attributesTemplateCode = attributesTemplateCode;
 	}
 	
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)

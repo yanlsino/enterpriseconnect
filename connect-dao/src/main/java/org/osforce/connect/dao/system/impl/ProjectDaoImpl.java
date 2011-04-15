@@ -2,10 +2,7 @@ package org.osforce.connect.dao.system.impl;
 
 import org.osforce.connect.dao.system.ProjectDao;
 import org.osforce.connect.entity.system.Project;
-import org.osforce.connect.entity.system.ProjectCategory;
-import org.osforce.connect.entity.system.User;
 import org.osforce.platform.dao.support.AbstractDao;
-import org.osforce.platform.dao.support.Page;
 import org.springframework.stereotype.Repository;
 
 /**

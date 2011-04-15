@@ -11,7 +11,6 @@ import org.osforce.connect.entity.system.User;
 import org.osforce.connect.service.commons.StatisticService;
 import org.osforce.connect.service.discussion.ForumService;
 import org.osforce.connect.service.discussion.TopicService;
-import org.osforce.connect.service.system.ProjectCategoryService;
 import org.osforce.connect.web.AttributeKeys;
 import org.osforce.platform.dao.support.Page;
 import org.osforce.platform.web.framework.annotation.Param;
@@ -33,7 +32,6 @@ public class TopicFragment {
 	private TopicService topicService;
 	private ForumService forumService;
 	private StatisticService statisticService;
-	private ProjectCategoryService projectCategoryService;
 	
 	public TopicFragment() {
 	}
@@ -51,12 +49,6 @@ public class TopicFragment {
 	@Autowired
 	public void setStatisticService(StatisticService statisticService) {
 		this.statisticService = statisticService;
-	}
-	
-	@Autowired
-	public void setProjectCategoryService(
-			ProjectCategoryService projectCategoryService) {
-		this.projectCategoryService = projectCategoryService;
 	}
 	
 	public String doTopView(@Pref String categoryCode, Project project,

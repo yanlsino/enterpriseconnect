@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.osforce.connect.dao.system.ProjectCategoryDao;
 import org.osforce.connect.entity.system.ProjectCategory;
-import org.osforce.connect.entity.system.Site;
 import org.osforce.platform.dao.support.AbstractDao;
 import org.osforce.platform.dao.support.Page;
 import org.springframework.stereotype.Repository;

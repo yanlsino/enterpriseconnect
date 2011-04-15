@@ -2,7 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<div id="search-bar">
+<div class="search-bar">
 	<ul>
 		<li <c:if test="${empty param.categoryId}">class="current first"</c:if>>
 			<a href="${base}/search?keywords=${searchBean.keywords}">
@@ -10,7 +10,7 @@
 			</a>
 		</li>
 		<c:forEach var="category" items="${categories}" varStatus="status">
-		<li <c:if test="${param.categoryId eq category.id}">class="current"</c:if>>
+		<li <c:if test="${param.categoryId eq category.id}">class="actived"</c:if>>
 			<a href="${base}/search?keywords=${searchBean.keywords}&categoryId=${category.id}">
 				<span>${category.label}(${category.count})</span>
 			</a> 

@@ -43,9 +43,6 @@
     
     <script type="text/javascript" src="${base}/static/components/jquery-cycle/jquery.cycle.min.js"></script>
     
-    <script type="text/javascript" src="http://yui.yahooapis.com/3.3.0/build/yui/yui-min.js"></script>
-    
-    
     <link rel="stylesheet" href="${base}/themes/${theme.name}/css/style.css" type="text/css" media="screen, projection"/>
     <link rel="stylesheet" href="${base}/themes/${theme.name}/css/fragment.css" type="text/css" media="screen, projection"/>
     <script type="text/javascript">

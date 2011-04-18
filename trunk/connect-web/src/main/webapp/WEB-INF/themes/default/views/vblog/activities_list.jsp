@@ -18,7 +18,7 @@
 		<div class="info"><fmt:message key="vblog.activities_list.noActivityToDisplay"/></div>
 		</c:when>
 		<c:otherwise>	
-		<ul class="activities-list">
+		<ul id="activities-list${id}" class="activities-list">
 			<c:forEach var="activity" items="${page.result}" varStatus="status">
 			<li <c:if test="${status.last}">class="last"</c:if>>
 				<a href="${base}/${activity.enteredBy.project.uniqueId}/profile">
@@ -48,25 +48,6 @@
 						<div class="clear"></div>
 					</div>
 					<ul id="comments-list${activity.id}" class="comments-list">
-					<%-- replace use ajax load 
-					<c:forEach var="comment" items="${activity.comments}" varStatus="status">
-						<li>
-							<a href="${base}/${comment.enteredBy.project.uniqueId}/profile">
-							<c:choose>
-								<c:when test="${not empty comment.enteredBy.project.profile.logo}">
-								<img class="thumbnail" src="${base}/logo/download/${comment.enteredBy.project.profile.logo.id}/35x35"/>
-								</c:when>
-								<c:otherwise>
-								<img class="thumbnail" src="${base}/themes/${theme.name}/stock/${comment.enteredBy.project.category.code}.png" width="35" height="35"/>
-								</c:otherwise>
-							</c:choose>
-							</a>
-							<div class="comment-content">${comment.content}</div>
-							<span class="float-right"><e2:prettyTime date="${comment.entered}"/></span>
-							<div class="clear"></div>
-						</li>
-					</c:forEach>
-					--%>
 					</ul>
 					<form id="activity-comment-form${activity.id}" class="activity-comment-form" style="display: none;" action="${base}/process/commons/comment" method="post">
 					<c:choose>
@@ -98,7 +79,7 @@
 		</ul>
 		<c:if test="${page.totalPages gt 1}">
 		<div style="text-align: center">
-			<a href="#" class="more-action${id}">更多</a>
+			<a id="more-action${id}" href="${base}/process/fragment/${id}">更多</a>
 		</div>
 		</c:if>
 		</c:otherwise>
@@ -108,6 +89,22 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	var pageNo = 2;
+	$('#more-action${id}').click(function(){
+		var self = this;
+		var url = $(this).attr('href');
+		var params = {'pageNo':pageNo,'uniqueId':'${project.uniqueId}'};
+		$.get(url, params, function(html){
+			$(html).find('.activities-list').contents().appendTo($('#activities-list${id}'));
+			if((pageNo+1)<${page.totalPages}) {
+				pageNo++;
+			} else {
+				$(self).hide();
+			}
+		});
+		return false;
+	});	
+	
 	$('.activity-comment-form').ajaxForm({
 		dataType: 'json',
 		clearForm: true,

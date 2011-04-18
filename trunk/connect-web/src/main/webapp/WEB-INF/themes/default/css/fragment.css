@@ -88,6 +88,13 @@
 .activities-list .comments-list .comment-content {
 	margin-left: 55px; 	
 }
+.faces-list {
+	width: 112px;	
+}
+		
+.faces-list li {
+	display: inline;
+}
 /* blog post fragment */
 .post-form textarea {
 	width: 90%;

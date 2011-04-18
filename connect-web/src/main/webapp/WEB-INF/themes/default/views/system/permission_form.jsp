@@ -53,6 +53,7 @@ select[multiple] {
 							</c:if>
 						</c:forEach>
 						</select>
+						<form:hidden path="resourceId" id="resourceId${id}"/>
 					</div> 					
 					</c:when>
 					<c:otherwise>
@@ -63,7 +64,7 @@ select[multiple] {
 					</c:otherwise>
 				</c:choose>
 				<div>
-					<button type="submit">提交</button>
+					<button id="submit${id}" type="submit" class="button">提交</button>
 					<button type="reset">重置</button>
 					<form:hidden path="id"/>
 				</div>
@@ -74,71 +75,56 @@ select[multiple] {
 <c:choose>
 	<c:when test="${param.multiple}">
 	<script type="text/javascript">
-	YUI().use('io-form', 'json', function(Y){
-		Y.one('#select-category${id}').on('change', function(e){
-			window.location.href='?siteId=${param.siteId}&multiple=${param.multiple}&categoryId='+e.currentTarget.get('value');
+	$(document).ready(function(){
+		$('#select-category${id}').change(function(){
+			window.location.href='?siteId=${param.siteId}&multiple=${param.multiple}&categoryId='+$(this).val();
 		});
-		Y.one('#select-role${id}').on('change', function(e){
-			window.location.href='?siteId=${param.siteId}&multiple=${param.multiple}&categoryId=${param.categoryId}&roleId='+e.currentTarget.get('value');
-		});
-		//
-		var select1 = Y.one('#select1${id}');
-		var select2 = Y.one('#select2${id}');
-		Y.one('#addAction${id}').on('click', function(e){
-			select1.all('option').each(function(){
-				if(this.get('selected')) {
-					select2.insert(this);
-				}
-			});
-			e.halt();
-		});
-		Y.one('#removeAction${id}').on('click', function(e){
-			select2.all('option').each(function(){
-				if(this.get('selected')) {
-					select1.insert(this);
-				}
-			})
-			e.halt();
+		$('#select-role${id}').change(function(){
+			window.location.href='?siteId=${param.siteId}&multiple=${param.multiple}&categoryId=${param.categoryId}&roleId='+$(this).val();
 		});
 		//
-		var permissionForm = Y.one('#permission-form${id}');
-		permissionForm.on('submit', function(e){
-			select2.all('option').each(function(){
-				var resourceId = this.get('value');
-				Y.io.header('Content-Type', 'application/json');
-				Y.io(permissionForm.get('action'), {
-					method: 'POST',
-					data: 'resourceId='+resourceId,
-					form: {
-						id: permissionForm
-					}
+		$('#addAction${id}').click(function(){
+			return !$('#select1${id} option:selected').remove().appendTo('#select2${id}');
+		});
+		$('#removeAction${id}').click(function(){
+			return !$('#select2${id} option:selected').remove().appendTo('#select1${id}');
+		});
+		//
+		$('#permission-form${id}').submit(function(){
+			var form = this;
+			$('#select2${id} option').each(function(){
+				var resourceId = $(this).val();
+				$(form).ajaxSubmit({
+					dataType: 'json',
+					clearForm: true,
+					forceSync: true,
+					beforeSerialize: function($form, options){
+						$('#resourceId${id}').val(resourceId);
+					},
+					beforeSubmit: function(formData, $form) {
+						for(i in formData) {
+							alert(formData[i].value);
+						}
+					},
+					success: function(permission){}
 				});
 			});
-			e.halt();
+			return false;
 		});
 	});
 	</script>
 	</c:when>
 	<c:otherwise>
 	<script type="text/javascript">
-	YUI().use('io-form', 'json', function(Y){
-		var permissionForm = Y.one('#permission-form${id}');
-		permissionForm.on('submit', function(e){
-			Y.on('io:complete', function(id, o){
-				try {
-					var permission = Y.JSON.parse(o.responseText);
-					window.location.href='?permissionId='+permission.id+'&siteId=${param.siteId}&categoryId=${param.categoryId}';
-				} catch(e) {
-					// TODO alert message username or password invalid
-				}
-			});
-			Y.io(permissionForm.get('action'), {
-				method: 'POST',
-				form: {
-					id: permissionForm
-				}
-			});
-			e.halt();
+	$(document).ready(function(){
+		$('#permission-form${id}').ajaxForm({
+			dataType: 'json',
+			clearForm: true,
+			beforeSubmit: function(formData, $form) {
+			},
+			success: function(permission){
+				window.location.href='?permissionId='+permission.id+'&siteId=${param.siteId}&categoryId=${param.categoryId}';
+			}
 		});
 	});
 	</script>

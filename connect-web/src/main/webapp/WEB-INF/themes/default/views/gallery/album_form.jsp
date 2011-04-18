@@ -21,46 +21,33 @@
 				<form:input path="name" cssClass="text"/>
 			</div>
 			<div>
-				<button type="submit" class="button">
-					<span id="status1${id}">
-						提交
-					</span>
-					<span id="status2${id}" style="display: none">
-						<img src="${base}/static/images/loading.gif"/>正在处理...
-					</span>
-				</button>
+				<button type="submit" class="button">提交</button>
 				<form:hidden path="enteredId"/>
 				<form:hidden path="modifiedId"/>
 				<form:hidden path="projectId"/>
 			</div>
 		</form:form>
-		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var albumForm = Y.one('#album-form${id}');
-	albumForm.on('submit', function(e){
-		Y.one('#status1${id}').hide();
-		Y.one('#status2${id}').show();
-		//
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			try {
-				var album = Y.JSON.parse(o.responseText);
-				setTimeout('window.location.href="?albumId='+album.id+'"', 500);
-			} catch(e) {
-				// TODO alert message username or password invalid
+$(document).ready(function(){
+	$('#album-form${id}').ajaxForm({
+		dataType: 'json',
+		beforeSubmit: function(formData, $form){
+			var name = $.trim(formData[0].value);
+			if(name=='') {
+				return false;
 			}
-		});
-		Y.io(albumForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: albumForm
-			}
-		});
-		e.halt();
+			$form.find('.button').busy({
+				img: '${base}/static/images/loading.gif'
+			});
+		},
+		success: function(album){
+			setTimeout(function(){
+				window.location.href='?albumId=' + album.id;
+			}, 500);
+		}
 	});
 });
 </script>

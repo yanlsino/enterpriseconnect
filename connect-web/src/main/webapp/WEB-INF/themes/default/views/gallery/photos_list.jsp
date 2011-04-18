@@ -21,7 +21,7 @@
 		</c:if>
 		<div class="photos-list">
 		<c:forEach var="photo" items="${page.result}">
-			<a id="${photo.id}" href="${base}/photo/download/${photo.realFile.id}/500x500" class="loadImage">
+			<a id="${photo.id}" href="${base}/photo/download/${photo.realFile.id}/500x500" class="<c:if test="${param.photoId eq photo.id}">current</c:if>">
 				<img class="thumbnail" src="${base}/photo/download/${photo.realFile.id}/100x100"/>
 			</a>
 		</c:forEach>
@@ -31,48 +31,34 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('node', function(Y){
-	Y.all('.loadImage').on('click', function(e){
-		changeImage(e.currentTarget);
-		e.halt();
+$(document).ready(function(){
+	$('.photos-list a').click(function(){
+		changeImage(this);
+		return false;
 	});
-	Y.one('#previous${id}').on('click', function(e){
-		var id = Y.one('#photo${id} img').get('id');
-		preOrNextImage(id, 'pre');
-		e.halt();
+	$('#previous${id}').click(function(){
+		var current = $('.photos-list a.current');
+		if(current.size()==0) {
+			current = $('.photos-list a:first');
+		}
+		changeImage(current.prev());
+		return false;
 	});
-	Y.one('#next${id}').on('click', function(e){
-		var id = Y.one('#photo${id} img').get('id');
-		preOrNextImage(id, 'next');
-		e.halt();
+	$('#next${id}').click(function(){
+		var current = $('.photos-list a.current');
+		if(current.size()==0) {
+			current = $('.photos-list a:first');
+		}
+		changeImage(current.next());
+		return false;
 	});
-	function preOrNextImage(id, mode) {
-		var imgLinks = Y.all('.photos-list a');
-		var pre = null, current = null, next = null;
-		for(i=0; i<imgLinks.size(); i++) {
-			if(i>0) {
-				pre = imgLinks.item(i-1);
-			}
-			var current = imgLinks.item(i);
-			if(i<imgLinks.size()-1) {
-				next = imgLinks.item(i+1);
-			}
-			if(current.get('id') == id) {
-				break;
-			}
-		}
-		if(pre!=null && mode=='pre') {
-			changeImage(pre);
-		}
-		if(next!=null && mode=='next') {
-			changeImage(next);
-		}
-	}
-	
+
 	function changeImage(node) {
-		var id = node.get('id');
-		var imgSrc = node.get('href');
-		Y.one('#photo${id} img').set('src', imgSrc).set('id', id);
+		$('.photos-list a').removeClass('current');
+		var id = $(node).attr('id');
+		$(node).addClass('current');
+		var imgSrc = $(node).attr('href');
+		$('#photo${id} img').attr({'src':imgSrc, 'id': id});
 	}
-})
+});
 </script>

@@ -47,42 +47,15 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var roleForm = Y.one('#role-form${id}');
-	roleForm.on('submit', function(e){
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			try {
-				var role = Y.JSON.parse(o.responseText);
-				window.location.href='?roleId='+role.id+'&siteId=${param.siteId}';
-			} catch(e) {
-				// TODO alert message username or password invalid
-			}
-		});
-		Y.io(roleForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: roleForm
-			}
-		});
-		e.halt();
-	});
-});
-</script>
-
-<script type="text/javascript">
 $(document).ready(function(){
-	$('#roleForm').validate({
-		submitHandler: function(form) {
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(role){
-					window.location.href="?roleId="+role.id+"&siteId=${param.siteId}";
-				}
-			});	
-			return false;
+	$('#role-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
 		},
-		meta: "validate"
+		success: function(role){
+			window.location.href='?roleId='+role.id+'&siteId=${param.siteId}';
+		}
 	});
 });
 </script>

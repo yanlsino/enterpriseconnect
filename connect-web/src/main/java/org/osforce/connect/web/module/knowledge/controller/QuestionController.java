@@ -1,6 +1,6 @@
 package org.osforce.connect.web.module.knowledge.controller;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.osforce.connect.entity.knowledge.Question;
@@ -33,12 +33,15 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value="/question", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Long> update(Question question) {
+	public @ResponseBody Map<String, Object> update(Question question) {
 		if(question.getId()==null) {
 			questionService.createQuestion(question);
 		} else {
 			questionService.updateQuestion(question);
 		}
-		return Collections.singletonMap("id", question.getId());
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("id", question.getId());
+		model.put("title", question.getTitle());
+		return model;
 	}
 }

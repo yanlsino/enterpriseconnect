@@ -20,29 +20,24 @@
 		<c:otherwise>
 		<form:form id="topic-form${id}" action="${base}/process/discussion/topic" 
 			commandName="topic" cssClass="topic-form">
-				<p>
+				<div>
 					<label for="forumId" class="title"><fmt:message key="discussion.topic_form.forum"/></label>
 					<br/>
 					<form:select path="forumId" items="${forums}" itemLabel="name" itemValue="id"/>
-				</p>
-				<p>
+				</div>
+				<div>
 					<label for="subject" class="title"><fmt:message key="discussion.topic_form.subject"/></label>
 					<br/>
-					<form:input path="subject" cssClass="title {validate:{required:true, messages:{required:'主题不能为空！'}}}"/>		
-				</p>
-				<p>
+					<form:input path="subject" cssClass="title"/>		
+				</div>
+				<div>
 					<label for="content" class="title"><fmt:message key="discussion.topic_form.content"/></label>
 					<br/>
-					<form:textarea path="content" cssClass="text {validate:{required:true, messages:{required:'内容不能为空！'}}}"/>
-				</p>
-				<p>
+					<form:textarea path="content" id="editor${id}" cssClass="text"/>
+				</div>
+				<div>
 					<button type="submit" class="button">
-						<span id="status1${id}">
-							<fmt:message key="discussion.topic_form.submit"/>
-						</span>
-						<span id="status2${id}" style="display: none">
-							<img src="${base}/static/images/loading.gif"/>正在处理...
-						</span>
+						<fmt:message key="discussion.topic_form.submit"/>
 					</button>
 					<form:hidden path="id"/>
 					<form:hidden path="categoryId"/>
@@ -53,7 +48,7 @@
 					<c:if test="${not empty topic.entered}">
 					<input type="hidden" name="entered" value='<fmt:formatDate value="${topic.entered}" pattern="yyyy-MM-dd HH:mm:ss"/>'/>
 					</c:if>
-				</p>
+				</div>
 		</form:form>
 		</c:otherwise>
 	</c:choose>
@@ -61,28 +56,26 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var topicForm = Y.one('#topic-form${id}');
-	topicForm.on('submit', function(e){
-		Y.one('#status1${id}').hide();
-		Y.one('#status2${id}').show();
-		//
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			try {
-				var topic = Y.JSON.parse(o.responseText);
-				setTimeout('window.location.href="?topicId='+topic.id+'"', 500);
-			} catch(e) {
-				// TODO alert message username or password invalid
+$(document).ready(function(){
+	$('#topic-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form){
+			var subject = $.trim(formData[1].value);
+			var content = $.trim(formData[2].value);
+			if(subject=='' || content=='') {
+				return false;
 			}
-		});
-		Y.io(topicForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: topicForm
-			}
-		});
-		e.halt();
+			$form.find('.button').busy({
+				img: '${base}/static/images/loading.gif'
+			});
+		},
+		success: function(topic){
+			setTimeout(function(){
+				window.location.href='?topicId=' + topic.id;				
+			}, 500);
+		}
 	});
+	$('#editor${id}').htmlarea(settings.simple);
 });
 </script>

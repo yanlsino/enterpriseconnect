@@ -77,100 +77,39 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-upload-iframe', 'json', function(Y){
-	Y.one('#select-file${id}').on('change', function(e){
-		var logoForm = Y.one('#logo-form${id}');
-		Y.on('io:complete', function(id, o){
-			var profile = Y.JSON.parse(o.responseText);	
-			window.location.href='?profileId'+profile.id;
-		});
-		Y.io(logoForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: logoForm,
-				upload: true
+$(document).ready(function(){
+	$('#select-file${id}').change(function(){
+		$('#logo-form${id}').ajaxSubmit({
+			beforeSubmit: function(formData, $form){
+				$form.find('input[type=file]').busy({
+					img: '${base}/static/images/loading.gif'
+				});
+			},
+			success: function(profile){
+				window.location.reload();
 			}
 		});
-		e.halt();
 	});
-	Y.one('#addRow${id}').on('click', function(e){
-		var html = '<div>' + 
-				   	   '<input name="labels"/>' + 
-				   	   '<input name="values"/>' +
-				   '</div>';
-		Y.one('#profile-attributes${id}').insert(html);
-		e.halt();
-	});
-});
-</script>
-
-<script type="text/javascript">
-YUI().use('io-form', 'json', 'yui2-editor', function(Y){
-	var YAHOO = Y.YUI2;
-	//
-	var editor = new YAHOO.widget.Editor('editor${id}', 
-	{
-	    height: '150px',
-	    width: '400px',
-	    animate: true,
-	    dompath: true,
-	    focusAtStart: true,
-	    autoHeight: true,
-	    collapse: false,
-	    toolbar: {
-	      collapse: false,
-	      draggable: false,
-	      buttonType: 'advanced',
-	      buttons: [
-	          { group: 'textstyle',
-	              buttons: [
-	                  { type: 'push', label: 'Bold CTRL + SHIFT + B', value: 'bold' },
-	                  { type: 'push', label: 'Italic CTRL + SHIFT + I', value: 'italic' },
-	                  { type: 'push', label: 'Underline CTRL + SHIFT + U', value: 'underline' },
-	              ]
-	          },             
-	          { type: 'separator' },
-	          { group: 'indentlist',
-	              buttons: [
-	                  { type: 'push', label: 'Indent', value: 'indent', disabled: true },
-	                  { type: 'push', label: 'Outdent', value: 'outdent', disabled: true },
-	                  { type: 'push', label: 'Create an Unordered List', value: 'insertunorderedlist' },
-	                  { type: 'push', label: 'Create an Ordered List', value: 'insertorderedlist' }
-	              ]
-	          }        
-	      ]
-	    }
-	});
-	//
-	editor.on('toolbarLoaded', function() {
-	    this.on('afterNodeChange', function(o) {
-	    	editor.saveHTML();
-	    });
-	}, editor, true);
-	editor.render();
-	// 
-	var profileForm = Y.one('#profile-form${id}');
-	profileForm.on('submit', function(e){
-		//
-		Y.one('#status1${id}').hide();
-		Y.one('#status2${id}').show();
-		//
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			try {
-				var profile = Y.JSON.parse(o.responseText);
-				setTimeout('window.location.href ="?profileId='+ profile.id +'"', 500);
-			} catch(e) {
-				// alert message
+	
+	$('#profile-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
+			var title = $.trim(formData[0].value);
+			var shortDescription = $.trim(formData[1].value);
+			if(title=='' || shortDescription=='') {
+				return false;
 			}
-		});
-		Y.io(profileForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: profileForm
-			}
-		});
-		e.halt();
+			$form.find('.button').busy({
+				img: '${base}/static/images/loading.gif'
+			});
+		},
+		success: function(profile){
+			setTimeout(function(){
+				window.location.href='?profileId=' + profile.id;
+			}, 500);
+		}
 	});
+	$('#editor${id}').htmlarea(settings.simple);
 });
 </script>

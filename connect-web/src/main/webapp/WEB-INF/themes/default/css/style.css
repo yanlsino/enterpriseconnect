@@ -102,14 +102,12 @@ a:hover {
 	border: 1px solid #DDD;
 	padding: 5px;	
 }
-
-.overlay {
-	border: 5px solid #F6F6F6;
-	padding: 0 2px;
-	border-color: transparent;
-	background-color: #F6F6F6;	
+ul {
+	margin: 0;
+	padding: 0;	
 }
-
-.overlay ul li {
-	display: inline;	
+ul li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }

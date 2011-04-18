@@ -54,53 +54,27 @@
 	</div>
 </div>
 
-
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var registerForm = Y.one('#register-form${id}');
-	registerForm.on('submit', function(e){
-		Y.one('#status1${id}').hide();
-		Y.one('#status2${id}').show();
-		if(validateForm()) {
-			Y.io.header('Content-Type', 'application/json');
-			Y.on('io:complete', function(id, o){
-				try {
-					var user = Y.JSON.parse(o.responseText);
-					if('${param.popup}' == 'true') {
-						setTimeout('window.location.reload()', 500);
-					} else {
-						setTimeout('window.location.href="${base}/'+user.uniqueId+'/profile"', 500);
-					}
-				} catch(e) {
-					// TODO alert message username or password invalid
-				}
-			});
-			Y.io(registerForm.get('action'), {
-				method: 'POST',
-				form: {
-					id: registerForm
-				}
-			});
-		} 
-		Y.one('#status1${id}').show();
-		Y.one('#status2${id}').hide();
-		e.halt();
-	});
-	//
-	function validateForm() {
-		var username = Y.one('#username${id}').get('value');
-		var password1 = Y.one('#password${id}').get('value');
-		var password2 = Y.one('#rePassword${id}').get('value');
-		var nickname = Y.one('#nickname${id}').get('value');
-		if(Y.Lang.trim(username)=='' || Y.Lang.trim(password1)==''
-				|| Y.Lang.trim(password2)=='' || Y.Lang.trim(nickname)==''
-				|| password1!=password2) {
-			return false;
+$(document).ready(function(){
+	$('#register-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData){
+			var username = formData[0].value;
+			var password1 = formData[1].value;
+			var password2 = formData[2].value;
+			var nickname = formData[3].value;
+			if($.trim(username)=='' || $.trim(password1)=='' || 
+					$.trim(password2)=='' || $.trim(nickname)=='' ||
+					password1!=password2 || username.match(/@.+\..+/)==null) {
+				return false;
+			}
+		},
+		success: function(user){
+			setTimeout(function(){
+				window.location.href='${base}/' + user.uniqueId + '/profile';
+			}, 0);
 		}
-		return true;
-	}
+	})
 });
 </script>
-</div>
-</div>
-

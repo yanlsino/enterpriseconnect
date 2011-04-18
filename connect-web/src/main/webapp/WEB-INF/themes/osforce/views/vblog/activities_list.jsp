@@ -100,6 +100,29 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#activity-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
+			var description = formData[0].value;
+			if($.trim(description)=='') {
+				return false;
+			}
+			$form.find('.button').busy({
+				img: '${base}/static/images/loading.gif'
+			});
+		},
+		success: function(activity){
+			setTimeout(function(){
+				window.location.reload();
+			}, 500);
+		}
+	});
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
 	var pageNo = 2;
 	var totalPages = ${page.totalPages};
 	// for activity comment

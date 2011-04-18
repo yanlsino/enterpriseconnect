@@ -79,44 +79,24 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var commentForm = Y.one('#comment-form${id}');
-	commentForm.on('submit', function(e){
-		Y.one('#status1${id}').hide();
-		Y.one('#status2${id}').show();
-		//
-		Y.on('io:complete', function(id, o){
-			try {
-				var comment = Y.JSON.parse(o.responseText);
-				setTimeout('window.location.reload()', 500);
-			} catch(e) {
-				// TODO alert message username or password invalid
+$(document).ready(function(){
+	$('#comment-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
+			var content = $.trim(formData[0].value);
+			if(content=='') {
+				return false;
 			}
-		});
-		Y.io(commentForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: commentForm
-			}
-		});
-		e.halt();
+			$form.find('.button').busy({
+				img: '${base}/static/images/loading.gif'
+			});
+		},
+		success: function(activity){
+			setTimeout(function(){
+				window.location.reload();
+			}, 500);
+		}
 	});
 });
-
-(function(){
-	$('.commentForm').submit(function(){
-		var content = $(this).find('#content').val();
-		if($.trim(content)!='') {
-			$(this).ajaxSubmit({
-				dataType:'json',
-				success:function(comment){
-					window.location.reload();
-				}
-			});	
-		} else {
-			$.prompt('评论内容不能为空！');			
-		}
-		return false;
-	});
-})();
 </script>

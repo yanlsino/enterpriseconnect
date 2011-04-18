@@ -13,18 +13,22 @@
 	</div>	
 	</c:if>
 	<div class="body">
-		<div id="folder-tree${id}"></div>
+		<div id="folder-tree${id}" class="tree"></div>
 	</div>
 </div>
 
 <script type="text/javascript">
-YUI().use('yui2-treeview', function(Y) {
-	var YAHOO = Y.YUI2;	
-	//
-	var tree = new YAHOO.widget.TreeView("folder-tree${id}", ${folderTree});
-	tree.subscribe("labelClick", function(node) {
-		window.location.href='${base}/${project.uniqueId}/document?folderId='+node.data.id;
-    });
-	tree.render();
+$(document).ready(function(){
+	$('#folder-tree${id}').zTree({
+		isSimpleData: true,
+		treeNodeKey: 'id',
+		treeNodeParentKey: 'pId',
+		callback: {
+			beforeCollapse: function(){return false;},
+			click: function(event, id, node){
+				window.location.href='${base}/${project.uniqueId}/document?folderId=' + node.id;
+			}
+		}
+	}, ${folderTree});
 });
 </script>

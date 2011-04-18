@@ -37,42 +37,15 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var linkForm = Y.one('#site-link-form${id}');
-	linkForm.on('submit', function(e){
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			try {
-				var siteLink = Y.JSON.parse(o.responseText);
-				window.location.href='?siteId=${param.siteId}&linkId='+siteLink.id;
-			} catch(e) {
-				// TODO alert message username or password invalid
-			}
-		});
-		Y.io(linkForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: linkForm
-			}
-		});
-		e.halt();
-	});
-});
-</script>
-
-<script type="text/javascript">
 $(document).ready(function(){
-	$('#siteLinkForm').validate({
-		submitHandler: function(form) {
-			$(form).ajaxSubmit({
-				dataType:'json',
-				success:function(siteLink){
-					window.location.href="?siteId=${param.siteId}&linkId="+siteLink.id;
-				}
-			});
-			return false;
+	$('#site-link-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
 		},
-		meta: "validate"
+		success: function(siteLink){
+			window.location.href='?siteId=${param.siteId}&linkId='+siteLink.id;
+		}
 	});
 });
 </script>

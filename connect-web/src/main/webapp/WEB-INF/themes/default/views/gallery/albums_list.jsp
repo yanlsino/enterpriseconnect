@@ -40,9 +40,7 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('gallery-yui-slideshow', function(Y){
-	Y.all('.slideshow').each(function(){
-		var slideshow = new Y.Slideshow(this);
-	});
+$(document).ready(function() {
+    $('.slideshow').cycle();
 });
 </script>

@@ -48,25 +48,15 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var categoryForm = Y.one('#project-category-form${id}');
-	categoryForm.on('submit', function(e){
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			try {
-				var category = Y.JSON.parse(o.responseText);
-				window.location.href='?categoryId='+category.id+'&siteId='+category.siteId;
-			} catch(e) {
-				// TODO alert message username or password invalid
-			}
-		});
-		Y.io(categoryForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: categoryForm
-			}
-		});
-		e.halt();
+$(document).ready(function(){
+	$('#project-category-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
+		},
+		success: function(category){
+			window.location.href='?categoryId='+category.id+'&siteId='+category.siteId;
+		}
 	});
 });
 </script>

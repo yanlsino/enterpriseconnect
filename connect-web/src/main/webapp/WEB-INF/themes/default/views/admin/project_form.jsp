@@ -15,74 +15,63 @@
 	<div class="body">
 		<form:form id="project-form${id}" action="${base}/process/admin/project" 
 			commandName="project" cssClass="project-form">
-				<p>
-					<label for="title" class="title">名称:</label>
+				<div>
+					<label for="title" class="title">名称: <span class="required">*</span></label>
 					<br/>
 					<form:input path="title" cssClass="text {validate:{required:true, messages:{required:'名称不能为空！'}}}"/>
-				</p>
-				<p>
-					<label for="uniqueId" class="title">唯一编码:([a-z] - _)</label>
+				</div>
+				<div>
+					<label for="uniqueId" class="title">唯一编码:([a-z] - _) <span class="required">*</span></label>
 					<br/>
 					<form:input path="uniqueId" cssClass="text {validate:{required:true, messages:{required:'唯一编码不能为空！'}}}"/>
-				</p>
-				<p>
+				</div>
+				<div>
 					<label for="category" class="title">分类:</label>
 					<br/>
 					<form:input path="category.label" readonly="true" cssClass="text"/>
-				</p>
+				</div>
 				<c:if test="${not empty subCategories1}">
-				<p>
+				<div>
 					<label for="subCategory1" class="title">子分类:</label>
 					<br/>
 					<form:select path="subCategoryId1">
 						<form:option value="" label="无"/>
 						<form:options items="${subCategories1}" itemLabel="label" itemValue="id"/>
 					</form:select>
-				</p>
+				</div>
 				</c:if>
-				<p>
-					<button type="submit" class="button">
-						<span id="status1${id}">
-							提交
-						</span>
-						<span id="status2${id}" style="display: none">
-							<img src="${base}/static/images/loading.gif"/>正在处理...
-						</span>
-					</button>
+				<div>
+					<button type="submit" class="button">提交</button>
 					<form:hidden path="id"/>
 					<form:hidden path="enteredId"/>
 					<form:hidden path="modifiedId"/>
 					<form:hidden path="categoryId"/>
 					<input type="hidden" name="entered" value='<fmt:formatDate value="${project.entered}" pattern="yyyy-MM-dd HH:mm:ss"/>'/>
-				</p>
-			</fieldset>
+				</div>
 		</form:form>
 	</div>
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var projectForm = Y.one('#project-form${id}');
-	projectForm.on('submit', function(e){
-		Y.one('#status1${id}').hide();
-		Y.one('#status2${id}').show();;
-		//
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			try {
-				var project = Y.JSON.parse(o.responseText);
-				setTimeout('window.location.href="?projectId='+project.id+'"', 500);
-			} catch(e) {
-				// TODO alert message username or password invalid
+$(document).ready(function(){
+	$('#project-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData){
+			var title = $.trim(formData[0].value);
+			var uniqueId = $.trim(formData.[1].value);
+			if(title=='' || uniqueId=='') {
+				return false;
 			}
-		});
-		Y.io(projectForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: projectForm
-			}
-		});
-		e.halt();
+			$form.find('.button').busy({
+				img: '${base}/static/images/loading.gif'
+			});
+		},
+		success: function(project){
+			setTimeout(function(){
+				window.location.reload();
+			}, 500);
+		}
 	});
 });
 </script>

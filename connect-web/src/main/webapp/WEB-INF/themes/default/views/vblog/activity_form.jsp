@@ -21,7 +21,7 @@
 			<img id="activity-form-logo${id}" class="activity-form-logo top left thumbnail" src="${base}/themes/${theme.name}/stock/${user.project.category.code}.png"/>
 			</c:otherwise>
 		</c:choose>
-		<form:form id="activity-form${id}" class="activity-form" 
+		<form:form id="activity-form${id}" cssClass="activity-form" 
 			action="${base}/process/vblog/activity" commandName="activity">
 			<div>
 				<form:textarea path="description" id="description${id}"/>
@@ -38,12 +38,7 @@
 				</ul>
 				</c:if>
 				<button id="${id}submitButton" type="submit" class="button right">
-					<span id="status1${id}">
-						<fmt:message key="vblog.activity_form.submit"/>
-					</span>
-					<span id="status2${id}" style="display: none">
-						<img src="${base}/static/images/loading.gif"/>正在处理...
-					</span>
+					<fmt:message key="vblog.activity_form.submit"/>
 				</button>
 			</div>
 			<form:hidden path="type"/>
@@ -68,6 +63,28 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#activity-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
+			var description = formData[0].value;
+			if($.trim(description)=='') {
+				return false;
+			}
+			$form.find('.button').busy({
+				img: '${base}/static/images/loading.gif'
+			});
+		},
+		success: function(activity){
+			setTimeout(function(){
+				window.location.reload();
+			}, 500);
+		}
+	});
+});
+</script>
 <script type="text/javascript">
 YUI().use('overlay', function(Y){
 	var overlay = new Y.Overlay({
@@ -149,41 +166,5 @@ YUI().use('overlay', function(Y){
 		Y.one(id).show();
 		overlay.show();
 	}
-});
-</script>
-
-<script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-    var description = Y.one('#description${id}');
-	var activityForm = Y.one('#activity-form${id}');
-	activityForm.on('submit', function(e){
-		// validate 
-		if(description.get('value')=='') {
-			// TODO alert description can not be empty
-			return e.halt();
-		}
-		//
-		Y.one('#status1${id}').hide();
-		Y.one('#status2${id}').show();
-    	//description.set('disabled', 'disabled');
-    	//
-   		Y.io.header('Content-Type', 'application/json');
-    	Y.on('io:complete', function(id, o){
-			try {
-				var activity = Y.JSON.parse(o.responseText);
-				setTimeout('window.location.reload()', 500);
-				description.set('value','');
-			} catch(e) {
-				// TODO alert message username or password invalid
-			}
-		});
-		Y.io(activityForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: activityForm
-			}
-		});
-		e.halt();
-	});
 });
 </script>

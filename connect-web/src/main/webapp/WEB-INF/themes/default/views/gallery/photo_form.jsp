@@ -13,59 +13,42 @@
 	</div>	
 	</c:if>
 	<div class="body">
-		<form id="photo-form${id}">
+		<form:form id="photo-form${id}" cssClass="photo-form"
+			action="${base}/process/commons/attachment" commandName="photo">
 			<div>
 				<label>目标相册</label>
 				<br/>
-				<select id="albumId" name="albumId">
-				<c:forEach var="album" items="${albums}">
-					<option value="${album.id}" <c:if test="${param.albumId eq album.id}">selected="selected""</c:if>>${album.name}</option>
-				</c:forEach>	
-				</select>
+				<form:select path="albumId" items="${albums}" itemLabel="name" itemValue="id"/>
 			</div>
 			<div>
 				<input type="file" name="file" id="select-file${id}"/>
 			</div>
 			<div id="file-queue${id}" class="file-queue"></div>
 			<div>
-				<input type="hidden" name="forward" value="/gallery/photo"/>
-				<input type="hidden" name="enteredId" value="${user.id}"/>
-				<input type="hidden" name="modifiedId" value="${user.id}"/>
+				<form:hidden path="enteredId"/>
+				<form:hidden path="modifiedId"/>
+				<input type="hidden" name="forward" value="/gallery/photo"/>				
 			</div>
-		</form>
+		</form:form>
 	</div>
 </div>
 
 <script type="text/javascript">
-YUI().use('io-upload-iframe', 'json', function(Y){
-	var fileQueue = Y.one('#file-queue${id}');
-	Y.one('#select-file${id}').on('change', function(e){
-		var path = e.currentTarget.get('value');
-		//
-		Y.io.header('Content-Type', 'application/json');
-		var photoForm = Y.one('#photo-form${id}');
-		Y.on('io:complete', function(id, o){
-			var photo = Y.JSON.parse(o.responseText);
-			var html = '<div><span>'+ path +'<span><a class="removeAction">x</a></div>';
-			Y.one('#file-queue${id}').insert(html);
-			bindEvent();
-			e.currentTarget.set('value', '');
-		});
-		Y.io('${base}/process/commons/attachment', {
-			method: 'POST',
-			form: {
-				id: photoForm,
-				upload: true
+$(document).ready(function(){
+	$('#select-file${id}').change(function(){
+		$('#photo-form${id}').ajaxSubmit({
+			dataType: 'json',
+			beforeSubmit: function(formData, $form){
+				$form.find('#select-file${id}').busy({
+					img: '${base}/static/images/loading.gif'
+				});
+			},
+			success: function(photo){
+				setTimeout(function(){
+					window.location.href='?albumId=' + photo.albumId;
+				}, 500);
 			}
 		});
-		e.halt();
 	});
-	function bindEvent() {
-		Y.all('.removeAction').on('click', function(e){
-			var parent = e.currentTarget.get('parentNode');
-			parent.remove();
-			e.halt();
-		});
-	}
 });
 </script>

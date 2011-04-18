@@ -24,12 +24,13 @@
 			</u:security>
 			</c:when>
 			<c:otherwise>
-			<form:form id="file-form${id}" cssClass="file-form" commandName="fileItem">
+			<form:form id="file-form${id}" action="${base}/process/commons/attachment" 
+				cssClass="file-form" commandName="fileItem">
 				<div>
 					<label>上传目录</label>
 					<br/>
 					<input id="folder${id}" class="text" value="${fileItem.folder.name}" readonly="readonly"/>
-					<input id="folderId${id}" type="hidden" value="${fileItem.folderId}"/>
+					<input id="folderId${id}" type="hidden" name="folderId" value="${fileItem.folderId}"/>
 					<a href="#" id="selectAction${id}">选择</a>
 				</div>
 				<div>
@@ -39,76 +40,59 @@
 				<div>
 					<form:hidden path="enteredId"/>
 					<form:hidden path="modifiedId"/>
-					<form:hidden path="folderId"/>
 					<input type="hidden" name="forward" value="/document/file"/>
 				</div>
 			</form:form>
 			</c:otherwise>
 		</c:choose>
-		<div id="folder-tree${id}"></div>
+		<div id="folder-tree${id}" class="tree" style="display: none"></div>
 	</div>
 </div>
 
 <script type="text/javascript">
-YUI().use('io-upload-iframe', 'json', function(Y){
-	var fileQueue = Y.one('#file-queue${id}');
-	Y.one('#select-file${id}').on('change', function(e){
-		var path = e.currentTarget.get('value');
-		//
-		var fileForm = Y.one('#file-form${id}');
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			var fileItem = Y.JSON.parse(o.responseText);	
-			var html = '<div><span>'+ path +'<span><a class="removeAction">x</a></div>';
-			Y.one('#file-queue${id}').insert(html);
-			bindEvent();
-			e.currentTarget.set('value', '');
-		});
-		Y.io('${base}/process/commons/attachment', {
-			method: 'POST',
-			form: {
-				id: fileForm,
-				upload: true
+$(document).ready(function(){
+	$('#select-file${id}').change(function(){
+		$('#file-form${id}').ajaxSubmit({
+			dataType: 'json',
+			beforeSubmit: function(formData, $form){
+				var folderId = $.trim(formData[0].value);
+				if(folderId=='') {
+					return false;
+				}
+				$form.find('#select-file${id}').busy({
+					img: '${base}/static/images/loading.gif'
+				});
+			},
+			success: function(fileItem){
+				setTimeout(function(){
+					window.location.href='?folderId=' + $('#folderId${id}').val();
+				}, 500);
 			}
 		});
-		e.halt();
 	});
-	function bindEvent() {
-		Y.all('.removeAction').on('click', function(e){
-			var parent = e.currentTarget.get('parentNode');
-			parent.remove();
-			e.halt();
-		});
-	}
 });
 </script>
 
 <script type="text/javascript">
-YUI().use('yui2-treeview', 'overlay', function(Y){
-	var YAHOO = Y.YUI2;
-	//
-	var overlay = new Y.Overlay({
-        srcNode:"#folder-tree${id}",
-        visible:false,
-        width:"20em",
-        align: {
-    		node: '#selectAction${id}',
-    		points: [Y.WidgetPositionAlign.TL, Y.WidgetPositionAlign.TR]
-    	}
+$(document).ready(function(){
+	$("#folder-tree${id}").zTree({
+		isSimpleData: true,
+		treeNodeKey: "id",
+		treeNodeParentKey: "pId",
+		showLine: true,
+		callback: {
+			beforeCollapse: function(){return false;},
+			click: function(event, id, node){
+				$('#folder${id}').val(node.name);
+				$('#folderId${id}').val(node.id);
+			}
+		}
+	}, ${folderTree});
+
+	$('#selectAction${id}').aqLayer({
+        margin: '0',
+        object: '#folder-tree${id}',
+        onLoad: function() {}
     });
-	overlay.render();
-	//
-	Y.one('#selectAction${id}').on('click', function(e){
-		overlay.show();
-		e.halt();
-	});
-	//
-	var tree = new YAHOO.widget.TreeView("folder-tree${id}", ${folderTree});
-	tree.subscribe("labelClick", function(node) {
-		Y.one('#folder${id}').set('value', node.label);
-		Y.one('#folderId${id}').set('value', node.data.id);
-		overlay.hide();
-    });
-	tree.render();
 });
 </script>

@@ -1,10 +1,11 @@
 package org.osforce.connect.web.module.document.fragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 import org.osforce.connect.entity.document.Folder;
 import org.osforce.connect.entity.system.Project;
@@ -38,8 +39,10 @@ public class FolderFragment {
 	
 	public  String doTreeView(Project project, FragmentContext context) {
 		List<Folder> parentFolders =  folderService.getRootForlders(project.getId());
-		JSONArray folderTree = buildTree(parentFolders);
-		context.putRequestData(AttributeKeys.FOLDER_TREE_KEY_READABLE, folderTree.toString());
+		List<Map<String, Object>> folderList = new ArrayList<Map<String, Object>>();
+		walkFolderTree(parentFolders, folderList);
+		String treeData = JSONSerializer.toJSON(folderList).toString();
+		context.putRequestData(AttributeKeys.FOLDER_TREE_KEY_READABLE, treeData);
 		return "document/folders_tree";
 	}
 	
@@ -64,44 +67,32 @@ public class FolderFragment {
 			parentFolders = folderService.getRootForlders(project.getId());
 		}
 		//
-		JSONArray folderTree = buildTree(parentFolders);
-		context.putRequestData(AttributeKeys.FOLDER_TREE_KEY_READABLE, folderTree.toString());
+		List<Map<String, Object>> folderList = new ArrayList<Map<String, Object>>();
+		walkFolderTree(parentFolders, folderList);
+		String treeData = JSONSerializer.toJSON(folderList).toString();
+		context.putRequestData(AttributeKeys.FOLDER_TREE_KEY_READABLE, treeData);
 		//
 		context.putRequestData(AttributeKeys.FOLDER_LIST_KEY_READABLE, parentFolders);
 		context.putRequestData(AttributeKeys.FOLDER_KEY_READABLE, folder);
 		return "document/folder_form";
 	}
 	
-	private JSONArray buildTree(List<Folder> folders) {
-		JSONArray jsonArray = new JSONArray();
+	private void walkFolderTree(List<Folder> folders, List<Map<String, Object>> folderList) {
 		for(Folder folder : folders) {
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("id", folder.getId());
-			jsonObject.put("label", folder.getName());
-			jsonObject.put("type", "text");
-			jsonObject.put("expanded", true);
-			if(!folder.getChildren().isEmpty()) {
-				walkTree(jsonObject, folder.getChildren());
+			Map<String, Object> model = new HashMap<String, Object>();
+			model.put("id", folder.getId());
+			if(folder.getParentId()!=null) {
+				model.put("pId", folder.getParentId());
 			}
-			jsonArray.add(jsonObject);
-		}
-		return jsonArray;
-	}
-	
-	private void walkTree(JSONObject jsonObject, List<Folder> folders) {
-		JSONArray jsonArray = new JSONArray();
-		for(Folder folder : folders) {
-			JSONObject subJsonObject = new JSONObject();
-			subJsonObject.put("id", folder.getId());
-			subJsonObject.put("label", folder.getName());
-			subJsonObject.put("type", "text");
-			subJsonObject.put("expanded", true);
-			if(!folder.getChildren().isEmpty()) {
-				walkTree(subJsonObject, folder.getChildren());
+			model.put("name", folder.getName());
+			model.put("icon", "");
+			model.put("open", true);
+			model.put("isParent", true);
+			folderList.add(model);
+			if(folder.getChildren()!=null) {
+				walkFolderTree(folder.getChildren(), folderList);
 			}
-			jsonArray.add(subJsonObject);
 		}
-		jsonObject.put("children", jsonArray);
 	}
 	
 }

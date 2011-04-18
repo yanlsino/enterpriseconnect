@@ -49,14 +49,12 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('node', function(Y){
-	Y.all('table.calendar .day a').on('click', function(e){
-		window.location.href="?date=" + e.currentTarget.get('title');
-		e.halt();
+$(document).ready(function(){
+	$('table.calendar .day a').click(function(){
+		window.location.href="?date=" + $(this).attr('title');
 	});
-	Y.all('table.calendar .week a').on('click', function(e){
-		window.location.href="?date=" + e.currentTarget.get('title');
-		e.halt();
+	$('table.calendar .week a').click(function(){
+		window.location.href="?date=" + $(this).attr('title');
 	});
 });
 </script>

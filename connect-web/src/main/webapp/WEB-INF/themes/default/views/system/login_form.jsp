@@ -42,44 +42,28 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var loginForm = Y.one('#login-form${id}');
-	loginForm.on('submit', function(e){
-		if(validateForm()) {
-			Y.io.header('Content-Type', 'application/json');
-			Y.on('io:complete', function(id, o){
-				try {
-					var user = Y.JSON.parse(o.responseText);
-					if('${param.popup}' == 'true') {
-						setTimeout('window.location.reload()', 0);
-					} else {
-						setTimeout('window.location.href="${base}/'+user.uniqueId+'/profile"', 0);
-					}
-				} catch(e) {
-					// TODO alert message username or password invalid
+$(document).ready(function(){
+	$('#login-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData){
+			// validate 
+			var username = formData[0].value;
+			var password = formData[1].value;
+			if($.trim(username)=='' || $.trim(password)=='' ||
+					username.match(/@.+\..+/)==null) {
+				return false;
+			}
+		},
+		success: function(user){
+			setTimeout(function(){
+				if('${param.popup}' == 'true') {
+					window.location.reload();					
+				} else {
+					window.location.href='${base}/' + user.uniqueId + '/profile';
 				}
-			});
-			Y.io(loginForm.get('action'), {
-				method: 'POST',
-				form: {
-					id: loginForm
-				}
-			});
+			}, 0);
 		}
-		e.halt();
 	});
-	//
-	function validateForm() {
-		var username = Y.one('#username${id}').get('value');
-		var password = Y.one('#password${id}').get('value');
-		if(Y.Lang.trim(username)=='' || Y.Lang.trim(password)=='') {
-			return false;
-		}
-		// regex
-		if(!username.match(/@.+\..+/)) {
-			return false;
-		}
-		return true;
-	}
 });
 </script>

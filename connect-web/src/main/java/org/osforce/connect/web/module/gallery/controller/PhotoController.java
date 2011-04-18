@@ -1,6 +1,6 @@
 package org.osforce.connect.web.module.gallery.controller;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.osforce.connect.entity.commons.Attachment;
@@ -36,7 +36,7 @@ public class PhotoController {
 	}
 	
 	@RequestMapping(value="/photo", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Long> update(Photo photo, WebRequest request) {
+	public @ResponseBody Map<String, Object> update(Photo photo, WebRequest request) {
 		Attachment attach = (Attachment) request.getAttribute(
 				AttributeKeys.ATTACHMENT_KEY, WebRequest.SCOPE_REQUEST);
 		photo.setName(attach.getName());
@@ -46,7 +46,11 @@ public class PhotoController {
 		} else {
 			photoService.updatePhoto(photo);
 		}
-		return Collections.singletonMap("id", photo.getId());
+		//
+		Map<String, Object> modal = new HashMap<String, Object>();
+		modal.put("id", photo.getId());
+		modal.put("albumId", photo.getAlbumId());
+		return modal;
 	}
 	
 }

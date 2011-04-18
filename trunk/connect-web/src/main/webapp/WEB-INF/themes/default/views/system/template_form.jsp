@@ -44,25 +44,15 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var templateForm = Y.one('#template-form${id}');
-	templateForm.on('submit', function(e){
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			try {
-				var template = Y.JSON.parse(o.responseText);
-				window.location.href='?templateId='+template.id+'&siteId=${param.siteId}';
-			} catch(e) {
-				// TODO alert message username or password invalid
-			}
-		});
-		Y.io(templateForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: templateForm
-			}
-		});
-		e.halt();
+$(document).ready(function(){
+	$('#template-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
+		},
+		success: function(template){
+			window.location.href='?templateId='+template.id+'&siteId=${param.siteId}';
+		}
 	});
 });
 </script>

@@ -103,98 +103,50 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var eventForm = Y.one('#event-form${id}');
-	eventForm.on('submit', function(e){
-		Y.one('#start${id}').set('value', getStartDate());
-		Y.one('#end${id}').set('value', getEndDate());
-		//
-		var startDate = Y.one('#start-date${id}').get('value');
-		var endDate = Y.one('#end-date${id}').get('value');
-		if(Y.Lang.trim(startDate)!='' && Y.Lang.trim(endDate)!='') {
-			Y.one('#status1${id}').hide();
-			Y.one('#status2${id}').show();
-			//
-			Y.io.header('Content-Type', 'application/json');
-			Y.on('io:complete', function(id, o){
-				try {
-					var event = Y.JSON.parse(o.responseText);
-					setTimeout('window.location.href="?eventId='+event.id+'"', 500);
-				} catch(e) {
-					// TODO alert message username or password invalid
-				}
+$(document).ready(function(){
+	$('#event-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSerialize: function(){
+			var start = getStartDate();
+			var end = getEndDate();
+			$('#start${id}').val(start);
+			$('#end${id}').val(end);
+		},
+		beforeSubmit: function(formData, $form){
+			var title = $.trim($('#title${id}').val());
+			var startDate = $.trim($('#start-date${id}').val());
+			var endDate = $.trim($('#end-date${id}').val());
+			if(title=='' || startDate=='' || endDate=='') {
+				return false
+			}
+			$form.find('.button').busy({
+				img: '${base}/static/images/loading.gif'
 			});
-			Y.io(eventForm.get('action'), {
-				method: 'POST',
-				form: {
-					id: eventForm
-				}
-			});
+		},
+		success: function(event){
+			setTimeout(function(){
+				window.location.href='?eventId=' + event.id;				
+			}, 500);
 		}
-		e.halt();
 	});
 	
 	function getStartDate() {
-		var dateStr = Y.one('#start-date${id}').get('value');
-		var hourStr = Y.one('#start-hour${id}').get('value');
-		var minuteStr = Y.one('#start-minute${id}').get('value');
+		var dateStr = $('#start-date${id}').val();
+		var hourStr = $('#start-hour${id}').val();
+		var minuteStr = $('#start-minute${id}').val();
 		return dateStr + ' ' + hourStr + ':' + minuteStr;
 	}
 	
 	function getEndDate() {
-		var dateStr = Y.one('#end-date${id}').get('value');
-		var hourStr = Y.one('#end-hour${id}').get('value');
-		var minuteStr = Y.one('#end-minute${id}').get('value');
+		var dateStr = $('#end-date${id}').val();
+		var hourStr = $('#end-hour${id}').val();
+		var minuteStr = $('#end-minute${id}').val();
 		return dateStr + ' ' + hourStr + ':' + minuteStr;
 	}
-});
-</script>
-<%-- 
-<script type="text/javascript">
-YUI().use('node', function(Y){
-	Y.all('.hours').each(function(){
-		for(i=0; i<24;i++) {
-			this.insert('<option>'+i+'</option>'); 
-		}
-	});
-	Y.all('.minutes').each(function(){
-		for(i=0; i<60;i++) {
-			this.insert('<option>'+i+'</option>');
-		}
-	});
-});
-</script>
---%>
 
-<script type="text/javascript">
-YUI().use('node', 'yui2-calendar', 'overlay', function(Y) {
-	var YAHOO = Y.YUI2;
-	//
-	var overlay = new Y.Overlay({
-        srcNode:"#overlay${id}",
-        visible:false
-    });
-	
-	overlay.render();
-	
-	Y.all('input.calendar').on('click', function(e){
-		var cal = new YAHOO.widget.Calendar('calendar', 'calendar${id}', {
-			close: false
-		});
-		cal.selectEvent.subscribe(function(d){
-			var dateArray = cal.getSelectedDates();
-			for(i in dateArray) {
-				var d = dateArray[i];
-				var dateStr = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
-				e.currentTarget.set('value', dateStr);
-				overlay.hide();
-			}
-		});
-		cal.render();
-		//
-		overlay.set("align", {node: e.currentTarget,
-    		points: [Y.WidgetPositionAlign.TL, Y.WidgetPositionAlign.TR]});
-		overlay.show();
-	});
+	Date.format = 'yyyy-m-d';
+	$('#start-date${id}').datePicker();
+	$('#end-date${id}').datePicker();
 });
 </script>

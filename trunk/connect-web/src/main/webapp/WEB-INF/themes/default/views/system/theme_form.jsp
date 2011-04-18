@@ -27,25 +27,15 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var themeForm = Y.one('#theme-form${id}');
-	themeForm.on('submit', function(e){
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			try {
-				var theme = Y.JSON.parse(o.responseText);
-				window.location.href='?themeId='+theme.id;
-			} catch(e) {
-				// TODO alert message username or password invalid
-			}
-		});
-		Y.io(themeForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: themeForm
-			}
-		});
-		e.halt();
+$(document).ready(function(){
+	$('#template-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
+		},
+		success: function(theme){
+			window.location.href='?themeId='+theme.id;
+		}
 	});
 });
 </script>

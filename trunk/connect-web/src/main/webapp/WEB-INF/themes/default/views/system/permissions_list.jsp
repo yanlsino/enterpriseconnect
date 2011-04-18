@@ -49,9 +49,7 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('node', function(Y){
-	Y.one('#select-category${id}').on('change', function(e){
-		window.location.href='?siteId=${param.siteId}&categoryId=' + e.currentTarget.get('value');
-	});
+$('#select-category${id}').change(function(){
+	window.location.href='?siteId=${param.siteId}&categoryId=' + $(this).val();
 });
 </script>

@@ -48,6 +48,10 @@ public class CommentController {
 		model.put("id", comment.getId());
 		model.put("linkedId", comment.getLinkedId());
 		model.put("content", comment.getContent());
+		model.put("entered_pretty", new PrettyTime().format(comment.getEntered()));
+		model.put("enteredBy_project_profile_logo_id", comment.getEnteredBy().getProject().getProfile().getLogoId());
+		model.put("enteredBy_project_category_code", comment.getEnteredBy().getProject().getCategory().getCode());
+		model.put("enteredBy_project_uniqueId", comment.getEnteredBy().getProject().getUniqueId());
 		return model;
 	}
 	

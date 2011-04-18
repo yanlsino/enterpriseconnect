@@ -42,25 +42,15 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var resourceForm = Y.one('#resource-form${id}');
-	resourceForm.on('submit', function(e){
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			try {
-				var resource = Y.JSON.parse(o.responseText);
-				window.location.href="?resourceId="+resource.id;
-			} catch(e) {
-				// TODO alert message username or password invalid
-			}
-		});
-		Y.io(resourceForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: resourceForm
-			}
-		});
-		e.halt();
+$(document).ready(function(){
+	$('#resource-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
+		},
+		success: function(resource){
+			window.location.href="?resourceId="+resource.id;
+		}
 	});
 });
 </script>

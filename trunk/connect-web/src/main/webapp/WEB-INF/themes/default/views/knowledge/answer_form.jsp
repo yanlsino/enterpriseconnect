@@ -45,77 +45,25 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('yui2-editor', function(Y){
-	var YAHOO = Y.YUI2;
-	//
-	var editor = new YAHOO.widget.Editor('editor${id}', 
-	{
-	    animate: true,
-	    dompath: true,
-	    focusAtStart: true,
-	    autoHeight: true,
-	    collapse: false,
-	    toolbar: {
-	      collapse: false,
-	      draggable: false,
-	      buttonType: 'advanced',
-	      buttons: [
-	          { group: 'textstyle',
-	              buttons: [
-	                  { type: 'push', label: 'Bold CTRL + SHIFT + B', value: 'bold' },
-	                  { type: 'push', label: 'Italic CTRL + SHIFT + I', value: 'italic' },
-	                  { type: 'push', label: 'Underline CTRL + SHIFT + U', value: 'underline' },
-	              ]
-	          },             
-	          { type: 'separator' },
-	          { group: 'indentlist',
-	              buttons: [
-	                  { type: 'push', label: 'Indent', value: 'indent', disabled: true },
-	                  { type: 'push', label: 'Outdent', value: 'outdent', disabled: true },
-	                  { type: 'push', label: 'Create an Unordered List', value: 'insertunorderedlist' },
-	                  { type: 'push', label: 'Create an Ordered List', value: 'insertorderedlist' }
-	              ]
-	          }        
-	      ]
-	    }
-	});
-	//
-	editor.on('toolbarLoaded', function() {
-	    this.on('afterNodeChange', function(o) {
-	    	editor.saveHTML();
-	    });
-	}, editor, true);
-	editor.render();
-});
-</script>
-
-<script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var answerForm = Y.one('#answer-form${id}');
-	answerForm.on('submit', function(e){
-		var content = Y.one('#content${id}').get('value'); 
-		if(Y.Lang.trim(content)!='') {		
-			Y.one('#status1${id}').hide();
-			Y.one('#status2${id}').show();
-			//
-			Y.io.header('Content-Type', 'application/json');
-			Y.on('io:complete', function(id, o){
-				try {
-					var answer = Y.JSON.parse(o.responseText);
-					setTimeout('window.location.href="?answerId='+answer.id+'"', 500);
-					Y.one('#content${id}').set('value', '');
-				} catch(e) {
-					// TODO alert message username or password invalid
-				}
+$(document).ready(function(){
+	$('#answer-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form){
+			var content = $.trim(formData[0].value);
+			if(content=='') {
+				return false;
+			}
+			$form.find('.button').busy({
+				img: '${base}/static/images/loading.gif'
 			});
-			Y.io(answerForm.get('action'), {
-				method: 'POST',
-				form: {
-					id: answerForm
-				}
-			});
+		},
+		success: function(answer){
+			setTimeout(function(){
+				window.location.reload();				
+			}, 500);
 		}
-		e.halt();
 	});
+	$('#editor${id}').htmlarea(settings.simple);
 });
 </script>

@@ -54,12 +54,7 @@
 				<tr>
 					<td>
 					<button id="submit${id}" class="button">
-						<span id="status1${id}">
-							提交
-						</span>
-						<span id="status2${id}" style="display: none">
-							<img src="${base}/static/images/loading.gif"/>正在处理...
-						</span>
+						提交
 					</button>
 					</td>
 				</tr>
@@ -71,24 +66,22 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var featureForms = Y.all('.feature-form');
-	Y.one('#submit${id}').on('click', function(e){
-		Y.one('#status1${id}').hide();
-		Y.one('#status2${id}').show();
-    	//
-    	featureForms.each(function(e){
-    		Y.io.header('Content-Type', 'application/json');
-    		Y.io(this.get('action'), {
-    			method: 'POST',
-    			form: {
-    				id: this
-    			}
-    		});
-    	});
-    	//
-    	setTimeout('window.location.reload()', 500);
-		e.halt();
+$(document).ready(function(){
+	$('#submit${id}').click(function(){
+		$('.feature-form').each(function(){
+			$('.feature-form').ajaxSubmit({
+				forceSync: true,
+				dataType: 'json',
+				beforeSubmit: function(formData){
+					var label = $.trim(formData[0].value);
+					var code = $.trim(formData[1].value);
+					if(label=='' || code=='') {
+						return false;
+					}
+				}
+			});
+			window.location.reload();
+		});
 	});
 });
 </script>

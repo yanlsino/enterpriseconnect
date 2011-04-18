@@ -44,25 +44,15 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var mailSettingsForm = Y.one('#mail-settings-form${id}');
-	mailSettingsForm.on('submit', function(e){
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			try {
-				var mailSettings = Y.JSON.parse(o.responseText);
-				window.location.href='?mailSettingsId='+mailSettings.id;
-			} catch(e) {
-				// TODO alert message username or password invalid
-			}
-		});
-		Y.io(mailSettingsForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: mailSettingsForm
-			}
-		});
-		e.halt();
+$(document).ready(function(){
+	$('#mail-settings-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
+		},
+		success: function(mailSettings){
+			window.location.href='?mailSettingsId='+mailSettings.id;
+		}
 	});
 });
 </script>

@@ -105,7 +105,7 @@ public class Event extends IdEntity {
 	}
 
 	@Column(name="start_date", nullable=false)
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern="yyyy-M-d HH:mm")
 	public Date getStart() {
 		return start;
 	}
@@ -115,7 +115,7 @@ public class Event extends IdEntity {
 	}
 	
 	@Column(name="end_date", nullable=false)
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern="yyyy-M-d HH:mm")
 	public Date getEnd() {
 		return end;
 	}

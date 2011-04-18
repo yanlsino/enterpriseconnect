@@ -41,13 +41,13 @@
 						</c:choose>
 						<div class="right">
 							<u:prettyTime date="${activity.entered}"/>
-							<a class="comment-action" id="${activity.id}">
+							<a class="comment-action" id="${activity.id}" href="${base}/process/commons/comments?entity=Activity&linkedId=${activity.id}">
 								<fmt:message key="vblog.activities_list.comment"><fmt:param value="${activity.commentCount}"/></fmt:message>
 							</a>
 						</div>
 						<div class="clear"></div>
 					</div>
-					<div id="comments-list${activity.id}">
+					<ul id="comments-list${activity.id}" class="comments-list">
 					<%-- replace use ajax load 
 					<c:forEach var="comment" items="${activity.comments}" varStatus="status">
 						<li>
@@ -67,11 +67,11 @@
 						</li>
 					</c:forEach>
 					--%>
-					</div>
+					</ul>
 					<form id="activity-comment-form${activity.id}" class="activity-comment-form" style="display: none;" action="${base}/process/commons/comment" method="post">
 					<c:choose>
 						<c:when test="${empty user}">
-							<div class="notice">添加评论，请先 <a href="${base}/login">登录</a></div>
+							<div class="notice">添加评论，请先 <a href="${base}/app/login/form" class="loginAction">登录</a></div>
 						</c:when>
 						<c:otherwise>
 							<div>
@@ -107,82 +107,58 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var pageNo = 1;
-	var totalPages = ${page.totalPages};
-	var moreAction = Y.one('.more-action${id}');
-	if(moreAction!=null) {
-		moreAction.on('click', function(e){
-			if(++pageNo<=totalPages) {
-				Y.on('io:complete', function(id, o){
-					Y.one('.activities-list').append(
-							Y.Node.create(o.responseText).one('.activities-list'));
-				});
-				Y.io('${base}/process/fragment/${id}?uniqueId=${project.uniqueId}&pageNo='+pageNo);
-			} else {
-				moreAction.setStyle('display', 'none');
+$(document).ready(function(){
+	$('.activity-comment-form').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
+			var content = $.trim(formData[0].value);
+			if(content=='') {
+				return false;
 			}
-			e.halt();
-		});
-	}
-	Y.all('.comment-action').on('click', function(e){
-		var activityId = e.target.get('id');
-		showCommentForm(activityId);
-		showCommentList(activityId);
+		},
+		success: function(comment){
+			_fillCommentListContainer(comment)
+		}
 	});
-	Y.all('.cancel-action').on('click', function(e){
-		var activityId = e.target.get('id');
-		hideCommentForm(activityId);
+
+	$('.comment-action').click(function(){
+		showCommentList(this);
+		showCommentForm(this);
+		return false;
 	});
-	Y.all('.activity-comment-form').on('submit', function(e){
-		var commentForm = e.currentTarget;
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			//
-		});
-		Y.io(commentForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: commentForm
-			}
-		});
-		window.location.reload();
-		e.halt();
-	});
-	function showCommentForm(activityId) {
-		Y.one('#activity-comment-form'+activityId).setStyle('display', 'block');
+
+	function showCommentForm(link) {
+		var id = $(link).attr('id');
+		$('#activity-comment-form'+id).show();
 	}
-	function hideCommentForm(activityId) {
-		Y.one('#activity-comment-form'+activityId).setStyle('display', 'none');
+
+	function showCommentList(link) {
+		var id = $(link).attr('id');
+		if($('#comments-list'+id).find('li').size()==0) {
+			var url = $(link).attr('href');
+			$.get(url, function(comments){
+				for(i in comments) {
+					_fillCommentListContainer(comments[i]);	
+				}
+			});
+		}
 	}
-	function showCommentList(activityId) {
-		Y.on('io:complete', function(id, o){
-			var commentList = Y.JSON.parse(o.responseText);
-			for(i in commentList) {
-				var comment = commentList[i];
-				_fillCommentListContainer(comment);
-			}
-		});
-		Y.io('${base}/process/commons/comments?entity=Activity&linkedId='+activityId);
-	}
+
 	function _fillCommentListContainer(comment) {
-		var container = Y.one('#comments-list'+comment.linkedId);
-		var html = '<ul class="comments-list">' +
-						'<li>' + 
+		var item = '<li>' + 
 							'<a href="${base}/'+ comment.enteredBy_project_uniqueId +'/profile">';
 		if(comment.enteredBy_project_profile_logo_id!=null) {
-			html += '<img class="top left thumbnail" src="${base}/logo/download/'+ comment.enteredBy_project_profile_logo_id +'/35x35"/>';
+			item += '<img class="top left thumbnail" src="${base}/logo/download/'+ comment.enteredBy_project_profile_logo_id +'/35x35"/>';
 		} else {
-			html += '<img class="top left thumbnail" src="${base}/themes/${theme.name}/stock/'+ comment.enteredBy_project_category_code +'.png" width="35" height="35"/>';
+			item += '<img class="top left thumbnail" src="${base}/themes/${theme.name}/stock/'+ comment.enteredBy_project_category_code +'.png" width="35" height="35"/>';
 		}
-		html +=     '</a>'; 
-		html += 	'<p class="comment-content">'+comment.content+'</p>' + 
+		item +=     '</a>'; 
+		item += 	'<p class="comment-content">'+comment.content+'</p>' + 
 					'<span class="top right">'+comment.entered_pretty+'</span>' +
 					'<br class="clear"/>' +
-					'</li>' +
-				'</ul>'
-		//container.append(html);
-		container.set('innerHTML', html);
+					'</li>';
+		$('#comments-list'+comment.linkedId).append(item);
 	}
 });
 </script>

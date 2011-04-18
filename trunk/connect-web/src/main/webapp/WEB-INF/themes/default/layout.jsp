@@ -18,53 +18,59 @@
 	
 	<!-- plugins -->
     <link rel="stylesheet" href="${base}/themes/${theme.name}/css/plugins/buttons/screen.css" type="text/css" media="screen, projection"/>
+     
 	
-	<link rel="stylesheet" href="${base}/themes/${theme.name}/css/style.css" type="text/css" media="screen, projection"/>
-    <link rel="stylesheet" href="${base}/themes/${theme.name}/css/fragment.css" type="text/css" media="screen, projection"/>
+    <script type="text/javascript" src="${base}/static/components/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="${base}/static/components/global.js"></script>
     
-    <script type="text/javascript" src="${base}/static/js/yui/yui-min.js"></script>
-    <script type="text/javascript" src="${base}/static/js/globle.js"></script>
+    <link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-jHtmlArea/style/jHtmlArea.css"/>
+    <script type="text/javascript" src="${base}/static/components/jquery-jHtmlArea/jquery.jHtmlArea.min.js"></script>
+    
+    <script type="text/javascript" src="${base}/static/components/jquery-form/jquery.form.min.js"></script>
+    <script type="text/javascript" src="${base}/static/components/jquery-busy/jquery.busy.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-datePicker/jquery.datePicker.css"/>
+    <script type="text/javascript" src="${base}/static/components/jquery-datePicker/jquery.datePicker.js"></script>
+    <script type="text/javascript" src="${base}/static/components/jquery-datePicker/date.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-simplemodal/jquery.simplemodal.css"/>
+    <script type="text/javascript" src="${base}/static/components/jquery-simplemodal/jquery.simplemodal.min.js"></script>
+    
+    <script type="text/javascript" src="${base}/static/components/jquery-jqLayer/jquery.jqLayer.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-zTree/jquery.zTree.css"/>
+    <script type="text/javascript" src="${base}/static/components/jquery-zTree/jquery.zTree.min.js"></script>
+    
+    <script type="text/javascript" src="${base}/static/components/jquery-cycle/jquery.cycle.min.js"></script>
+    
+    <script type="text/javascript" src="http://yui.yahooapis.com/3.3.0/build/yui/yui-min.js"></script>
+    
+    
+    <link rel="stylesheet" href="${base}/themes/${theme.name}/css/style.css" type="text/css" media="screen, projection"/>
+    <link rel="stylesheet" href="${base}/themes/${theme.name}/css/fragment.css" type="text/css" media="screen, projection"/>
     <script type="text/javascript">
-    YUI().use('node', 'lang', function(Y){
-    	Y.on('domready', function(){
-    		var hasLeftColumn = false;
-        	var hasRightColumn = false;
-        	if(Y.one('#body .left-column')!=null) {
-        		hasLeftColumn = Y.Lang.trim(Y.one('#body .left-column').getContent())!='';
-        	}
-        	if(Y.one('#body .right-column')!=null) {
-        		hasRightColumn = Y.Lang.trim(Y.one('#body .right-column').getContent())!='';
-        	}
-        	if(!hasLeftColumn || !hasRightColumn) {
-        		if(!hasLeftColumn) {
-        			if(Y.one('#body .left-column')!=null) {
-        				Y.one('#body .left-column').remove();
-        			}
-        			Y.one('#body .main-column').addClass('span-16');
-        		}
-        		if(!hasRightColumn) {
-        			Y.one('#body .main-column').addClass('span-19');
-        			Y.one('#body .main-column').addClass('last');
-        			if(Y.one('#body .right-column')!=null) {
-        				Y.one('#body .right-column').remove();
-        			}
-        		}
-        		if(!hasLeftColumn && !hasRightColumn) {
-        			if(Y.one('#body .left-column')!=null) {
-        				Y.one('#body .left-column').remove();
-        			}
-        			if(Y.one('#body .right-column')!=null) {
-        				Y.one('#body .right-column').remove();
-        			}
-        			Y.one('#body .main-column').addClass('span-24');
-        			Y.one('#body .main-column').addClass('last');
-        		}
-    		}
-    	});
+    $(document).ready(function(){
+		var hasLeftColumn = $.trim($('#body .left-column').html())!='';
+		var hasRightColumn = $.trim($('#body .right-column').html())!='';
+		if(!hasLeftColumn) {
+			$('#body .left-column').remove();
+			$('#body .main-column').addClass('span-16');
+		}
+		if(!hasRightColumn) {
+			$('#body .right-column').remove();
+			$('#body .main-column').addClass('span-19');
+			$('#body .main-column').addClass('last');
+		}
+		if(!hasLeftColumn && !hasRightColumn) {
+			$('#body .left-column').remove();
+			$('#body .right-column').remove();
+			$('#body .main-column').addClass('span-24');
+			$('#body .main-column').addClass('last');
+		}
     });
 	</script>
 </head>
-<body class="yui-skin-sam">
+<body>
 	<div class="container">
 		<div id="head">
 			<a href="${base}">

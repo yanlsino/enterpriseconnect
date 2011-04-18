@@ -70,25 +70,15 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('lang', 'io-form', 'json', function(Y){
-	var siteForm = Y.one('#site-form${id}');
-	siteForm.on('submit', function(e){
-		Y.io.header('Content-Type', 'application/json');
-		Y.on('io:complete', function(id, o){
-			try {
-				var site = Y.JSON.parse(o.responseText);
-				window.location.href='?siteId='+site.id;
-			} catch(e) {
-				// TODO alert message username or password invalid
-			}
-		});
-		Y.io(siteForm.get('action'), {
-			method: 'POST',
-			form: {
-				id: siteForm
-			}
-		});
-		e.halt();
+$(document).ready(function(){
+	$('#site-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
+		},
+		success: function(site){
+			window.location.href='?siteId='+site.id;
+		}
 	});
 });
 </script>

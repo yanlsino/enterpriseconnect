@@ -2,7 +2,6 @@ package org.osforce.connect.web.module.document.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +45,7 @@ public class FolderController {
 		return Collections.singletonMap("id", folder.getId());
 	}
 	
+	@Deprecated
 	@RequestMapping(value="/folders")
 	public @ResponseBody List<Map<String, Object>> list(
 			@RequestParam Long projectId, @RequestParam(required=false) Long id,
@@ -58,24 +58,8 @@ public class FolderController {
 			Folder folder = folderService.getFolder(id);
 			tmp = folder.getChildren();
 		}
-		walkFolderTree(tmp, folderList, tree);
+		//walkFolderTree(tmp, folderList);
 		return folderList;
 	}
 	
-	private void walkFolderTree(List<Folder> folders, List<Map<String, Object>> folderList, boolean tree) {
-		for(Folder folder : folders) {
-			Map<String, Object> model = new HashMap<String, Object>();
-			model.put("id", folder.getId());
-			if(folder.getParentId()!=null) {
-				model.put("pId", folder.getParentId());
-			}
-			model.put("name", folder.getName());
-			model.put("icon", "");
-			model.put("isParent", true);
-			folderList.add(model);
-			if(tree && folder.getChildren()!=null) {
-				walkFolderTree(folder.getChildren(), folderList, tree);
-			}
-		}
-	}
 }

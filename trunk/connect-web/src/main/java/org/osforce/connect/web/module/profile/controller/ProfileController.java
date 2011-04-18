@@ -1,6 +1,7 @@
 package org.osforce.connect.web.module.profile.controller;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.osforce.connect.entity.commons.Attachment;
@@ -43,11 +44,14 @@ public class ProfileController {
 	}
 	
 	@RequestMapping(value="/profile/profile", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Long> update(@RequestParam String[] labels, 
-			@RequestParam String[] values, Profile profile, WebRequest request) {
+	public @ResponseBody Map<String, Object> update(@RequestParam String[] labels, 
+			@RequestParam String[] values, Profile profile) {
 		profile.setAttributes(labels, values);
 		profileService.updateProfile(profile);
-		return Collections.singletonMap("id", profile.getId());
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("id", profile.getId());
+		model.put("title", profile.getTitle());
+		return model;
 	}
 	
 	@RequestMapping(value="/profile/logo")

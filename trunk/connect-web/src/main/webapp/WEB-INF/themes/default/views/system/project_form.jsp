@@ -43,42 +43,21 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('io-form', 'json', function(Y){
-	var projectForm = Y.one('#project-form${id}');
-	projectForm.on('submit', function(e){
-		Y.one('#status1${id}').hide();
-		Y.one('#status2${id}').show();
-		//
-		if(validateForm()) {
-			Y.io.header('Content-Type', 'application/json');
-			Y.on('io:complete', function(id, o){
-				try {
-					var project = Y.JSON.parse(o.responseText);
-					window.location.href='${base}/'+project.uniqueId+'/profile';
-				} catch(e) {
-					// TODO alert message username or password invalid
-				}
-			});
-			Y.io(projectForm.get('action'), {
-				method: 'POST',
-				form: {
-					id: projectForm
-				}
-			});
+$(document).ready(function(){
+	$('##project-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form) {
+			var title = $.trim(formData[0].value);
+			var uniqueId = $.trim(formData[1].value);
+			if(title=='' || uniqueId=='' ||
+					uniqueId.match(/^[\w_-]+$/)==null) {
+				return false;
+			}
+		},
+		success: function(project){
+			window.location.href='${base}/'+project.uniqueId+'/profile';
 		}
-		e.halt();
 	});
-	
-	function validateForm() {
-		var title = Y.one('#title${id}').get('value');
-		var uniqueId = Y.one('#uniqueId${id}').get('value');
-		if(Y.Lang.trim(title)=='' || Y.Lang.trim(uniqueId)=='') {
-			return false;
-		}
-		if(uniqueId.match(/^[\w_-]+$/)==null) {
-			return false;
-		}
-		return true;
-	}
 });
 </script>

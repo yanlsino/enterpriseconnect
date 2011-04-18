@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<page name="/apps/tag_form">
-	<position name="mainColumn">
-		<fragment refer="tagFragment" view="Form">
-			<title>编辑 Tags</title>
-		</fragment>
-	</position>
-</page>

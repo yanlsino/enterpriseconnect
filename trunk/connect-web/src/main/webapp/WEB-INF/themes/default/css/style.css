@@ -10,7 +10,7 @@ body {
 }
 #head #wrapper {
 	float: right;
-	text-align: right;	
+	text-align: right;
 }
 #user-menu {
 	margin: 10px 0;
@@ -19,7 +19,7 @@ body {
 	list-style: none;
 }
 #user-menu ul li {
-	display: inline;	
+	display: inline;
 }
 #site-search {
 }
@@ -34,7 +34,7 @@ body {
 	list-style: none;
 }
 #main-menu ul li {
-	display: inline;	
+	display: inline;
 }
 #main-menu ul li a {
 	padding:0 5px;
@@ -77,7 +77,7 @@ body {
 	border-bottom: none;
 	font-size: 120%;
 }
- 
+
 #sub-menu ul a:hover {
 background: #fff;
 }
@@ -88,7 +88,7 @@ background: #fff;
 	margin-bottom: 1.5em;
 }
 a {
-	text-decoration: none;	
+	text-decoration: none;
 }
 
 a:hover {
@@ -96,15 +96,19 @@ a:hover {
 }
 
 .error, .alert, .notice, .success, .info {
-	margin: 0;	
+	margin: 0;
 }
 .thumbnail {
 	border: 1px solid #DDD;
-	padding: 5px;	
+	padding: 5px;
+}
+.required {
+	font: bold;
+	color: 	red;
 }
 ul {
 	margin: 0;
-	padding: 0;	
+	padding: 0;
 }
 ul li {
 	margin: 0;

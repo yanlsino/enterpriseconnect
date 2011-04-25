@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 12, 2011 - 10:11:38 PM
@@ -37,26 +37,26 @@ public class ProjectFragment {
 	private RoleService roleService;
 	private TemplateService templateService;
 	private ProjectCategoryService projectCategoryService;
-	
+
 	public ProjectFragment() {
 	}
-	
+
 	@Autowired
 	public void setRoleService(RoleService roleService) {
 		this.roleService = roleService;
 	}
-	
+
 	@Autowired
 	public void setTemplateService(TemplateService templateService) {
 		this.templateService = templateService;
 	}
-	
+
 	@Autowired
 	public void setProjectCategoryService(
 			ProjectCategoryService projectCategoryService) {
 		this.projectCategoryService = projectCategoryService;
 	}
-	
+
 	public String doProjectView(Project project, FragmentContext context) {
 		if(project==null) {
 			return "commons/blank";
@@ -64,8 +64,8 @@ public class ProjectFragment {
 		context.putRequestData(AttributeKeys.PROJECT_KEY_READABLE, project);
 		return "system/project";
 	}
-	
-	public String doFormView(@Pref String templateCode, @Pref String categoryCode, 
+
+	public String doFormView(@Pref String templateCode, @Pref String categoryCode,
 			User user, Site site, FragmentContext context) {
 		ProjectCategory category = projectCategoryService
 				.getProjectCategory(site, categoryCode);
@@ -84,7 +84,7 @@ public class ProjectFragment {
 		context.putRequestData(AttributeKeys.PROJECT_KEY_READABLE, project);
 		return "system/project_form";
 	}
-	
+
 	public String doProjectMenuView(@Param String viewName, User user,
 			TeamMember member, Project project, FragmentContext context) {
 		if(project==null) {
@@ -93,7 +93,7 @@ public class ProjectFragment {
 		List<ProjectFeature> features = project.getFeatures();
 		List<ProjectFeature> tmp = new ArrayList<ProjectFeature>();
 		for(ProjectFeature feature : features) {
-			if(PermissionUtil.hasPermission(feature, project, user, member)) {
+			if(PermissionUtil.hasPermission(feature,user, member)) {
 				tmp.add(feature);
 			}
 		}
@@ -103,5 +103,5 @@ public class ProjectFragment {
 		context.putRequestData(AttributeKeys.FEATURE_CODE_KEY_READABLE, featureCode);
 		return "system/project_menu";
 	}
-	
+
 }

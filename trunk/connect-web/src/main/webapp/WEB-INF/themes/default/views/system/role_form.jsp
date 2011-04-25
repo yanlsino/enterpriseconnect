@@ -9,34 +9,38 @@
 	<c:if test="${not empty title}">
 	<div class="head">
 		<h3>${title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
-		<form:form id="role-form${id}" cssClass="role-form" 
+		<form:form id="role-form${id}" cssClass="role-form"
 			action="${base}/process/system/role" commandName="role">
 				<div>
-					<label for="name">角色名:</label>
+					<label for="categoryId">分类</label>
+					<form:select path="categoryId" items="${categories}" itemLabel="label" itemValue="id"/>
+				</div>
+				<div>
+					<label for="name">角色名 <span class="required">*</span></label>
+					<br/>
 					<form:input path="name"/>
 				</div>
 				<div>
-					<label for="code">编码:</label>
+					<label for="code">编码 <span class="required">*</span></label>
+					<br/>
 					<form:input path="code"/>
 				</div>
 				<div>
-					<label for="level">级别:</label>
+					<label for="level">级别 <span class="required">*</span></label>
+					<br/>
 					<form:input path="level"/>
 				</div>
 				<div>
-					<label for="description">描述:</label>
+					<label for="description">描述</label>
+					<br/>
 					<form:textarea path="description"/>
 				</div>
 				<div>
-					<label for="enabled">启用:</label>
+					<label for="enabled">启用</label>
 					<form:checkbox path="enabled"/>
-				</div>
-				<div>
-					<label for="categoryId">分类:</label>
-					<form:select path="categoryId" items="${categories}" itemLabel="label" itemValue="id"/>
 				</div>
 				<div>
 					<input type="submit" value=" 提交 "/>
@@ -52,6 +56,12 @@ $(document).ready(function(){
 		dataType: 'json',
 		clearForm: true,
 		beforeSubmit: function(formData, $form) {
+			var name = $.trim(formData[0].value);
+			var code = $.trim(formData[1].value);
+			var level = $.trim(formData[2].value);
+			if(name=='' || code=='' ||level=='') {
+				return false;
+			}
 		},
 		success: function(role){
 			window.location.href='?roleId='+role.id+'&siteId=${param.siteId}';

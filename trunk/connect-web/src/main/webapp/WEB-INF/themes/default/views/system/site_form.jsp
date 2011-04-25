@@ -10,59 +10,72 @@
 	<c:if test="${not empty title}">
 	<div class="head">
 		<h3>${title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
-		<form:form id="site-form${id}" cssClass="site-form" 
+		<form:form id="site-form${id}" cssClass="site-form"
 			action="${base}/process/system/site" commandName="site">
 				<div>
-					<label for="domain">网站域名:</label>
+					<label for="domain">网站域名 <span class="required">*</span></label>
+					<br/>
 					<form:input path="domain"/>
 				</div>
 				<div>
-					<label for="contextPath">上下文</label>
+					<label for="contextPath">上下文 <span class="required">*</span></label>
+					<br/>
 					<form:input path="contextPath"/>
 				</div>
 				<div>
-					<label for="port">端口</label>
+					<label for="port">端口 <span class="required">*</span></label>
+					<br/>
 					<form:input path="port"/>
 				</div>
 				<div>
 					<label for="ssl">SSL</label>
+					<br/>
 					<form:checkbox path="ssl"/>
 				</div>
 				<div>
-					<label for="title">网站标题:</label>
+					<label for="title">网站标题 <span class="required">*</span></label>
+					<br/>
 					<form:input path="title"/>
 				</div>
 				<div>
-					<label for="description">网站描述:</label>
+					<label for="description">网站描述</label>
+					<br/>
 					<form:textarea path="description"/>
 				</div>
 				<div>
-					<label for="keywords">网站关键词:</label>
+					<label for="keywords">网站关键词</label>
+					<br/>
 					<form:input path="keywords"/>
 				</div>
 				<div>
-					<label for="copyright">网站版权:</label>
+					<label for="copyright">网站版权</label>
+					<br/>
 					<form:textarea path="copyright"/>
 				</div>
 				<div>
-					<label for="theme">网站主题:</label>
-					<c:if test="${fn:length(themes) gt 0}">
-						<form:select path="themeId" items="${themes}" itemLabel="name" itemValue="id"/>
-					</c:if>
+					<label for="theme">网站主题</label>
+					<br/>
+					<form:select path="themeId">
+						<form:option value="" label="default"/>
+						<form:options items="${themes}" itemLabel="name" itemValue="id"/>
+					</form:select>
 				</div>
+
 				<div>
-					<label for="mailSettings">邮件配置:</label>
+					<label for="mailSettings">邮件配置</label>
+					<br/>
 					<form:select path="mailSettingsId" items="${mailSettingsList}" itemLabel="host" itemValue="id"/>
 				</div>
 				<div>
 					<label for="enabled">启用</label>
+					<br/>
 					<form:checkbox path="enabled"/>
 				</div>
 				<div>
-					<input type="submit" value=" 提交 "/>
+					<button type="submit" class="button">提交</button>
 					<form:hidden path="id"/>
 				</div>
 		</form:form>
@@ -75,6 +88,13 @@ $(document).ready(function(){
 		dataType: 'json',
 		clearForm: true,
 		beforeSubmit: function(formData, $form) {
+			var domain = $.trim(formData[0].value);
+			var contextPath = $.trim(formData[1].value);
+			var port = $.trim(formData[2].value);
+			var title = $.trim(formData[4].value);
+			if(domain=='' || contextPath=='' || port=='' || title=='') {
+				return false;
+			}
 		},
 		success: function(site){
 			window.location.href='?siteId='+site.id;

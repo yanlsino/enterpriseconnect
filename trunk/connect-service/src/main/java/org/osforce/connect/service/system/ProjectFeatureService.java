@@ -13,6 +13,8 @@ public interface ProjectFeatureService {
 
 	ProjectFeature getProjectFeature(Long featureId);
 	
+	ProjectFeature getProjectFeature(String code, Long projectId);
+	
 	void createProjectFeature(ProjectFeature feature);
 	
 	void updateProjectFeature(ProjectFeature feature);

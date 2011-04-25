@@ -8,7 +8,7 @@ import org.osforce.connect.entity.system.User;
 import org.osforce.connect.entity.team.TeamMember;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 24, 2011 - 11:55:47 AM
@@ -18,7 +18,7 @@ public abstract class PermissionUtil {
 
 	public static boolean hasPermission(Permission permission, Project project,
 			User user, TeamMember member) {
-		if(permission!=null && 
+		if(permission!=null &&
 				NumberUtils.compare(permission.getRole().getLevel(), 100)>=0) {
 			return true;
 		}
@@ -33,9 +33,9 @@ public abstract class PermissionUtil {
 		}
 		return false;
 	}
-	
-	public static boolean hasPermission(ProjectFeature feature, Project project, 
-			User user, TeamMember member) {
+
+	public static boolean hasPermission(ProjectFeature feature, User user, TeamMember member) {
+		Project project = feature.getProject();
 		if(project!=null && user!=null && (
 				NumberUtils.compare(project.getId(), user.getProject().getId())==0 ||
 				NumberUtils.compare(project.getEnteredBy().getId(), user.getId())==0)) {

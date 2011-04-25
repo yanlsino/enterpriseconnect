@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Mar 5, 2011 - 3:34:48 PM
@@ -30,34 +30,34 @@ public class SystemAspect {
 	private Task siteBackupTask;
 	private Task siteRestoreTask;
 	private Task resourceSyncTask;
-	
+
 	public SystemAspect() {
 	}
-	
+
 	@Autowired
 	@Qualifier("userRegisterEmailTask")
 	public void setUserRegisterEmailTask(Task userRegisterEmailTask) {
 		this.userRegisterEmailTask = userRegisterEmailTask;
 	}
-	
+
 	@Autowired
 	@Qualifier("siteBackupTask")
 	public void setSiteBackupTask(Task siteBackupTask) {
 		this.siteBackupTask = siteBackupTask;
 	}
-	
+
 	@Autowired
 	@Qualifier("siteRestoreTask")
 	public void setSiteRestoreTask(Task siteRestoreTask) {
 		this.siteRestoreTask = siteRestoreTask;
 	}
-	
+
 	@Autowired
 	@Qualifier("resourceSyncTask")
 	public void setResourceSyncTask(Task resourceSyncTask) {
 		this.resourceSyncTask = resourceSyncTask;
 	}
-	
+
 	@AfterReturning("execution(* org.osforce.connect.service.system.ProjectService.createProject(..))")
 	public void createProject(JoinPoint jp) {
 		Project project = (Project) jp.getArgs()[0];
@@ -69,7 +69,7 @@ public class SystemAspect {
 			userRegisterEmailTask.doAsyncTask(context);
 		}
 	}
-	
+
 	@AfterReturning("execution(* org.osforce.connect.service.system.SiteService.backupSite(..))")
 	public void backupSite(JoinPoint jp) {
 		Site site = (Site) jp.getArgs()[0];
@@ -77,7 +77,7 @@ public class SystemAspect {
 		context.put("siteId", site.getId());
 		siteBackupTask.doAsyncTask(context);
 	}
-	
+
 	@AfterReturning("execution(* org.osforce.connect.service.system.SiteService.restoreSite(..))")
 	public void restoreSite(JoinPoint jp) {
 		Site site = (Site) jp.getArgs()[0];
@@ -85,11 +85,11 @@ public class SystemAspect {
 		context.put("siteId", site.getId());
 		siteRestoreTask.doAsyncTask(context);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	@AfterReturning("execution(* org.osforce.connect.service.system.ResourceService.syncResource(..))")
+	@AfterReturning("execution(* org.osforce.connect.service.system.ResourceService.syncResource())")
 	public void syncResource(JoinPoint jp) {
 		resourceSyncTask.doSyncTask(Collections.EMPTY_MAP);
 	}
-	
+
 }

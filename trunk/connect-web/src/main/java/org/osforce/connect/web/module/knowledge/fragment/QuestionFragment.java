@@ -42,6 +42,9 @@ public class QuestionFragment {
 	public String doRecentView(Page<Question> page, 
 			Project project, FragmentContext context) {
 		page = questionService.getQuestionPage(page, project);
+		if(page.getResult().isEmpty()) {
+			return "commons/blank";
+		}
 		context.putRequestData(AttributeKeys.PAGE_KEY_READABLE, page);
 		return "knowledge/questions_recent";
 	}

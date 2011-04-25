@@ -15,26 +15,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Jan 28, 2011 - 12:31:09 PM
  *  <a href="http://www.opensourceforce.org">开源力量</a>
- *  
+ *
  *  @see ExtraUrlRewriterConfLoader
  */
 public class SiteAwareInterceptor extends HandlerInterceptorAdapter {
 
 	private SiteService siteService;
-	
+
 	public SiteAwareInterceptor() {
 	}
-	
+
 	@Autowired
 	public void setSiteService(SiteService siteService) {
 		this.siteService = siteService;
 	}
-	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
@@ -44,7 +44,7 @@ public class SiteAwareInterceptor extends HandlerInterceptorAdapter {
 			// site always is null, build a default site use default theme
 			site = buildDefaultSite(request);
 		}
-		// Site will always bind to current request 
+		// Site will always bind to current request
 		request.setAttribute(AttributeKeys.SITE_KEY, site);
 		request.setAttribute(AttributeKeys.SITE_KEY_READABLE, site);
 		//
@@ -53,7 +53,7 @@ public class SiteAwareInterceptor extends HandlerInterceptorAdapter {
 		request.setAttribute(AttributeKeys.THEME_KEY_READABLE, theme);
 		return super.preHandle(request, response, handler);
 	}
-	
+
 	// TODO
 	protected Site buildDefaultSite(HttpServletRequest request) throws UnknownHostException {
 		String domain = request.getServerName();
@@ -63,12 +63,12 @@ public class SiteAwareInterceptor extends HandlerInterceptorAdapter {
 			}
 		}
 		Site site = new Site(
-				"Enterprise Connect", 
-				null, 
-				"Open Source, Socail Business Software, SBS, Social Networking Service, SNS ", 
-				domain, 
+				"Enterprise Connect",
+				null,
+				"Open Source, Socail Business Software, SBS, Social Networking Service, SNS ",
+				domain,
 				true);
 		return site;
 	}
-	
+
 }

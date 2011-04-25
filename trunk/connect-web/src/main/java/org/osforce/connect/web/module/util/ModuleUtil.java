@@ -3,26 +3,28 @@ package org.osforce.connect.web.module.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.osforce.connect.entity.system.ProjectFeature;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 11, 2011 - 2:41:38 PM
  *  <a href="http://www.opensourceforce.org">开源力量</a>
  */
 public abstract class ModuleUtil {
-	
+
 	public static List<ProjectFeature> parseToModules(String featuresStr) {
 		List<ProjectFeature> modules = new ArrayList<ProjectFeature>();
 		String[] featureStrs = StringUtils.split(featuresStr, "\r\n");
 		for(String featureStr : featureStrs) {
+			int index = ArrayUtils.indexOf(featureStrs, featureStr);
 			if(StringUtils.isNotBlank(featureStr)) {
 				ProjectFeature module = new ProjectFeature();
 				featureStr = StringUtils.substringBetween(featureStr, "[", "]");
-				String[] strs = StringUtils.split(featureStr, ","); 
+				String[] strs = StringUtils.split(featureStr, ",");
 				for(String str : strs) {
 					String key = StringUtils.substringBefore(str, "=");
 					String value = StringUtils.substringAfter(str, "=");
@@ -36,12 +38,13 @@ public abstract class ModuleUtil {
 						module.setRoleCode(value);
 					}
 				}
+				module.setLevel(index);
 				modules.add(module);
 			}
 		}
 		return modules;
 	}
-	
+
 	public static void main(String[] args) {
 		String str = "[label=个人主页,code=profile,show=true,role=guest]\r\n[label=日历,code=calendar,show=true,role=member]";
 		List<ProjectFeature> features = parseToModules(str);

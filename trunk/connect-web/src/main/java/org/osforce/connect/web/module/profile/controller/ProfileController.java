@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 12, 2011 - 11:40:09 PM
@@ -29,10 +29,10 @@ public class ProfileController {
 
 	private ProfileService profileService;
 	private AttachmentService attachmentService;
-	
+
 	public ProfileController() {
 	}
-	
+
 	@Autowired
 	public void setProfileService(ProfileService profileService) {
 		this.profileService = profileService;
@@ -42,18 +42,17 @@ public class ProfileController {
 	public void setAttachmentService(AttachmentService attachmentService) {
 		this.attachmentService = attachmentService;
 	}
-	
+
 	@RequestMapping(value="/profile/profile", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> update(@RequestParam String[] labels, 
-			@RequestParam String[] values, Profile profile) {
-		profile.setAttributes(labels, values);
+	public @ResponseBody Map<String, Object> update(Profile profile) {
+		//profile.setAttributes(labels, values);
 		profileService.updateProfile(profile);
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("id", profile.getId());
 		model.put("title", profile.getTitle());
 		return model;
 	}
-	
+
 	@RequestMapping(value="/profile/logo")
 	public @ResponseBody Map<String, Long> update(
 			@RequestParam Long profileId, WebRequest request) {
@@ -67,5 +66,5 @@ public class ProfileController {
 		profileService.updateProfile(profile);
 		return Collections.singletonMap("id", profile.getId());
 	}
-	
+
 }

@@ -7,6 +7,7 @@ import org.osforce.connect.entity.system.Project;
 import org.osforce.connect.entity.system.ProjectFeature;
 import org.osforce.connect.entity.system.Role;
 import org.osforce.connect.service.system.ProjectFeatureService;
+import org.osforce.platform.dao.support.QueryAppender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +47,13 @@ public class ProjectFeatureServiceImpl implements ProjectFeatureService {
 
 	public ProjectFeature getProjectFeature(Long featureId) {
 		return projectFeatureDao.get(featureId);
+	}
+	
+	public ProjectFeature getProjectFeature(String code, Long projectId) {
+		QueryAppender appender = new QueryAppender()
+				.equal("projectFeature.code", code)
+				.equal("projectFeature.project.id", projectId);
+		return projectFeatureDao.findUnique(appender);
 	}
 
 	public void createProjectFeature(ProjectFeature feature) {

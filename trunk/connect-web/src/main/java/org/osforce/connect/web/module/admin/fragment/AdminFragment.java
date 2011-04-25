@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Mar 18, 2011 - 9:06:34 PM
@@ -32,34 +32,34 @@ public class AdminFragment {
 	private RoleService roleService;
 	private TemplateService templateService;
 	private ProjectCategoryService projectCategoryService;
-	
+
 	public AdminFragment() {
 	}
-	
+
 	@Autowired
 	public void setRoleService(RoleService roleService) {
 		this.roleService = roleService;
 	}
-	
+
 	@Autowired
 	public void setTemplateService(TemplateService templateService) {
 		this.templateService = templateService;
 	}
-	
+
 	@Autowired
 	public void setProjectCategoryService(
 			ProjectCategoryService projectCategoryService) {
 		this.projectCategoryService = projectCategoryService;
 	}
-	
+
 	public String doActionsView() {
 		return "admin/actions";
 	}
-	
+
 	public String doWelcomeView() {
 		return "admin/welcome";
 	}
-	
+
 	public String doProjectFormView(Project project,
 			Site site, FragmentContext context) {
 		List<ProjectCategory> categories = projectCategoryService.getProjectCategoryList(site.getId());
@@ -70,7 +70,7 @@ public class AdminFragment {
 		context.putRequestData(AttributeKeys.PROJECT_KEY_READABLE, project);
 		return "admin/project_form";
 	}
-	
+
 	public String doFeaturesFormView(@Pref String templateCode,
 			Project project, FragmentContext context) {
 		//
@@ -82,7 +82,9 @@ public class AdminFragment {
 					feature.setId(tmp.getId());
 					feature.setLabel(tmp.getLabel());
 					feature.setShow(tmp.getShow());
-					feature.setLevel(tmp.getLevel());
+					if(tmp.getLevel()!=null) {
+						feature.setLevel(tmp.getLevel());
+					}
 					feature.setRoleId(tmp.getRoleId());
 				}
 			}
@@ -94,5 +96,5 @@ public class AdminFragment {
 		context.putRequestData(AttributeKeys.ROLE_LIST_KEY_READABLE, roles);
 		return "admin/features_form";
 	}
-	
+
 }

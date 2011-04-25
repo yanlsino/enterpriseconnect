@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Jan 29, 2011 - 11:45:53 AM
@@ -24,11 +24,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SiteFragment {
-	
+
 	private SiteService siteService;
 	private ThemeService themeService;
 	private MailSettingsService mailSettingsService;
-	
+
 	public SiteFragment() {
 	}
 
@@ -36,12 +36,12 @@ public class SiteFragment {
 	public void setSiteService(SiteService siteService) {
 		this.siteService = siteService;
 	}
-	
+
 	@Autowired
 	public void setThemeService(ThemeService themeService) {
 		this.themeService = themeService;
 	}
-	
+
 	@Autowired
 	public void setMailSettingsService(MailSettingsService mailSettingsService) {
 		this.mailSettingsService = mailSettingsService;
@@ -50,17 +50,14 @@ public class SiteFragment {
 	public String doListView(Page<Site> page, FragmentContext context) {
 		page = siteService.getSitePage(page);
 		context.putRequestData(AttributeKeys.PAGE_KEY_READABLE, page);
-		if(page.getResult().isEmpty()) {
-			return "commons/blank";
-		}
 		return "system/sites_list";
 	}
-	
+
 	public String doCopyrightView(Site site, FragmentContext context) {
 		context.putRequestData(AttributeKeys.SITE_KEY_READABLE, site);
 		return "system/site_copyright";
 	}
-	
+
 	public String doFormView(@Param Long siteId, FragmentContext context) {
 		Site site = new Site();
 		if(siteId!=null) {

@@ -1,5 +1,5 @@
 ==Documentation==
   
-[http://code.google.com/p/enterpriseconnect/wiki/Introduction Introduction]
+[Introduction Introduction]
   
-[http://code.google.com/p/enterpriseconnect/wiki/UserGuide User Guide]
+[UserGuide User Guide]

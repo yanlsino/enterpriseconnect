@@ -5,7 +5,7 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<div class="actions">
@@ -14,15 +14,18 @@
 				<li>
 					<a href="${base}/system/sites">站点管理</a>
 					(<a href="${base}/system/sites/site/form">添加</a>)
-					(<a href="${base}/process/system/index-sync">重建索引</a>)
 				</li>
 				<li>
 					<a href="${base}/system/themes">主题管理</a>
 					(<a href="${base}/system/themes/theme/form">添加</a>)
 				</li>
-				<li class="last">
+				<li>
 					<a href="${base}/system/mail_settings">邮件设置</a>
 					(<a href="${base}/system/mail_settings/mail_settings/form">添加</a>)
+				</li>
+				<li class="last">
+					<a href="${base}/system">系统概况</a>
+					(<a href="${base}/process/system/index-sync">重建索引</a>)
 				</li>
 			</ul>
 			<c:if test="${not empty param.siteId}">
@@ -40,7 +43,7 @@
 					<a href="${base}/system/links?siteId=${param.siteId}">友情链接管理</a>
 					(<a href="${base}/system/links/link/form?siteId=${param.siteId}">添加</a>)
 				</li>
-			</ul>	
+			</ul>
 			<div>安全管理</div>
 			<ul>
 				<li><a href="${base}/system/users?siteId=${param.siteId}">用户管理</a></li>
@@ -55,7 +58,6 @@
 				</li>
 				<li class="last">
 					<a href="${base}/system/permissions?siteId=${param.siteId}">权限管理</a>
-					(<a href="${base}/system/permissions/permission/form?siteId=${param.siteId}&multiple=true">添加</a>)
 				</li>
 			</ul>
 			</c:if>

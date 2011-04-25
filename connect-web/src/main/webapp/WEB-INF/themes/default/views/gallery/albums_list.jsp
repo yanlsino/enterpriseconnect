@@ -25,7 +25,7 @@
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<a href='<u:security code="gallery-photo-add" project="${project}">${base}/${project.uniqueId}/gallery/photo/upload?albumId=${album.id}</u:security>' title="${album.name}">
+					<a href='<u:security code="gallery-photo-add" project="${project}">${base}/${project.uniqueId}/gallery/photo/form?albumId=${album.id}</u:security>' title="${album.name}">
 						<img src="${base}/static/images/nophoto.jpg" width="150" height="150"/>
 					</a>
 				</c:otherwise>

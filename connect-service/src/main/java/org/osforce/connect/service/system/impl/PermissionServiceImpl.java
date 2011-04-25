@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.osforce.connect.dao.system.PermissionDao;
 import org.osforce.connect.dao.system.ProjectCategoryDao;
-import org.osforce.connect.dao.system.ProjectDao;
 import org.osforce.connect.dao.system.ResourceDao;
 import org.osforce.connect.dao.system.RoleDao;
 import org.osforce.connect.entity.system.Permission;
-import org.osforce.connect.entity.system.Project;
 import org.osforce.connect.entity.system.ProjectCategory;
 import org.osforce.connect.entity.system.Resource;
 import org.osforce.connect.entity.system.Role;
@@ -19,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 24, 2011 - 12:52:12 PM
@@ -30,56 +28,50 @@ import org.springframework.transaction.annotation.Transactional;
 public class PermissionServiceImpl implements PermissionService {
 
 	private RoleDao roleDao;
-	private ProjectDao projectDao;
 	private ResourceDao resourceDao;
 	private PermissionDao permissionDao;
 	private ProjectCategoryDao projectCategoryDao;
-	
+
 	public PermissionServiceImpl() {
 	}
-	
+
 	@Autowired
 	public void setRoleDao(RoleDao roleDao) {
 		this.roleDao = roleDao;
 	}
-	
-	@Autowired
-	public void setProjectDao(ProjectDao projectDao) {
-		this.projectDao = projectDao;
-	}
-	
+
 	@Autowired
 	public void setResourceDao(ResourceDao resourceDao) {
 		this.resourceDao = resourceDao;
 	}
-	
+
 	@Autowired
 	public void setPermissionDao(PermissionDao permissionDao) {
 		this.permissionDao = permissionDao;
 	}
-	
+
 	@Autowired
 	public void setProjectCategoryDao(ProjectCategoryDao projectCategoryDao) {
 		this.projectCategoryDao = projectCategoryDao;
 	}
-	
+
 	public Permission getPermission(Long permissionId) {
 		return permissionDao.get(permissionId);
 	}
-	
+
 	public Permission getPermission(String code) {
 		QueryAppender appender = new QueryAppender()
 				.equal("permission.resource.code", code);
 		return permissionDao.findUnique(appender);
 	};
-	
+
 	public Permission getPermission(Long resourceId, Long categoryId) {
 		QueryAppender appender = new QueryAppender()
 				.equal("permission.resource.id", resourceId)
 				.equal("permission.category.id", categoryId);
 		return permissionDao.findUnique(appender);
 	}
-	
+
 	public Permission getPermission(String resourceCode, Long categoryId) {
 		QueryAppender appender = new QueryAppender()
 				.equal("permission.resource.code", resourceCode)
@@ -95,10 +87,6 @@ public class PermissionServiceImpl implements PermissionService {
 		if(permission.getRoleId()!=null) {
 			Role role = roleDao.get(permission.getRoleId());
 			permission.setRole(role);
-		}
-		if(permission.getProjectId()!=null) {
-			Project project = projectDao.get(permission.getProjectId());
-			permission.setProject(project);
 		}
 		if(permission.getResourceId()!=null) {
 			Resource resource = resourceDao.get(permission.getResourceId());

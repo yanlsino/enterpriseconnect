@@ -30,7 +30,7 @@
 				<form:form id="feature-form${status.count}" cssClass="feature-form" 
 					action="${base}/process/admin/feature" commandName="feature">
 					<td>
-						<form:input path="label" cssClass="{validate:{required:true, messages:{required:'显示名不能为空！'}}}"/>
+						<form:input path="label" cssClass=""/>
 					</td>
 					<td>
 						<form:input path="code" readonly="true"/>
@@ -53,9 +53,7 @@
 			<tfoot>
 				<tr>
 					<td>
-					<button id="submit${id}" class="button">
-						提交
-					</button>
+					<button id="submit${id}" class="button">提交</button>
 					</td>
 				</tr>
 			</tfoot>
@@ -68,8 +66,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#submit${id}').click(function(){
+		$(this).busy({img: '${base}/static/images/loading.gif'});
 		$('.feature-form').each(function(){
-			$('.feature-form').ajaxSubmit({
+			$(this).ajaxSubmit({
 				forceSync: true,
 				dataType: 'json',
 				beforeSubmit: function(formData){
@@ -78,10 +77,14 @@ $(document).ready(function(){
 					if(label=='' || code=='') {
 						return false;
 					}
-				}
+				}, 
+				success: function(feature){}
 			});
-			window.location.reload();
 		});
+		setTimeout(function(){
+			window.location.reload();
+		}, 500);
+		return false;
 	});
 });
 </script>

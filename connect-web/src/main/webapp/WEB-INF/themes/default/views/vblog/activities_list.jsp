@@ -10,14 +10,14 @@
 	<c:if test="${not empty title}">
 	<div class="head">
 		<h3>${title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 	<c:choose>
 		<c:when test="${empty page.result}">
 		<div class="info"><fmt:message key="vblog.activities_list.noActivityToDisplay"/></div>
 		</c:when>
-		<c:otherwise>	
+		<c:otherwise>
 		<ul id="activities-list${id}" class="activities-list">
 			<c:forEach var="activity" items="${page.result}" varStatus="status">
 			<li <c:if test="${status.last}">class="last"</c:if>>
@@ -59,7 +59,7 @@
 								<textarea name="content"></textarea>
 							</div>
 							<div class="last">
-								<!-- 
+								<!--
 								<span class="float-right"><fmt:message key="vblog.activities_list.maxCharacters"/></span>
 								-->
 								<button class="button" type="submit"><fmt:message key="vblog.activities_list.submit"/></button>
@@ -103,8 +103,8 @@ $(document).ready(function(){
 			}
 		});
 		return false;
-	});	
-	
+	});
+
 	$('.activity-comment-form').ajaxForm({
 		dataType: 'json',
 		clearForm: true,
@@ -136,22 +136,22 @@ $(document).ready(function(){
 			var url = $(link).attr('href');
 			$.get(url, function(comments){
 				for(i in comments) {
-					_fillCommentListContainer(comments[i]);	
+					_fillCommentListContainer(comments[i]);
 				}
 			});
 		}
 	}
 
 	function _fillCommentListContainer(comment) {
-		var item = '<li>' + 
+		var item = '<li>' +
 							'<a href="${base}/'+ comment.enteredBy_project_uniqueId +'/profile">';
 		if(comment.enteredBy_project_profile_logo_id!=null) {
 			item += '<img class="top left thumbnail" src="${base}/logo/download/'+ comment.enteredBy_project_profile_logo_id +'/35x35"/>';
 		} else {
 			item += '<img class="top left thumbnail" src="${base}/themes/${theme.name}/stock/'+ comment.enteredBy_project_category_code +'.png" width="35" height="35"/>';
 		}
-		item +=     '</a>'; 
-		item += 	'<p class="comment-content">'+comment.content+'</p>' + 
+		item +=     '</a>';
+		item += 	'<p class="comment-content">'+comment.content+'</p>' +
 					'<span class="top right">'+comment.entered_pretty+'</span>' +
 					'<br class="clear"/>' +
 					'</li>';

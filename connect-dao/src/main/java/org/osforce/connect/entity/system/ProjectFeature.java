@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 import org.osforce.platform.entity.support.IdEntity;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Jan 29, 2011 - 10:41:25 AM
@@ -35,7 +35,7 @@ public class ProjectFeature extends IdEntity {
 	// refer
 	private Role role;
 	private Project project;
-	
+
 	public ProjectFeature() {
 	}
 
@@ -44,7 +44,7 @@ public class ProjectFeature extends IdEntity {
 		this.code = code;
 		this.show = true;
 	}
-	
+
 	public String getLabel() {
 		return label;
 	}
@@ -61,11 +61,11 @@ public class ProjectFeature extends IdEntity {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
+
 	public Integer getLevel() {
 		return level;
 	}
-	
+
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
@@ -77,7 +77,7 @@ public class ProjectFeature extends IdEntity {
 	public void setShow(Boolean show) {
 		this.show = show;
 	}
-	
+
 	@Transient
 	public Long getRoleId() {
 		if(roleId==null && role!=null) {
@@ -85,11 +85,11 @@ public class ProjectFeature extends IdEntity {
 		}
 		return roleId;
 	}
-	
+
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
-	
+
 	@Transient
 	public Long getProjectId() {
 		if(projectId==null && project!=null) {
@@ -97,7 +97,7 @@ public class ProjectFeature extends IdEntity {
 		}
 		return projectId;
 	}
-	
+
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
@@ -106,17 +106,17 @@ public class ProjectFeature extends IdEntity {
 	public String getRoleCode() {
 		return roleCode;
 	}
-	
+
 	public void setRoleCode(String roleCode) {
 		this.roleCode = roleCode;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="project_id")
 	public Project getProject() {
 		return project;
 	}
-	
+
 	public void setProject(Project project) {
 		this.project = project;
 	}
@@ -126,9 +126,9 @@ public class ProjectFeature extends IdEntity {
 	public Role getRole() {
 		return role;
 	}
-	
+
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
+
 }

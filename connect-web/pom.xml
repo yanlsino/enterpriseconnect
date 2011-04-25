@@ -4,8 +4,8 @@
 	<parent>
 		<artifactId>connect-parent</artifactId>
 		<groupId>org.osforce</groupId>
-		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../connect-parent</relativePath>
+		<version>1.0.1</version>
+		<relativePath>../connect-parent/pom.xml</relativePath>
 	</parent>
 	<groupId>org.osforce</groupId>
 	<artifactId>connect-web</artifactId>
@@ -20,6 +20,10 @@
 		<dependency>
 			<groupId>org.osforce</groupId>
 			<artifactId>connect-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.osforce</groupId>
+			<artifactId>connect-task</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

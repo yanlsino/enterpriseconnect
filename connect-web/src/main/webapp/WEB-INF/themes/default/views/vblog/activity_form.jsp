@@ -10,7 +10,7 @@
 	<c:if test="${not empty title}">
 	<div class="head">
 		<h3>${title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<c:choose>
@@ -21,7 +21,7 @@
 			<img id="activity-form-logo${id}" class="activity-form-logo top left thumbnail" src="${base}/themes/${theme.name}/stock/${user.project.category.code}.png"/>
 			</c:otherwise>
 		</c:choose>
-		<form:form id="activity-form${id}" cssClass="activity-form" 
+		<form:form id="activity-form${id}" cssClass="activity-form"
 			action="${base}/process/vblog/activity" commandName="activity">
 			<div>
 				<form:textarea path="description" id="description${id}"/>
@@ -32,7 +32,7 @@
 					<li><a href="#" id="insertFace${id}">表情</a></li>
 					<li><a href="#" id="insertLink${id}">链接</a></li>
 					<li><a href="#" id="insertImage${id}">图片</a></li>
-					<!-- 
+					<!--
 					<li><a href="#" class="insertVideo">视频</a></li>
 					-->
 				</ul>
@@ -46,7 +46,7 @@
 			<form:hidden path="enteredId"/>
 		</form:form>
 		<br class="clear"/>
-		
+
 		<div id="faceLayer${id}" style="display:none">
 			<ul class="faces-list">
 				<c:forTokens var="face" items="angel,angry,cool,crying,devilish,embarrassed,glasses,kiss,laugh,monkey,plain,raspberry,sad,sick,smile,smile-big,smirk,surprise,tired,uncertain,wink,worried" delims=",">
@@ -73,8 +73,8 @@ $(document).ready(function(){
     });
     $('.faces-list a').click(function(){
 		var faceId = $(this).attr('id');
-		$('#description${id}').append('[face:'+faceId+']');
-		return false;		
+		$('#description${id}').val($('#description${id}').val()+'[face:'+faceId+']');
+		return false;
     });
     $('#insertLink${id}').aqLayer({
         margin: '0',
@@ -82,7 +82,7 @@ $(document).ready(function(){
     });
     $('#linkLayer${id} button').click(function(){
         var link = $('#linkLayer${id} input').val();
-        $('#description${id}').append('[link:'+link+']');
+        $('#description${id}').val($('#description${id}').val()+'[link:'+link+']');
     });
     $('#insertImage${id}').aqLayer({
         margin: '0',
@@ -90,7 +90,7 @@ $(document).ready(function(){
     });
     $('#imageLayer${id} button').click(function(){
         var image = $('#imageLayer${id} input').val();
-        $('#description${id}').append('[image:'+image+']');
+        $('#description${id}').val($('#description${id}').val()+'[image:'+image+']');
     });
 });
 </script>

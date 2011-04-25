@@ -8,7 +8,7 @@
 .fragment .head h3 {
 	margin: 0;
 	padding: 5px 10px 5px 10px;
-	
+
 }
 .fragment .body {
 	padding: 1em;
@@ -30,23 +30,27 @@
 .profiles-list li.profile,
 .profiles-recent li.profile,
 .profiles-top li.profile {
-	margin-bottom: 5px;	
+	margin-bottom: 5px;
 }
-#profile-form textarea.shortDescription{
+.profile-form textarea.shortDescription{
 	height: 60px;
 }
-#profile-form textarea.description {
+.profile-form textarea.description {
 	width: 90%
+}
+.profile-basic .thumbnail {
+	width: 75px;
+	height: 75px;
 }
 /* activity fragment */
 .main-column .activity-form {
-	margin-left: 80px;	
+	margin-left: 80px;
 }
 .right-column .activity-form {
 	margin-left: 70px;
 }
 .activity-form .toolbar li {
-	display: inline;	
+	display: inline;
 }
 .main-column .activity-form-logo {
 	width: 60px;
@@ -54,11 +58,11 @@
 }
 .right-column .activity-form-logo {
 	width: 50px;
-	height: 50px;	
+	height: 50px;
 }
 .main-column .activity-form textarea {
 	margin-top:0;
-	width: 310px;
+	width: 97%;
 	height: 60px;
 }
 .right-column .activity-form textarea {
@@ -67,8 +71,12 @@
 	height: 50px;
 }
 
-.activities-list textarea {
-	width: 70%;
+.main-column .activities-list textarea {
+	width: 90%;
+	height: 50px;
+}
+.right-column .activities-list textarea {
+	width: 210px;
 	height: 50px;
 }
 .activities-list li {
@@ -79,19 +87,19 @@
 }
 .activities-list .activity-body img {
 	max-height: 200px;
-	max-width: 200px;	
+	max-width: 200px;
 }
 .activities-list p {
 	margin: 0;
 	padding: 0;
 }
 .activities-list .comments-list .comment-content {
-	margin-left: 55px; 	
+	margin-left: 55px;
 }
 .faces-list {
-	width: 112px;	
+	width: 112px;
 }
-		
+
 .faces-list li {
 	display: inline;
 }
@@ -110,7 +118,7 @@
 	margin-bottom: 5px;
 	line-height: 16px;
 	background: url("../icons/help_16x16.png") no-repeat;
-	border-bottom: 1px dashed #DDD;	
+	border-bottom: 1px dashed #DDD;
 }
 .questions-list li.last
 .questions-recent li.last {
@@ -130,7 +138,7 @@
 .events-list .calendar .month {
 	padding: 5px 0;
 	text-align: center;
-	background-color: #900;  
+	background-color: #900;
 	radius: 5px;
 }
 .events-list .calendar .date {
@@ -142,23 +150,23 @@
 	padding-bottom: 5px;
 }
 .events-list div.info {
-	margin-left: 80px;	
+	margin-left: 80px;
 }
 .events-list ul {
 }
 .events-list ul li {
 	margin-left: 80px;
-	border-bottom: 1px dashed #DDD; 
+	border-bottom: 1px dashed #DDD;
 }
 .events-list ul li.last {
-	border-bottom: none;	
+	border-bottom: none;
 }
 .events-list ul li h4 {
 	padding: 5px 10px;
-	border-bottom: 1px solid #DDD; 
+	border-bottom: 1px solid #DDD;
 }
 table.calendar {
-	
+
 }
 table.calendar tbody tr td {
 	margin: 1px;
@@ -183,7 +191,7 @@ table.calendar tbody tr td.first {
 	background-color: white;
 }
 table.calendar tbody tr td a {
-	display: block;	
+	display: block;
 }
 /* answer fragment */
 .answer-form textarea {
@@ -192,37 +200,37 @@ table.calendar tbody tr td a {
 }
 /* album fragment */
 .albums-list .slideshow {
-	margin-bottom: 1.5em;	
+	margin-bottom: 1.5em;
 }
-.albums-list .slideshow { 
-	height: 182px; 
-	width: 182px; 
-	margin-right: 1.5em; 
-	float: left 
+.albums-list .slideshow {
+	height: 182px;
+	width: 182px;
+	margin-right: 1.5em;
+	float: left
 }
-.slideshow img { 
-	padding: 15px; 
-	border: 1px solid #ccc; 
-	background-color: #eee; 
+.slideshow img {
+	padding: 15px;
+	border: 1px solid #ccc;
+	background-color: #eee;
 }
 /* forum fragment */
 .forum-form #description {
 	width: 300px;
-	height: 100px;	
+	height: 100px;
 }
 .forums-list li.forum {
-	margin-bottom: 1.5em;	
+	margin-bottom: 1.5em;
 }
 /* topic fragment */
 .topic-form #content {
 	width: 550px;
-	height: 250px;	
+	height: 250px;
 }
 .topic {
-	margin-bottom: 2em;	
+	margin-bottom: 2em;
 }
 .topic .author {
-	text-align: center;	
+	text-align: center;
 }
 .topic .topic-head h4 {
 	margin-left: 120px;
@@ -234,18 +242,18 @@ table.calendar tbody tr td a {
 }
 .replies-list .reply-head h4 {
 	margin-left: 120px;
-	border-bottom: 1px solid #DDD;	
+	border-bottom: 1px solid #DDD;
 }
 .reply-form {
 	margin-left: 120px;
 }
 .reply-form textarea {
 	width: 450px;
-	height: 150px;	
+	height: 150px;
 }
 /* member fragment */
 .members-list {
-	margin: 5px 5px 5px 0;	
+	margin: 5px 5px 5px 0;
 }
 .members-list li {
 	float: left;
@@ -256,34 +264,36 @@ table.calendar tbody tr td a {
 }
 .members-list li:hover {
 	background-color: #DDF0F8;
-	border: 1px solid #DDD;	
+	border: 1px solid #DDD;
 }
 .members-list li img {
 	float: left;
-	margin: 5px;	
-}
-.members-info {
-	
+	margin: 5px;
 }
 .members-info li:hover {
 	background-color: #DDF0F8;
 }
+/* message fragment */
+.message-form textarea {
+	height: 100px;
+}
 /* comment fragment */
 .comments-list li {
-	margin-bottom: 1em;	
+	margin-bottom: 1em;
 }
 .comment-form textarea {
-	height: 100px; 
+	height: 100px;
 }
 /* link fragment */
 .concerns-list li {
 	float: left;
-	margin-right: 5px; 
+	margin-right: 5px;
+	margin-bottom: 5px;
 }
 /* project fragment */
 .project {
 	padding-left: 1em;
-	margin-bottom: 0.5em;		
+	margin-bottom: 0.5em;
 }
 
 /* site fragment */

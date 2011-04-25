@@ -54,15 +54,16 @@ public class VBlogRenderTag extends TagSupport {
 	}
 	
 	static final Pattern facePattern = Pattern.compile("\\[face:\\s*(.+?)\\s*\\]");
-	private void parseFace() {
+	public void parseFace() {
 		// faces
 		String tmp = text;
 		Matcher faceMatcher = facePattern.matcher(tmp);
 		while(faceMatcher.find()) {
 			String face = faceMatcher.group(1);
-			String faceBlock = StringUtils.substring(tmp, faceMatcher.start(), faceMatcher.end());
-			text = StringUtils.replaceOnce(tmp, faceBlock, "<img src=\""+facesBase+"/face-"+face+".png\"/>");
+			String faceBlock = StringUtils.substring(text, faceMatcher.start(), faceMatcher.end());
+			tmp = StringUtils.replaceOnce(tmp, faceBlock, "<img src=\""+facesBase+"/face-"+face+".png\"/>");
 		}
+		text = tmp;
 	}
 	
 	static final Pattern imgPattern = Pattern.compile("\\[img:\\s*(.+?)\\s*\\]");
@@ -71,9 +72,10 @@ public class VBlogRenderTag extends TagSupport {
 		Matcher imgMatcher = imgPattern.matcher(tmp);
 		while(imgMatcher.find()) {
 			String imgUrl = imgMatcher.group(1);
-			String imgBlock = StringUtils.substring(tmp, imgMatcher.start(), imgMatcher.end());
-			text = StringUtils.replaceOnce(tmp, imgBlock, "<img src=\""+ imgUrl +"\">");
+			String imgBlock = StringUtils.substring(text, imgMatcher.start(), imgMatcher.end());
+			tmp = StringUtils.replaceOnce(tmp, imgBlock, "<img src=\""+ imgUrl +"\">");
 		}
+		text = tmp;
 	}
 	
 	static final Pattern linkPattern = Pattern.compile("\\[link:\\s*(.+?)\\s*\\]");
@@ -82,9 +84,10 @@ public class VBlogRenderTag extends TagSupport {
 		Matcher linkMatcher = linkPattern.matcher(tmp);
 		while(linkMatcher.find()) {
 			String linkUrl = linkMatcher.group(1);
-			String linkBlock = StringUtils.substring(tmp, linkMatcher.start(), linkMatcher.end());
-			text = StringUtils.replaceOnce(tmp, linkBlock, "<a href=\""+ linkUrl +"\" target=\"_blank\">"+linkUrl+"</a>");
+			String linkBlock = StringUtils.substring(text, linkMatcher.start(), linkMatcher.end());
+			tmp = StringUtils.replaceOnce(tmp, linkBlock, "<a href=\""+ linkUrl +"\" target=\"_blank\">"+linkUrl+"</a>");
 		}
+		text = tmp;
 	}
 	
 	private void parseSpecialChar() {

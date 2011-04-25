@@ -7,7 +7,7 @@
 select[multiple] {
 	height: 200px;
 	width: 100px;
-} 
+}
 -->
 </style>
 
@@ -18,51 +18,36 @@ select[multiple] {
 	<c:if test="${not empty title}">
 	<div class="head">
 		<h3>${title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
-		<form:form id="permission-form${id}" cssClass="permission-form" 
+		<form:form id="permission-form${id}" cssClass="permission-form"
 			action="${base}/process/system/permission" commandName="permission">
 				<div>
 					<label for="categoryId">分类名称:</label>
 					<br/>
-					<form:select path="categoryId" id="select-category${id}" items="${categories}" itemLabel="label" itemValue="id"/>
+					<form:input path="category.label" readonly="true"/>
+					<form:hidden path="categoryId"/>
+				</div>
+				<div>
+					<label for="resourceId">资源名称:</label>
+					<br/>
+					<form:input path="resource.name" readonly="true"/>
+					<form:hidden path="resourceId"/>
 				</div>
 				<div>
 					<label for="roleId">角色名称:</label>
 					<br/>
-					<form:select path="roleId" id="select-role${id}" items="${roles}" itemLabel="name" itemValue="id"/>
+					<form:select path="roleId" id="select-role${id}">
+						<form:option value=""/>
+						<form:options items="${roles}" itemLabel="name" itemValue="id"/>
+					</form:select>
 				</div>
-				<c:choose>
-					<c:when test="${param.multiple}">
-					<div>
-						<label for="resourceId">资源名称:</label>
-						<br/>
-						<select id="select1${id}" multiple="multiple">
-						<c:forEach var="resource" items="${resources}">
-							<option value="${resource.id}">${resource.name}</option>
-						</c:forEach>
-						</select>
-						<a id="addAction${id}" href="#">&gt;&gt;Add</a>
-						|
-						<a id="removeAction${id}" href="#">Remove&lt;&lt;</a>
-						<select id="select2${id}" multiple="multiple">
-						<c:forEach var="p" items="${permissions}">
-							<c:if test="${p.role.id eq permission.role.id}">
-							<option value="${p.resource.id}">${p.resource.name}</option>
-							</c:if>
-						</c:forEach>
-						</select>
-						<form:hidden path="resourceId" id="resourceId${id}"/>
-					</div> 					
-					</c:when>
-					<c:otherwise>
-					<div>
-						<label for="resourceId">资源名称:</label>
-						<form:select path="resourceId" items="${resources}" itemLabel="name" itemValue="id"/>
-					</div>
-					</c:otherwise>
-				</c:choose>
+				<div>
+					<label for="enabled">状态</label>
+					<br/>
+					<form:checkbox path="enabled"/>
+				</div>
 				<div>
 					<button id="submit${id}" type="submit" class="button">提交</button>
 					<button type="reset">重置</button>
@@ -102,13 +87,11 @@ select[multiple] {
 						$('#resourceId${id}').val(resourceId);
 					},
 					beforeSubmit: function(formData, $form) {
-						for(i in formData) {
-							alert(formData[i].value);
-						}
 					},
 					success: function(permission){}
 				});
 			});
+			window.location.reload();
 			return false;
 		});
 	});

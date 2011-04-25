@@ -25,14 +25,7 @@
 					<form:input path="uniqueId" id="uniqueId${id}" cssClass="text"/>
 				</div>
 				<div>
-					<button type="submit" class="button">
-					<span id="status1${id}">
-						提交
-					</span>
-					<span id="status2${id}" style="display: none">
-						<img src="${base}/static/images/loading.gif"/>正在处理...
-					</span>
-				</button>
+					<button type="submit" class="button">提交</button>
 					<form:hidden path="id"/>
 					<form:hidden path="enteredId"/>
 					<form:hidden path="modifiedId"/>
@@ -44,7 +37,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$('##project-form${id}').ajaxForm({
+	$('#project-form${id}').ajaxForm({
 		dataType: 'json',
 		clearForm: true,
 		beforeSubmit: function(formData, $form) {
@@ -54,9 +47,14 @@ $(document).ready(function(){
 					uniqueId.match(/^[\w_-]+$/)==null) {
 				return false;
 			}
+			$form.find('.button').busy({
+				img: '${base}/static/images/loading.gif'
+			});
 		},
 		success: function(project){
-			window.location.href='${base}/'+project.uniqueId+'/profile';
+			setTimeout(function(){
+				window.location.href='${base}/'+project.uniqueId+'/profile';
+			}, 500);
 		}
 	});
 });

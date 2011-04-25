@@ -44,10 +44,15 @@ public class AdminController {
 	
 	@RequestMapping(value="/feature", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> update(ProjectFeature feature) {
-		if(feature.getId()==null) {
+		ProjectFeature tmp = projectFeatureService
+				.getProjectFeature(feature.getCode(), feature.getProjectId());
+		if(feature.getId()==null && tmp==null) {
 			projectFeatureService.createProjectFeature(feature);
 		} else {
-			projectFeatureService.updateProjectFeature(feature);
+			tmp.setLabel(feature.getLabel());
+			tmp.setLevel(feature.getLevel());
+			tmp.setRoleId(feature.getRoleId());
+			projectFeatureService.updateProjectFeature(tmp);
 		}
 		//
 		Map<String, Object> model = new HashMap<String, Object>();

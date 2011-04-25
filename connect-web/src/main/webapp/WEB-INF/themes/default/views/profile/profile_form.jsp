@@ -10,10 +10,10 @@
 	<c:if test="${not empty title}">
 	<div class="head">
 		<h3>${title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
-		<form id="logo-form${id}" class="logo-form" 
+		<form id="logo-form${id}" class="logo-form"
 			action="${base}/process/commons/attachment" method="post">
 			<div>
 			<c:choose>
@@ -31,16 +31,16 @@
 				<input type="hidden" name="profileId" value="${profile.id}"/>
 			</div>
 		</form>
-	
+
 		<form:form id="profile-form${id}" cssClass="profile-form"
 			action="${base}/process/profile/profile" commandName="profile">
 			<div>
-				<label for="title"><fmt:message key="profile.profile_form.title"/></label>
+				<label for="title"><fmt:message key="profile.profile_form.title"/> <span class="required">*</span></label>
 				<br/>
 				<form:input path="title"/>
 			</div>
 			<div>
-				<label for="shortDescription"><fmt:message key="profile.profile_form.shortDescription"/></label>
+				<label for="shortDescription"><fmt:message key="profile.profile_form.shortDescription"/> <span class="required">*</span></label>
 				<br/>
 				<form:textarea path="shortDescription" cssClass="shortDescription "/>
 			</div>
@@ -56,15 +56,9 @@
 				</div>
 			</c:forEach>
 			</div>
-			<div><a id="addRow${id}" href="#">添加行</a></div>
 			<div>
 				<button type="submit" class="button">
-					<span id="status1${id}">
-						<fmt:message key="profile.profile_form.submit"/>
-					</span>
-					<span id="status2${id}" style="display: none">
-						<img src="${base}/static/images/loading.gif"/>正在处理...
-					</span>
+					<fmt:message key="profile.profile_form.submit"/>
 				</button>
 				<form:hidden path="id"/>
 				<form:hidden path="enteredId"/>
@@ -90,10 +84,9 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
+
 	$('#profile-form${id}').ajaxForm({
 		dataType: 'json',
-		clearForm: true,
 		beforeSubmit: function(formData, $form) {
 			var title = $.trim(formData[0].value);
 			var shortDescription = $.trim(formData[1].value);

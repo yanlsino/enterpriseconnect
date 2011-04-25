@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 25, 2011 - 11:03:30 AM
@@ -23,19 +23,19 @@ import org.springframework.transaction.annotation.Transactional;
 public class ResourceServiceImpl implements ResourceService {
 
 	private ResourceDao resourceDao;
-	
+
 	public ResourceServiceImpl() {
 	}
-	
+
 	@Autowired
 	public void setResourceDao(ResourceDao resourceDao) {
 		this.resourceDao = resourceDao;
 	}
-	
+
 	public Resource getResource(Long resourceId) {
 		return resourceDao.get(resourceId);
 	}
-	
+
 	public Resource getResource(String code) {
 		QueryAppender appender = new QueryAppender()
 				.equal("resource.code", code);
@@ -63,15 +63,15 @@ public class ResourceServiceImpl implements ResourceService {
 		appender.asc("resource.code");
 		return resourceDao.findPage(page, appender);
 	}
-	
+
 	public List<Resource> getResourceList() {
 		QueryAppender appender = new QueryAppender();
 		appender.asc("resource.code");
 		return resourceDao.find(appender);
 	}
-	
+
 	/**
-	 * intercept by @code SystemAspecct
+	 * intercept by @code SystemAspect
 	 */
 	public void syncResource() {}
 }

@@ -4,8 +4,8 @@
 	<parent>
 		<artifactId>connect-parent</artifactId>
 		<groupId>org.osforce</groupId>
-		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../connect-parent</relativePath>
+		<version>1.0.1</version>
+		<relativePath>../connect-parent/pom.xml</relativePath>
 	</parent>
 	<groupId>org.osforce</groupId>
 	<artifactId>connect-dao</artifactId>
@@ -19,14 +19,6 @@
 		<dependency>
 			<groupId>org.osforce</groupId>
 			<artifactId>platform-common</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 	</dependencies>
 </project>

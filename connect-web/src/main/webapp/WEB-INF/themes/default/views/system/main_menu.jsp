@@ -20,8 +20,8 @@
 
 	<c:forEach var="category" items="${categories}">
 		<li>
-			<a href="${base}/${category.code}" title='<fmt:message key="system.main_menu.${category.code}"/>'> 
-				<span><fmt:message key="system.main_menu.${category.code}" /></span>
+			<a href="${base}/${category.code}" title='${category.label}"'> 
+				<span>${category.label}</span>
 			</a>
 		</li>
 	</c:forEach>

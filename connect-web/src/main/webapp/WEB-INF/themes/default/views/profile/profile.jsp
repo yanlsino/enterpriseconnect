@@ -10,7 +10,7 @@
 	</div>	
 	</c:if>
 	<div class="body">
-			<div id="profile-basic">
+			<div class="profile-basic">
 				<c:choose>
 					<c:when test="${not empty profile.logo}">
 					<img class="top right thumbnail" src="${base}/logo/download/${profile.logo.id}/75x75"/>
@@ -40,7 +40,7 @@
 				</dl>
 			</div>
 			<c:if test="${not empty customAttributes}">
-			<div id="profile-attributes">
+			<div class="profile-attributes">
 				<dl>
 					<c:forEach var="customAttribute" items="${customAttributes}" varStatus="status">
 					<dd <c:if test="${status.last}">class="last"</c:if>>

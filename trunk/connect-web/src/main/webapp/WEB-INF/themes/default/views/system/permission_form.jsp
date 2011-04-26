@@ -24,19 +24,19 @@ select[multiple] {
 		<form:form id="permission-form${id}" cssClass="permission-form"
 			action="${base}/process/system/permission" commandName="permission">
 				<div>
-					<label for="categoryId">分类名称:</label>
+					<label for="categoryId">分类名称</label>
 					<br/>
 					<form:input path="category.label" readonly="true"/>
 					<form:hidden path="categoryId"/>
 				</div>
 				<div>
-					<label for="resourceId">资源名称:</label>
+					<label for="resourceId">资源名称</label>
 					<br/>
 					<form:input path="resource.name" readonly="true"/>
 					<form:hidden path="resourceId"/>
 				</div>
 				<div>
-					<label for="roleId">角色名称:</label>
+					<label for="roleId">角色名称</label>
 					<br/>
 					<form:select path="roleId" id="select-role${id}">
 						<form:option value=""/>

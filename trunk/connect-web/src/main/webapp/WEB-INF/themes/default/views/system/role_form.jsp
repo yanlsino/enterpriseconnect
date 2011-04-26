@@ -43,7 +43,7 @@
 					<form:checkbox path="enabled"/>
 				</div>
 				<div>
-					<input type="submit" value=" 提交 "/>
+					<button type="submit" class="button">提交</button>
 					<form:hidden path="id"/>
 				</div>
 		</form:form>

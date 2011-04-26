@@ -10,25 +10,28 @@
 	<c:if test="${not empty title}">
 	<div class="head">
 		<h3>${title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
-		<form:form id="site-link-form" cssClass="site-link-form" 
+		<form:form id="site-link-form${id}" cssClass="site-link-form"
 			action="${base}/process/system/site_link" commandName="siteLink">
 			<div>
-				<label>显示名:</label>
-				<form:input path="text" cssClass="{validate:{required:true, messages:{required:'显示名不能我为空！'}}}"/>
+				<label>显示名 <span class="required">*</span></label>
+				<br/>
+				<form:input path="text" cssClass="text"/>
 			</div>
 			<div>
-				<label>分类编码:</label>
-				<form:input path="code" cssClass="{validate:{required:true, messages:{required:'分类编码不能为空！'}}}"/>
+				<label>分类编码 <span class="required">*</span></label>
+				<br/>
+				<form:input path="code" cssClass="text"/>
 			</div>
 			<div>
-				<label>URL:</label>
-				<form:input path="href" cssClass="{validate:{required:true, messages:{required:'网站链接不能为空！'}}}"/>
+				<label>URL <span class="required">*</span></label>
+				<br/>
+				<form:input path="href" cssClass="text"/>
 			</div>
 			<div>
-				<input type="submit" value=" 提交 "/>
+				<button type="submit" class="button">提交</button>
 				<form:hidden path="id"/>
 				<form:hidden path="siteId"/>
 			</div>
@@ -42,6 +45,11 @@ $(document).ready(function(){
 		dataType: 'json',
 		clearForm: true,
 		beforeSubmit: function(formData, $form) {
+			for(i in formData) {
+				if($.trim(formData[i].value)=='') {
+					return false;
+				}
+			}
 		},
 		success: function(siteLink){
 			window.location.href='?siteId=${param.siteId}&linkId='+siteLink.id;

@@ -1,22 +1,22 @@
-===System Required===
+=== System Required ===
   # Java Runtime Environment 1.5.0 +
   # Database (Mysql Postgresql Oracle etc...)
   # Servlet Container (Jetty Tomcat JBoss etc...)
   # If install from source code, Maven 3.0 + is required
 
-===Installation===
+=== Installation ===
 
-====1.From Source Code====
+==== 1.From Source Code ====
   # Download source code from Downloads or check out from svn.
   # From terminal cd to connect's root directory. then execute `mvn package` command.
   # After execute `mvn package` command, you will find a connect-web-${version}.war in ${CONNECT_ROOT}/connect-web/target. this package is the same as which you download from Google Code's Downloads.
 
 
-====2.From War Package====
+==== 2.From War Package ====
   # Download war package from downloads, and put the war under tomcat's _webapp_. 
   # Startup the tomcat, the tomcat will unpackage connect-web.war, then cd to _webapp_/connect-web/WEB-INF/classes, your need to edit application.properties according to your database environment.After finish editing. you need to restart tomcat.
 
-===After Installation===
+=== After Installation ===
   当按照上面的两种方式安装完后，访问 http://localhost:8080/${context_path} 时，出现的只是一个主页，没有任何内容。你还需要通过下面几步来配置一个最简单的站点（Enterprise Connect 支持多站点）。
   # 访问 http://localhost:8080/${context_path}/system 进入后台配置管理界面
   # 通过站点管理来新增一个站点，例如： 域名 localhost 端口 8080 上下文 connect-web
@@ -25,4 +25,4 @@
 
 
 
-====Create MenuItem====
+==== Create MenuItem ====

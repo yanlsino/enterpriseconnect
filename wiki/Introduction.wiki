@@ -1,3 +1,3 @@
-  Enterprise Connect 是一个开源的 SBS （Social Bussiness Software），可以用于建立企业内部的协作平台，企业门户等。当然，Enterprise Connect 也是一个SNS 软件 （Social Networking Service）， 可以用于建立基于SNS的网站，例如：开发者社区，学校内部的网络社区等。
+  Enterprise Connect 是一个开源的 SBS （Social Bussiness Software），可以用于建立企业内部的协作平台，企业门户等。当然Enterprise Connect也是一个SNS 软件(Social Networking Service)，可以用于建立基于SNS的网站，例如：开发者社区，学校内部的网络社区等。
 
-  Enterprise Connect 使用 Java 语言开发，使用流行开源技术 Spring MVC + Spring + JPA（Hibernate）+ Hibernate Search 并用 Maven 进行项目管理。
+  Enterprise Connect使用Java语言开发，使用流行开源技术 Spring MVC + Spring + JPA（Hibernate）+ Hibernate Search 并用 Maven 进行项目管理。

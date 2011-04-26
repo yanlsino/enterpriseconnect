@@ -25,6 +25,7 @@
   # 通过角色管理为当前站点创建3个角色。例如： [#Create_Role 角色创建]
   # 权限管理，在进行权限权限管理之前你得先进行资源同步，通过资源同步可以加载当前系统的受控资源。当完成资源同步之后就可以进行权限管理了。例如：[#Manage_Permission 权限管理]
   # 还有最后一步，模板管理，通过模板管理，可以添加自定义模块模板，也就将Enterprise Connect当前支持的这些模块（或者称作 Features）跟具体的分类菜单挂钩。例如：[#Create_Template 模板创建]
+  # 最终看到的结果 例如：[#Demo_Site 例子站点]
 
 ==== Create Site ====
 [http://enterpriseconnect.googlecode.com/svn/trunk/src/images/add-site.png]
@@ -47,3 +48,11 @@
 [http://enterpriseconnect.googlecode.com/svn/trunk/src/images/list-permission.png]
 
 ==== Create Template ====
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/add-template.png]
+
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/list-template.png]
+
+==== Demo Site ====
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/connect.png]
+
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/connect-profile.png]

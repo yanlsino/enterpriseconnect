@@ -21,13 +21,16 @@
   # 访问 http://localhost:8080/${context_path}/system 进入后台配置管理界面
   # 通过站点管理来新增一个站点，例如： 域名 localhost 端口 8080 上下文 connect-web
   # 当完成添加一个新站点之后，在站点列表里就会显示该站点，接下来你就需要对该站点进行具体配置，例如： 菜单配置 模块配置 权限配置等。
-  # 你第一个需要创建的是成员菜单项，在Enterprise Connect中必须拥有该菜单项，当然，有的站点不希望显示该菜单项，你可以通过不起用该菜单项来满足你的需求。例如：[#Create_Menu         成员菜单项创建]
-
+  # 你第一个需要创建的是成员菜单项，在Enterprise Connect中必须拥有该菜单项，当然，有的站点不希望显示该菜单项，你可以通过不起用该菜单项来满足你的需求。例如：[#Create_Menu         菜单创建]
+  # 通过角色管理为当前站点创建3个角色。例如： [#Create_Role 角色创建]
+  # 权限管理，在进行权限权限管理之前你得先进行资源同步，通过资源同步可以加载当前系统的受控资源。当完成资源同步之后就可以进行权限管理了。例如：[#Manage_Permission 权限管理]
+  # 还有最后一步，模板管理，通过模板管理，可以添加自定义模块模板，也就将Enterprise Connect当前支持的这些模块（或者称作 Features）跟具体的分类菜单挂钩。例如：[#Create_Template 模板创建]
 
 
 ==== Create Menu ====
 
+==== Create Role ====
 
+==== Manage Permission ====
 
-
-dfgdgs
+==== Create Template ====

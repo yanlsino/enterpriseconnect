@@ -2,3 +2,5 @@
   
   * [Introduction Introduction]
   * [UserGuide User Guide]
+  * [DeveloperGuide Developer Guide]
+  * [Architecture Architecture]

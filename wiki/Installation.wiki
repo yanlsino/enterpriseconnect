@@ -1,4 +1,3 @@
-#labels Featured
 ===System Required===
   # Java Runtime Environment 1.5.0 +
   # if package form source code, Maven 3.0 + is required

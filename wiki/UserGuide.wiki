@@ -28,6 +28,9 @@
 
 
 ==== Create Menu ====
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/add_menu.png ]
+
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/list_menu.png]
 
 ==== Create Role ====
 

@@ -37,7 +37,13 @@
 [http://enterpriseconnect.googlecode.com/svn/trunk/src/images/list-category.png]
 
 ==== Create Role ====
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/add-role.png]
+
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/list-role.png]
 
 ==== Manage Permission ====
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/list-resource.png]
+
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/list-permission.png]
 
 ==== Create Template ====

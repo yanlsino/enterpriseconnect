@@ -1,1 +1,0 @@
-{"error":0,"url":"${base}/image/download/${attachment.id}/${imgWidth}x${imgHeight}","message":"successs"}

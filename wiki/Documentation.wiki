@@ -1,6 +1,7 @@
 ==Documentation==
   
   * [Introduction Introduction]
+  * [Screenshot Screenshot]
   * [UserGuide User Guide]
   * [DeveloperGuide Developer Guide]
   * [Architecture Architecture]

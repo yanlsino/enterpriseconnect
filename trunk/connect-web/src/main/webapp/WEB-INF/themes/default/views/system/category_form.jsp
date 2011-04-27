@@ -25,6 +25,11 @@
 					<form:input path="code" cssClass="text"/>
 				</div>
 				<div>
+					<label for="sensitive">仅登录可见</label>
+					<br/>
+					<form:checkbox path="sensitive" value="true"/>
+				</div>
+				<div>
 					<label for="level">排序值 </label>
 					<form:input path="level"/>
 				</div>

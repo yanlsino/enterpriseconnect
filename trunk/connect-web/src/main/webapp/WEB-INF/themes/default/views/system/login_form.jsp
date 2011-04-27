@@ -8,21 +8,21 @@
 
 <div id="${id}" class="fragment">
 	<div class="body">
-		<form id="login-form${id}" class="login-form" 
-			action="${base}/j_security_check" method="POST"> 
+		<form id="login-form${id}" class="login-form"
+			action="${base}/j_security_check" method="POST">
 			<fieldset>
 				<legend>${title}</legend>
 				<div>
-            		<label class="title"><fmt:message key="system.login_form.username"/><span class="required">*</span></label>
+            		<label class="title"><fmt:message key="system.login_form.username"/> <span class="required">*</span></label>
             		<br/>
             		<input id="username${id}" name="j_username" class="text formmgr-field yiv-required"/>
               	</div>
 				<div>
-            		<label for="j_password" class="title"><fmt:message key="system.login_form.password"/><span class="required">*</span></label>
+            		<label for="j_password" class="title"><fmt:message key="system.login_form.password"/> <span class="required">*</span></label>
             		<br/>
               		<input type="password" id="password${id}" name="j_password" class="text formmgr-field yiv-required"/>
 				</div>
-				<div>					
+				<div>
             		<label for="rememberMe" class="title"><fmt:message key="system.login_form.rememberMe"/></label>
 	             	<input type="checkbox" name="rememberMe" value="true" checked="checked"/>
 	            </div>
@@ -47,7 +47,7 @@ $(document).ready(function(){
 		dataType: 'json',
 		clearForm: true,
 		beforeSubmit: function(formData){
-			// validate 
+			// validate
 			var username = formData[0].value;
 			var password = formData[1].value;
 			if($.trim(username)=='' || $.trim(password)=='' ||
@@ -58,7 +58,7 @@ $(document).ready(function(){
 		success: function(user){
 			setTimeout(function(){
 				if('${param.popup}' == 'true') {
-					window.location.reload();					
+					window.location.reload();
 				} else {
 					window.location.href='${base}/' + user.uniqueId + '/profile';
 				}

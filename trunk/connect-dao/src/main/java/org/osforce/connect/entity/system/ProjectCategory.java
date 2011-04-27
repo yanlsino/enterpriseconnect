@@ -17,7 +17,7 @@ import org.osforce.connect.entity.support.SiteEntity;
 
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Nov 4, 2010 - 11:48:55 AM
@@ -27,12 +27,13 @@ import org.osforce.connect.entity.support.SiteEntity;
 @Table(name="project_categories")
 @Cacheable
 public class ProjectCategory extends SiteEntity{
-	
+
 	private static final long serialVersionUID = 6939240938778471219L;
-	
+
 	private String code;
 	private String label;
 	private Integer level;
+	private Boolean sensitive = false;
 	private Boolean enabled;
 	// helper
 	private Integer count = 0;
@@ -40,10 +41,10 @@ public class ProjectCategory extends SiteEntity{
 	// refer
 	private ProjectCategory parent;
 	private List<ProjectCategory> children = new ArrayList<ProjectCategory>();
-	
+
 	public ProjectCategory() {
 	}
-	
+
 	public ProjectCategory(String label, String code) {
 		this.label = label;
 		this.code = code;
@@ -75,6 +76,14 @@ public class ProjectCategory extends SiteEntity{
 		this.level = level;
 	}
 
+	public Boolean getSensitive() {
+		return sensitive;
+	}
+
+	public void setSensitive(Boolean sensitive) {
+		this.sensitive = sensitive;
+	}
+
 	public Boolean getEnabled() {
 		return enabled;
 	}
@@ -82,7 +91,7 @@ public class ProjectCategory extends SiteEntity{
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
 	/**
 	 * 返回当前分类的 Project 个数
 	 * @return size
@@ -91,11 +100,11 @@ public class ProjectCategory extends SiteEntity{
 	public Integer getCount() {
 		return count;
 	}
-	
+
 	public void setCount(Integer count) {
 		this.count = count;
 	}
-	
+
 	@Transient
 	public Long getParentId() {
 		if(parentId==null && parent!=null) {
@@ -103,28 +112,28 @@ public class ProjectCategory extends SiteEntity{
 		}
 		return parentId;
 	}
-	
+
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="parent_id")
 	public ProjectCategory getParent() {
 		return parent;
 	}
-	
+
 	public void setParent(ProjectCategory parent) {
 		this.parent = parent;
 	}
-	
+
 	@OneToMany(mappedBy="parent")
 	public List<ProjectCategory> getChildren() {
 		return children;
 	}
-	
+
 	public void setChildren(List<ProjectCategory> children) {
 		this.children = children;
 	}
-	
+
 }

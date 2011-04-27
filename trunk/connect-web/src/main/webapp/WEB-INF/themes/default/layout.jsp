@@ -9,40 +9,41 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="Keywords" content="${site.title}"/>
     <meta name="Description" content="${site.description}"/>
-	
+	<link rel="SHORTCUT ICON" href="${base}/themes/${theme.name}/icons/favicon.ico"/>
+
 	<link rel="stylesheet" href="${base}/themes/${theme.name}/css/screen.css" type="text/css" media="screen, projection"/>
     <link rel="stylesheet" href="${base}/themes/${theme.name}/css/print.css" type="text/css" media="print"/>
     <!--[if lt IE 8]>
     <link rel="stylesheet" href="${base}/themes/${theme.name}/css/ie.css" type="text/css" media="screen, projection"/>
     <![endif]-->
-	
+
 	<!-- plugins -->
     <link rel="stylesheet" href="${base}/themes/${theme.name}/css/plugins/buttons/screen.css" type="text/css" media="screen, projection"/>
-     
-	
+
+
     <script type="text/javascript" src="${base}/static/components/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="${base}/static/components/global.js"></script>
-    
+
     <link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-jHtmlArea/style/jHtmlArea.css"/>
     <script type="text/javascript" src="${base}/static/components/jquery-jHtmlArea/jquery.jHtmlArea.min.js"></script>
-    
+
     <script type="text/javascript" src="${base}/static/components/jquery-form/jquery.form.min.js"></script>
     <script type="text/javascript" src="${base}/static/components/jquery-busy/jquery.busy.min.js"></script>
-    
+
     <link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-datePicker/jquery.datePicker.css"/>
     <script type="text/javascript" src="${base}/static/components/jquery-datePicker/jquery.datePicker.js"></script>
     <script type="text/javascript" src="${base}/static/components/jquery-datePicker/date.js"></script>
-    
+
     <link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-simplemodal/jquery.simplemodal.css"/>
     <script type="text/javascript" src="${base}/static/components/jquery-simplemodal/jquery.simplemodal.min.js"></script>
-    
+
     <script type="text/javascript" src="${base}/static/components/jquery-jqLayer/jquery.jqLayer.min.js"></script>
-    
+
     <link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-zTree/jquery.zTree.css"/>
     <script type="text/javascript" src="${base}/static/components/jquery-zTree/jquery.zTree.min.js"></script>
-    
+
     <script type="text/javascript" src="${base}/static/components/jquery-cycle/jquery.cycle.min.js"></script>
-    
+
     <link rel="stylesheet" href="${base}/themes/${theme.name}/css/style.css" type="text/css" media="screen, projection"/>
     <link rel="stylesheet" href="${base}/themes/${theme.name}/css/fragment.css" type="text/css" media="screen, projection"/>
     <script type="text/javascript">
@@ -83,7 +84,7 @@
 				<div id="site-search">
 					<osf:position render="siteSearch"/>
 				</div>
-				</osf:position> 
+				</osf:position>
 			</div>
 			<br class="clear"/>
 			<osf:position exist="mainMenu">

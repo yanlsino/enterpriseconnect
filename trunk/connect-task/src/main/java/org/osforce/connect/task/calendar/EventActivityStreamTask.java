@@ -1,10 +1,10 @@
-package org.osforce.connect.task.discussion;
+package org.osforce.connect.task.calendar;
 
 import java.util.Map;
 
+import org.osforce.connect.entity.calendar.Event;
 import org.osforce.connect.entity.commons.Activity;
-import org.osforce.connect.entity.discussion.Reply;
-import org.osforce.connect.service.discussion.ReplyService;
+import org.osforce.connect.service.calendar.EventService;
 import org.osforce.connect.service.vblog.ActivityService;
 import org.osforce.platform.task.support.AbstractTask;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +14,21 @@ import org.springframework.stereotype.Component;
  *
  * @author gavin
  * @since 1.0.0
- * @create Mar 2, 2011 - 5:22:37 PM
+ * @create Apr 27, 2011 - 2:00:20 PM
  *  <a href="http://www.opensourceforce.org">开源力量</a>
  */
 @Component
-public class ReplyActivityStreamTask extends AbstractTask {
+public class EventActivityStreamTask extends AbstractTask {
 
-	private ReplyService replyService;
+	private EventService eventService;
 	private ActivityService activityService;
 
-	public ReplyActivityStreamTask() {
+	public EventActivityStreamTask() {
 	}
 
 	@Autowired
-	public void setReplyService(ReplyService replyService) {
-		this.replyService = replyService;
+	public void setEventService(EventService eventService) {
+		this.eventService = eventService;
 	}
 
 	@Autowired
@@ -38,17 +38,17 @@ public class ReplyActivityStreamTask extends AbstractTask {
 
 	@Override
 	protected void doTask(Map<Object, Object> context) throws Exception {
-		Long replyId = (Long) context.get("replyId");
-		Reply reply = replyService.getReply(replyId);
+		Long eventId = (Long) context.get("eventId");
+		Event event = eventService.getEvent(eventId);
 		String template = (String) context.get("template");
 		Activity activity = new Activity();
-		activity.setLinkedId(replyId);
-		activity.setEntity(Reply.NAME);
-		activity.setType(Reply.NAME);
+		activity.setLinkedId(eventId);
+		activity.setEntity(Event.NAME);
+		activity.setType(Event.NAME);
 		activity.setDescription(template);
 		activity.setFormat(Activity.FORMAT_FTL);
-		activity.setProjectId(reply.getTopic().getForum().getProjectId());
-		activity.setEnteredId(reply.getModifiedId());
+		activity.setProjectId(event.getProjectId());
+		activity.setEnteredId(event.getModifiedId());
 		activityService.createActivity(activity);
 	}
 

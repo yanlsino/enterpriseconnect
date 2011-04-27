@@ -10,7 +10,7 @@
 	<c:if test="${not empty title}">
 	<div class="head">
 		<h3>${title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<div id="folder-tree${id}" class="tree"></div>
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		callback: {
 			beforeCollapse: function(){return false;},
 			click: function(event, id, node){
-				window.location.href='${base}/${project.uniqueId}/document?folderId=' + node.id;
+				window.location.href='${base}/${project.uniqueId}/document/folder/' + node.id;
 			}
 		}
 	}, ${folderTree});

@@ -35,7 +35,10 @@
 					<div>
 						<c:choose>
 							<c:when test="${activity.type eq 'site-chat' or activity.type eq 'user-input'}">
-								<u:vBlogRender text="${activity.description}" facesBase="${base}/static/images/faces"/>
+								<u:textRender text="${activity.description}" facesBase="${base}/static/images/faces"/>
+							</c:when>
+							<c:when test="${activity.format eq 'ftl'}">
+								<u:freemarkerRender activity="${activity}"/>
 							</c:when>
 							<c:otherwise>${activity.description}</c:otherwise>
 						</c:choose>

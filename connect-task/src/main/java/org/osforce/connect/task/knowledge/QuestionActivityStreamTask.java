@@ -1,10 +1,10 @@
-package org.osforce.connect.task.team;
+package org.osforce.connect.task.knowledge;
 
 import java.util.Map;
 
 import org.osforce.connect.entity.commons.Activity;
-import org.osforce.connect.entity.team.TeamMember;
-import org.osforce.connect.service.team.MemberService;
+import org.osforce.connect.entity.knowledge.Question;
+import org.osforce.connect.service.knowledge.QuestionService;
 import org.osforce.connect.service.vblog.ActivityService;
 import org.osforce.platform.task.support.AbstractTask;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +14,16 @@ import org.springframework.stereotype.Component;
  *
  * @author gavin
  * @since 1.0.0
- * @create Mar 3, 2011 - 9:39:41 AM
+ * @create Apr 27, 2011 - 1:21:55 PM
  *  <a href="http://www.opensourceforce.org">开源力量</a>
  */
 @Component
-public class MemberActivityStreamTask extends AbstractTask {
+public class QuestionActivityStreamTask extends AbstractTask {
 
 	private ActivityService activityService;
-	private MemberService memberService;
+	private QuestionService questionService;
 
-	public MemberActivityStreamTask() {
+	public QuestionActivityStreamTask() {
 	}
 
 	@Autowired
@@ -32,23 +32,23 @@ public class MemberActivityStreamTask extends AbstractTask {
 	}
 
 	@Autowired
-	public void setMemberService(MemberService memberService) {
-		this.memberService = memberService;
+	public void setQuestionService(QuestionService questionService) {
+		this.questionService = questionService;
 	}
 
 	@Override
 	protected void doTask(Map<Object, Object> context) throws Exception {
-		Long memberId = (Long) context.get("memberId");
-		TeamMember member = memberService.getMember(memberId);
+		Long questionId = (Long) context.get("questionId");
+		Question question = questionService.getQuestion(questionId);
 		String template = (String) context.get("template");
 		Activity activity = new Activity();
-		activity.setLinkedId(memberId);
-		activity.setEntity(TeamMember.NAME);
-		activity.setType(TeamMember.NAME);
+		activity.setLinkedId(questionId);
+		activity.setEntity(Question.NAME);
+		activity.setType(Question.NAME);
 		activity.setDescription(template);
 		activity.setFormat(Activity.FORMAT_FTL);
-		activity.setProjectId(member.getProjectId());
-		activity.setEnteredId(member.getUserId());
+		activity.setProjectId(question.getProjectId());
+		activity.setEnteredId(question.getModifiedId());
 		activityService.createActivity(activity);
 	}
 

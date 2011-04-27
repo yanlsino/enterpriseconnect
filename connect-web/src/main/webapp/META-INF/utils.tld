@@ -93,8 +93,8 @@
 	</tag>
 
 	<tag>
-		<name>vBlogRender</name>
-		<tag-class>org.osforce.connect.web.tag.VBlogRenderTag</tag-class>
+		<name>textRender</name>
+		<tag-class>org.osforce.connect.web.tag.TextRenderTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>text</name>
@@ -103,6 +103,16 @@
 		</attribute>
 		<attribute>
 			<name>facesBase</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>freemarkerRender</name>
+		<tag-class>org.osforce.connect.web.tag.FreemarkerRenderTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>activity</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

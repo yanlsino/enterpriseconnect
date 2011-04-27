@@ -28,7 +28,7 @@
 					<showToolbar>true</showToolbar>
 				</preferences>
 				<rules>
-					<rule name="securityRule" code="vblog-activity-add" 
+					<rule name="securityRule" code="vblog-activity-add"
 					userRequired="true" projectRequired="true"/>
 				</rules>
 			</fragment>
@@ -106,7 +106,7 @@
 					<showToolbar>true</showToolbar>
 				</preferences>
 				<rules>
-					<rule name="securityRule" code="vblog-activity-add" 
+					<rule name="securityRule" code="vblog-activity-add"
 					userRequired="true" projectRequired="true"/>
 				</rules>
 			</fragment>
@@ -117,7 +117,7 @@
 					projectRequired="true"/>
 				</rules>
 				<preferences>
-					<activityTypes>user-input,Profile,BlogPost,Topic,Reply</activityTypes>
+					<activityTypes>user-input,Profile,Question,Answer,Event,Album,Photo,BlogPost,Forum,Topic,Reply,FileItem,Folder</activityTypes>
 				</preferences>
 			</fragment>
 		</position>
@@ -196,7 +196,7 @@
 					<showToolbar>true</showToolbar>
 				</preferences>
 				<rules>
-					<rule name="securityRule" code="vblog-activity-add" 
+					<rule name="securityRule" code="vblog-activity-add"
 					userRequired="true" projectRequired="true"/>
 				</rules>
 			</fragment>

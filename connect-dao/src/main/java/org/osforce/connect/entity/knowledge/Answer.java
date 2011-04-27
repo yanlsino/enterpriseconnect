@@ -18,7 +18,7 @@ import org.osforce.platform.entity.support.IdEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Mar 22, 2011 - 8:58:50 PM
@@ -29,6 +29,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Cacheable
 public class Answer extends IdEntity {
 	private static final long serialVersionUID = 497817015598556275L;
+
+	public static final String NAME = Answer.class.getSimpleName();
 
 	private String content;
 	private Date entered;
@@ -41,7 +43,7 @@ public class Answer extends IdEntity {
 	private User enteredBy;
 	private User modifiedBy;
 	private Question question;
-	
+
 	public Answer() {
 	}
 
@@ -84,7 +86,7 @@ public class Answer extends IdEntity {
 	public void setEnteredId(Long enteredId) {
 		this.enteredId = enteredId;
 	}
-	
+
 	@Transient
 	public Long getModifiedId() {
 		if(modifiedId==null && modifiedBy!=null) {
@@ -92,7 +94,7 @@ public class Answer extends IdEntity {
 		}
 		return modifiedId;
 	}
-	
+
 	public void setModifiedId(Long modifiedId) {
 		this.modifiedId = modifiedId;
 	}
@@ -118,13 +120,13 @@ public class Answer extends IdEntity {
 	public void setEnteredBy(User enteredBy) {
 		this.enteredBy = enteredBy;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="modified_by_id")
 	public User getModifiedBy() {
 		return modifiedBy;
 	}
-	
+
 	public void setModifiedBy(User modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
@@ -138,5 +140,5 @@ public class Answer extends IdEntity {
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
-	
+
 }

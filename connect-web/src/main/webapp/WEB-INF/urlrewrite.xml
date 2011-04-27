@@ -13,7 +13,7 @@
 		<to last="true">/$1/$2</to>
 	</rule>
 	<!-- skip rewrite end -->
-	
+
 	<!-- redirect to home -->
 	<rule>
 		<note>rewrite /</note>
@@ -23,7 +23,7 @@
 	<!-- attachment begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/(profile)/attachment$</from>
-		<to last="true">/page?viewName=/commons/attachment_form&amp;uniqueId=$1</to>	
+		<to last="true">/page?viewName=/commons/attachment_form&amp;uniqueId=$1</to>
 	</rule>
 	<rule>
 		<from>^/(image|doc|photo|logo)/download/([\d]+)$</from>
@@ -38,14 +38,14 @@
 		<to last="true">/commons/download?attachmentId=$2&amp;dimension=$3</to>
 	</rule>
 	<!-- attachment end -->
-	
+
 	<!-- apps begin -->
 	<rule>
 		<from>^/app/([\w]+)/form$</from>
 		<to>/page?viewName=/apps/$1_form&amp;popup=true</to>
 	</rule>
 	<!-- apps end -->
-	
+
 	<!-- profile module begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/profile$</from>
@@ -56,7 +56,7 @@
 		<to last="true">/page?viewName=/profile/$2_form&amp;uniqueId=$1</to>
 	</rule>
 	<!-- profile module end -->
-	
+
 	<!-- knowledge module begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/knowledge$</from>
@@ -75,18 +75,18 @@
 		<to last="true">/page?viewName=/knowledge/$2&amp;uniqueId=$1&amp;$2Id=$3</to>
 	</rule>
 	<!-- knowledge module end -->
-	
+
 	<!-- calendar module begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/calendar$</from>
 		<to last="true">/page?viewName=/calendar/events&amp;uniqueId=$1</to>
-	</rule>	
+	</rule>
 	<rule>
 		<from>^/([\w\d-_]+)/calendar/event/form$</from>
 		<to last="true">/page?viewName=/calendar/event_form&amp;uniqueId=$1</to>
 	</rule>
 	<!-- calendar module end -->
-	
+
 	<!-- blog module begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/blog$</from>
@@ -105,7 +105,7 @@
 		<to last="true">/page?viewName=/blog/$2_form&amp;uniqueId=$1</to>
 	</rule>
 	<!-- blog module end -->
-	
+
 	<!-- gallery module begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/gallery$</from>
@@ -120,18 +120,22 @@
 		<to last="true">/page?viewName=/gallery/$2_form&amp;uniqueId=$1</to>
 	</rule>
 	<!-- gallery module end -->
-	
+
 	<!-- document module begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/document$</from>
 		<to last="true">/page?viewName=/document/folders&amp;uniqueId=$1</to>
 	</rule>
 	<rule>
+		<from>^/([\w\d-_]+)/document/(file|folder)/([\d]+)$</from>
+		<to last="true">/page?viewName=/document/$2&amp;uniqueId=$1</to>
+	</rule>
+	<rule>
 		<from>^/([\w\d-_]+)/document/(file|folder)/form$</from>
 		<to last="true">/page?viewName=/document/$2_form&amp;uniqueId=$1</to>
 	</rule>
 	<!-- document module end -->
-	
+
 	<!-- discussion module begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/discussion$</from>
@@ -150,7 +154,7 @@
 		<to last="true">/page?viewName=/discussion/$2_form&amp;uniqueId=$1</to>
 	</rule>
 	<!-- discussion module end -->
-	
+
 	<!-- team module begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/team$</from>
@@ -161,7 +165,7 @@
 		<to last="true">/page?viewName=/team/members_invite&amp;uniqueId=$1</to>
 	</rule>
 	<!-- team module end -->
-	
+
 	<!-- message module begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/message$</from>
@@ -180,7 +184,7 @@
 		<to last="true">/page?viewName=/message/message_form&amp;uniqueId=$1&amp;box=$2</to>
 	</rule>
 	<!-- message module end -->
-	
+
 	<!-- admin module begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/admin$</from>
@@ -195,7 +199,7 @@
 		<to last="true">/page?viewName=/admin/features_form&amp;uniqueId=$1</to>
 	</rule>
 	<!-- admin module end -->
-	
+
 	<!-- system module begin -->
 	<rule>
 		<from>^/(login|register|system)$</from>
@@ -210,7 +214,7 @@
 		<to last="true">/page?viewName=system/$2_form</to>
 	</rule>
 	<!-- system module end -->
-	
+
 	<!-- portal begin -->
 	<rule>
 		<from>^/([\w\d-_]+)/form$</from>
@@ -227,6 +231,6 @@
 	<rule>
 		<from>^/([\w\d-_]+)/([\w\d-_]+)$</from>
 		<to last="true">/page?viewName=/dashboardTname=$1&amp;subCategoryCode=$2</to>
-	</rule>	
+	</rule>
 	<!-- portal end -->
 </urlrewrite>

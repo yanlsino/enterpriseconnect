@@ -9,13 +9,13 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.commons.lang.StringUtils;
 
-public class VBlogRenderTag extends TagSupport {
+public class TextRenderTag extends TagSupport {
 	private static final long serialVersionUID = 3841163609059895187L;
 	
 	private String facesBase;
 	private String text;
 	
-	public VBlogRenderTag() {
+	public TextRenderTag() {
 	}
 	
 	public String getFacesBase() {

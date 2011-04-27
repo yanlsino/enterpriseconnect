@@ -19,7 +19,7 @@ import org.osforce.platform.entity.support.IdEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Mar 22, 2011 - 9:54:46 PM
@@ -30,7 +30,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Cacheable
 public class Album extends IdEntity {
 	private static final long serialVersionUID = 6616350844990456656L;
-	
+
+	public static final String NAME = Album.class.getSimpleName();
+
 	private String name;
 	private Date entered;
 	private Date modified;
@@ -138,14 +140,14 @@ public class Album extends IdEntity {
 	public void setProject(Project project) {
 		this.project = project;
 	}
-	
+
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="album")
 	public List<Photo> getPhotos() {
 		return photos;
 	}
-	
+
 	public void setPhotos(List<Photo> photos) {
 		this.photos = photos;
 	}
-	
+
 }

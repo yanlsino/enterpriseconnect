@@ -19,7 +19,7 @@ import org.osforce.platform.entity.support.IdEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Nov 13, 2010 - 11:07:35 AM
@@ -29,8 +29,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name="forums")
 @Cacheable
 public class Forum extends IdEntity {
-
 	private static final long serialVersionUID = 4265299716831892231L;
+
+	public static final String NAME = Forum.class.getSimpleName();
 
 	private String name;
 	private String description;
@@ -56,7 +57,7 @@ public class Forum extends IdEntity {
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -84,13 +85,13 @@ public class Forum extends IdEntity {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
 	@Column(nullable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	public Date getEntered() {
 		return entered;
 	}
-	
+
 	public void setEntered(Date entered) {
 		this.entered = entered;
 	}
@@ -99,7 +100,7 @@ public class Forum extends IdEntity {
 	public Date getModified() {
 		return modified;
 	}
-	
+
 	public void setModified(Date modified) {
 		this.modified = modified;
 	}
@@ -107,7 +108,7 @@ public class Forum extends IdEntity {
 	public Integer getLevel() {
 		return level;
 	}
-	
+
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
@@ -135,7 +136,7 @@ public class Forum extends IdEntity {
 	public void setEnteredId(Long enteredId) {
 		this.enteredId = enteredId;
 	}
-	
+
 	@Transient
 	public Long getModifiedId() {
 		if(modifiedId==null && modifiedBy!=null) {
@@ -143,7 +144,7 @@ public class Forum extends IdEntity {
 		}
 		return modifiedId;
 	}
-	
+
 	public void setModifiedId(Long modifiedId) {
 		this.modifiedId = modifiedId;
 	}
@@ -152,7 +153,7 @@ public class Forum extends IdEntity {
 	public List<Topic> getTopics() {
 		return topics;
 	}
-	
+
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
@@ -166,7 +167,7 @@ public class Forum extends IdEntity {
 	public void setProject(Project project) {
 		this.project = project;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="entered_by_id")
 	public User getEnteredBy() {
@@ -176,13 +177,13 @@ public class Forum extends IdEntity {
 	public void setEnteredBy(User enteredBy) {
 		this.enteredBy = enteredBy;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="modified_by_id")
 	public User getModifiedBy() {
 		return modifiedBy;
 	}
-	
+
 	public void setModifiedBy(User modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}

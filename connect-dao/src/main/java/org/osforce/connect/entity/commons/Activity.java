@@ -18,7 +18,7 @@ import org.osforce.connect.entity.system.User;
 import org.osforce.platform.entity.support.IdEntity;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Nov 6, 2010 - 10:19:49 PM
@@ -29,17 +29,18 @@ import org.osforce.platform.entity.support.IdEntity;
 @Cacheable
 public class Activity extends IdEntity {
 	private static final long serialVersionUID = 8205271185975262412L;
-	
+
 	public static final String NAME = Activity.class.getSimpleName();
-	
+
 	public static final String FORMAT_HTML = "html";
-	public static final String FORMAT_TEXT = "text";
-	
+	public static final String FORMAT_TXT = "txt";
+	public static final String FORMAT_FTL = "ftl";
+
 	private Long linkedId;
 	private String entity;
 	private String description;
 	private String type;
-	private String format = FORMAT_TEXT;
+	private String format = FORMAT_TXT;
 	private Date entered;
 	// helper
 	private Long enteredId;
@@ -50,22 +51,22 @@ public class Activity extends IdEntity {
 	// refer
 	private User enteredBy;
 	private Project project;
-	
+
 	public Activity() {
 	}
-	
+
 	public Long getLinkedId() {
 		return linkedId;
 	}
-	
+
 	public void setLinkedId(Long linkedId) {
 		this.linkedId = linkedId;
 	}
-	
+
 	public String getEntity() {
 		return entity;
 	}
-	
+
 	public void setEntity(String entity) {
 		this.entity = entity;
 	}
@@ -74,25 +75,25 @@ public class Activity extends IdEntity {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	@Column(nullable=false)
 	public String getType() {
 		return type;
 	}
-	
+
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	@Column(nullable=false)
 	public String getFormat() {
 		return format;
 	}
-	
+
 	public void setFormat(String format) {
 		this.format = format;
 	}
@@ -105,7 +106,7 @@ public class Activity extends IdEntity {
 	public void setEntered(Date entered) {
 		this.entered = entered;
 	}
-	
+
 	@Transient
 	public Long getEnteredId() {
 		if(enteredId==null && enteredBy!=null) {
@@ -113,11 +114,11 @@ public class Activity extends IdEntity {
 		}
 		return enteredId;
 	}
-	
+
 	public void setEnteredId(Long enteredId) {
 		this.enteredId = enteredId;
 	}
-	
+
 	@Transient
 	public Long getProjectId() {
 		if(projectId==null && project!=null) {
@@ -125,34 +126,34 @@ public class Activity extends IdEntity {
 		}
 		return projectId;
 	}
-	
+
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
-	
+
 	@Transient
 	public Long getCommentCount() {
 		return commentCount;
 	}
-	
+
 	public void setCommentCount(Long commentCount) {
 		this.commentCount = commentCount;
 	}
-	
+
 	@Transient
 	public String getSyncTargets() {
 		return syncTargets;
 	}
-	
+
 	public void setSyncTargets(String syncTargets) {
 		this.syncTargets = syncTargets;
 	}
-	
+
 	@Transient
 	public List<Comment> getComments() {
 		return comments;
 	}
-	
+
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}

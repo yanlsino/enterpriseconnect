@@ -16,7 +16,7 @@ import org.osforce.platform.entity.support.IdEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Mar 22, 2011 - 9:58:08 PM
@@ -27,6 +27,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Cacheable
 public class Photo extends IdEntity {
 	private static final long serialVersionUID = -8437147337946507570L;
+
+	public static final String NAME = Photo.class.getSimpleName();
 
 	private String name;
 	private Date entered;
@@ -41,7 +43,7 @@ public class Photo extends IdEntity {
 	private User modifiedBy;
 	private Attachment realFile;
 	private Album album;
-	
+
 	public Photo() {
 	}
 
@@ -106,7 +108,7 @@ public class Photo extends IdEntity {
 	public void setRealFileId(Long realFileId) {
 		this.realFileId = realFileId;
 	}
-	
+
 	@Transient
 	public Long getAlbumId() {
 		if(albumId==null && album!=null) {
@@ -114,7 +116,7 @@ public class Photo extends IdEntity {
 		}
 		return albumId;
 	}
-	
+
 	public void setAlbumId(Long albumId) {
 		this.albumId = albumId;
 	}
@@ -124,7 +126,7 @@ public class Photo extends IdEntity {
 	public User getEnteredBy() {
 		return enteredBy;
 	}
-	
+
 	public void setEnteredBy(User enteredBy) {
 		this.enteredBy = enteredBy;
 	}
@@ -148,15 +150,15 @@ public class Photo extends IdEntity {
 	public void setRealFile(Attachment realFile) {
 		this.realFile = realFile;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="album_id")
 	public Album getAlbum() {
 		return album;
 	}
-	
+
 	public void setAlbum(Album album) {
 		this.album = album;
 	}
-	
+
 }

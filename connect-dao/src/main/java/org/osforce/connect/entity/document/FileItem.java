@@ -16,7 +16,7 @@ import org.osforce.platform.entity.support.IdEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Nov 10, 2010 - 3:48:59 PM
@@ -28,6 +28,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class FileItem extends IdEntity {
 
 	private static final long serialVersionUID = -4517309340701439012L;
+
+	public static final String NAME = FileItem.class.getSimpleName();
 
 	private String displayName;
 	private Date entered;
@@ -44,7 +46,7 @@ public class FileItem extends IdEntity {
 	private User modifiedBy;
 	private Folder folder;
 	private Attachment realFile;
-	
+
 	public FileItem() {
 	}
 
@@ -55,21 +57,21 @@ public class FileItem extends IdEntity {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
-	
+
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	public Date getEntered() {
 		return entered;
 	}
-	
+
 	public void setEntered(Date entered) {
 		this.entered = entered;
 	}
-	
+
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	public Date getModified() {
 		return modified;
 	}
-	
+
 	public void setModified(Date modified) {
 		this.modified = modified;
 	}
@@ -77,11 +79,11 @@ public class FileItem extends IdEntity {
 	public Boolean getEnabled() {
 		return enabled;
 	}
-	
+
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
 	@Transient
 	public Long getEnteredId() {
 		if(enteredId==null && enteredBy!=null) {
@@ -101,11 +103,11 @@ public class FileItem extends IdEntity {
 		}
 		return modifiedId;
 	}
-	
+
 	public void setModifiedId(Long modifiedId) {
 		this.modifiedId = modifiedId;
 	}
-	
+
 	@Transient
 	public Long getFolderId() {
 		if(folderId==null && folder!=null) {
@@ -113,20 +115,20 @@ public class FileItem extends IdEntity {
 		}
 		return folderId;
 	}
-	
+
 	public void setFolderId(Long folderId) {
 		this.folderId = folderId;
 	}
-	
+
 	@Transient
 	public Long getViews() {
 		return views;
 	}
-	
+
 	public void setViews(Long views) {
 		this.views = views;
 	}
-	
+
 	@Transient
 	public Long getRealFileId() {
 		if(realFileId==null && realFile!=null) {
@@ -134,21 +136,21 @@ public class FileItem extends IdEntity {
 		}
 		return realFileId;
 	}
-	
+
 	public void setRealFileId(Long realFileId) {
 		this.realFileId = realFileId;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="entered_by_id")
 	public User getEnteredBy() {
 		return enteredBy;
 	}
-	
+
 	public void setEnteredBy(User enteredBy) {
 		this.enteredBy = enteredBy;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="modified_by_id")
 	public User getModifiedBy() {
@@ -158,25 +160,25 @@ public class FileItem extends IdEntity {
 	public void setModifiedBy(User modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="folder_id")
 	public Folder getFolder() {
 		return folder;
 	}
-	
+
 	public void setFolder(Folder folder) {
 		this.folder = folder;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="real_file_id")
 	public Attachment getRealFile() {
 		return realFile;
 	}
-	
+
 	public void setRealFile(Attachment realFile) {
 		this.realFile = realFile;
 	}
-	
+
 }

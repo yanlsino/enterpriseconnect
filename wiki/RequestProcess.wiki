@@ -1,0 +1,3 @@
+https://enterpriseconnect.googlecode.com/svn/trunk/src/images/mvc.png
+
+上图是一次页面请求的处理流程

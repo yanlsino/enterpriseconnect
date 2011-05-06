@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>connect-parent</artifactId>
 		<groupId>org.osforce</groupId>
-		<version>1.0.2</version>
+		<version>1.0.3-SNAPSHOT</version>
 		<relativePath>../connect-parent/pom.xml</relativePath>
 	</parent>
 	<groupId>org.osforce</groupId>

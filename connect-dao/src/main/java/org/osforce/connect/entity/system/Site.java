@@ -13,7 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.osforce.platform.entity.support.IdEntity;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Jan 28, 2011 - 3:41:16 PM
@@ -24,7 +24,7 @@ import org.osforce.platform.entity.support.IdEntity;
 @Cacheable
 public class Site extends IdEntity {
 	private static final long serialVersionUID = 2417731008556633617L;
-	
+
 	private String title;
 	private String description;
 	private String keywords;
@@ -40,7 +40,7 @@ public class Site extends IdEntity {
 	// refer
 	private Theme theme;
 	private MailSettings mailSettings;
-	
+
 	public Site() {
 	}
 
@@ -87,15 +87,15 @@ public class Site extends IdEntity {
 	public void setDomain(String domain) {
 		this.domain = domain;
 	}
-	
+
 	public String getContextPath() {
 		return contextPath;
 	}
-	
+
 	public void setContextPath(String contextPath) {
 		this.contextPath = contextPath;
 	}
-	
+
 	public Integer getPort() {
 		return port;
 	}
@@ -116,19 +116,19 @@ public class Site extends IdEntity {
 	public Boolean getEnabled() {
 		return enabled;
 	}
-	
+
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
 	public String getCopyright() {
 		return copyright;
 	}
-	
+
 	public void setCopyright(String copyright) {
 		this.copyright = copyright;
 	}
-	
+
 	@Transient
 	public String getHomeURL() {
 		String protocol = "http://";
@@ -149,21 +149,24 @@ public class Site extends IdEntity {
 		}
 		return buffer.toString();
 	}
-	
+
 	@Transient
 	public Long getThemeId() {
 		return themeId;
 	}
-	
+
 	public void setThemeId(Long themeId) {
 		this.themeId = themeId;
 	}
-	
+
 	@Transient
 	public Long getMailSettingsId() {
+		if(mailSettingsId==null && mailSettings!=null) {
+			mailSettingsId = mailSettings.getId();
+		}
 		return mailSettingsId;
 	}
-	
+
 	public void setMailSettingsId(Long mailSettingsId) {
 		this.mailSettingsId = mailSettingsId;
 	}
@@ -183,9 +186,9 @@ public class Site extends IdEntity {
 	public MailSettings getMailSettings() {
 		return mailSettings;
 	}
-	
+
 	public void setMailSettings(MailSettings mailSettings) {
 		this.mailSettings = mailSettings;
 	}
-	
+
 }

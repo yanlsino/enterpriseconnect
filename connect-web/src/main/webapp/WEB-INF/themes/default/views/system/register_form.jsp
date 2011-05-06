@@ -11,7 +11,7 @@
 		<form:form id="register-form${id}"  cssClass="register-form"
 			action="${base}/process/system/register" commandName="user">
 			<fieldset>
-				<legend>${title}</legend>
+				<legend>加入${site.title}，请认真填写如下注册信息 ...</legend>
 				<div>
 					<label for="username" class="title"><fmt:message key="system.register_form.username" /><span class="required"> * </span></label>
 					<br/>
@@ -33,14 +33,7 @@
 					<form:input path="nickname" id="nickname${id}" cssClass="text" />
 				</div>
 				<div>
-					<button class="button" type="submit">
-						<span id="status1${id}">
-							加入 ${site.title}
-						</span>
-						<span id="status2${id}" style="display: none">
-							<img src="${base}/static/images/loading.gif"/>正在处理...
-						</span>
-					</button>
+					<button class="button" type="submit">加入 ${site.title}</button>
 					<button class="button" type="reset">重置</button>
 					<form:hidden path="id" />
 					<br class="clear"/>
@@ -50,7 +43,7 @@
 					已经注册？<a href="${base}/login">登录</a>
 				</div>
 			</fieldset>
-		</form:form>	
+		</form:form>
 	</div>
 </div>
 
@@ -64,7 +57,7 @@ $(document).ready(function(){
 			var password1 = formData[1].value;
 			var password2 = formData[2].value;
 			var nickname = formData[3].value;
-			if($.trim(username)=='' || $.trim(password1)=='' || 
+			if($.trim(username)=='' || $.trim(password1)=='' ||
 					$.trim(password2)=='' || $.trim(nickname)=='' ||
 					password1!=password2 || username.match(/@.+\..+/)==null) {
 				return false;

@@ -7,12 +7,12 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<ul class="project-actions">
 		<c:if test="${empty member}">
-			<li><a class="addMemberAction" href="${base}/process/team/join?projectId=${project.id}">
+			<li><a class="addMemberAction" href="${base}/process/team/request?projectId=${project.id}">
 			<c:choose>
 				<c:when test="${project.category.code eq 'people'}"><fmt:message key="profile.actions.addAsFriend"/></c:when>
 				<c:otherwise><fmt:message key="profile.actions.addAsMember"/></c:otherwise>

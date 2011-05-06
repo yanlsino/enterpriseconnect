@@ -40,9 +40,9 @@ public class ProfileActivityStreamTask extends AbstractTask {
 	}
 
 	protected void doTask(Map<Object, Object> context) throws IOException, TemplateException {
-		Profile profile = (Profile) context.get("profile");
+		Long profileId = (Long) context.get("profileId");
 		String templateName = (String) context.get("template");
-		profile = profileService.getProfile(profile.getId());
+		Profile profile = profileService.getProfile(profileId);
 		Activity activity = new Activity();
 		activity.setLinkedId(profile.getId());
 		activity.setEntity(Profile.NAME);

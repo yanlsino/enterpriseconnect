@@ -100,5 +100,14 @@
 	<!-- Freemarker Configuration -->
 	<bean class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
    		<property name="templateLoaderPath" value="/WEB-INF/template"/>
+   		<property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+
+	<!-- Java Mail Sender -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+  		<property name="host" value="${mail_host}"/>
+  		<property name="port" value="${mail_port}"/>
+  		<property name="username" value="${mail_username}"/>
+  		<property name="password" value="${mail_password}"/>
 	</bean>
 </beans>

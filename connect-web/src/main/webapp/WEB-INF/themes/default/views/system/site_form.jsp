@@ -67,7 +67,10 @@
 				<div>
 					<label for="mailSettings">邮件配置</label>
 					<br/>
-					<form:select path="mailSettingsId" items="${mailSettingsList}" itemLabel="host" itemValue="id"/>
+					<form:select path="mailSettingsId">
+						<form:option value=""/>
+						<form:options items="${mailSettingsList}" itemLabel="host" itemValue="id"/>
+					</form:select>
 				</div>
 				<div>
 					<label for="enabled">启用</label>

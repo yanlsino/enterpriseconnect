@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 16, 2011 - 5:31:04 PM
@@ -36,30 +36,30 @@ public class MemberController {
 	private UserService userService;
 	private ProjectService projectService;
 	private MemberService memberService;
-	
+
 	public MemberController() {
 	}
-	
+
 	@Autowired
 	public void setRoleService(RoleService roleService) {
 		this.roleService = roleService;
 	}
-	
+
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 	@Autowired
 	public void setProjectService(ProjectService projectService) {
 		this.projectService = projectService;
 	}
-	
+
 	@Autowired
 	public void setMemberService(MemberService memberService) {
 		this.memberService = memberService;
 	}
-	
+
 	@RequestMapping(value="/member", method=RequestMethod.POST)
 	public void update(TeamMember member) {
 		if(member.getId()==null) {
@@ -68,9 +68,9 @@ public class MemberController {
 			memberService.updateMember(member);
 		}
 	}
-	
-	@RequestMapping(value="/join")
-	public @ResponseBody Map<String, Long> join(
+
+	@RequestMapping(value="/request")
+	public @ResponseBody Map<String, Long> request(
 			@RequestParam Long projectId, WebRequest request) {
 		Project project = projectService.getProject(projectId);
 		User user = (User) request.getAttribute(
@@ -81,25 +81,25 @@ public class MemberController {
 			member.setUser(user);
 			member.setProject(project);
 			member.setStatus(TeamMember.STATUS_WAIT_APPROVE);
-			memberService.createMember(member);
-			request.removeAttribute(AttributeKeys.TEAM_MEMBER_KEY, 
+			memberService.requestMember(member);
+			request.removeAttribute(AttributeKeys.TEAM_MEMBER_KEY,
 					WebRequest.SCOPE_SESSION);
 			return Collections.singletonMap("id", member.getId());
 		}
 		return null;
 	}
-	
+
 	@RequestMapping(value={"/approve", "/accept"})
 	public @ResponseBody Map<String, Long> approve(
 			@RequestParam Long memberId) {
 		memberService.approveMember(memberId);
 		return Collections.singletonMap("id", memberId);
 	}
-	
+
 	@RequestMapping(value="/members/invite")
 	public @ResponseBody String invite(@RequestParam String emails,
 			WebRequest request) {
-		Project project = (Project) request.getAttribute(AttributeKeys.PROJECT_KEY, 
+		Project project = (Project) request.getAttribute(AttributeKeys.PROJECT_KEY,
 				WebRequest.SCOPE_REQUEST);
 		String[] emailsArray = StringUtils.split(emails, "\n");
 		for(String email : emailsArray) {

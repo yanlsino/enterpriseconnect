@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.findPage(page, appender);
 	}
 	
-	public void register(User user, Project project) {
+	public void registerUser(User user, Project project) {
 		// create user
 		Date now = new Date();
 		user.setEmail(user.getUsername());

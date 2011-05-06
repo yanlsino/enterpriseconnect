@@ -58,9 +58,10 @@ public class SystemAspect {
 		this.resourceSyncTask = resourceSyncTask;
 	}
 
-	@AfterReturning("execution(* org.osforce.connect.service.system.ProjectService.createProject(..))")
+	@AfterReturning("execution(* org.osforce.connect.service.system.UserService.registerUser(..))")
 	public void createProject(JoinPoint jp) {
-		Project project = (Project) jp.getArgs()[0];
+		//User user = (User) jp.getArgs()[0];
+		Project project = (Project) jp.getArgs()[1];
 		if(StringUtils.equals(project.getCategory().getCode(), "people")) {
 			Map<Object, Object> context = new HashMap<Object, Object>();
 			context.put("siteId", project.getCategory().getSiteId());

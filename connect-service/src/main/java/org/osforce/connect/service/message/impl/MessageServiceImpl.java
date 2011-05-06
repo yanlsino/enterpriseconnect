@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 12, 2011 - 9:21:41 AM
@@ -30,20 +30,20 @@ public class MessageServiceImpl implements MessageService {
 	private UserDao userDao;
 	private ProjectDao projectDao;
 	private MessageDao messageDao;
-	
+
 	public MessageServiceImpl() {
 	}
-	
+
 	@Autowired
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-	
+
 	@Autowired
 	public void setProjectDao(ProjectDao projectDao) {
 		this.projectDao = projectDao;
 	}
-	
+
 	@Autowired
 	public void setMessageDao(MessageDao messageDao) {
 		this.messageDao = messageDao;
@@ -82,8 +82,8 @@ public class MessageServiceImpl implements MessageService {
 	public void deleteMessage(Long messageId) {
 		messageDao.delete(messageId);
 	}
-	
-	public Page<Message> getMessagePage(Page<Message> page, 
+
+	public Page<Message> getMessagePage(Page<Message> page,
 			Project project, String box) {
 		QueryAppender appender = new QueryAppender();
 		if(StringUtils.equals(box, "inbox")) {
@@ -94,11 +94,12 @@ public class MessageServiceImpl implements MessageService {
 		appender.desc("message.entered");
 		return messageDao.findPage(page, appender);
 	}
-	
+
 	public Long countUnreadMessage(Project project) {
 		QueryAppender appender = new QueryAppender();
 		appender.equal("message.to.id", project.getId());
 		appender.equal("message.read", false);
 		return messageDao.count(appender);
 	}
+
 }

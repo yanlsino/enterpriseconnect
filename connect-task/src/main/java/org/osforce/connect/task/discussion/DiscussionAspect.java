@@ -32,6 +32,7 @@ public class DiscussionAspect {
 	private Task forumActivityStreamTask;
 	private Task topicActivityStreamTask;
 	private Task replyActivityStreamTask;
+	private Task replyCreateEmailTask;
 
 	public DiscussionAspect() {
 	}
@@ -58,6 +59,12 @@ public class DiscussionAspect {
 	@Qualifier("replyActivityStreamTask")
 	public void setReplyActivityStreamTask(Task replyActivityStreamTask) {
 		this.replyActivityStreamTask = replyActivityStreamTask;
+	}
+
+	@Autowired
+	@Qualifier("replyCreateEmailTask")
+	public void setTopicReplyEmailTask(Task replyCreateEmailTask) {
+		this.replyCreateEmailTask = replyCreateEmailTask;
 	}
 
 	@AfterReturning("execution(* org.osforce.connect.service.discussion.TopicService.viewTopic(..))")
@@ -96,6 +103,8 @@ public class DiscussionAspect {
 		context.put("replyId", reply.getId());
 		context.put("template", TEMPLATE_REPLY_UPDATE);
 		replyActivityStreamTask.doAsyncTask(context);
+		//
+		replyCreateEmailTask.doAsyncTask(context);
 	}
 
 }

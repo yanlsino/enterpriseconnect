@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Mar 3, 2011 - 4:51:36 PM
@@ -23,10 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class MailSettingsServiceImpl implements MailSettingsService {
 
 	private MailSettingsDao mailSettingsDao;
-	
+
 	public MailSettingsServiceImpl() {
 	}
-	
+
 	@Autowired
 	public void setMailSettingsDao(MailSettingsDao mailSettingsDao) {
 		this.mailSettingsDao = mailSettingsDao;
@@ -51,12 +51,12 @@ public class MailSettingsServiceImpl implements MailSettingsService {
 	public void deleteMailSettings(Long mailSettingsId) {
 		mailSettingsDao.delete(mailSettingsId);
 	}
-	
+
 	public Page<MailSettings> getMailSettingsPage(Page<MailSettings> page) {
 		QueryAppender appender = new QueryAppender();
 		return mailSettingsDao.findPage(page, appender);
 	}
-	
+
 	public List<MailSettings> getMailSettingsList() {
 		QueryAppender appender = new QueryAppender();
 		return mailSettingsDao.find(appender);

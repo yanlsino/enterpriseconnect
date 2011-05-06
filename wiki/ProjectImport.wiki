@@ -1,0 +1,24 @@
+Enterprise Connect使用Maven作为项目构建工具，其工程结构如下：
+{{{
+connect
+  |
+  +---connect-parent
+  |
+  +---connect-dao
+  |
+  +---connect-service
+  |
+  +---connect-task
+  |
+  +---connect-web
+}}}
+
+如果想要将Enterprise Connect导入成 Eclipse工程，你需要安装M2Eclipse插件。安装地址如下：
+
+核心插件：[http://m2eclipse.sonatype.org/sites/m2e]
+
+额外工具：[http://m2eclipse.sonatype.org/sites/m2e-extras]
+
+关于Maven，M2eclipse关注此博客 [http://www.juvenxu.com/category/m2eclipse]
+
+关于使用M2eclipse进行Maven项目的导入以及开发，请参考相关文档。。。

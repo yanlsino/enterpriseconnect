@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 16, 2011 - 6:59:32 PM
@@ -19,17 +19,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class MessageController {
-    
+
 	private MessageService messageService;
-	
+
 	public MessageController() {
 	}
-	
+
 	@Autowired
 	public void setMessageService(MessageService messageService) {
 		this.messageService = messageService;
 	}
-	
+
 	@RequestMapping(value="/message/message")
 	public @ResponseBody Map<String, Long> update(Message message) {
 		if(message.getId()==null) {

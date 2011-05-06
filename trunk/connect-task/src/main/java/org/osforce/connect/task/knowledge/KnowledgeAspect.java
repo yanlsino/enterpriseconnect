@@ -30,6 +30,7 @@ public class KnowledgeAspect {
 	private Task questionViewCountTask;
 	private Task questionActivityStreamTask;
 	private Task answerActivityStreamTask;
+	private Task answerCreateEmailTask;
 
 	public KnowledgeAspect() {
 	}
@@ -50,6 +51,12 @@ public class KnowledgeAspect {
 	@Qualifier("answerActivityStreamTask")
 	public void setAnswerActivityStreamTask(Task answerActivityStreamTask) {
 		this.answerActivityStreamTask = answerActivityStreamTask;
+	}
+
+	@Autowired
+	@Qualifier("answerCreateEmailTask")
+	public void setAnswerCreateEmailTask(Task answerCreateEmailTask) {
+		this.answerCreateEmailTask = answerCreateEmailTask;
 	}
 
 	@AfterReturning("execution(* org.osforce.connect.service.knowledge.QuestionService.viewQuestion(..))")
@@ -78,6 +85,8 @@ public class KnowledgeAspect {
 		context.put("answerId", answer.getId());
 		context.put("template", TEMPLATE_ANSWER_UPDATE);
 		answerActivityStreamTask.doAsyncTask(context);
+		//
+		answerCreateEmailTask.doAsyncTask(context);
 	}
 
 }

@@ -5,7 +5,7 @@ import org.osforce.connect.entity.system.Project;
 import org.osforce.platform.dao.support.Page;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 12, 2011 - 9:21:13 AM
@@ -14,15 +14,16 @@ import org.osforce.platform.dao.support.Page;
 public interface MessageService {
 
 	Message getMessage(Long messageId);
-	
+
 	void createMessage(Message message);
-	
+
 	void updateMessage(Message message);
-	
+
 	void deleteMessage(Long messageId);
 
-	Page<Message> getMessagePage(Page<Message> page, 
+	Page<Message> getMessagePage(Page<Message> page,
 			Project project, String box);
 
 	Long countUnreadMessage(Project project);
+
 }

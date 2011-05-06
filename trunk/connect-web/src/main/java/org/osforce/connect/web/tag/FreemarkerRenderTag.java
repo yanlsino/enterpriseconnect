@@ -38,8 +38,8 @@ import org.osforce.connect.service.team.MemberService;
 import org.osforce.connect.task.support.FreemarkerUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.servlet.support.RequestContextUtils;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
+import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -65,9 +65,9 @@ public class FreemarkerRenderTag extends TagSupport {
 	@Override
 	public int doEndTag() throws JspException {
 		appContext = RequestContextUtils.getWebApplicationContext(pageContext.getRequest());
-		FreeMarkerConfigurer configurer = appContext.getBean(FreeMarkerConfigurer.class);
+		Configuration configuration = appContext.getBean(Configuration.class);
 		try {
-			Template template = configurer.getConfiguration().getTemplate(activity.getDescription());
+			Template template = configuration.getTemplate(activity.getDescription());
 			Map<Object, Object> model = createModel();
 			model.put("base", pageContext.getRequest().getAttribute("base"));
 			String result = FreemarkerUtil.render(template, model);

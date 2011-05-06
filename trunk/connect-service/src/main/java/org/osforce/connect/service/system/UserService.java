@@ -29,6 +29,6 @@ public interface UserService {
 	
 	Page<User> getUserPage(Page<User> page, String startWith);
 
-	void register(User user, Project project);
+	void registerUser(User user, Project project);
 
 }

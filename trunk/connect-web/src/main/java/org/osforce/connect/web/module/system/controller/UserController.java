@@ -71,7 +71,7 @@ public class UserController {
 				user.getId()!=null) {
 			Project project = (Project) request.getAttribute(
 					AttributeKeys.PROJECT_KEY,  WebRequest.SCOPE_SESSION);
-			userService.register(user, project);
+			userService.registerUser(user, project);
 		}
 		//
 		Map<String, Object> model = new HashMap<String, Object>();

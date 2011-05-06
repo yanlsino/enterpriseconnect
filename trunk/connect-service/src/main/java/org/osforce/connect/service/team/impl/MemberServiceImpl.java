@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 12, 2011 - 8:43:19 AM
@@ -33,25 +33,25 @@ public class MemberServiceImpl implements MemberService {
 	private RoleDao roleDao;
 	private ProjectDao projectDao;
 	private MemberDao memberDao;
-	
+
 	public MemberServiceImpl() {
 	}
-	
+
 	@Autowired
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-	
+
 	@Autowired
 	public void setRoleDao(RoleDao roleDao) {
 		this.roleDao = roleDao;
 	}
-	
+
 	@Autowired
 	public void setProjectDao(ProjectDao projectDao) {
 		this.projectDao = projectDao;
 	}
-	
+
 	@Autowired
 	public void setMemberDao(MemberDao memberDao) {
 		this.memberDao = memberDao;
@@ -60,7 +60,7 @@ public class MemberServiceImpl implements MemberService {
 	public TeamMember getMember(Long memberId) {
 		return memberDao.get(memberId);
 	}
-	
+
 	public TeamMember getMember(Long userId, Long projectId) {
 		QueryAppender appender = new QueryAppender()
 				.equal("teamMember.user.id", userId)
@@ -102,7 +102,7 @@ public class MemberServiceImpl implements MemberService {
 				.equal("teamMember.enabled", true);
 		return memberDao.findPage(page, appender);
 	}
-	
+
 	public List<TeamMember> getNeedApproveMemberList(
 			Project project, User user) {
 		QueryAppender appender = new QueryAppender();
@@ -111,7 +111,7 @@ public class MemberServiceImpl implements MemberService {
 				.equal("teamMember.enabled", false);
 		return memberDao.find(appender);
 	}
-	
+
 	public List<TeamMember> getWaitApproveMemberList(
 			Project project, User user) {
 		QueryAppender appender = new QueryAppender();
@@ -120,7 +120,7 @@ public class MemberServiceImpl implements MemberService {
 				.equal("teamMember.enabled", false);
 		return memberDao.find(appender);
 	}
-	
+
 	public List<TeamMember> getMemberList(Project project, User user,
 			String status, Boolean reverse) {
 		QueryAppender appender = new QueryAppender();
@@ -137,13 +137,17 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return memberDao.find(appender);
 	}
-	
+
+	public void requestMember(TeamMember member) {
+		createMember(member);
+	}
+
 	public void approveMember(Long memberId) {
 		TeamMember member = memberDao.get(memberId);
 		member.setStatus(null);
 		member.setEnabled(true);
 		memberDao.update(member);
-		if(NumberUtils.compare(member.getProject().getId(), 
+		if(NumberUtils.compare(member.getProject().getId(),
 				member.getProject().getEnteredBy().getProject().getId())==0) {
 			TeamMember otherSide = new TeamMember();
 			otherSide.setStatus(null);

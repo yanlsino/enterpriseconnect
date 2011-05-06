@@ -48,7 +48,9 @@
 	<!-- View Revolver Begin -->
 	<bean id="freemarkerConfigurer"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<!--
 		<property name="templateLoaderPath" value="/WEB-INF/template/"/>
+		 -->
 		<property name="freemarkerSettings">
 			<props>
 				<prop key="number_format">0.######</prop>

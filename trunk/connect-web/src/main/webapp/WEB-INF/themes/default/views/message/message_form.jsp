@@ -10,10 +10,10 @@
 	<c:if test="${not empty title}">
 	<div class="head">
 		<h3>${title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
-	<form:form id="message-form${id}" cssClass="message-form" 
+	<form:form id="message-form${id}" cssClass="message-form"
 		action="${base}/process/message/message" commandName="message">
 		<fieldset>
 			<div>
@@ -40,12 +40,7 @@
 			</div>
 			<div>
 				<button class="button" type="submit">
-					<span id="status1${id}">
-						<fmt:message key="message.message_form.submit"/>
-					</span>
-					<span id="status2${id}" style="display: none">
-						<img src="${base}/static/images/loading.gif"/>正在处理...
-					</span>
+					<fmt:message key="message.message_form.submit"/>
 				</button>
 				<form:hidden path="id"/>
 				<form:hidden path="fromId"/>
@@ -59,3 +54,24 @@
 	</form:form>
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#message-form${id}').ajaxForm({
+		dataType: 'json',
+		clearForm: true,
+		beforeSubmit: function(formData, $form){
+			var subject = $.trim(formData[1].value);
+			var content = $.trim(formData[2].value);
+			if(subject=='' || content=='') {
+				return false;
+			}
+		},
+		success: function(message){
+			setTimeout(function(){
+				window.location.href='?messageId=' + message.id;
+			}, 500);
+		}
+	});
+});
+</script>

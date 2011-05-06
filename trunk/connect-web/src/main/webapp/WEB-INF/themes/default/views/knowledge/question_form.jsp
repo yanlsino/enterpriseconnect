@@ -10,7 +10,7 @@
 	<c:if test="${not empty title}">
 	<div class="head">
 		<h3>${title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<form:form id="question-form${id}" cssClass="question-form"
@@ -33,6 +33,7 @@
 				<form:hidden path="enteredId"/>
 				<form:hidden path="modifiedId"/>
 				<form:hidden path="projectId"/>
+				<input type="hidden" name="entered" value='<fmt:formatDate value="${question.entered}" pattern="yyyy-MM-dd HH:mm:ss"/>' />
 			</div>
 		</form:form>
 	</div>
@@ -55,7 +56,7 @@ $(document).ready(function(){
 		},
 		success: function(question){
 			setTimeout(function(){
-				window.location.href='?questionId=' + question.id;				
+				window.location.href='?questionId=' + question.id;
 			}, 500);
 		}
 	});

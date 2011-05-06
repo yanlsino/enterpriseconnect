@@ -8,4 +8,4 @@
     * [RequestProcess Request Process]
     * [SecondaryDevelopment Secondary Development]
   * [Architecture Architecture]
-  * [Be an Committer]
+  * [About Committer]

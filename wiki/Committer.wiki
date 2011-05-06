@@ -9,6 +9,6 @@
 
 3. 多次提交产品patch记录
 
-4. 接受将所提交的代码赠予EnterpriseConnect , 不再保留代码著作权
+4. 接受将所提交的代码赠予EnterpriseConnect 不再保留代码著作权
 
 6. 获得现有项目管理者全票同意

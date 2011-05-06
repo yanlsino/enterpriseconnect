@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.osforce</groupId>
 	<artifactId>connect</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.2</version>
 	<packaging>pom</packaging>
 	<name>Connect</name>
 	<description>Open Source Force's Enterprise Connect Project</description>

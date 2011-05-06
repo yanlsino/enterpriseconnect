@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.osforce</groupId>
 	<artifactId>connect</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Connect</name>
 	<description>Open Source Force's Enterprise Connect Project</description>
@@ -15,7 +15,7 @@
 	</modules>
 
 	<scm>
-		<connection>scm:svn:http://enterpriseconnect.googlecode.com/svn/tags/connect-1.0.2</connection>
-		<developerConnection>scm:svn:https://enterpriseconnect.googlecode.com/svn/tags/connect-1.0.2</developerConnection>
+		<connection>scm:svn:http://enterpriseconnect.googlecode.com/svn/trunk</connection>
+		<developerConnection>scm:svn:https://enterpriseconnect.googlecode.com/svn/trunk</developerConnection>
 	</scm>
 </project>

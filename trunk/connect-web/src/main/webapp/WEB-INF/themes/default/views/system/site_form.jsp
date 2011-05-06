@@ -63,7 +63,7 @@
 						<form:options items="${themes}" itemLabel="name" itemValue="id"/>
 					</form:select>
 				</div>
-
+				<!--
 				<div>
 					<label for="mailSettings">邮件配置</label>
 					<br/>
@@ -72,6 +72,7 @@
 						<form:options items="${mailSettingsList}" itemLabel="host" itemValue="id"/>
 					</form:select>
 				</div>
+				 -->
 				<div>
 					<label for="enabled">启用</label>
 					<br/>

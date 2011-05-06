@@ -19,10 +19,12 @@
 					<a href="${base}/system/themes">主题管理</a>
 					(<a href="${base}/system/themes/theme/form">添加</a>)
 				</li>
+				<!--
 				<li>
 					<a href="${base}/system/mail_settings">邮件设置</a>
 					(<a href="${base}/system/mail_settings/mail_settings/form">添加</a>)
 				</li>
+				 -->
 				<li class="last">
 					<a href="${base}/system">系统概况</a>
 					(<a href="${base}/process/system/index-sync">重建索引</a>)

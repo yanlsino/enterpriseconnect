@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page name="/apps/message_form">
+	<position name="mainColumn">
+		<fragment refer="messageFragment" view="Form"/>
+	</position>
+</page>

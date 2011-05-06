@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<resource name="主页查看" code="profile-profile-view" enabled="true" />
+	<resource name="主页编辑" code="profile-profile-edit" enabled="true" />
+
+	<resource name="日历添加" code="calendar-event-add" enabled="true" />
+	<resource name="日历编辑" code="calendar-event-edit" enabled="true" />
+	<resource name="日历查看" code="calendar-event-view" enabled="true" />
+
+	<resource name="博文添加" code="blog-post-add" enabled="true" />
+	<resource name="博文编辑" code="blog-post-edit" enabled="true" />
+	<resource name="博文查看" code="blog-post-view" enabled="true" />
+
+	<resource name="讨论版块添加" code="discussion-forum-add" enabled="true" />
+	<resource name="讨论版块编辑" code="discussion-forum-edit" enabled="true" />
+	<resource name="讨论版块查看" code="discussion-forum-view" enabled="true" />
+	<resource name="讨论话题添加" code="discussion-topic-add" enabled="true" />
+	<resource name="讨论话题编辑" code="discussion-topic-edit" enabled="true" />
+	<resource name="讨论话题查看" code="discussion-topic-view" enabled="true" />
+	<resource name="讨论回复添加" code="discussion-reply-add" enabled="true" />
+	<resource name="讨论回复编辑" code="discussion-reply-edit" enabled="true" />
+	<resource name="讨论回复查看" code="discussion-reply-view" enabled="true" />
+
+	<resource name="文档文件添加" code="document-file-add" enabled="true" />
+	<resource name="文档文件编辑" code="document-file-edit" enabled="true" />
+	<resource name="文档文件查看" code="document-file-view" enabled="true" />
+	<resource name="文档文件下载" code="document-file-download" enabled="true" />
+	<resource name="文档目录添加" code="document-folder-add" enabled="true" />
+	<resource name="文档目录编辑" code="document-folder-edit" enabled="true" />
+	<resource name="文档目录查看" code="document-folder-view" enabled="true" />
+
+	<resource name="团队成员添加" code="team-member-add" enabled="true" />
+	<resource name="团队成员编辑" code="team-member-edit" enabled="true" />
+	<resource name="团队成员查看" code="team-member-view" enabled="true" />
+	<resource name="消息添加" code="message-message-add" enabled="true" />
+
+	<resource name="消息编辑" code="message-message-edit" enabled="true" />
+	<resource name="消息查看" code="message-message-view" enabled="true" />
+
+	<resource name="微薄添加" code="vblog-activity-add" enabled="true" />
+	<resource name="微薄编辑" code="vblog-activity-edit" enabled="true" />
+	<resource name="微薄查看" code="vblog-activity-view" enabled="true" />
+
+	<resource name="相册添加" code="gallery-album-add" enabled="true" />
+	<resource name="相册编辑" code="gallery-album-edit" enabled="true" />
+	<resource name="相册查看" code="gallery-album-view" enabled="true" />
+
+	<resource name="相片上传" code="gallery-photo-add" enabled="true" />
+	<resource name="相片编辑" code="gallery-photo-edit" enabled="true" />
+	<resource name="相片查看" code="gallery-photo-view" enabled="true" />
+
+	<resource name="问题添加" code="knowledge-question-add" enabled="true" />
+	<resource name="问题编辑" code="knowledge-question-edit" enabled="true" />
+	<resource name="问题查看" code="knowledge-question-view" enabled="true" />
+</resources>

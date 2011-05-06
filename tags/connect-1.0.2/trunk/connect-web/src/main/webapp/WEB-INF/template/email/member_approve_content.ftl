@@ -1,0 +1,1 @@
+${member.project.enteredBy.nickname} 确认了你的请求！

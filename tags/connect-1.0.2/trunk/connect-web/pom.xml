@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>connect-parent</artifactId>
+		<groupId>org.osforce</groupId>
+		<version>1.0.2</version>
+		<relativePath>../connect-parent/pom.xml</relativePath>
+	</parent>
+	<groupId>org.osforce</groupId>
+	<artifactId>connect-web</artifactId>
+	<packaging>war</packaging>
+	<name>Connect's Web</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.osforce</groupId>
+			<artifactId>platform-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.osforce</groupId>
+			<artifactId>connect-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.osforce</groupId>
+			<artifactId>connect-task</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.wikimodel</groupId>
+			<artifactId>wem</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ocpsoft</groupId>
+			<artifactId>ocpsoft-pretty-time</artifactId>
+		</dependency>
+	</dependencies>
+</project>

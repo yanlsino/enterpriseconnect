@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+	<page name="team/members" parent="commons/header" categoryCode="people">
+		<position name="leftColumn" width="200px">
+			<fragment refer="teamFragment" view="Actions">
+				<rules>
+					<rule name="securityRule" code="team-member-add" />
+				</rules>
+			</fragment>
+			<fragment refer="linkFragment" view="List">
+				<title>我关注的</title>
+				<preferences>
+					<limit>10</limit>
+					<entity>Profile</entity>
+					<mode>link-from</mode>
+				</preferences>
+			</fragment>
+			<fragment refer="linkFragment" view="List">
+				<title>关注我的</title>
+				<preferences>
+					<limit>10</limit>
+					<entity>Profile</entity>
+					<mode>link-to</mode>
+				</preferences>
+			</fragment>
+		</position>
+		<position name="mainColumn">
+			<fragment refer="memberFragment" view="Invite">
+				<title>好友邀请</title>
+			</fragment>
+		</position>
+	</page>
+	<page name="team/members" parent="commons/header" categoryCode="groups">
+		<position name="leftColumn" width="200px">
+			<fragment refer="teamFragment" view="Actions">
+				<rules>
+					<rule name="securityRule" code="team-member-add" />
+				</rules>
+			</fragment>
+			<fragment refer="linkFragment" view="List">
+				<title>谁在关注本圈子</title>
+				<preferences>
+					<limit>10</limit>
+					<entity>Profile</entity>
+					<mode>link-to</mode>
+				</preferences>
+			</fragment>
+		</position>
+		<position name="mainColumn">
+			<fragment refer="memberFragment" view="Invite">
+				<title>成员邀请</title>
+			</fragment>
+		</position>
+	</page>
+	<page name="team/members" parent="commons/header" categoryCode="events">
+		<position name="leftColumn" width="200px">
+			<fragment refer="teamFragment" view="Actions">
+				<rules>
+					<rule name="securityRule" code="team-member-add" />
+				</rules>
+			</fragment>
+			<fragment refer="linkFragment" view="List">
+				<title>谁在关注本活动</title>
+				<preferences>
+					<limit>10</limit>
+					<entity>Profile</entity>
+					<mode>link-to</mode>
+				</preferences>
+			</fragment>
+		</position>
+		<position name="mainColumn">
+			<fragment refer="memberFragment" view="Invite">
+				<title>参与者邀请</title>
+			</fragment>
+		</position>
+	</page>
+</pages>

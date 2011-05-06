@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<!-- scan @components in service or dao -->
+	<context:component-scan base-package="org.osforce.connect.service,
+	org.osforce.connect.dao,org.osforce.connect.task"/>
+
+	<!-- global application configuration
+	<util:properties id="applicationPrefs" location="classpath:application.properties"/>
+	<context:property-placeholder ignore-resource-not-found="true" properties-ref="applicationPrefs"/>
+	-->
+
+	<!-- 定义受环境影响的变量 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<!-- 标准配置 -->
+				<value>classpath*:/application.properties</value>
+				<!-- 服务器生产环境配置 -->
+				<value>file:${application_home}/application.server.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	<task:executor id="taskExecutor" pool-size="5" queue-capacity="25"/>
+	<task:scheduler id="taskScheduler" pool-size="5"/>
+	<task:annotation-driven executor="taskExecutor" scheduler="taskScheduler"/>
+
+	<!-- datasource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<!-- connection info -->
+		<property name="driverClassName" value="${jdbc_driver}" />
+		<property name="url" value="${jdbc_url}" />
+		<property name="username" value="${jdbc_username}" />
+		<property name="password" value="${jdbc_password}" />
+		<!-- connection pooling info -->
+		<property name="maxIdle" value="${dbcp_maxIdle}" />
+		<property name="maxActive" value="${dbcp_maxActive}" />
+		<property name="defaultAutoCommit" value="false" />
+		<property name="timeBetweenEvictionRunsMillis" value="3600000" />
+		<property name="minEvictableIdleTimeMillis" value="3600000" />
+	</bean>
+
+	<!-- persistence exception translator -->
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	<!-- entity manager factory -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="persistenceXmlLocation" value="/META-INF/persistence.xml"/>
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="false"/>
+				<property name="generateDdl" value="true"/>
+				<property name="database">
+					<util:constant static-field="${jpa_dialect}"/>
+				</property>
+			</bean>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.ejb.naming_strategy">org.osforce.platform.entity.support.PrefixImprovedNamingStrategy</prop>
+				<prop key="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</prop>
+				<prop key="hibernate.cache.provider_configuration_file_resource_path">/cache/ehcache-hibernate.xml</prop>
+				<prop key="hibernate.search.default.directory_provider">org.hibernate.search.store.FSDirectoryProvider</prop>
+				<prop key="hibernate.search.default.indexBase">${application_home}/indexes</prop>
+				<prop key="hibernate.search.analyzer">org.apache.lucene.analysis.cn.ChineseAnalyzer</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- bean post-processor for JPA annotations -->
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<!-- Transaction Config -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    	<property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+	<!-- Cache -->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="shared" value="true"/>
+		<property name="configLocation" value="classpath:cache/ehcache.xml"/>
+	</bean>
+
+	<!-- Freemarker Configuration -->
+	<bean class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+   		<property name="templateLoaderPath" value="/WEB-INF/template"/>
+   		<property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+
+	<!-- Java Mail Sender -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+  		<property name="host" value="${mail_host}"/>
+  		<property name="port" value="${mail_port}"/>
+  		<property name="username" value="${mail_username}"/>
+  		<property name="password" value="${mail_password}"/>
+	</bean>
+</beans>

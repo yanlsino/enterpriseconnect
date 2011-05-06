@@ -1,11 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>platform-parent</artifactId>
+		<artifactId>connect</artifactId>
 		<groupId>org.osforce</groupId>
-		<version>1.0.1</version>
-		<relativePath/>
+		<version>1.0.2-SNAPSHOT</version>
 	</parent>
 	<groupId>org.osforce</groupId>
 	<artifactId>connect-parent</artifactId>
@@ -31,6 +29,10 @@
 		</snapshotRepository>
 	</distributionManagement>
 
+	<properties>
+		<platform.version>1.0.1</platform.version>
+	</properties>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -48,16 +50,49 @@
 				<artifactId>connect-dao</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>platform-common</artifactId>
+				<version>${platform.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>platform-dao</artifactId>
+				<version>${platform.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>platform-task</artifactId>
+				<version>${platform.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osforce</groupId>
+				<artifactId>platform-web</artifactId>
+				<version>${platform.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>jsp-api</artifactId>
+				<version>2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.wikimodel</groupId>
+				<artifactId>wem</artifactId>
+				<version>2.0.7</version>
+			</dependency>
 			<dependency>
 				<groupId>com.ocpsoft</groupId>
 				<artifactId>ocpsoft-pretty-time</artifactId>
 				<version>1.0.5</version>
 			</dependency>
-			<dependency>
-				<groupId>org.wikimodel</groupId>
-				<artifactId>org.wikimodel.wem</artifactId>
-				<version>2.0.7</version>
-			</dependency>
+
 			<dependency>
 				<groupId>postgresql</groupId>
 				<artifactId>postgresql</artifactId>
@@ -145,5 +180,13 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.1</version>
+			</plugin>
+		</plugins>
 	</build>
 </project>

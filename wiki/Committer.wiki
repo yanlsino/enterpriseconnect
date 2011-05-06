@@ -1,6 +1,6 @@
-成为Committer, 你的代码将有机会进入主干版本，将会有更多的人使用到你编写的代码。 成为EnterpriseConnect committer的条件如下：
+成为Committer, 你的代码将有机会进入主干版本，将会有更多的人使用到你编写的代码。 成为Enterprise Connect committer的条件如下：
 
-1. 多次提出产品改进意见
+1. 多次提出产品改进意见记录
 
 2. 多次提交bug记录
 

@@ -1,3 +1,19 @@
 https://enterpriseconnect.googlecode.com/svn/trunk/src/images/mvc.png
 
 上图是一次页面请求的处理流程
+
+------
+
+下面以首页 http://localhost:8080/connect-web 的请求为例，来了解一下 Enterprise Connect 的一次完整页面请求。
+
+当浏览器发起一次请求时，首先会被 URLRewriter 模块拦截，该模块会根据 /WEB-INF/ 下的 urlrewrite.xml 里定义的规则来冲重定向请求。首页的请求将会被下面这条规则所匹配，因此，重写之后的请求将是 http://localhost:8080/connect-web/page?viewName=/dashboardTname=home
+{{{
+<rule>
+    <from>^/$</from>
+    <to last="true">/page?viewName=/dashboardTname=home</to>
+</rule>
+}}}
+{{{
+  注意：viewName所指定的是页面定义文件，页面定义文件在 /WEB-INF/pages 下。
+       T后面跟的是一些自定义参数，例如：上面的 name=home 表示在 dashboard 这个页面定义文件里选择 page name 为 home 的页面配置。
+}}}

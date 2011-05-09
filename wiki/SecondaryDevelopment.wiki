@@ -10,7 +10,7 @@ public class AboutFragment {
 	}
 }
 }}}
-首先你需要创建一个 Java 类，例如上面的 AboutFragment，类名推荐 XXXFragment，用 Component Annotation 标注为 Spring 容器管理的组建。
+首先你需要创建一个 Java 类，例如上面的 AboutFragment，类名推荐 XXXFragment，用 Component Annotation 标注为 Spring 容器管理的组件。
 
 {{{
 注意：用 @Component 标注的Bean 在 Spring 容器中的 ID 为类名的首字母小写。
@@ -26,7 +26,7 @@ public class AboutFragment {
 
 接下来在 /WEB-INF/views/ 创建一个 commons/about 页面，该页面的后缀可以是 .jsp .ftl .vm 等Spring MVC支持的任意视图。
 
-完成上面的步骤之后，你已经完成了一个组建的开发，接下来你需要把这个组件显示在页面上，因此你需要将你开发的组件定义到页面定义文件中，下面是关于 AboutFragment 的配置。
+完成上面的步骤之后，你已经完成了一个组件的开发，接下来你需要把这个组件显示在页面上，因此你需要将你开发的组件定义到页面定义文件中，下面是关于 AboutFragment 的配置。
 
 {{{
 <fragment refer="aboutFragment" view="About" cache="300">

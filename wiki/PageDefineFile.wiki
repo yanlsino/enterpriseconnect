@@ -47,3 +47,6 @@
 	</position>
 </page>
 }}}
+页面定义文件是基于位置的定义，在上面的定义中定义了两个位置，mainColumn 和 rightColumn，当然 page 元素中还有一个 parent 元素所指定的父定义，注意：子定义可以覆盖父定义。
+
+fragment元素是一个组建，他有 Spring 容器管理。refer 表示引用 Spring 容器中的 ID，view 则是指调用 Fragment 中的 doXXXView() 方法，cache 用来指定当前这个 Fragment 是否缓存，及缓存时间。fragment 元素里的资源素可以理解为当前 fragment 的上下文配置。

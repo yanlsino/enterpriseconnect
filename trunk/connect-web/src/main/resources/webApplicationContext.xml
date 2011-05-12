@@ -14,21 +14,16 @@
 	<context:component-scan base-package="org.osforce.connect.service,
 	org.osforce.connect.dao,org.osforce.connect.task"/>
 
-	<!-- global application configuration
-	<util:properties id="applicationPrefs" location="classpath:application.properties"/>
-	<context:property-placeholder ignore-resource-not-found="true" properties-ref="applicationPrefs"/>
-	-->
-
 	<!-- 定义受环境影响的变量 -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-		<property name="ignoreResourceNotFound" value="true" />
+		<property name="ignoreResourceNotFound" value="false" />
 		<property name="locations">
 			<list>
 				<!-- 标准配置 -->
-				<value>classpath*:/application.properties</value>
+				<value>classpath:application.properties</value>
 				<!-- 服务器生产环境配置 -->
-				<value>file:${application_home}/application.server.properties</value>
+				<value>file:${user.home}/.connect/application.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -41,13 +36,13 @@
 	<!-- datasource -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<!-- connection info -->
-		<property name="driverClassName" value="${jdbc_driver}" />
-		<property name="url" value="${jdbc_url}" />
-		<property name="username" value="${jdbc_username}" />
-		<property name="password" value="${jdbc_password}" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 		<!-- connection pooling info -->
-		<property name="maxIdle" value="${dbcp_maxIdle}" />
-		<property name="maxActive" value="${dbcp_maxActive}" />
+		<property name="maxIdle" value="${dbcp.maxIdle}" />
+		<property name="maxActive" value="${dbcp.maxActive}" />
 		<property name="defaultAutoCommit" value="false" />
 		<property name="timeBetweenEvictionRunsMillis" value="3600000" />
 		<property name="minEvictableIdleTimeMillis" value="3600000" />
@@ -64,7 +59,7 @@
 				<property name="showSql" value="false"/>
 				<property name="generateDdl" value="true"/>
 				<property name="database">
-					<util:constant static-field="${jpa_dialect}"/>
+					<util:constant static-field="${jpa.dialect}"/>
 				</property>
 			</bean>
 		</property>
@@ -74,7 +69,7 @@
 				<prop key="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</prop>
 				<prop key="hibernate.cache.provider_configuration_file_resource_path">/cache/ehcache-hibernate.xml</prop>
 				<prop key="hibernate.search.default.directory_provider">org.hibernate.search.store.FSDirectoryProvider</prop>
-				<prop key="hibernate.search.default.indexBase">${application_home}/indexes</prop>
+				<prop key="hibernate.search.default.indexBase">${user.home}/.connect/indexes</prop>
 				<prop key="hibernate.search.analyzer">org.apache.lucene.analysis.cn.ChineseAnalyzer</prop>
 			</props>
 		</property>
@@ -105,9 +100,9 @@
 
 	<!-- Java Mail Sender -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-  		<property name="host" value="${mail_host}"/>
-  		<property name="port" value="${mail_port}"/>
-  		<property name="username" value="${mail_username}"/>
-  		<property name="password" value="${mail_password}"/>
+  		<property name="host" value="${mail.host}"/>
+  		<property name="port" value="${mail.port}"/>
+  		<property name="username" value="${mail.username}"/>
+  		<property name="password" value="${mail.password}"/>
 	</bean>
 </beans>

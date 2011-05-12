@@ -82,12 +82,22 @@
 .activities-list li {
 	margin-bottom: 5px;
 }
-.activities-list .activity-body {
+.main-column .activities-list .activity-wrapper {
+	margin-bottom: 5px;
+}
+.main-column .activities-list li.activity {
+	min-height: 55px;
+	border-bottom: 1px dashed #DDD;
+}
+.activities-list .activity-wrapper {
 	padding-left: 65px;
 }
-.activities-list .activity-body img {
-	max-height: 200px;
-	max-width: 200px;
+.activities-list .activity-wrapper img {
+	max-height: 150px;
+	max-width: 150px;
+}
+.activities-list .activity-body {
+	min-height: 55px;
 }
 .activities-list p {
 	margin: 0;

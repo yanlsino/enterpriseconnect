@@ -5,11 +5,11 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<c:if test="${not empty parent}">
-			<a href="${base}/system/categories?siteId=${param.siteId}&parentId=${parent.parentId}">上一级</a>				
+			<a href="${base}/system/categories?siteId=${param.siteId}&parentId=${parent.parentId}">上一级</a>
 		</c:if>
 		<c:choose>
 			<c:when test="${empty page.result}">当前无菜单项可显示！</c:when>
@@ -29,7 +29,7 @@
 					<tbody>
 						<c:forEach var="category" items="${page.result}" varStatus="status">
 							<tr class="<c:if test='${status.last}'>last</c:if> <c:if test='${status.count%2==0}'>alt</c:if>">
-								<td class="first"><a href="${base}/system/categories/category/form?siteId=${param.siteId}&categoryId=${category.id}">${category.id}</a></td>
+								<td class="first"><a href="${base}/system/category/form?siteId=${param.siteId}&categoryId=${category.id}">${category.id}</a></td>
 								<td><a href="${base}/system/categories?siteId=${param.siteId}&parentId=${category.id}">${category.label}</a></td>
 								<td>${category.code}</td>
 								<td>${category.level}</td>
@@ -44,7 +44,7 @@
 							</tr>
 						</c:forEach>
 					</tbody>
-				</table>	
+				</table>
 			</c:otherwise>
 		</c:choose>
 	</div>

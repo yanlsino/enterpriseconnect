@@ -18,12 +18,14 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  *
  * @author gavin
  * @since 1.0.0
- * @create Jan 28, 2011 - 12:31:09 PM
- *  <a href="http://www.opensourceforce.org">开源力量</a>
+ * @create Jan 28, 2011 - 12:31:09 PM <a
+ *         href="http://www.opensourceforce.org">开源力量</a>
  *
- *  @see ExtraUrlRewriterConfLoader
+ * @see ExtraUrlRewriterConfLoader
  */
 public class SiteAwareInterceptor extends HandlerInterceptorAdapter {
+
+	private static final String REGEX_IP = "^\\d+\\.\\d+\\.\\d+\\.\\d+$";
 
 	private SiteService siteService;
 
@@ -38,37 +40,43 @@ public class SiteAwareInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		String domain = request.getServerName();
-		Site site = siteService.getSite(domain);
-		if(site==null) {
+		String serverName = request.getServerName();
+		if (serverName.matches(REGEX_IP)) {
+			serverName = resolveDomain(serverName);
+		}
+		Site site = siteService.getSite(serverName);
+		if (site == null) {
 			// site always is null, build a default site use default theme
-			site = buildDefaultSite(request);
+			site = buildDefaultSite(serverName);
 		}
 		// Site will always bind to current request
 		request.setAttribute(AttributeKeys.SITE_KEY, site);
 		request.setAttribute(AttributeKeys.SITE_KEY_READABLE, site);
 		//
-		Theme theme = site.getTheme()!=null?site.getTheme():new Theme("default");
+		Theme theme = site.getTheme() != null ? site.getTheme() : new Theme(
+				"default");
 		request.setAttribute(AttributeKeys.THEME_KEY, theme);
 		request.setAttribute(AttributeKeys.THEME_KEY_READABLE, theme);
 		return super.preHandle(request, response, handler);
 	}
 
-	// TODO
-	protected Site buildDefaultSite(HttpServletRequest request) throws UnknownHostException {
-		String domain = request.getServerName();
-		for(InetAddress addr : InetAddress.getAllByName("localhost")) {
-			if(StringUtils.equals(addr.getHostAddress(), request.getServerName())) {
-				domain = "localhost";
-			}
-		}
+	// TODO need to be refactor
+	protected Site buildDefaultSite(String domain) {
 		Site site = new Site(
 				"Enterprise Connect",
 				null,
 				"Open Source, Socail Business Software, SBS, Social Networking Service, SNS ",
-				domain,
-				true);
+				domain, true);
 		return site;
+	}
+
+	private String resolveDomain(String ipAddress) throws UnknownHostException {
+		for (InetAddress addr : InetAddress.getAllByName("localhost")) {
+			if (StringUtils.equals(addr.getHostAddress(), ipAddress)) {
+				return "localhost";
+			}
+		}
+		return ipAddress;
 	}
 
 }

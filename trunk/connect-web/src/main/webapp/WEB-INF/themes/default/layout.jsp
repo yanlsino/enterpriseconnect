@@ -37,7 +37,8 @@
     <link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-simplemodal/jquery.simplemodal.css"/>
     <script type="text/javascript" src="${base}/static/components/jquery-simplemodal/jquery.simplemodal.min.js"></script>
 
-    <script type="text/javascript" src="${base}/static/components/jquery-jqLayer/jquery.jqLayer.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-aqLayer/jquery.aqLayer.css"/>
+    <script type="text/javascript" src="${base}/static/components/jquery-aqLayer/jquery.aqLayer.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-zTree/jquery.zTree.css"/>
     <script type="text/javascript" src="${base}/static/components/jquery-zTree/jquery.zTree.min.js"></script>

@@ -7,7 +7,7 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<form:form id="searchForm" action="${base}/search" commandName="searchBean" method="GET">

@@ -24,7 +24,7 @@
 			<tbody>
 				<c:forEach var="site" items="${page.result}" varStatus="status">
 					<tr class="<c:if test='${status.last}'>last</c:if> <c:if test='${status.count%2==0}'>alt</c:if>">
-						<td class="first"><a href="${base}/system/sites/site/form?siteId=${site.id}">${site.id}</a></td>
+						<td class="first"><a href="${base}/system/site/form?siteId=${site.id}">${site.id}</a></td>
 						<td><a href="${base}/system/sites?siteId=${site.id}">${site.title}</a></td>
 						<td><a href="${site.homeURL}" target="_blank">${site.homeURL}</a></td>
 						<td>

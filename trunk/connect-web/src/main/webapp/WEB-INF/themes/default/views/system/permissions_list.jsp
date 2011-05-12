@@ -32,7 +32,7 @@
 			<c:forEach var="resource" items="${resources}" varStatus="status">
 				<c:set var="permission" value="${resourceMap[resource]}"/>
 				<tr class="<c:if test='${status.last}'>last</c:if>">
-					<td><a href="${base}/system/permissions/permission/form?permissionId=${permission.id}&siteId=${param.siteId}&categoryId=${categoryId}">${resource.id}</a></td>
+					<td><a href="${base}/system/permission/form?permissionId=${permission.id}&siteId=${param.siteId}&categoryId=${categoryId}">${resource.id}</a></td>
 					<td>${resource.name}</td>
 					<td>${resource.code}</td>
 					<td>

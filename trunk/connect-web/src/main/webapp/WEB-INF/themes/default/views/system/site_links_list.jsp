@@ -5,7 +5,7 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 	<c:choose>
@@ -31,7 +31,7 @@
 			<tbody>
 			<c:forEach var="siteLink" items="${siteLinks}" varStatus="status">
 				<tr>
-					<td class="first"><a href="${base}/system/links/link/form?siteId=${param.siteId}&linkId=${siteLink.id}">${siteLink.id}</a></td>
+					<td class="first"><a href="${base}/system/link/form?siteId=${param.siteId}&linkId=${siteLink.id}">${siteLink.id}</a></td>
 					<td>${siteLink.text}</td>
 					<td>${siteLink.code}</td>
 					<td class="last"><a href="${siteLink.href}" target="_blank">${siteLink.href}</a></td>

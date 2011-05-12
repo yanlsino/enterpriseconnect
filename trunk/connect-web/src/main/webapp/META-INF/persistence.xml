@@ -13,6 +13,8 @@
 		<class>org.osforce.connect.entity.commons.Template</class>
 		<class>org.osforce.connect.entity.commons.Keyword</class>
 		<class>org.osforce.connect.entity.commons.Tag</class>
+		<!-- oauth -->
+		<class>org.osforce.connect.entity.oauth.Authorization</class>
 		<!-- profile -->
 		<class>org.osforce.connect.entity.profile.Profile</class>
 		<!-- blog -->

@@ -46,7 +46,7 @@ public class Activity extends IdEntity {
 	private Long enteredId;
 	private Long projectId;
 	private Long commentCount = 0L;
-	private String syncTargets; // split by comma
+	private String[] targets; // split by comma
 	private List<Comment> comments = new ArrayList<Comment>();
 	// refer
 	private User enteredBy;
@@ -141,12 +141,12 @@ public class Activity extends IdEntity {
 	}
 
 	@Transient
-	public String getSyncTargets() {
-		return syncTargets;
+	public String[] getTargets() {
+		return targets;
 	}
 
-	public void setSyncTargets(String syncTargets) {
-		this.syncTargets = syncTargets;
+	public void setTargets(String[] targets) {
+		this.targets = targets;
 	}
 
 	@Transient

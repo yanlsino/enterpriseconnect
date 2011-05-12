@@ -4,7 +4,7 @@
 
 <div class="search-bar">
 	<ul>
-		<li <c:if test="${empty param.categoryId}">class="current first"</c:if>>
+		<li <c:if test="${empty param.categoryId}">class="actived first"</c:if>>
 			<a href="${base}/search?keywords=${searchBean.keywords}">
 				<span><fmt:message key="search.search_bar.allCategories"><fmt:param value="${totalCount}"/></fmt:message></span>
 			</a>
@@ -13,8 +13,8 @@
 		<li <c:if test="${param.categoryId eq category.id}">class="actived"</c:if>>
 			<a href="${base}/search?keywords=${searchBean.keywords}&categoryId=${category.id}">
 				<span>${category.label}(${category.count})</span>
-			</a> 
-		</li>		
+			</a>
+		</li>
 		</c:forEach>
 	</ul>
 	<div class="clear"></div>

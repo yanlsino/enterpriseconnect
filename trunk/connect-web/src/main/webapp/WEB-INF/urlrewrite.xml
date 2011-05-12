@@ -210,8 +210,8 @@
 		<to last="true">/page?viewName=system/$1</to>
 	</rule>
 	<rule>
-		<from>^/system/(sites|themes|categories|links|users|roles|resources|permissions|templates|mail_settings)/(site|theme|category|link|user|role|resource|permission|template|mail_settings)/form$</from>
-		<to last="true">/page?viewName=system/$2_form</to>
+		<from>^/system/(site|theme|category|link|user|role|resource|permission|template|mail_settings)/form$</from>
+		<to last="true">/page?viewName=system/$1_form</to>
 	</rule>
 	<!-- system module end -->
 

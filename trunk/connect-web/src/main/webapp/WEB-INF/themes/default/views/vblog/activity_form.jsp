@@ -32,65 +32,111 @@
 					<li><a href="#" id="insertFace${id}">表情</a></li>
 					<li><a href="#" id="insertLink${id}">链接</a></li>
 					<li><a href="#" id="insertImage${id}">图片</a></li>
-					<!--
-					<li><a href="#" class="insertVideo">视频</a></li>
-					-->
 				</ul>
+				<span>
+					<input type="checkbox" class="syncTarget" name="targets" value="sina"/>
+					<img src="${base}/static/images/sina_16x16.png">
+				</span>
+				<span>
+					<input type="checkbox" class="syncTarget" name="targets" value="tencent"/>
+					<img src="${base}/static/images/tencent_16x16.png">
+				</span>
 				</c:if>
 				<button id="${id}submitButton" type="submit" class="button right">
 					<fmt:message key="vblog.activity_form.submit"/>
 				</button>
+				<br class="clear"/>
 			</div>
 			<form:hidden path="type"/>
 			<form:hidden path="projectId"/>
 			<form:hidden path="enteredId"/>
 		</form:form>
-		<br class="clear"/>
 
 		<div id="faceLayer${id}" style="display:none">
 			<ul class="faces-list">
 				<c:forTokens var="face" items="angel,angry,cool,crying,devilish,embarrassed,glasses,kiss,laugh,monkey,plain,raspberry,sad,sick,smile,smile-big,smirk,surprise,tired,uncertain,wink,worried" delims=",">
-				<li><a id="${face}" href="#"><img src="${base}/static/images/faces/face-${face}.png"/></a></li>
+				<li><a id="${face}"><img src="${base}/static/images/faces/face-${face}.png"/></a></li>
 				</c:forTokens>
 			</ul>
 		</div>
 		<div id="linkLayer${id}" style="display:none">
-			<button type="button">插入链接</button>
-			<input type="text" class="text"/>
+			<a>插入链接</a>
+			<input type="text" size="40"/>
 		</div>
 		<div id="imageLayer${id}" style="display:none">
-			<button type="button">插入图片</button>
-			<input type="text" class="text"/>
+			<a>插入图片</a>
+			<input type="text" size="40"/>
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#activity-form${id} .syncTarget').click(function(){
+		if($(this).attr('checked')) {
+			var target = $(this).val();
+			var url = '${base}/process/oauth/authorized?target=' + target;
+			$.get(url, function(o){
+				if(!o.authorized) {
+					var u = '${base}/process/oauth/authorizationUrl?target=' + target;
+					$.get(u, function(o){
+						showModalWindow(o.authUrl, {width: '800px', height: '600px'});
+					})
+				}
+			});
+		}
+	});
+
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
 	$('#insertFace${id}').aqLayer({
         margin: '0',
-        object: '#faceLayer${id}'
+        object: '#faceLayer${id}',
+        onLoad: function(){
+        	$('#linkLayer${id}').data('aqLayer').trigger('close');
+        	$('#imageLayer${id}').data('aqLayer').trigger('close');
+        }
     });
     $('.faces-list a').click(function(){
 		var faceId = $(this).attr('id');
 		$('#description${id}').val($('#description${id}').val()+'[face:'+faceId+']');
+		$('#faceLayer${id}').data('aqLayer').trigger('close');
 		return false;
     });
     $('#insertLink${id}').aqLayer({
         margin: '0',
-        object: '#linkLayer${id}'
+        object: '#linkLayer${id}',
+        onLoad: function(){
+	    	$('#faceLayer${id}').data('aqLayer').trigger('close');
+	    	$('#imageLayer${id}').data('aqLayer').trigger('close');
+	    }
     });
-    $('#linkLayer${id} button').click(function(){
+    $('#linkLayer${id} a').click(function(){
         var link = $('#linkLayer${id} input').val();
+        if($.trim(link)=='') {
+			link = '替换成链接地址';
+        }
         $('#description${id}').val($('#description${id}').val()+'[link:'+link+']');
+        $('#linkLayer${id}').data('aqLayer').trigger('close');
     });
     $('#insertImage${id}').aqLayer({
         margin: '0',
-        object: '#imageLayer${id}'
+        object: '#imageLayer${id}',
+        onLoad: function(){
+	    	$('#faceLayer${id}').data('aqLayer').trigger('close');
+	    	$('#linkLayer${id}').data('aqLayer').trigger('close');
+	    }
     });
-    $('#imageLayer${id} button').click(function(){
+    $('#imageLayer${id} a').click(function(){
         var image = $('#imageLayer${id} input').val();
-        $('#description${id}').val($('#description${id}').val()+'[image:'+image+']');
+        if($.trim(image)=='') {
+			image = '替换成图片地址';
+        }
+        $('#description${id}').val($('#description${id}').val()+'[img:'+image+']');
+        $('#imageLayer${id}').data('aqLayer').trigger('close');
     });
 });
 </script>

@@ -21,7 +21,7 @@ import org.osforce.platform.entity.support.IdEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Nov 10, 2010 - 4:32:46 PM
@@ -32,21 +32,21 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Cacheable
 public class BlogPost extends IdEntity {
 	private static final long serialVersionUID = -815358715459951096L;
-	
+
 	public static final String NAME = BlogPost.class.getSimpleName();
-	
+
 	public static final String TYPE_ORIGINAL = "original";	// 原创
 	public static final String TYPE_LINKS = "links";		// 转贴
-	
-	private String type = TYPE_ORIGINAL; 
+
+	private String type = TYPE_ORIGINAL;
 	private String title;
 	private String content;
 	private String keywords;
-	private Boolean top = false;
 	private Date entered;
 	private Date modified;
-	private Boolean enabled;	// 标记是否为草稿 
-	
+	private Boolean enabled;	// 标记是否为草稿
+	private Boolean top = false;
+
 	// helper
 	private String shortContent;
 	private Long categoryId;
@@ -55,13 +55,13 @@ public class BlogPost extends IdEntity {
 	private Long modifiedId;
 	private Long views = 0L;
 	private Long commentNumber;
-	
+
 	// refer
 	private BlogCategory category;
 	private Project project;
 	private User enteredBy;
 	private User modifiedBy;
-	
+
 	public BlogPost() {
 	}
 
@@ -82,13 +82,13 @@ public class BlogPost extends IdEntity {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	@Lob@Column(nullable=false)
 	@Type(type="org.hibernate.type.StringClobType")
 	public String getContent() {
 		return content;
 	}
-	
+
 	public void setContent(String content) {
 		this.content = content;
 	}
@@ -134,7 +134,7 @@ public class BlogPost extends IdEntity {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
 	@Transient
 	public String getShortContent() {
 		if(StringUtils.isNotBlank(content)) {
@@ -150,11 +150,11 @@ public class BlogPost extends IdEntity {
 		}
 		return categoryId;
 	}
-	
+
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
-	
+
 	@Transient
 	public Long getProjectId() {
 		if(projectId==null && project!=null) {
@@ -162,11 +162,11 @@ public class BlogPost extends IdEntity {
 		}
 		return projectId;
 	}
-	
+
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
-	
+
 	@Transient
 	public Long getEnteredId() {
 		if(enteredId==null && enteredBy!=null) {
@@ -174,11 +174,11 @@ public class BlogPost extends IdEntity {
 		}
 		return enteredId;
 	}
-	
+
 	public void setEnteredId(Long enteredId) {
 		this.enteredId = enteredId;
 	}
-	
+
 	@Transient
 	public Long getModifiedId() {
 		if(modifiedId==null && modifiedBy!=null) {
@@ -186,29 +186,29 @@ public class BlogPost extends IdEntity {
 		}
 		return modifiedId;
 	}
-	
+
 	public void setModifiedId(Long modifiedId) {
 		this.modifiedId = modifiedId;
 	}
-	
+
 	@Transient
 	public Long getViews() {
 		return views;
 	}
-	
+
 	public void setViews(Long views) {
 		this.views = views;
 	}
-	
+
 	@Transient
 	public Long getCommentNumber() {
 		return commentNumber;
 	}
-	
+
 	public void setCommentNumber(Long commentNumber) {
 		this.commentNumber = commentNumber;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="category_id")
 	public BlogCategory getCategory() {
@@ -218,7 +218,7 @@ public class BlogPost extends IdEntity {
 	public void setCategory(BlogCategory category) {
 		this.category = category;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="project_id")
 	public Project getProject() {
@@ -238,7 +238,7 @@ public class BlogPost extends IdEntity {
 	public void setEnteredBy(User enteredBy) {
 		this.enteredBy = enteredBy;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="modified_by_id")
 	public User getModifiedBy() {

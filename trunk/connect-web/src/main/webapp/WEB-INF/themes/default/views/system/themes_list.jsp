@@ -19,7 +19,7 @@
 			<tbody>
 			<c:forEach var="theme" items="${page.result}" varStatus="status">
 				<tr class="<c:if test='${status.last}'>last</c:if> <c:if test='${status.count%2==0}'>alt</c:if>">
-					<td class="first"><a href="${base}/system/themes/theme/form?themeId=${theme.id}">${theme.id}</a></td>
+					<td class="first"><a href="${base}/system/theme/form?themeId=${theme.id}">${theme.id}</a></td>
 					<td>${theme.name}</td>
 					<td class="last">
 					<c:choose>

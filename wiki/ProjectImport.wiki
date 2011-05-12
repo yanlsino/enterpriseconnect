@@ -68,4 +68,4 @@ connect
 
 [http://enterpriseconnect.googlecode.com/svn/trunk/src/images/Connect-Import4.png]
 
-==== 是不是很简单呢？ 至少我觉得比将 Enterprise Connect 转成 MyCclipse 简单！ :D ====
+==== 是不是很简单呢？ 至少我觉得比将 Enterprise Connect 转成 MyEclipse 简单！ :D ====

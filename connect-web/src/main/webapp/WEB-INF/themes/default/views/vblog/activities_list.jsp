@@ -20,7 +20,7 @@
 		<c:otherwise>
 		<ul id="activities-list${id}" class="activities-list">
 			<c:forEach var="activity" items="${page.result}" varStatus="status">
-			<li <c:if test="${status.last}">class="last"</c:if>>
+			<li class='activity<c:if test="${status.last}"> last</c:if>'>
 				<a href="${base}/${activity.enteredBy.project.uniqueId}/profile">
 				<c:choose>
 					<c:when test="${not empty activity.enteredBy.project.profile.logo}">
@@ -31,8 +31,14 @@
 					</c:otherwise>
 				</c:choose>
 				</a>
-				<div class="activity-body">
-					<div>
+				<div class="activity-wrapper">
+					<div class="activity-body">
+						<div class="right">
+							<span class="pretty-tim "><u:prettyTime date="${activity.entered}"/></span>
+							<a class="comment-action" id="${activity.id}" href="${base}/process/commons/comments?entity=Activity&linkedId=${activity.id}">
+								<fmt:message key="vblog.activities_list.comment"><fmt:param value="${activity.commentCount}"/></fmt:message>
+							</a>
+						</div>
 						<c:choose>
 							<c:when test="${activity.type eq 'site-chat' or activity.type eq 'user-input'}">
 								<u:textRender text="${activity.description}" facesBase="${base}/static/images/faces"/>
@@ -42,16 +48,8 @@
 							</c:when>
 							<c:otherwise>${activity.description}</c:otherwise>
 						</c:choose>
-						<div class="right">
-							<u:prettyTime date="${activity.entered}"/>
-							<a class="comment-action" id="${activity.id}" href="${base}/process/commons/comments?entity=Activity&linkedId=${activity.id}">
-								<fmt:message key="vblog.activities_list.comment"><fmt:param value="${activity.commentCount}"/></fmt:message>
-							</a>
-						</div>
-						<div class="clear"></div>
 					</div>
-					<ul id="comments-list${activity.id}" class="comments-list">
-					</ul>
+					<ul id="comments-list${activity.id}" class="comments-list"></ul>
 					<form id="activity-comment-form${activity.id}" class="activity-comment-form" style="display: none;" action="${base}/process/commons/comment" method="post">
 					<c:choose>
 						<c:when test="${empty user}">

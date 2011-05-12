@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 18, 2011 - 8:34:08 PM
@@ -27,22 +27,22 @@ public class SearchFragment {
 
 	private ProfileSearchService profileSearchService;
 	private ProjectCategoryService projectCategoryService;
-	
+
 	public SearchFragment() {
 	}
-	
+
 	@Autowired
 	public void setProfileSearchService(
 			ProfileSearchService profileSearchService) {
 		this.profileSearchService = profileSearchService;
 	}
-	
+
 	@Autowired
 	public void setProjectCategoryService(
 			ProjectCategoryService projectCategoryService) {
 		this.projectCategoryService = projectCategoryService;
 	}
-	
+
 	public String doBarView(SearchBean searchBean,
 			Site site, FragmentContext context) {
 		List<ProjectCategory> categories = projectCategoryService
@@ -61,8 +61,8 @@ public class SearchFragment {
 		context.putRequestData(AttributeKeys.SEARCH_BEAN_KEY_READABLE, searchBean);
 		return "search/search_bar";
 	}
-	
-	public String doResultView(SearchBean searchBean, 
+
+	public String doResultView(SearchBean searchBean,
 			Page<Profile> page, FragmentContext context) {
 		if(StringUtils.isNotBlank(searchBean.getKeywords())) {
 			page = profileSearchService.searchProfilePage(page, searchBean);
@@ -70,23 +70,21 @@ public class SearchFragment {
 		}
 		return "search/search_result";
 	}
-	
-	public String doSiteFormView(SearchBean searchBean, 
+
+	public String doSiteFormView(SearchBean searchBean,
 			Site site, FragmentContext context) {
 		context.putRequestData(AttributeKeys.SEARCH_BEAN_KEY_READABLE, searchBean);
 		List<ProjectCategory> categories = projectCategoryService
 				.getProjectCategoryList(site.getId());
-		//categories.add(0, new ProjectCategory());//影响界面显示
 		context.putRequestData("categories", categories);
 		return "search/site_search_form";
 	}
-	
+
 	public String doFormView(SearchBean searchBean,
 			Site site, FragmentContext context) {
 		context.putRequestData(AttributeKeys.SEARCH_BEAN_KEY_READABLE, searchBean);
 		List<ProjectCategory> categories = projectCategoryService
 				.getProjectCategoryList(site.getId());
-		categories.add(0, new ProjectCategory());
 		context.putRequestData("categories", categories);
 		return "search/search_form";
 	}

@@ -8,6 +8,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:webApplicationContext.xml
+			classpath:webApplicationContext-social.xml
 			classpath:webApplicationContext-security.xml
 		</param-value>
 	</context-param>
@@ -29,7 +30,7 @@
 		<filter-name>characterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<!-- filter all request into spring security -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
@@ -53,7 +54,7 @@
 		<filter-name>UrlRewriteFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<!-- 
+	<!--
 	<filter>
 		<filter-name>SimplePageCachingFilter</filter-name>
 		<filter-class>net.sf.ehcache.constructs.web.filter.SimplePageCachingFilter</filter-class>
@@ -91,8 +92,8 @@
     	<url-pattern>/fragment/*</url-pattern>
     	<dispatcher>INCLUDE</dispatcher>
   	</filter-mapping>
-	
-	<!-- 
+
+	<!--
 	<filter>
 		<filter-name>SimpleCachingHeadersPageCachingFilter</filter-name>
 		<filter-class>net.sf.ehcache.constructs.web.filter.SimpleCachingHeadersPageCachingFilter</filter-class>
@@ -111,7 +112,7 @@
     	<dispatcher>INCLUDE</dispatcher>
   	</filter-mapping>
   	 -->
-  	 
+
 	<!-- Handles all requests into the application -->
 	<servlet>
 		<servlet-name>dispatcherServlet</servlet-name>

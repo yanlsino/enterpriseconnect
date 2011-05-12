@@ -20,7 +20,7 @@
 			<tbody>
 				<c:forEach var="mailSettings" items="${page.result}" varStatus="status">
 					<tr class="<c:if test='${status.last}'>last</c:if> <c:if test='${status.count%2==0}'>alt</c:if>">
-						<td class="first"><a href="${base}/system/mail_settings/mail_settings/form?mailSettingsId=${mailSettings.id}">${mailSettings.id}</a></td>
+						<td class="first"><a href="${base}/system/mail_settings/form?mailSettingsId=${mailSettings.id}">${mailSettings.id}</a></td>
 						<td>${mailSettings.host}</td>
 						<td>${mailSettings.username}</td>
 						<td class="last">

@@ -5,7 +5,7 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<table class="tableList">
@@ -23,7 +23,7 @@
 			<tbody>
 			<c:forEach var="role" items="${page.result}" varStatus="status">
 				<tr class="<c:if test='${status.last}'>last</c:if> <c:if test='${status.count%2==0}'>alt</c:if>">
-					<td class="first"><a href="${base}/system/roles/role/form?roleId=${role.id}&siteId=${param.siteId}&categoryId=${param.categoryId}">${role.id}</a></td>
+					<td class="first"><a href="${base}/system/role/form?roleId=${role.id}&siteId=${param.siteId}&categoryId=${param.categoryId}">${role.id}</a></td>
 					<td>${role.name}</td>
 					<td>${role.code}</td>
 					<td>${role.category.label}</td>
@@ -32,12 +32,12 @@
 					<td class="last">
 					<c:choose>
 						<c:when test="${role.enabled}">激活</c:when>
-						<c:otherwise>未激活</c:otherwise>		
+						<c:otherwise>未激活</c:otherwise>
 					</c:choose>
 					</td>
 				</tr>
 			</c:forEach>
 			</tbody>
-		</table>	
+		</table>
 	</div>
 </div>

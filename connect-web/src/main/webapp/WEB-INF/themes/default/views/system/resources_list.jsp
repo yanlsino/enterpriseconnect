@@ -6,7 +6,7 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<table class="tableList">
@@ -21,7 +21,7 @@
 			<tbody>
 			<c:forEach var="resource" items="${page.result}" varStatus="status">
 				<tr class="<c:if test='${status.last}'>last</c:if> <c:if test='${status.count%2==0}'>alt</c:if>">
-					<td class="first"><a href="${base}/system/resources/resource/form?resourceId=${resource.id}&siteId=${param.siteId}&categoryId=${param.categoryId}">${resource.id}</a></td>
+					<td class="first"><a href="${base}/system/resource/form?resourceId=${resource.id}&siteId=${param.siteId}&categoryId=${param.categoryId}">${resource.id}</a></td>
 					<td>${resource.name}</td>
 					<td>${resource.code}</td>
 					<td class="last">
@@ -38,4 +38,4 @@
 		<u:pagination link="?siteId=${param.siteId}&categoryId=${param.categoryId}&pageNo=" page="${page}"/>
 		</c:if>
 	</div>
-</div>	
+</div>

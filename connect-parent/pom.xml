@@ -30,6 +30,7 @@
 	</distributionManagement>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<platform.version>1.0.1</platform.version>
 	</properties>
 
@@ -68,6 +69,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.osforce</groupId>
+				<artifactId>platform-social</artifactId>
+				<version>${platform.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osforce</groupId>
 				<artifactId>platform-web</artifactId>
 				<version>${platform.version}</version>
 			</dependency>
@@ -94,6 +100,11 @@
 				<artifactId>ocpsoft-pretty-time</artifactId>
 				<version>1.0.5</version>
 			</dependency>
+			<dependency>
+				<groupId>org.scribe</groupId>
+				<artifactId>scribe</artifactId>
+				<version>1.2.0</version>
+			</dependency>
 
 			<dependency>
 				<groupId>postgresql</groupId>
@@ -110,28 +121,6 @@
 
 	<profiles>
 		<profile>
-			<id>windows</id>
-			<activation>
-				<os>
-					<family>windows</family>
-				</os>
-			</activation>
-			<properties>
-				<application.home>${user.home}\.connect</application.home>
-			</properties>
-		</profile>
-		<profile>
-			<id>unix</id>
-			<activation>
-				<os>
-					<family>unix</family>
-				</os>
-			</activation>
-			<properties>
-				<application.home>${user.home}/.connect</application.home>
-			</properties>
-		</profile>
-		<profile>
 			<id>mysql</id>
 			<activation>
 				<property>
@@ -142,7 +131,6 @@
 			<properties>
 				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 				<jdbc.url>jdbc:mysql://localhost/connect?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
-				<jdbc.username>root</jdbc.username>
 				<jpa.dialect>org.springframework.orm.jpa.vendor.Database.MYSQL</jpa.dialect>
 			</properties>
 			<dependencies>
@@ -163,7 +151,6 @@
 			<properties>
 				<jdbc.driver>org.postgresql.Driver</jdbc.driver>
 				<jdbc.url>jdbc:postgresql://localhost:5432/connect</jdbc.url>
-				<jdbc.username>postgres</jdbc.username>
 				<jpa.dialect>org.springframework.orm.jpa.vendor.Database.POSTGRESQL</jpa.dialect>
 			</properties>
 			<dependencies>

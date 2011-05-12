@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 14, 2011 - 12:03:10 PM
@@ -23,15 +23,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ActivityController {
 
 	private ActivityService activityService;
-	 
+
 	public ActivityController() {
 	}
-	
+
 	@Autowired
 	public void setActivityService(ActivityService activityService) {
 		this.activityService = activityService;
 	}
-	
+
 	@RequestMapping(value="/activity", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Long> update(Activity activity) {
 		if(activity.getId()==null) {
@@ -41,5 +41,5 @@ public class ActivityController {
 		}
 		return Collections.singletonMap("id", activity.getId());
 	}
-	
+
 }

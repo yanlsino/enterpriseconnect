@@ -19,6 +19,8 @@ connect
 
 额外工具：[http://m2eclipse.sonatype.org/sites/m2e-extras]
 
-关于Maven，M2eclipse关注此博客 [http://www.juvenxu.com/category/m2eclipse]
+关于 Maven,M2Eclipse 关注此博客 [http://www.juvenxu.com/category/m2eclipse]
 
 关于使用M2eclipse进行Maven项目的导入以及开发，请参考相关文档。。。
+
+----

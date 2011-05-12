@@ -24,3 +24,13 @@ connect
 关于使用M2eclipse进行Maven项目的导入以及开发，请参考相关文档。。。
 
 ----
+
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/Connect-Import1.png]
+
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/Connect-Import2.png]
+
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/Connect-Import3.png]
+
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/Connect-Import7.png]
+
+[http://enterpriseconnect.googlecode.com/svn/trunk/src/images/Connect-Import4.png]

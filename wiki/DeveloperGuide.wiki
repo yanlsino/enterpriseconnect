@@ -1,3 +1,4 @@
+#labels Featured
 开发者文档初稿已经完成，后期会跟着 Enterprise Connect 的脚步逐步完善。
 
 如果看了有不明白的地方，可以通过 QQ 群讨论，群号： 144832020

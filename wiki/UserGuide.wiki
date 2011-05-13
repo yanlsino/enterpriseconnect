@@ -1,7 +1,7 @@
 === System Required ===
   # Java Runtime Environment 1.5.0 +
   # Database (Mysql Postgresql Oracle etc...)
-  # Servlet Container (Jetty Tomcat JBoss etc...)
+  # Servlet Container (Jetty Tomcat JBoss etc...), Tomcat recommended. 
   # If install from source code, Maven 3.0 + is required
 
 === Installation ===

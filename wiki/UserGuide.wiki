@@ -6,15 +6,17 @@
 
 === Installation ===
 
-==== 1.From Source Code ====
-  # Download source code from Downloads or check out from svn.
-  # From terminal cd to connect's root directory. then execute `mvn package` command.
-  # After execute `mvn package` command, you will find a connect-web-${version}.war in ${CONNECT_ROOT}/connect-web/target. this package is the same as which you download from Google Code's Downloads.
+==== 1.从源码编译安装 ====
+  # 从 Google Code SVN 中检出源代码到你本地磁盘
+  # 从你的终端 cd 到源代码的根目录，然后根据自己的数据库选择执行如下命令：
+  {{{
+  mvn package -P mysql or mvn package -P postgresql
+  }}}
+  # 当你成功执行上面的命令之后，你就可以在 ${CONNECT_ROOT}/connect-web/target 下找到编程完的 war 包 connect-web-${version}.war 编译完的 war 包跟从 Google Code Downloads 里下载的是相同的
 
-
-==== 2.From War Package ====
-  # Download war package from downloads, and put the war under tomcat's _webapp_. <br>下载war包，将它置于tomcat webapp目录下.
-  # Startup the tomcat, the tomcat will unpackage connect-web.war, then cd to _webapp_/connect-web/WEB-INF/classes, your need to edit application.properties according to your database environment. After finish editing. you need to restart tomcat. <br>启动tomcat, connect-web.war将会被自动解压，进入_webapp_/connect-web/WEB-INF/classes ,根据数据库环境修改application.properties. 完成后重启tomcat.
+==== 2.直接下载 War 安装 ====
+  # 从 Google Code Downloads 中下载最新版本的 War 包，然后部署到 Tomcat 的 webapp 下
+  # 启动 Tomcat，Tomcat 就会将 War 解包部署。当 Tomcat 解包之后你需要根据自己的运行环境进行配置，具体配置参看 ${tomcat_root}/webapps/connect-web/WEB-INF/classes 下的 [application.properties] 文件。
 
 === After Installation ===
   当按照上面的两种方式安装完后，访问 {{{http://localhost:8080/${context_path}}}} 时，出现的只是一个主页，没有任何内容。你还需要通过下面几步来配置一个最简单的站点（Enterprise Connect 支持多站点）。

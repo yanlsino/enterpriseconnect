@@ -14,7 +14,7 @@
 
 ==== 2.From War Package ====
   # Download war package from downloads, and put the war under tomcat's _webapp_. 
-  # Startup the tomcat, the tomcat will unpackage connect-web.war, then cd to _webapp_/connect-web/WEB-INF/classes, your need to edit application.properties according to your database environment. After finish editing. you need to restart tomcat. 启动tomcat, connect-web.war将会被自动解压，进入_webapp_/connect-web/WEB-INF/classes ,根据数据库环境修改application.properties. 同时需要配置context_path. 完成后重启tomcat.
+  # Startup the tomcat, the tomcat will unpackage connect-web.war, then cd to _webapp_/connect-web/WEB-INF/classes, your need to edit application.properties according to your database environment. After finish editing. you need to restart tomcat. <br>启动tomcat, connect-web.war将会被自动解压，进入_webapp_/connect-web/WEB-INF/classes ,根据数据库环境修改application.properties. 同时需要配置context_path. 完成后重启tomcat.
 
 === After Installation ===
   当按照上面的两种方式安装完后，访问 {{{http://localhost:8080/${context_path}}}} 时，出现的只是一个主页，没有任何内容。你还需要通过下面几步来配置一个最简单的站点（Enterprise Connect 支持多站点）。

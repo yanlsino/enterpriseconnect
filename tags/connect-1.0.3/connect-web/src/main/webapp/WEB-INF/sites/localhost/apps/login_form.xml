@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page name="app/login_form" parent="commons/header">
+	<position name="mainColumn">
+		<fragment refer="userFragment" view="LoginForm">
+			<title>登录信息</title>
+		</fragment>
+	</position>
+</page>

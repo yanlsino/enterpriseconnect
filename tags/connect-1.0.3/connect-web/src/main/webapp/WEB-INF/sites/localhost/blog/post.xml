@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+	<page name="blog/post" parent="commons/header">
+		<position name="leftColumn" width="200px" layout="fill">
+			<fragment refer="blogFragment" view="Actions" cache="300">
+				<rules>
+					<rule name="securityRule" code="blog-post-add|blog-category-edit"/>
+				</rules>
+			</fragment>
+			<fragment refer="blogCategoryFragment" view="List">
+				<title>博文分类</title>
+				<rules>
+					<rule name="securityRule" code="blog-category-view"/>
+				</rules>
+			</fragment>
+		</position>
+		<position name="mainColumn" layout="fill">
+			<fragment refer="blogPostFragment" view="Post">
+				<rules>
+					<rule name="securityRule" code="blog-post-view"/>
+				</rules>
+			</fragment>
+			<fragment refer="commentFragment" view="List">
+				<title>博文评论</title>
+				<preferences>
+					<entity>BlogPost</entity>
+				</preferences>
+			</fragment>
+		</position>
+		<!-- 
+		<position name="rightColumn" width="280px" layout="fill">
+			<fragment refer="aboutFragment" view="About" cache="300">
+				<title>About Link</title>
+				<content><![CDATA[
+				<a href="#">click me</a>
+				<p>This is the right column</p>
+				]]></content>
+			</fragment>
+		</position>
+		 -->
+	</page>
+</pages>

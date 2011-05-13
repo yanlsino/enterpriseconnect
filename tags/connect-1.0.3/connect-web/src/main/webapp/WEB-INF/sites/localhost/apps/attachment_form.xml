@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page name="commons/attachment_form">
+	<position name="mainColumn">
+		<fragment refer="attachmentFragment" view="Form">
+			<title>附件上传</title>
+		</fragment>
+	</position>
+</page>

@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.osforce</groupId>
+	<artifactId>connect</artifactId>
+	<version>1.0.3</version>
+	<packaging>pom</packaging>
+	<name>Connect</name>
+	<description>Open Source Force's Enterprise Connect Project</description>
+	<modules>
+		<module>connect-web</module>
+		<module>connect-parent</module>
+		<module>connect-service</module>
+		<module>connect-dao</module>
+		<module>connect-task</module>
+	</modules>
+
+	<scm>
+		<connection>scm:svn:http://enterpriseconnect.googlecode.com/svn/tags/connect-1.0.3</connection>
+		<developerConnection>scm:svn:https://enterpriseconnect.googlecode.com/svn/tags/connect-1.0.3</developerConnection>
+	</scm>
+</project>

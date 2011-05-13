@@ -1,0 +1,59 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="e2PersistenceUnit" transaction-type="RESOURCE_LOCAL">
+		<!-- commons -->
+		<class>org.osforce.connect.entity.commons.Activity</class>
+		<class>org.osforce.connect.entity.commons.Attachment</class>
+		<class>org.osforce.connect.entity.commons.Comment</class>
+		<class>org.osforce.connect.entity.commons.Link</class>
+		<class>org.osforce.connect.entity.commons.Rating</class>
+		<class>org.osforce.connect.entity.commons.Statistic</class>
+		<class>org.osforce.connect.entity.commons.Template</class>
+		<class>org.osforce.connect.entity.commons.Keyword</class>
+		<class>org.osforce.connect.entity.commons.Tag</class>
+		<!-- oauth -->
+		<class>org.osforce.connect.entity.oauth.Authorization</class>
+		<!-- profile -->
+		<class>org.osforce.connect.entity.profile.Profile</class>
+		<!-- blog -->
+		<class>org.osforce.connect.entity.blog.BlogCategory</class>
+		<class>org.osforce.connect.entity.blog.BlogPost</class>
+		<!-- calendar -->
+		<class>org.osforce.connect.entity.calendar.Event</class>
+		<!-- document -->
+		<class>org.osforce.connect.entity.document.FileItem</class>
+		<class>org.osforce.connect.entity.document.Folder</class>
+		<!-- discussion -->
+		<class>org.osforce.connect.entity.discussion.Forum</class>
+		<class>org.osforce.connect.entity.discussion.Reply</class>
+		<class>org.osforce.connect.entity.discussion.Topic</class>
+		<class>org.osforce.connect.entity.discussion.TopicCategory</class>
+		<!-- message -->
+		<class>org.osforce.connect.entity.message.Message</class>
+		<!-- system -->
+		<class>org.osforce.connect.entity.system.User</class>
+		<class>org.osforce.connect.entity.system.Role</class>
+		<class>org.osforce.connect.entity.system.Resource</class>
+		<class>org.osforce.connect.entity.system.Permission</class>
+		<class>org.osforce.connect.entity.system.Site</class>
+		<class>org.osforce.connect.entity.system.SiteLink</class>
+		<class>org.osforce.connect.entity.system.Theme</class>
+		<class>org.osforce.connect.entity.system.MailSettings</class>
+		<class>org.osforce.connect.entity.system.Project</class>
+		<class>org.osforce.connect.entity.system.ProjectCategory</class>
+		<class>org.osforce.connect.entity.system.ProjectFeature</class>
+		<!-- team -->
+		<class>org.osforce.connect.entity.team.TeamMember</class>
+		<!-- gallery -->
+		<class>org.osforce.connect.entity.gallery.Album</class>
+		<class>org.osforce.connect.entity.gallery.Photo</class>
+		<!-- map -->
+		<class>org.osforce.connect.entity.map.Map</class>
+		<class>org.osforce.connect.entity.map.Marker</class>
+		<!-- knowledge -->
+		<class>org.osforce.connect.entity.knowledge.Question</class>
+		<class>org.osforce.connect.entity.knowledge.Answer</class>
+	</persistence-unit>
+</persistence>

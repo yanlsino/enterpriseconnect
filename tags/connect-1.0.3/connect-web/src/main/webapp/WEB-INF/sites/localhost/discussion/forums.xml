@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+	<page name="/discussion/forums" parent="commons/header">
+		<position name="leftColumn" width="200px" layout="fill">
+			<fragment refer="discussionFragment" view="Actions">
+				<rules>
+					<rule name="securityRule" userRequired="true"
+					code="discussion-topic-add|discussion-forum-add"/>
+				</rules>
+			</fragment>
+		</position>
+		<position name="mainColumn" layout="fill">
+			<fragment refer="forumFragment" view="List">
+				<title>版块列表</title>
+				<rules>
+					<rule name="securityRule" code="discussion-forum-view"/>
+				</rules>
+			</fragment>
+		</position>
+		<position name="rightColumn" width="280px" layout="fill">
+			<fragment refer="topicFragment" view="Top">
+				<title>热门话题</title>
+				<rules>
+					<rule name="securityRule" code="discussion-topic-view"/>
+				</rules>
+			</fragment>
+		</position>
+	</page>
+</pages>

@@ -16,7 +16,7 @@
 
 ==== 2.直接下载 War 安装 ====
   # 从 Google Code Downloads 中下载最新版本的 War 包，然后部署到 Tomcat 的 webapp 下
-  # 启动 Tomcat，Tomcat 就会将 War 解包部署。当 Tomcat 解包之后你需要根据自己的运行环境进行配置，具体配置参看 ${tomcat_root}/webapps/connect-web/WEB-INF/classes 下的 [application.properties] 文件。
+  # 启动 Tomcat，Tomcat 就会将 War 解包部署。当 Tomcat 解包之后你需要根据自己的运行环境进行配置，具体配置参看 ${tomcat_root}/webapps/connect-web/WEB-INF/classes 下的 [application_properties application.properties] 文件。
 
 === After Installation ===
   当按照上面的两种方式安装完后，访问 {{{http://localhost:8080/${context_path}}}} 时，出现的只是一个主页，没有任何内容。你还需要通过下面几步来配置一个最简单的站点（Enterprise Connect 支持多站点）。

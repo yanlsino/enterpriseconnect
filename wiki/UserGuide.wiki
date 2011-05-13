@@ -13,7 +13,7 @@
 
 
 ==== 2.From War Package ====
-  # Download war package from downloads, and put the war under tomcat's _webapp_. 
+  # Download war package from downloads, and put the war under tomcat's _webapp_. <br>下载war包，将它置于tomcat webapp目录下.
   # Startup the tomcat, the tomcat will unpackage connect-web.war, then cd to _webapp_/connect-web/WEB-INF/classes, your need to edit application.properties according to your database environment. After finish editing. you need to restart tomcat. <br>启动tomcat, connect-web.war将会被自动解压，进入_webapp_/connect-web/WEB-INF/classes ,根据数据库环境修改application.properties. 同时需要配置context_path. 完成后重启tomcat.
 
 === After Installation ===

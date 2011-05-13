@@ -14,7 +14,7 @@
 
 <br>
 
-你亦可以申请成为Enterprise Connect项目管理者，成为项目的合作人，并有投票权决定是否吸收新的Committer, 条件如下:
+你亦可以申请成为Enterprise Connect项目管理者，同时成为项目的合作人，将拥有决定是否吸收新的Committer的投票权, 条件如下:
 
 1. 成为Committer
 

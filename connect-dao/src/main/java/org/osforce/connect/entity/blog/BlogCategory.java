@@ -17,7 +17,6 @@ import org.osforce.connect.entity.system.Project;
 import org.osforce.platform.entity.support.IdEntity;
 
 /**
- * Uses  commons category
  * @author gavin
  * @since 1.0.0
  * @create Nov 10, 2010 - 4:33:55 PM
@@ -29,17 +28,17 @@ import org.osforce.platform.entity.support.IdEntity;
 public class BlogCategory extends IdEntity {
 
 	private static final long serialVersionUID = -1856521070359459275L;
-	
+
 	private String label;
 	private String code;
 	private Integer level = 0;
 	private Boolean enabled = true;
-	// helper 
+	// helper
 	private Long projectId;
 	// refer
 	private Project project;
 	private List<BlogPost> blogPosts = new ArrayList<BlogPost>();
-	
+
 	public BlogCategory() {
 	}
 
@@ -51,15 +50,15 @@ public class BlogCategory extends IdEntity {
 	public void setLabel(String label) {
 		this.label = label;
 	}
-	
+
 	public String getCode() {
 		return code;
 	}
-	
+
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
+
 	public Integer getLevel() {
 		return level;
 	}
@@ -67,42 +66,42 @@ public class BlogCategory extends IdEntity {
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
-	
+
 	public Boolean getEnabled() {
 		return enabled;
 	}
-	
+
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
 	@Transient
 	public Long getProjectId() {
 		if(projectId==null && project!=null) {
-			projectId = project.getId(); 
+			projectId = project.getId();
 		}
 		return projectId;
 	}
-	
+
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="project_id")
 	public Project getProject() {
 		return project;
 	}
-	
+
 	public void setProject(Project project) {
 		this.project = project;
 	}
-	
+
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="category")
 	public List<BlogPost> getBlogPosts() {
 		return blogPosts;
 	}
-	
+
 	public void setBlogPosts(List<BlogPost> blogPosts) {
 		this.blogPosts = blogPosts;
 	}

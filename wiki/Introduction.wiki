@@ -1,4 +1,3 @@
-#labels Featured
   Enterprise Connect 是一个开源的 SBS （Social Bussiness Software），可以用于建立企业内部的协作平台，企业门户等。
 
   当然Enterprise Connect也是一个SNS 软件(Social Networking Service)，可以用于建立基于SNS的网站，例如：开发者社区，学校内部的网络社区等。

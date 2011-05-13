@@ -1,4 +1,3 @@
-[http://www.opensourceforce.org:8080/e2-demo Demo Site]
 
 [http://enterpriseconnect.googlecode.com/files/screenshot5.png]
 

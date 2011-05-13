@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>connect</artifactId>
 		<groupId>org.osforce</groupId>
-		<version>1.0.3</version>
+		<version>1.0.4-SNAPSHOT</version>
 	</parent>
 	<groupId>org.osforce</groupId>
 	<artifactId>connect-parent</artifactId>

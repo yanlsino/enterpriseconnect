@@ -11,7 +11,8 @@
   # 从 Google Code SVN 中检出源代码到你本地磁盘
   # 从你的终端 cd 到源代码的根目录，然后根据自己的数据库选择执行如下命令：
   {{{
-  mvn package -P mysql or mvn package -P postgresql
+  mvn package -P mysql -Djdbc.username={your database's username} -Djdbc.password={your database's password}
+  mvn package -P postgresql -Djdbc.username={your database's username} -Djdbc.password={your database's password}
   }}}
   # 当你成功执行上面的命令之后，你就可以在 ${CONNECT_ROOT}/connect-web/target 下找到编程完的 war 包 connect-web-${version}.war 编译完的 war 包跟从 Google Code Downloads 里下载的是相同的
 

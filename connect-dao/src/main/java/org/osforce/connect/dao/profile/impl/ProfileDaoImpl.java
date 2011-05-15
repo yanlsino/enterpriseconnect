@@ -13,26 +13,26 @@ import org.osforce.platform.dao.support.Page;
 import org.springframework.stereotype.Repository;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Jan 30, 2011 - 6:50:41 PM
  *  <a href="http://www.opensourceforce.org">开源力量</a>
  */
 @Repository
-public class ProfileDaoImpl extends AbstractDao<Profile> 
+public class ProfileDaoImpl extends AbstractDao<Profile>
 	implements ProfileDao {
 
 	public ProfileDaoImpl() {
 		super(Profile.class);
 	}
-	
+
 	static final String FIND_CONCERED_PAGE_JPQL = "FROM Profile p WHERE p.project.category.id = ?1 AND p.id IN (?2)";
 	public Page<Profile> findConcernedPage(Page<Profile> page,
 			ProjectCategory category, User user) {
 		Set<Long> pIds = new HashSet<Long>();
 		// link
-		List<Long> _pIds = find("SELECT l.toId FROM Link l WHERE l.from.id = ?1 AND l.entity = ?2", 
+		List<Long> _pIds = find("SELECT l.toId FROM Link l WHERE l.from.id = ?1 AND l.entity = ?2",
 				Long.class, user.getProjectId(), Profile.NAME);
 		pIds.addAll(_pIds);
 		// enteredBy
@@ -43,5 +43,5 @@ public class ProfileDaoImpl extends AbstractDao<Profile>
 		pIds.addAll(_pIds);
 		return findPage(page, FIND_CONCERED_PAGE_JPQL, category.getId(), pIds);
 	}
-	
+
 }

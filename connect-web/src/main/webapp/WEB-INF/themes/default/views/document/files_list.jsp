@@ -7,7 +7,7 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<u:security code="document-file-add">
@@ -54,11 +54,9 @@
 			</table>
 			</c:otherwise>
 		</c:choose>
-		
-		<div class="clear"></div>	
+		<br class="clear"/>
 	</div>
 </div>
-
 
 <script type="text/javascript">
 $(document).ready(function() {

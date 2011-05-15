@@ -22,7 +22,10 @@
 				<form:input path="to.title" readonly="true" cssClass="text"/>
 			</div>
 			<div>
-				<label for="subject"><fmt:message key="message.message_form.subject"/></label>
+				<label for="subject">
+					<fmt:message key="message.message_form.subject"/>
+					<span class="required"> * </span>
+				</label>
 				<br/>
 				<c:choose>
 					<c:when test="${message.reply}">
@@ -34,7 +37,10 @@
 				</c:choose>
 			</div>
 			<div>
-				<label for="content"><fmt:message key="message.message_form.content"/></label>
+				<label for="content">
+					<fmt:message key="message.message_form.content"/>
+					<span class="required"> * </span>
+				</label>
 				<br/>
 				<form:textarea path="content" cssClass="text"/>
 			</div>

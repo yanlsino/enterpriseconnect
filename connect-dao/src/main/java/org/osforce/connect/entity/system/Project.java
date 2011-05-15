@@ -25,7 +25,7 @@ import org.osforce.platform.entity.support.IdEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Nov 4, 2010 - 11:47:28 AM <a
@@ -36,13 +36,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Cacheable
 public class Project extends IdEntity {
 	private static final long serialVersionUID = -8971421207588403404L;
-	
+
 	public static final String NAME = Project.class.getSimpleName();
-	
+
 	private String uniqueId;
 	private String title;
 	private Date entered;
 	private Date modified;
+	private Boolean publish = true;
 	private Boolean enabled = false;
 	// helper
 	private Long enteredId;
@@ -74,7 +75,7 @@ public class Project extends IdEntity {
 	public void setUniqueId(String uniqueId) {
 		this.uniqueId = uniqueId;
 	}
-	
+
 	@Field(store=Store.NO, index=Index.TOKENIZED)
 	@Column(nullable=false)
 	public String getTitle() {
@@ -108,11 +109,19 @@ public class Project extends IdEntity {
 	public Boolean getEnabled() {
 		return enabled;
 	}
-	
+
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	
+
+	public Boolean getPublish() {
+		return publish;
+	}
+
+	public void setPublish(Boolean publish) {
+		this.publish = publish;
+	}
+
 	@Transient
 	public Long getEnteredId() {
 		if(enteredId==null && enteredBy!=null) {
@@ -120,11 +129,11 @@ public class Project extends IdEntity {
 		}
 		return enteredId;
 	}
-	
+
 	public void setEnteredId(Long enteredId) {
 		this.enteredId = enteredId;
 	}
-	
+
 	@Transient
 	public Long getModifiedId() {
 		if(modifiedId==null && modifiedBy!=null) {
@@ -132,11 +141,11 @@ public class Project extends IdEntity {
 		}
 		return modifiedId;
 	}
-	
+
 	public void setModifiedId(Long modifiedId) {
 		this.modifiedId = modifiedId;
 	}
-	
+
 	@Transient
 	public Long getCategoryId() {
 		if(categoryId==null && category!=null) {
@@ -144,7 +153,7 @@ public class Project extends IdEntity {
 		}
 		return categoryId;
 	}
-	
+
 	@Transient
 	public Long getSubCategoryId1() {
 		if(subCategoryId1==null && subCategory1!=null)  {
@@ -152,11 +161,11 @@ public class Project extends IdEntity {
 		}
 		return subCategoryId1;
 	}
-	
+
 	public void setSubCategoryId1(Long subCategoryId1) {
 		this.subCategoryId1 = subCategoryId1;
 	}
-	
+
 	@Transient
 	public Long getSubCategoryId2() {
 		if(subCategoryId2==null && subCategory2!=null)  {
@@ -164,11 +173,11 @@ public class Project extends IdEntity {
 		}
 		return subCategoryId2;
 	}
-	
+
 	public void setSubCategoryId2(Long subCategoryId2) {
 		this.subCategoryId2 = subCategoryId2;
 	}
-	
+
 	@Transient
 	public Long getSubCategoryId3() {
 		if(subCategoryId3==null && subCategory3!=null)  {
@@ -176,15 +185,15 @@ public class Project extends IdEntity {
 		}
 		return subCategoryId3;
 	}
-	
+
 	public void setSubCategoryId3(Long subCategoryId3) {
 		this.subCategoryId3 = subCategoryId3;
 	}
-	
+
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
-	
+
 	@Transient
 	public Long getProfileId() {
 		if(profileId==null && profile!=null) {
@@ -192,11 +201,11 @@ public class Project extends IdEntity {
 		}
 		return profileId;
 	}
-	
+
 	public void setProfileId(Long profileId) {
 		this.profileId = profileId;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="entered_by_id")
 	public User getEnteredBy() {
@@ -206,7 +215,7 @@ public class Project extends IdEntity {
 	public void setEnteredBy(User enteredBy) {
 		this.enteredBy = enteredBy;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="modified_by_id")
 	public User getModifiedBy() {
@@ -216,16 +225,16 @@ public class Project extends IdEntity {
 	public void setModifiedBy(User modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
-	
+
 	@OneToOne(mappedBy="project")
 	public Profile getProfile() {
 		return profile;
 	}
-	
+
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.EAGER, optional=false)
 	@JoinColumn(name="category_id")
 	@IndexedEmbedded
@@ -236,45 +245,45 @@ public class Project extends IdEntity {
 	public void setCategory(ProjectCategory category) {
 		this.category = category;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="sub_category1_id")
 	public ProjectCategory getSubCategory1() {
 		return subCategory1;
 	}
-	
+
 	public void setSubCategory1(ProjectCategory subCategory1) {
 		this.subCategory1 = subCategory1;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="sub_category2_id")
 	public ProjectCategory getSubCategory2() {
 		return subCategory2;
 	}
-	
+
 	public void setSubCategory2(ProjectCategory subCategory2) {
 		this.subCategory2 = subCategory2;
 	}
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="sub_category3_id")
 	public ProjectCategory getSubCategory3() {
 		return subCategory3;
 	}
-	
+
 	public void setSubCategory3(ProjectCategory subCategory3) {
 		this.subCategory3 = subCategory3;
 	}
-	
+
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="project")
 	@OrderBy("level")
 	public List<ProjectFeature> getFeatures() {
 		return features;
 	}
-	
+
 	public void setFeatures(List<ProjectFeature> features) {
 		this.features = features;
 	}
-	
+
 }

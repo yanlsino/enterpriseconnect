@@ -7,7 +7,7 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 	<c:choose>
@@ -32,12 +32,29 @@
 				<u:security code="blog-comment-add" userRequired="true">
 					<a href="${base}/${project.uniqueId}/blog/post/${post.id}#comments-list" class="comments"><fmt:message key="blog.posts_list.comment"><fmt:param value="${post.commentNumber}"/></fmt:message></a>
 				</u:security>
-					<span class="date"><fmt:formatDate value="${post.entered}" pattern="yyyy-MM-dd"/></span>	
+					<span class="date"><fmt:formatDate value="${post.entered}" pattern="yyyy-MM-dd"/></span>
 				</div>
 			</li>
 			</c:forEach>
-		</ul>		
+		</ul>
+		<br/>
+		<div id="pagination${id}" class="right"></div>
 		</c:otherwise>
 	</c:choose>
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#pagination${id}").pagination(${page.totalCount}, {
+        items_per_page: ${page.pageSize},
+        current_page: ${page.pageNo}-1,
+        callback: function(pageNo, container){
+            if((pageNo+1)!=${page.pageNo}) {
+				document.location.href='?pageNo=' + (pageNo+1);
+            }
+            return false;
+        }
+	});
+});
+</script>

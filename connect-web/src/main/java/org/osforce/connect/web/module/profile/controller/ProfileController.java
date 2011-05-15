@@ -45,7 +45,6 @@ public class ProfileController {
 
 	@RequestMapping(value="/profile/profile", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> update(Profile profile) {
-		//profile.setAttributes(labels, values);
 		profileService.updateProfile(profile);
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("id", profile.getId());

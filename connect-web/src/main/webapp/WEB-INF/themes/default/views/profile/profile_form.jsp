@@ -48,13 +48,19 @@
 				<label for="description"><fmt:message key="profile.profile_form.description"/></label>
 				<form:textarea path="description" id="editor${id}" cssClass="description"/>
 			</div>
+			<br/>
+			<label>自定义属性 (<a id="addRow${id}" href="#">添加行</a>)</label>
 			<div id="profile-attributes${id}" class="profile-attributes">
-			<c:forEach var="entry" items="${profile.attributesMap}">
+				<c:forEach var="tuplePair" items="${profile.tuplePairs}">
 				<div>
-					<input name="labels" value="${entry.key}"/>
-					<input name="values" value="${entry.value}"/>
+					<input name="labels" value="${tuplePair.tuple1}" size="10"/>
+					<input name="values" value="${tuplePair.tuple2}" size="40"/>
 				</div>
-			</c:forEach>
+				</c:forEach>
+				<div id="blankRow${id}">
+					<input name="labels" size="10"/>
+					<input name="values" size="40"/>
+				</div>
 			</div>
 			<div>
 				<button type="submit" class="button">
@@ -69,6 +75,14 @@
 		</form:form>
 	</div>
 </div>
+
+<script type="text/javascript">
+$('#addRow${id}').click(function(){
+	var blankRow = $('#blankRow${id}').clone();
+	$(blankRow).attr('id', '').appendTo('#profile-attributes${id}');
+	return false;
+});
+</script>
 
 <script type="text/javascript">
 $(document).ready(function(){

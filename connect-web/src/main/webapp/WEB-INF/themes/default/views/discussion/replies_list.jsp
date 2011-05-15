@@ -7,7 +7,7 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<div class="topic">
@@ -35,7 +35,7 @@
 			</div>
 			<div class="topic-head">
 				<span class="top right"><fmt:message key="discussion.replies_list.postAt"/> <fmt:formatDate value="${topic.entered}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
-				<h4>${topic.subject}</h4>		
+				<h4>${topic.subject}</h4>
 			</div>
 			<div class="topic-body">
 				${topic.content}
@@ -67,7 +67,7 @@
 					</div>
 					<div class="reply-head">
 						<span class="top right"><fmt:message key="discussion.replies_list.postAt"/><fmt:formatDate value="${reply.entered}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
-						<h4>${reply.subject}</h4>				
+						<h4>${reply.subject}</h4>
 					</div>
 					<div class="reply-body">
 						<c:if test="${not empty reply.quote}">
@@ -88,18 +88,33 @@
 			</li>
 		</c:forEach>
 		</ul>
-		</c:if>
-		<c:if test="${page.totalPages > 1}">
-		<u:pagination link="?pageNo=" page="${page}"/>
+		<br/>
+		<div id="pagination${id}" class="right"></div>
+		<br/>
 		</c:if>
 	</div>
 </div>
 
 <script type="text/javascript">
-(function(){
+$(document).ready(function(){
+	$("#pagination${id}").pagination(${page.totalCount}, {
+        items_per_page: ${page.pageSize},
+        current_page: ${page.pageNo}-1,
+        callback: function(pageNo, container){
+            if((pageNo+1)!=${page.pageNo}) {
+				document.location.href='?pageNo=' + (pageNo+1);
+            }
+            return false;
+        }
+	});
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
 	$('.quoteAction').click(function(){
 		var quoteId = $(this).attr('id');
 		$('#quoteId').val(quoteId);
 	});
-})();
+});
 </script>

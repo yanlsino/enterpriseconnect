@@ -10,12 +10,6 @@ var settings = {
 
 $(document).ready(function(){
 	//
-	$('.zoom-image').click(function(){
-		var url = $(this).find('img').attr('src');
-		$.modal('<img src="'+url+'"/>');
-		return false;
-	});
-	//
 	$('.loginAction').click(function(){
 		var url = $(this).attr('href');
 		openModalWindow(url);
@@ -29,6 +23,7 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+	//
 	$('.concernAction').click(function(){
 		var url = $(this).attr('href');
 		$.get(url,function(){
@@ -36,6 +31,7 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+	//
 	$('.leaveMessageAction').click(function(){
 		var url = $(this).attr('href');
 		openModalWindow(url);
@@ -53,7 +49,8 @@ function showModalWindow(url, options) {
 
 function openModalWindow(url, options) {
 	$.modal('', {
-		minHeight: options!=null?options.minHeight:'auto',
+		minHeight: options!=null?options.height : 'auto',
+		minWidth: options!=null?options.width : 'auto',
 		onOpen: function(dialog){
 			dialog.overlay.fadeIn('slow', function () {
 				dialog.container.slideDown('fast', function () {

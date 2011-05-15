@@ -90,8 +90,18 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#${id} .zoom-image').click(function(){
+		var url = $(this).find('img').attr('src');
+		$.modal('<img src="'+url+'"/>', {minHeight: 387});
+		return false;
+	});
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
 	var pageNo = 2;
-	$('#more-action${id}').click(function(){
+	$('#${id} #more-action${id}').click(function(){
 		var self = this;
 		var url = $(this).attr('href');
 		var params = {'pageNo':pageNo,'uniqueId':'${project.uniqueId}'};
@@ -106,7 +116,7 @@ $(document).ready(function(){
 		return false;
 	});
 
-	$('.activity-comment-form').ajaxForm({
+	$('#${id} .activity-comment-form').ajaxForm({
 		dataType: 'json',
 		clearForm: true,
 		beforeSubmit: function(formData, $form) {
@@ -120,7 +130,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$('.comment-action').click(function(){
+	$('#${id} .comment-action').click(function(){
 		showCommentList(this);
 		showCommentForm(this);
 		return false;

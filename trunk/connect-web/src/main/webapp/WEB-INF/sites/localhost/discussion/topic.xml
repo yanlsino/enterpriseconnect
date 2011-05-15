@@ -8,7 +8,7 @@
 			<fragment refer="replyFragment" view="Form">
 				<title>回复</title>
 				<rules>
-					<rule name="securityRule" code="discussion-reply-add" 
+					<rule name="securityRule" code="discussion-reply-add"
 					userRequired="true"/>
 				</rules>
 			</fragment>
@@ -16,7 +16,7 @@
 		<position name="rightColumn" width="280px" layout="fill">
 			<fragment refer="discussionFragment" view="Actions">
 				<rules>
-					<rule name="securityRule" code="discussion-topic-add|discussion-forum-add" 
+					<rule name="securityRule" code="discussion-topic-add|discussion-forum-add"
 					userRequired="true" projectRequired="true"/>
 				</rules>
 			</fragment>

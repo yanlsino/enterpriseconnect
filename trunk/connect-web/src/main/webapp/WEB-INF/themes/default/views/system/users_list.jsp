@@ -5,7 +5,7 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<table class="tableList">
@@ -30,12 +30,12 @@
 					<td class="last">
 					<c:choose>
 						<c:when test="${user.enabled}">激活</c:when>
-						<c:otherwise>未激活</c:otherwise>	
+						<c:otherwise>未激活</c:otherwise>
 					</c:choose>
 					</td>
 				</tr>
 			</c:forEach>
 			</tbody>
-		</table>	
+		</table>
 	</div>
 </div>

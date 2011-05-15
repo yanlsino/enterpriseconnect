@@ -6,7 +6,7 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 		<c:if test="${not empty photo}">
@@ -32,6 +32,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	//
 	$('.photos-list a').click(function(){
 		changeImage(this);
 		return false;

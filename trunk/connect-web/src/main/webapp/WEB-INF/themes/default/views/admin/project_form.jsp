@@ -10,10 +10,10 @@
 	<c:if test="${not empty title}">
 	<div class="head">
 		<h3>${title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
-		<form:form id="project-form${id}" action="${base}/process/admin/project" 
+		<form:form id="project-form${id}" action="${base}/process/admin/project"
 			commandName="project" cssClass="project-form">
 				<div>
 					<label for="title" class="title">名称: <span class="required">*</span></label>
@@ -41,6 +41,11 @@
 				</div>
 				</c:if>
 				<div>
+					<label>是否公开:</label>
+					<br/>
+					<form:checkbox path="publish"/>
+				</div>
+				<div>
 					<button type="submit" class="button">提交</button>
 					<form:hidden path="id"/>
 					<form:hidden path="enteredId"/>
@@ -56,10 +61,9 @@
 $(document).ready(function(){
 	$('#project-form${id}').ajaxForm({
 		dataType: 'json',
-		clearForm: true,
-		beforeSubmit: function(formData){
+		beforeSubmit: function(formData, $form){
 			var title = $.trim(formData[0].value);
-			var uniqueId = $.trim(formData.[1].value);
+			var uniqueId = $.trim(formData[1].value);
 			if(title=='' || uniqueId=='') {
 				return false;
 			}

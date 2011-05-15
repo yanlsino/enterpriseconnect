@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 
+ *
  * @author gavin
  * @since 1.0.0
  * @create Feb 12, 2011 - 9:05:12 AM
@@ -33,25 +33,25 @@ public class ProfileServiceImpl implements ProfileService {
 	private ProfileDao profileDao;
 	private ProjectDao projectDao;
 	private AttachmentDao attachmentDao;
-	
+
 	public ProfileServiceImpl() {
 	}
-	
+
 	@Autowired
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-	
+
 	@Autowired
 	public void setProfileDao(ProfileDao profileDao) {
 		this.profileDao = profileDao;
 	}
-	
+
 	@Autowired
 	public void setProjectDao(ProjectDao projectDao) {
 		this.projectDao = projectDao;
 	}
-	
+
 	@Autowired
 	public void setAttachmentDao(AttachmentDao attachmentDao) {
 		this.attachmentDao = attachmentDao;
@@ -60,13 +60,13 @@ public class ProfileServiceImpl implements ProfileService {
 	public Profile getProfile(Long profileId) {
 		return profileDao.get(profileId);
 	}
-	
+
 	public Profile getProfile(Project project) {
 		QueryAppender appender = new QueryAppender();
 		appender.equal("profile.project.id", project.getId());
 		return profileDao.findUnique(appender);
 	}
-	
+
 	public Profile viewProfile(Project project, User user) {
 		return getProfile(project);
 	}
@@ -107,19 +107,21 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 
 	public Page<Profile> getProfilePage(Page<Profile> page, ProjectCategory category) {
-		QueryAppender appender = new QueryAppender();
-		appender.equal("profile.project.category.id", category.getId()).desc("profile.entered");
+		QueryAppender appender = new QueryAppender()
+				.equal("profile.project.publish", true)
+				.equal("profile.project.category.id", category.getId())
+				.desc("profile.entered");
 		return profileDao.findPage(page, appender);
 	}
-	
+
 	public Page<Profile> getConcernedProfilePage(Page<Profile> page,
 			ProjectCategory category, User user) {
 		return profileDao.findConcernedPage(page, category, user);
 	}
-	
+
 	public Page<Profile> getTopProfilePage(Page<Profile> page,
 			ProjectCategory category) {
-		
+
 		return null;
 	}
 }

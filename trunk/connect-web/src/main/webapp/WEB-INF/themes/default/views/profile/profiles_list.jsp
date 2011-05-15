@@ -7,7 +7,7 @@
 	<c:if test="${not empty fragmentConfig.title}">
 	<div class="head">
 		<h3>${fragmentConfig.title}</h3>
-	</div>	
+	</div>
 	</c:if>
 	<div class="body">
 	<c:choose>
@@ -50,10 +50,27 @@
 			</li>
 		</c:forEach>
 		</ul>
-		<c:if test="${page.totalPages > 1}">
-		<u:pagination link="?pageNo=" page="${page}"/>
-		</c:if>
+		<br/>
+		<div id="pagination${id}" class="right"></div>
+		<br/>
 		</c:otherwise>
 	</c:choose>
 	</div>
 </div>
+
+<c:if test="${page.totalPages gt 1}">
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#pagination${id}").pagination(${page.totalCount}, {
+        items_per_page: ${page.pageSize},
+        current_page: ${page.pageNo}-1,
+        callback: function(pageNo, container){
+            if((pageNo+1)!=${page.pageNo}) {
+				document.location.href='?pageNo=' + (pageNo+1);
+            }
+            return false;
+        }
+	});
+});
+</script>
+</c:if>

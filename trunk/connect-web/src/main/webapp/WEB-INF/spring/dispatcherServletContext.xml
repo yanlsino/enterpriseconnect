@@ -45,6 +45,7 @@
     </bean>
     -->
 
+
 	<!-- View Revolver Begin -->
 	<bean id="freemarkerConfigurer"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
@@ -85,9 +86,6 @@
 
 	 <!-- Fragment Config Factory -->
 	<bean id="configFactory" class="org.osforce.platform.web.framework.config.impl.XmlConfigFactory">
-		<!-- NOTE: cache false for development
-		<property name="prefix" value="file:/home/gavin/Workspace"/>
-		-->
 		<property name="cache" value="false"/>
 	</bean>
 

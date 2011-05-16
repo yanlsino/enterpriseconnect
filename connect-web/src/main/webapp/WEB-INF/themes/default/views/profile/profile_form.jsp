@@ -88,6 +88,7 @@ $('#addRow${id}').click(function(){
 $(document).ready(function(){
 	$('#select-file${id}').change(function(){
 		$('#logo-form${id}').ajaxSubmit({
+			dataType: 'json',
 			beforeSubmit: function(formData, $form){
 				$form.find('input[type=file]').busy({
 					img: '${base}/static/images/loading.gif'

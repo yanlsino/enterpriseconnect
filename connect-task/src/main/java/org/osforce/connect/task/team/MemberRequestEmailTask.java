@@ -2,6 +2,7 @@ package org.osforce.connect.task.team;
 
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.osforce.connect.entity.team.TeamMember;
 import org.osforce.connect.service.team.MemberService;
 import org.osforce.connect.task.support.AbstractEmailTask;
@@ -47,8 +48,13 @@ public class MemberRequestEmailTask extends AbstractEmailTask {
 		Long memberId = (Long) context.get("memberId");
 		TeamMember member = memberService.getMember(memberId);
 		context.put("member", member);
-		helper.addTo(member.getProject().getEnteredBy().getEmail(),
-				member.getProject().getEnteredBy().getNickname());
+		if(StringUtils.equals(member.getStatus(), TeamMember.STATUS_NEED_ACCEPT)) {
+			helper.addTo(member.getUser().getEmail(),
+					member.getUser().getNickname());
+		} else if(StringUtils.equals(member.getStatus(), TeamMember.STATUS_WAIT_APPROVE)) {
+			helper.addTo(member.getProject().getEnteredBy().getEmail(),
+					member.getProject().getEnteredBy().getNickname());
+		}
 		String subject = FreemarkerUtil.render(configuration, MEMBER_REQUEST_SUBJECT, context);
 		String content = FreemarkerUtil.render(configuration, MEMBER_REQUEST_CONTENT, context);
 		helper.setSubject(subject);

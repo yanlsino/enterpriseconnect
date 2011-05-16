@@ -1,6 +1,8 @@
 package org.osforce.connect.web.module.team.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -97,10 +99,11 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/members/invite")
-	public @ResponseBody String invite(@RequestParam String emails,
-			WebRequest request) {
-		Project project = (Project) request.getAttribute(AttributeKeys.PROJECT_KEY,
-				WebRequest.SCOPE_REQUEST);
+	public @ResponseBody List<Long> invite(
+			@RequestParam String emails, WebRequest request) {
+		Project project = (Project) request.getAttribute(
+				AttributeKeys.PROJECT_KEY, WebRequest.SCOPE_REQUEST);
+		List<Long> memberList = new ArrayList<Long>();
 		String[] emailsArray = StringUtils.split(emails, "\n");
 		for(String email : emailsArray) {
 			User user = userService.getUser(StringUtils.trim(email));
@@ -108,9 +111,10 @@ public class MemberController {
 				Role defaultRole = roleService.getRole(project.getCategoryId(), 50);
 				TeamMember member = new TeamMember(project, user, defaultRole);
 				member.setStatus(TeamMember.STATUS_NEED_ACCEPT);
-				memberService.createMember(member);
+				memberService.requestMember(member);
+				memberList.add(member.getId());
 			}
 		}
-		return "success";
+		return memberList;
 	}
 }

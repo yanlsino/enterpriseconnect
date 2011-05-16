@@ -45,6 +45,9 @@
 
     <script type="text/javascript" src="${base}/static/components/jquery-cycle/jquery.cycle.min.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-autocomplete/jquery.autocomplete.css"/>
+    <script type="text/javascript" src="${base}/static/components/jquery-autocomplete/jquery.autocomplete.js"></script>
+
     <link rel="stylesheet" type="text/css" href="${base}/static/components/jquery-pagination/pagination.css"/>
     <script type="text/javascript" src="${base}/static/components/jquery-pagination/jquery.pagination.js"></script>
 

@@ -59,8 +59,7 @@ public class SystemAspect {
 	}
 
 	@AfterReturning("execution(* org.osforce.connect.service.system.UserService.registerUser(..))")
-	public void createProject(JoinPoint jp) {
-		//User user = (User) jp.getArgs()[0];
+	public void registerUser(JoinPoint jp) {
 		Project project = (Project) jp.getArgs()[1];
 		if(StringUtils.equals(project.getCategory().getCode(), "people")) {
 			Map<Object, Object> context = new HashMap<Object, Object>();

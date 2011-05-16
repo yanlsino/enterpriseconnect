@@ -49,6 +49,7 @@
 		</c:forEach>
 		</ul>
 		<div id="pagination${id}" class="right"></div>
+		</c:otherwise>
 	</c:choose>
 	</div>
 </div>

@@ -17,7 +17,7 @@
 	<!-- 定义受环境影响的变量 -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-		<property name="ignoreResourceNotFound" value="false" />
+		<property name="ignoreResourceNotFound" value="true" />
 		<property name="locations">
 			<list>
 				<!-- 标准配置 -->
